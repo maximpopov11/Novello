@@ -1,4 +1,4 @@
-# <project-title>
+# Project title
 
 
 ## Description
