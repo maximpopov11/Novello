@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/solutionText"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_below="@+id/inputText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/sevenButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/solutionText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="7" />
+
+    <Button
+        android:id="@+id/threeButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/sixButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/twoButton"
+        android:text="3" />
+
+    <Button
+        android:id="@+id/subtractButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/sixButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/threeButton"
+        android:text="-" />
+
+    <Button
+        android:id="@+id/eightButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/solutionText"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/sevenButton"
+        android:text="8" />
+
+    <Button
+        android:id="@+id/nineButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/solutionText"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/eightButton"
+        android:text="9" />
+
+    <Button
+        android:id="@+id/divideButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/solutionText"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/nineButton"
+        android:text="÷" />
+
+    <Button
+        android:id="@+id/fourButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/sevenButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="4" />
+
+    <Button
+        android:id="@+id/sixButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/nineButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/fiveButton"
+        android:text="6" />
+
+    <Button
+        android:id="@+id/multiplyButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/divideButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/sixButton"
+        android:text="*" />
+
+    <Button
+        android:id="@+id/oneButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/fourButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="1" />
+
+    <Button
+        android:id="@+id/zeroButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/oneButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="0" />
+
+    <Button
+        android:id="@+id/decimalButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/twoButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/zeroButton"
+        android:text="." />
+
+    <Button
+        android:id="@+id/equalButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/threeButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/decimalButton"
+        android:text="=" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/subtractButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/equalButton"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="5dp"
+        android:text="CLEAR" />
+
+    <Button
+        android:id="@+id/twoButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/fiveButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/oneButton"
+        android:text="2" />
+
+    <Button
+        android:id="@+id/fiveButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/eightButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/fourButton"
+        android:text="5" />
+
+    <TextView
+        android:id="@+id/inputText"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:text="TextView" />
+</RelativeLayout>
