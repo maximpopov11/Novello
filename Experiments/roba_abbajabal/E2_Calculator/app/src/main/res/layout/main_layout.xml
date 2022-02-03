@@ -14,7 +14,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         android:fontFamily="sans-serif-medium"
-        android:text="TextView" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/sevenButton"
@@ -198,5 +198,5 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:text="TextView" />
+        android:textSize="20sp" />
 </RelativeLayout>
