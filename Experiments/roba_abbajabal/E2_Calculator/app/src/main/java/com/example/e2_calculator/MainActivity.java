@@ -85,52 +85,76 @@ public class MainActivity extends AppCompatActivity
             case ADD:
                 savedOperation = Operation.ADD;
                 if (operationLocation != -1) {
-                    inputText.append(Character.toString('+'));
-                    operationLocation = inputText.getText().length() - 1;
+                    char[] previousInput = new char[inputText.getText().length()];
+                    System.arraycopy(inputText.getText().toString().toCharArray(),
+                            0, previousInput, 0, previousInput.length);
+                    previousInput[operationLocation] = '+';
+                    inputText.setText(String.valueOf(previousInput));
                 }
                 else {
-                    char[] previousInput = inputText.getText().toString().toCharArray();
+                    char[] previousInput = new char[inputText.getText().length()+1];
+                    System.arraycopy(inputText.getText().toString().toCharArray(),
+                            0, previousInput, 0, previousInput.length-1);
+                    operationLocation = inputText.getText().length();
                     previousInput[operationLocation] = '+';
-                    inputText.setText(new String(previousInput));
+                    inputText.setText(String.valueOf(previousInput));
                 }
                 break;
 
             case SUBTRACT:
                 savedOperation = Operation.SUBTRACT;
                 if (operationLocation != -1) {
-                    inputText.append(Character.toString('-'));
-                    operationLocation = inputText.getText().length() - 1;
+                    char[] previousInput = new char[inputText.getText().length()];
+                    System.arraycopy(inputText.getText().toString().toCharArray(),
+                            0, previousInput, 0, previousInput.length);
+                    previousInput[operationLocation] = '-';
+                    inputText.setText(String.valueOf(previousInput));
                 }
                 else {
-                    char[] previousInput = inputText.getText().toString().toCharArray();
+                    char[] previousInput = new char[inputText.getText().length()+1];
+                    System.arraycopy(inputText.getText().toString().toCharArray(),
+                            0, previousInput, 0, previousInput.length-1);
+                    operationLocation = inputText.getText().length();
                     previousInput[operationLocation] = '-';
-                    inputText.setText(new String(previousInput));
+                    inputText.setText(String.valueOf(previousInput));
                 }
                 break;
 
             case MULTIPLY:
                 savedOperation = Operation.MULTIPLY;
                 if (operationLocation != -1) {
-                    inputText.append(Character.toString('*'));
-                    operationLocation = inputText.getText().length() - 1;
+                    char[] previousInput = new char[inputText.getText().length()];
+                    System.arraycopy(inputText.getText().toString().toCharArray(),
+                            0, previousInput, 0, previousInput.length);
+                    previousInput[operationLocation] = '*';
+                    inputText.setText(String.valueOf(previousInput));
                 }
                 else {
-                    char[] previousInput = inputText.getText().toString().toCharArray();
+                    char[] previousInput = new char[inputText.getText().length()+1];
+                    System.arraycopy(inputText.getText().toString().toCharArray(),
+                            0, previousInput, 0, previousInput.length-1);
+                    operationLocation = inputText.getText().length();
                     previousInput[operationLocation] = '*';
-                    inputText.setText(new String(previousInput));
+                    inputText.setText(String.valueOf(previousInput));
                 }
                 break;
 
             case DIVIDE:
                 savedOperation = Operation.DIVIDE;
                 if (operationLocation != -1) {
-                    inputText.append(Character.toString('÷'));
-                    operationLocation = inputText.getText().length() - 1;
+                    char[] previousInput = new char[inputText.getText().length()];
+                    System.arraycopy(inputText.getText().toString().toCharArray(),
+                            0, previousInput, 0, previousInput.length);
+                    previousInput[operationLocation] = '÷';
+                    inputText.setText(String.valueOf(previousInput));
                 }
                 else {
-                    char[] previousInput = inputText.getText().toString().toCharArray();
+                    char[] previousInput = new char[inputText.getText().length()+1];
+                    System.arraycopy(inputText.getText().toString().toCharArray(),
+                            0, previousInput, 0, previousInput.length-1);
+                    operationLocation = inputText.getText().length();
                     previousInput[operationLocation] = '÷';
-                    inputText.setText(new String(previousInput));
+                    inputText.setText(String.valueOf(previousInput));
                 }
                 break;
         }
@@ -139,6 +163,36 @@ public class MainActivity extends AppCompatActivity
     public void getEqualButton()
     {
         // TODO: Process everything in input text and put it in solution text.
+        if (savedOperation == null)
+        {
+            return;
+        }
+
+        double operand1 = Double.parseDouble(inputText.getText().toString().substring(0, operationLocation));
+        double operand2 = Double.parseDouble(inputText.getText().toString().substring(operationLocation + 1));
+        double solution;
+        switch (savedOperation)
+        {
+            case ADD:
+                solution = operand1 + operand2;
+                break;
+            case SUBTRACT:
+                solution = operand1 - operand2;
+                break;
+            case MULTIPLY:
+                solution = operand1 * operand2;
+                break;
+            case DIVIDE:
+                solution = operand1 / operand2;
+                break;
+            default:
+                return;
+        }
+
+        operationLocation = -1;
+        savedOperation = null;
+        inputText.setText("");
+        solutionText.setText(String.valueOf(solution));
     }
 
     public void getClearButton()
