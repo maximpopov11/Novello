@@ -27,7 +27,8 @@ public class TestController {
     @PostMapping("/postTest2")
     public String postTest2(@RequestBody TestData testData) {
         //TODO
-        return String.format("Hello, %s! You sent a post request with a requestbody!", testData.getMessage());
+
+        return String.format("Hello, %s! welcome to this nightmare. Your Uid is:%d", testData.getMessage(), testData.getUid());
     }
 
     @DeleteMapping("/deleteTest")
