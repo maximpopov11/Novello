@@ -30,6 +30,11 @@ public class TestController {
 
         return String.format("Hello, %s! welcome to this nightmare. Your Uid is:%d", testData.getMessage(), testData.getUid());
     }
+    @PostMapping("/postTest3")
+    public void postTest3(@RequestBody TestData testData)
+    {
+        System.out.print("Does this work");
+    }
 
     @DeleteMapping("/deleteTest")
     public void deleteTest() {
