@@ -25,7 +25,8 @@ public class new_world_controller {
 
     @PostMapping("/postTest2")
     public String postTest2(@RequestBody TestData testData) {
-        return String.format("Hello, %s! Your favorite color is %s. Your password is %s. Your phone number is %s.", testData.getName(), testData.getFaveColor(),testData.getPassword(),testData.getPhoneNum());
+        return String.format("Hello, %s! Your favorite color is %s. Your password is %s. Your phone number is %s.", testData.getName(),
+                testData.getFaveColor(),testData.getPassword(),testData.getPhoneNum());
     }
 
     @DeleteMapping("/deleteTest")
