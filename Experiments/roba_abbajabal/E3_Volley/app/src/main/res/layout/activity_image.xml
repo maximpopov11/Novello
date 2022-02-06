@@ -12,4 +12,14 @@
         android:text="IMAGE REQUEST"
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="16dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageRequestButton2"
+        app:srcCompat="@android:drawable/menuitem_background" />
 </androidx.constraintlayout.widget.ConstraintLayout>
