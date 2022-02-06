@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.experiment3.ui.main.SectionsPagerAdapter;
 import com.example.experiment3.databinding.ActivityMainBinding;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    BookType preferred;
+    ArrayList<Book> books;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,21 +49,53 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //initialize books
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("The Final Empire", "Brandon Sanderson", "Mistborn", BookType.Fantasy));
-        books.add(new Book("The Well of Ascension", "Brandon Sanderson", "Mistborn", BookType.Fantasy));
-        books.add(new Book("The Hero of Ages", "Brandon Sanderson", "Mistborn", BookType.Fantasy));
-        books.add(new Book("Warbreaker", "Brandon Sanderson", "Warbreaker", BookType.Fantasy));
-        books.add(new Book("Skyward", "Brandon Sanderson", "Skyawrd", BookType.ScienceFiction));
-        books.add(new Book("War and Peace", "Leo Tolstoy", "War and Peace", BookType.Classic));
+        books = new ArrayList<>();
+        books.add(new Book("The Final Empire", "Brandon Sanderson", "Mistborn", BookType.Fantasy, 5.0));
+        books.add(new Book("The Well of Ascension", "Brandon Sanderson", "Mistborn", BookType.Fantasy, 4.5));
+        books.add(new Book("The Hero of Ages", "Brandon Sanderson", "Mistborn", BookType.Fantasy, 4.6));
+        books.add(new Book("Warbreaker", "Brandon Sanderson", "Warbreaker", BookType.Fantasy, 4.4));
+        books.add(new Book("Skyward", "Brandon Sanderson", "Skyward", BookType.ScienceFiction, 4.1));
+        books.add(new Book("War and Peace", "Leo Tolstoy", "War and Peace", BookType.Classic, 1.0));
+
+        Button fantasy= (Button) findViewById(R.id.fantasy);
+        Button scifi = (Button) findViewById(R.id.scifi);
+        Button classic = (Button) findViewById(R.id.classic);
+        fantasy.setText("Fantasy!");
+        scifi.setText("Sci Fi");
+        classic.setText("Classic :(");
+        fantasy.setOnClickListener(view -> selectPreferred(BookType.Fantasy));
+        scifi.setOnClickListener(view -> selectPreferred(BookType.ScienceFiction));
+        classic.setOnClickListener(view -> selectPreferred(BookType.Classic));
+
 
         //todo:
-            //give books public rating (general)
-            //allow user to choose preference for book type
             //suggest book to user
             //allow user to choose book
             //allow user to rate book
             //suggest other similar books with high ratings to user
 
     }
+
+    private void selectPreferred(BookType type) {
+        this.preferred = type;
+
+        Book suggested = books.get(0);
+        for (int i = 0; i < books.size(); i++) {
+            boolean better = false;
+            Book candidate = books.get(i);
+            if (candidate.type == preferred && suggested.type != preferred) {
+                better = true;
+            }
+            else if (candidate.rating > suggested.rating) {
+                better = true;
+            }
+            if (better) {
+                suggested = candidate;
+            }
+        }
+
+        TextView recommendation = (TextView) findViewById(R.id.Suggestion);
+        recommendation.setText("You should read " + recommendation.toString() + "!");
+    }
+
 }
