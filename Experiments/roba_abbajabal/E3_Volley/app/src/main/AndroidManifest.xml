@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".app.AppController"
+        android:name="com.example.e3_volley.app.AppController"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ImageRequestActivity"></activity>
+        <activity android:name=".JsonRequestActivity"></activity>
+        <activity android:name=".StringRequestActivity"></activity>
     </application>
 
 </manifest>
