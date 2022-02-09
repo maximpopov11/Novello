@@ -2,6 +2,7 @@ package com.example.experiment4imagecoloring;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,37 +22,44 @@ import com.example.experiment4imagecoloring.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    Bitmap bitmap;
-    Canvas canvas;
+    ConstraintLayout constraintLayout;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        // Create a ConstraintLayout in which to add the ImageView
+        constraintLayout = new ConstraintLayout(this);
 
-        setSupportActionBar(binding.toolbar);
+        // Instantiate an ImageView and define its properties
+        ImageView image1 = new ImageView(this);
+        image1.setImageResource(R.drawable.ic_launcher_foreground);
+        image1.setContentDescription(getResources().getString(R.string.my_image_desc));
+        ImageView image2 = new ImageView(this);
+        image2.setImageResource(R.drawable.ic_launcher_foreground);
+        image2.setContentDescription(getResources().getString(R.string.my_image_desc));
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        // set the ImageView bounds to match the Drawable's dimensions
+        image1.setAdjustViewBounds(true);
+        image1.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        image2.setAdjustViewBounds(true);
+        image2.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        // Add the ImageView to the layout and set the layout as the content view.
+        constraintLayout.addView(image1);
+        setContentView(constraintLayout);
 
-        canvas.drawBitmap(bitmap, 10, 10, new Paint());
-
+        image1.setBackgroundColor(Color.BLUE);
     }
 
     @Override
