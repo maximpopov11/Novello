@@ -36,4 +36,10 @@ public class UserController {
         return u;
     }
 
+    @PutMapping("/user/{id}/{firstName}/{lastName}")
+    public @ResponseBody User updateperson(@PathVariable String id, @PathVariable String firstName, @PathVariable String lastName, @RequestBody User user ){
+        userList.replace(id, user);
+        return userList.get(id);
+    }
 }
+
