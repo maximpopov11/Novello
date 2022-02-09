@@ -77,11 +77,11 @@ public class PeopleController {
         return peopleList.get(firstName);
     }
 
-    @PutMapping("/people/{lastName}")
-    public @ResponseBody Person updateLastName(@PathVariable String lastName, @RequestBody Person p) {
-        peopleList.replace(lastName, p);
-        return peopleList.get(lastName);
-    }
+//    @PutMapping("/people/{lastName}")
+//    public @ResponseBody Person updateLastName(@PathVariable String lastName, @RequestBody Person p) {
+//        peopleList.replace(lastName, p);
+//        return peopleList.get(lastName);
+//    }
 
     // THIS IS THE DELETE OPERATION
     // Springboot gets the PATHVARIABLE from the URL
