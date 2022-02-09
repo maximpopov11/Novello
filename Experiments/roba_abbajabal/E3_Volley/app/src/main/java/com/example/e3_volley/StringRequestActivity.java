@@ -3,6 +3,7 @@ package com.example.e3_volley;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,17 +25,21 @@ public class StringRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_string);
 
+        TextView textView = (TextView) findViewById(R.id.stringRequestResponseText);
+
         String tag_string_req = "string_req";
         String url = Const.URL_STRING_REQ;
 
         ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
+        textView.setText("Loading...");
         pDialog.show();
 
         StringRequest stringRequest =
             new StringRequest(Request.Method.GET, url,
             response -> {
                 Log.d(AppController.TAG, response.toString());
+                textView.setText("Response:\n" + response.toString());
                 pDialog.hide();
             }, error -> {
                 VolleyLog.d(AppController.TAG, error.getMessage());

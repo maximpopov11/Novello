@@ -2,6 +2,7 @@ package com.example.e3_volley;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,7 @@ public class ImageRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json);
 
-        ImageView imageView = findViewById(R.id.imageView);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();
         NetworkImageView imgNetWorkView = new NetworkImageView(this);
