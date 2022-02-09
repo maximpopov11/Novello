@@ -72,10 +72,16 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT methodhycfx
     @PutMapping("/people/{firstName}")
-    public @ResponseBody Person updatePerson(@PathVariable String firstName, @RequestBody Person p) {
+    public @ResponseBody Person updateFirstName(@PathVariable String firstName, @RequestBody Person p) {
         peopleList.replace(firstName, p);
         return peopleList.get(firstName);
     }
+
+//    @PutMapping("/people/{lastName}")
+//    public @ResponseBody Person updateLastName(@PathVariable String lastName, @RequestBody Person p) {
+//        peopleList.replace(lastName, p);
+//        return peopleList.get(lastName);
+//    }
 
     // THIS IS THE DELETE OPERATION
     // Springboot gets the PATHVARIABLE from the URL
