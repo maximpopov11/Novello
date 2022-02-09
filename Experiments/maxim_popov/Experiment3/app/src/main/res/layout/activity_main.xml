@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="144dp"
-            android:text="What is your preffered book type?"
+            android:text="What is your preferred book type?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,12 +82,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

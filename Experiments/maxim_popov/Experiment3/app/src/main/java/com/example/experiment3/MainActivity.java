@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     BookType preferred;
     ArrayList<Book> books;
+    Button fantasy;
+    Button scifi;
+    Button classic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = binding.viewPager;
-        viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
-        tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = binding.fab;
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,22 +57,15 @@ public class MainActivity extends AppCompatActivity {
         books.add(new Book("Skyward", "Brandon Sanderson", "Skyward", BookType.ScienceFiction, 4.1));
         books.add(new Book("War and Peace", "Leo Tolstoy", "War and Peace", BookType.Classic, 1.0));
 
-        Button fantasy= (Button) findViewById(R.id.fantasy);
-        Button scifi = (Button) findViewById(R.id.scifi);
-        Button classic = (Button) findViewById(R.id.classic);
+        fantasy= (Button) findViewById(R.id.fantasy);
+        scifi = (Button) findViewById(R.id.scifi);
+        classic = (Button) findViewById(R.id.classic);
         fantasy.setText("Fantasy!");
         scifi.setText("Sci Fi");
         classic.setText("Classic :(");
         fantasy.setOnClickListener(view -> selectPreferred(BookType.Fantasy));
         scifi.setOnClickListener(view -> selectPreferred(BookType.ScienceFiction));
         classic.setOnClickListener(view -> selectPreferred(BookType.Classic));
-
-
-        //todo:
-            //suggest book to user
-            //allow user to choose book
-            //allow user to rate book
-            //suggest other similar books with high ratings to user
 
     }
 
@@ -95,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         TextView recommendation = (TextView) findViewById(R.id.Suggestion);
-        recommendation.setText("You should read " + recommendation.toString() + "!");
+        recommendation.setText("You should read " + suggested.toString() + "!");
     }
 
 }
