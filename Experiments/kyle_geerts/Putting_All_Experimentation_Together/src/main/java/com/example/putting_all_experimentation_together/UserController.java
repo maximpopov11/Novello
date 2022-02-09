@@ -41,5 +41,11 @@ public class UserController {
         userList.replace(id, user);
         return userList.get(id);
     }
+
+    @DeleteMapping("/user/{id}")
+    public @ResponseBody HashMap<String, User> deleteUser(@PathVariable String id){
+        userList.remove(id);
+        return userList;
+    }
 }
 
