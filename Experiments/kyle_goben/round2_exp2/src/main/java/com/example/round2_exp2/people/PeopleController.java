@@ -48,8 +48,8 @@ public class PeopleController {
     @PostMapping("/people")
     public @ResponseBody String createPerson(@RequestBody Person person) {
         System.out.println(person);
-        peopleList.put(person.getFirstName(), person);
-        return "New person "+ person.getFirstName() + " Saved";
+        peopleList.put(person.getUserID(), person);
+        return "New person "+ person.getUserID() + " Saved";
     }
 
     // THIS IS THE READ OPERATION
@@ -58,9 +58,9 @@ public class PeopleController {
     // springboot automatically converts Person to JSON format when we return it
     // in this case because of @ResponseBody
     // Note: To READ we use GET method
-    @GetMapping("/people/{firstName}")
-    public @ResponseBody Person getPerson(@PathVariable String firstName) {
-        Person p = peopleList.get(firstName);
+    @GetMapping("/people/{userID}")
+    public @ResponseBody Person getPerson(@PathVariable String userID) {
+        Person p = peopleList.get(userID);
         return p;
     }
 
@@ -71,10 +71,10 @@ public class PeopleController {
     // Here we are returning what we sent to the method
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT method
-    @PutMapping("/people/{firstName}")
-    public @ResponseBody Person updatePerson(@PathVariable String firstName, @RequestBody Person p) {
-        peopleList.replace(firstName, p);
-        return peopleList.get(firstName);
+    @PutMapping("/people/{userID}")
+    public @ResponseBody Person updatePerson(@PathVariable String userID, @RequestBody Person p) {
+        peopleList.replace(userID, p);
+        return peopleList.get(userID);
     }
 
     // THIS IS THE DELETE OPERATION
@@ -83,9 +83,9 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To DELETE we use delete method
     
-    @DeleteMapping("/people/{firstName}")
-    public @ResponseBody HashMap<String, Person> deletePerson(@PathVariable String firstName) {
-        peopleList.remove(firstName);
+    @DeleteMapping("/people/{userID}")
+    public @ResponseBody HashMap<String, Person> deletePerson(@PathVariable String userID) {
+        peopleList.remove(userID);
         return peopleList;
     }
 }

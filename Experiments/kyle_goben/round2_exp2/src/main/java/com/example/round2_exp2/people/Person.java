@@ -9,31 +9,31 @@ package com.example.round2_exp2.people;
 
 public class Person {
 
-    private String firstName;
+    private String userID;
 
     private String lastName;
 
-    private String address;
+    private String faveColor;
 
-    private String telephone;
+    private String faveNumber;
 
     public Person(){
         
     }
 
-    public Person(String firstName, String lastName, String address, String telephone){
-        this.firstName = firstName;
+    public Person(String userID, String lastName, String faveColor, String faveNumber){
+        this.userID = userID;
         this.lastName = lastName;
-        this.address = address;
-        this.telephone = telephone;
+        this.faveColor = faveColor;
+        this.faveNumber = faveNumber;
     }
 
-    public String getFirstName() {
-        return this.firstName;
+    public String getUserID() {
+        return this.userID;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getLastName() {
@@ -44,27 +44,27 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return this.address;
+    public String getFaveColor() {
+        return this.faveColor;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setFaveColor(String faveColor) {
+        this.faveColor = faveColor;
     }
 
-    public String getTelephone() {
-        return this.telephone;
+    public String getFaveNumber() {
+        return this.faveNumber;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setFaveNumber(String faveNumber) {
+        this.faveNumber = faveNumber;
     }
 
     @Override
     public String toString() {
-        return firstName + " " 
+        return userID + " "
                + lastName + " "
-               + address + " "
-               + telephone;
+               + faveColor + " "
+               + faveNumber;
     }
 }
