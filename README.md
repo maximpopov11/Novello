@@ -1,8 +1,8 @@
-# Project title
+# Novello
 
 
 ## Description
-
+A library hub app for book recommendations, reviews, shopping, and communication, and collections.
 
 
 ## Dependencies
@@ -12,6 +12,8 @@
 
 
 ## Contributors 
-* Firstname Lastname   (email@iastate.edu)
-* ...
+* Roba Abbajabal    (robaa@iastate.edu)
+* Kyle Geerts       (kgeerts@iastate.edu)
+* Kyle Goben        (kgoben@iastate.edu)
+* Maxim Popov       (mpopov@iastate.edu)
 
