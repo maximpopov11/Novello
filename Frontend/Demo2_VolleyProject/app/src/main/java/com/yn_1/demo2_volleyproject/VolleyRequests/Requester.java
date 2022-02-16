@@ -9,23 +9,23 @@ public interface Requester {
      * Volley GET Method: <br>
      * For getting request
      */
-    void getRequest();
+    Object getRequest(String url);
 
     /**
      * Volley POST Method:
      * For adding requests
      */
-    void postRequest();
+    void postRequest(String url, Object post);
 
     /**
      * Volley PUT Method:
      * For changing requests
      */
-    void putRequest();
+    void putRequest(String url);
 
     /**
      * Volley GET Method:
      * For deleting requests
      */
-    void deleteRequest();
+    void deleteRequest(String url);
 }

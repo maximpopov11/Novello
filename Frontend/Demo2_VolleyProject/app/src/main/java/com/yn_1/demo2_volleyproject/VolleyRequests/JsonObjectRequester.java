@@ -7,22 +7,22 @@ package com.yn_1.demo2_volleyproject.VolleyRequests;
  */
 public class JsonObjectRequester implements Requester {
     @Override
-    public void getRequest() {
+    public Object getRequest(String url) {
+        return null;
+    }
+
+    @Override
+    public void postRequest(String url, Object obj) {
 
     }
 
     @Override
-    public void postRequest() {
+    public void putRequest(String url) {
 
     }
 
     @Override
-    public void putRequest() {
-
-    }
-
-    @Override
-    public void deleteRequest() {
+    public void deleteRequest(String url) {
 
     }
 }
