@@ -3,7 +3,7 @@ package com.yn_1.demo2_volleyproject.VolleyRequests;
 /**
  * Volley requests interface
  */
-public interface Request {
+public interface Requester {
 
     /**
      * Volley GET Method: <br>

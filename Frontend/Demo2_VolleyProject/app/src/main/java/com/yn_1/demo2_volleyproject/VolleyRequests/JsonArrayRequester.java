@@ -1,11 +1,11 @@
 package com.yn_1.demo2_volleyproject.VolleyRequests;
 
 /**
- * Volley string request class.
+ * Volley JSON array request class.
  *
- * @author Maxim Popov
+ * @author Roba Abbajabal
  */
-public class StringRequest implements Request{
+public class JsonArrayRequester implements Requester {
     @Override
     public void getRequest() {
 

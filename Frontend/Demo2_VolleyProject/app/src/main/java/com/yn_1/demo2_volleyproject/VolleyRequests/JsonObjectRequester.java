@@ -1,11 +1,11 @@
 package com.yn_1.demo2_volleyproject.VolleyRequests;
 
 /**
- * Volley image request class.
+ * Volley JSON object request class.
  *
- * @author Roba Abbajabal
+ * @author Maxim Popov
  */
-public class ImageRequest implements Request {
+public class JsonObjectRequester implements Requester {
     @Override
     public void getRequest() {
 
