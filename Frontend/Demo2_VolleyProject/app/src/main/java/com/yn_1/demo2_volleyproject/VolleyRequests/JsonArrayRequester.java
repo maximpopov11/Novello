@@ -3,72 +3,65 @@ package com.yn_1.demo2_volleyproject.VolleyRequests;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.yn_1.demo2_volleyproject.AppController;
-import org.json.JSONException;
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONArray;
 
 /**
  * Volley JSON array request class.
  *
  * @author Roba Abbajabal
  */
-public class JsonArrayRequester implements Requester {
+public class JsonArrayRequester implements Requester<JSONArray> {
 
     public static final String TAG="json_array_req";
 
+    private JSONArray receivedArray;
     @Override
-    public Map<Integer, String> getRequest(String url) {
-        Map<Integer, String> returnValue = new HashMap<Integer, String>();
+    public JSONArray getRequest(String url) {
         JsonArrayRequest getJsonArrayRequest = new JsonArrayRequest(
             Request.Method.GET, url, null,
             response -> {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        returnValue.put(i, response.get(i).toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+                receivedArray = response;
             }, error -> {
+                receivedArray = null;
                 error.printStackTrace();
             });
         AppController.getInstance().addToRequestQueue(getJsonArrayRequest, TAG);
-        return returnValue;
+        return receivedArray;
     }
 
     @Override
-    public void postRequest(String url, Object object) {
-        JsonArrayRequest getJsonArrayRequest = new JsonArrayRequest(
+    public void postRequest(String url, JSONArray post) {
+        JsonArrayRequest postJsonArrayRequest = new JsonArrayRequest(
             Request.Method.POST, url, null,
             response -> {
-                // Do something
+                response.put(post);
             }, error -> {
-                // Do Something
+                error.printStackTrace();
             });
-        AppController.getInstance().addToRequestQueue(getJsonArrayRequest, TAG);
+        AppController.getInstance().addToRequestQueue(postJsonArrayRequest, TAG);
     }
 
     @Override
-    public void putRequest(String url) {
-        JsonArrayRequest getJsonArrayRequest = new JsonArrayRequest(
-            Request.Method.PUT, url, null,
+    public void putRequest(String url, JSONArray put) {
+        JsonArrayRequest putJsonArrayRequest = new JsonArrayRequest(
+            Request.Method.POST, url, null,
             response -> {
-                // Do Something
+                response.put(put);
             }, error -> {
-                // Do Something
+                error.printStackTrace();
             });
-        AppController.getInstance().addToRequestQueue(getJsonArrayRequest, TAG);
+        AppController.getInstance().addToRequestQueue(putJsonArrayRequest, TAG);
     }
 
     @Override
     public void deleteRequest(String url) {
-        JsonArrayRequest getJsonArrayRequest = new JsonArrayRequest(
+        JsonArrayRequest deleteJsonArrayRequest = new JsonArrayRequest(
             Request.Method.DELETE, url, null,
             response -> {
-                // Do something
+                // Something
             }, error -> {
-                // Do Something
+                error.printStackTrace();
             });
-        AppController.getInstance().addToRequestQueue(getJsonArrayRequest, TAG);
+        AppController.getInstance().addToRequestQueue(deleteJsonArrayRequest, TAG);
     }
 }
