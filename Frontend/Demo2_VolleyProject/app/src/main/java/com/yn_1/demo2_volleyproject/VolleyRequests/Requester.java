@@ -3,29 +3,29 @@ package com.yn_1.demo2_volleyproject.VolleyRequests;
 /**
  * Volley requests interface
  */
-public interface Requester {
+public interface Requester<E> {
 
     /**
      * Volley GET Method: <br>
      * For getting request
      */
-    void getRequest();
+    E getRequest(String url);
 
     /**
      * Volley POST Method:
      * For adding requests
      */
-    void postRequest();
+    void postRequest(String url, E post);
 
     /**
      * Volley PUT Method:
      * For changing requests
      */
-    void putRequest();
+    void putRequest(String url, E put);
 
     /**
-     * Volley GET Method:
+     * Volley DELETE Method:
      * For deleting requests
      */
-    void deleteRequest();
+    void deleteRequest(String url);
 }
