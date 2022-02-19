@@ -9,5 +9,4 @@ public class Exp3NewWorldApplication {
     public static void main(String[] args) {
         SpringApplication.run(Exp3NewWorldApplication.class, args);
     }
-
 }
