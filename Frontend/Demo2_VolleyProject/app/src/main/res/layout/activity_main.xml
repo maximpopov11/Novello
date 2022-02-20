@@ -41,8 +41,8 @@
         android:id="@+id/showSearched"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="initial text"
+        android:layout_marginTop="29dp"
+        android:text="Nothing submitted yet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/submitSearch" />

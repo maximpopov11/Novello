@@ -3,6 +3,7 @@ package com.yn_1.demo2_volleyproject.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,27 +12,28 @@ import com.yn_1.demo2_volleyproject.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView searchBar;
-    EditText input;
-    String searched;
-    Button submitSearchButton;
     TextView showSearched;
+    String searched;
+    EditText stringInput;
+    Button submitSearchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        searchBar = findViewById(R.id.searchBookTitle);
-        searchBar.setHint("Enter book title...");
-        submitSearchButton = findViewById(R.id.submitSearch);
+        stringInput = (EditText) findViewById(R.id.searchBookTitle);
+        stringInput.setHint("Input book title...");
+        showSearched = (TextView) findViewById(R.id.showSearched);
+        submitSearchButton = (Button) findViewById(R.id.submitSearch);
         submitSearchButton.setText("Submit");
-        submitSearchButton.setOnClickListener(v -> {
-            //todo: crashes on next line because input is not set to what the user inputted
-            searched = input.getText().toString();
-            showSearched.setText(input.getText());
+        submitSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searched = stringInput.getText().toString();
+                showSearched.setText("Searched for " + searched + "!");
+            }
         });
-        showSearched = findViewById(R.id.showSearched);
 
     }
 
