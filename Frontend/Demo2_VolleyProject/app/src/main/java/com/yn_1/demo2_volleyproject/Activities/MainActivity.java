@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         stringInput = (EditText) findViewById(R.id.searchBookTitle);
         stringInput.setHint("Input book title...");
         showSearched = (TextView) findViewById(R.id.showSearched);
+        selectedBook = (TextView) findViewById(R.id.selectedBook);
         submitSearchButton = (Button) findViewById(R.id.submitSearch);
         submitSearchButton.setText("Submit");
         submitSearchButton.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
                 showSearched.setText("Searched for " + searchedTitle + "!");
                 Book searchedBook = searchLibrary(searchedTitle);
                 if (searchedBook != null) {
-                    selectedBook.setText(searchedBook.toString());
+                    //todo: crashes on next line whenever button is clicked
+                    String text = searchedBook.toString() + " found in library!";
+                    selectedBook.setText(text);
                 }
                 else {
                     selectedBook.setText(searchedTitle + " not found in library.");
@@ -55,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateLibrary() {
 
-        library.add(new Book("Mistborn", "Brandon Sanderson", 2006, "9780765311788", 5.0));
-        library.add(new Book("Roba's Autobiography", "Roba", 2022, "3", 5.1));
+        library.add(new Book("Roba's Autobiography", "Roba", 2022, "3", 9000));
         library.add(new Book("Life of Kevin", "Kyle", 2022, "7", 2.2));
         library.add(new Book("Life of Kyle", "Other Kyle", 2022, "number", 4.3));
 
