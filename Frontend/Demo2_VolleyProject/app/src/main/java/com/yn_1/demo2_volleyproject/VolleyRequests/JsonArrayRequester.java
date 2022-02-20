@@ -11,7 +11,6 @@ import org.json.JSONArray;
  * @author Roba Abbajabal
  */
 public class JsonArrayRequester implements Requester<JSONArray> {
-
     public static final String TAG="json_array_req";
 
     private JSONArray receivedArray;
