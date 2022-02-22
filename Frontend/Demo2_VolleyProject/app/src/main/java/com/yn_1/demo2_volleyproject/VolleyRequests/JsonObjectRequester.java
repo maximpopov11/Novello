@@ -1,6 +1,10 @@
 package com.yn_1.demo2_volleyproject.VolleyRequests;
 
+import com.yn_1.demo2_volleyproject.VolleyCommand;
+
 import org.json.JSONObject;
+
+import java.util.Map;
 
 /**
  * Volley JSON object request class.
@@ -9,22 +13,26 @@ import org.json.JSONObject;
  */
 public class JsonObjectRequester implements Requester<JSONObject> {
     @Override
-    public JSONObject getRequest(String url) {
-        return null;
-    }
-
-    @Override
-    public void postRequest(String url, JSONObject post) {
+    public void getRequest(String url, VolleyCommand command,
+                                 Map<String, String> headers, Map<String, String> params) {
 
     }
 
     @Override
-    public void putRequest(String url, JSONObject put) {
+    public void postRequest(String url, JSONObject post, VolleyCommand command,
+                            Map<String, String> headers, Map<String, String> params) {
 
     }
 
     @Override
-    public void deleteRequest(String url) {
+    public void putRequest(String url, JSONObject put, VolleyCommand command,
+                           Map<String, String> headers, Map<String, String> params) {
+
+    }
+
+    @Override
+    public void deleteRequest(String url, VolleyCommand command,
+                              Map<String, String> headers, Map<String, String> params) {
 
     }
 }
