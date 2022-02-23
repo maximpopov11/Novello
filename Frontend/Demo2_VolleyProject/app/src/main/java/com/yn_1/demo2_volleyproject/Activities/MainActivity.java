@@ -15,12 +15,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView showSearched;
-    TextView selectedBook;
-    String searchedTitle;
+    //Book search objects
     EditText stringInput;
     Button submitSearchButton;
+    String searchedTitle;
+    TextView selectedBook;
+    TextView showSearched;
 
+    //Collection of books
     ArrayList<Book> library = new ArrayList<>();
 
     @Override
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         populateLibrary();
 
+        //Book search
         stringInput = (EditText) findViewById(R.id.searchBookTitle);
         stringInput.setHint("Input book title...");
         showSearched = (TextView) findViewById(R.id.showSearched);
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 showSearched.setText("Searched for " + searchedTitle + "!");
                 Book searchedBook = searchLibrary(searchedTitle);
                 if (searchedBook != null) {
-                    //todo: crashes on next line whenever button is clicked
                     String text = searchedBook.toString() + " found in library!";
                     selectedBook.setText(text);
                 }
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Populates the library with some books
+     */
     private void populateLibrary() {
 
         library.add(new Book("Roba's Autobiography", "Roba", 2022, "3", 9000));
@@ -64,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Searches for a book in the library
+     * @param title is the title of the book to search for
+     * @return a book if one is found or null is not
+     */
     private Book searchLibrary(String title) {
 
         Book searching = null;
