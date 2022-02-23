@@ -1,6 +1,17 @@
 package com.yn_1.demo2_volleyproject.VolleyRequests;
 
+import android.util.Log;
+import androidx.annotation.Nullable;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.yn_1.demo2_volleyproject.AppController;
+import com.yn_1.demo2_volleyproject.VolleyCommand;
+
 import org.json.JSONArray;
+
+import java.util.Map;
 
 /**
  * Volley JSON array request class.
@@ -8,23 +19,135 @@ import org.json.JSONArray;
  * @author Roba Abbajabal
  */
 public class JsonArrayRequester implements Requester<JSONArray> {
+
+    // Request tag for debugging.
+    public static final String TAG="json_array_req";
+
     @Override
-    public JSONArray getRequest(String url) {
-        return null;
+    public void getRequest(String url, VolleyCommand command,
+                                Map<String, String> headers, Map<String, String> params) {
+        JsonArrayRequest getJsonArrayRequest = new JsonArrayRequest(
+            Request.Method.GET, url, null,
+            response -> {
+                Log.d(TAG, response.toString());
+                command.execute(response);
+            }, error -> {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                if (headers == null)
+                    return super.getHeaders();
+                else
+                    return headers;
+            }
+
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if (headers == null)
+                    return super.getParams();
+                else
+                    return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(getJsonArrayRequest, TAG);
     }
 
     @Override
-    public void postRequest(String url, JSONArray post) {
+    public void postRequest(String url, JSONArray post, VolleyCommand command,
+                            Map<String, String> headers, Map<String, String> params) {
+        JsonArrayRequest postJsonArrayRequest = new JsonArrayRequest(
+            Request.Method.POST, url, post,
+            response -> {
+                Log.d(TAG, response.toString());
+                command.execute(response);
+            }, error -> {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                if (headers == null)
+                    return super.getHeaders();
+                else
+                    return headers;
+            }
 
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if (headers == null)
+                    return super.getParams();
+                else
+                    return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(postJsonArrayRequest, TAG);
     }
 
     @Override
-    public void putRequest(String url, JSONArray put) {
+    public void putRequest(String url, JSONArray put, VolleyCommand command,
+                           Map<String, String> headers, Map<String, String> params) {
+        JsonArrayRequest putJsonArrayRequest = new JsonArrayRequest(
+            Request.Method.PUT, url, put,
+            response -> {
+                Log.d(TAG, response.toString());
+                command.execute(response);
+            }, error -> {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                if (headers == null)
+                    return super.getHeaders();
+                else
+                    return headers;
+            }
 
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if (headers == null)
+                    return super.getParams();
+                else
+                    return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(putJsonArrayRequest, TAG);
     }
 
     @Override
-    public void deleteRequest(String url) {
+    public void deleteRequest(String url, VolleyCommand command,
+                              Map<String, String> headers, Map<String, String> params) {
+        JsonArrayRequest deleteJsonArrayRequest = new JsonArrayRequest(
+            Request.Method.DELETE, url, null,
+            response -> {
+                Log.d(TAG, response.toString());
+                command.execute(response);
+            }, error -> {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                if (headers == null)
+                    return super.getHeaders();
+                else
+                    return headers;
+            }
 
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if (headers == null)
+                    return super.getParams();
+                else
+                    return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(deleteJsonArrayRequest, TAG);
     }
 }
