@@ -6,6 +6,8 @@ import java.util.Map;
 
 /**
  * Volley requests interface
+ *
+ * @author Roba Abbajabal
  */
 public interface Requester<E> {
 
