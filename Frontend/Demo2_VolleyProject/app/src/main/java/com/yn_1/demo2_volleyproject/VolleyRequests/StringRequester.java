@@ -29,7 +29,7 @@ public class StringRequester implements Requester<String> {
     public void getRequest(String url, VolleyCommand command,
                              Map<String, String> headers, Map<String, String> params) {
         StringRequest getStringRequest = new StringRequest(
-                Request.Method.GET, url, null,
+                Request.Method.GET, url,
                 response -> {
                     Log.d(TAG, response.toString());
                     command.execute(response);
@@ -65,7 +65,7 @@ public class StringRequester implements Requester<String> {
     public void postRequest(String url, String post, VolleyCommand command,
                             Map<String, String> headers, Map<String, String> params) {
         StringRequest postStringRequest = new StringRequest(
-                Request.Method.POST, url, post,
+                Request.Method.POST, url,
                 response -> {
                     Log.d(TAG, response.toString());
                     command.execute(response);
@@ -97,7 +97,7 @@ public class StringRequester implements Requester<String> {
     public void putRequest(String url, String put, VolleyCommand command,
                            Map<String, String> headers, Map<String, String> params) {
         StringRequest putStringRequest = new StringRequest(
-                Request.Method.PUT, url, put,
+                Request.Method.PUT, url,
                 response -> {
                     Log.d(TAG, response.toString());
                     command.execute(response);
@@ -129,7 +129,7 @@ public class StringRequester implements Requester<String> {
     public void deleteRequest(String url, VolleyCommand command,
                               Map<String, String> headers, Map<String, String> params) {
         StringRequest deleteStringRequest = new StringRequest(
-                Request.Method.DELETE, url, null,
+                Request.Method.DELETE, url,
                 response -> {
                     Log.d(TAG, response.toString());
                     command.execute(response);
