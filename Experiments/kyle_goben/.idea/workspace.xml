@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a502dc39-0a6d-4554-8cf1-ad2bbc44ce5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/kyleiscool" beforeDir="false" />
-    </list>
+    <list default="true" id="a502dc39-0a6d-4554-8cf1-ad2bbc44ce5c" name="Changes" comment="Downloaded Unit 2 experiments to get them working" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,6 +9,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="24ZcvuVVe4KC3kwoMXibajQcvpm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -22,6 +23,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/DEMO 2/exp6" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -35,10 +37,41 @@
       <option name="presentableId" value="Default" />
       <updated>1643841796983</updated>
       <workItem from="1643841798377" duration="161000" />
+      <workItem from="1645293403513" duration="504000" />
     </task>
+    <task id="LOCAL-00001" summary="Downloaded Unit 2 experiments to get them working">
+      <created>1645293449058</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1645293449058</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Downloaded Unit 2 experiments to get them working">
+      <created>1645293820380</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1645293820380</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Downloaded Unit 2 experiments to get them working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Downloaded Unit 2 experiments to get them working" />
   </component>
 </project>

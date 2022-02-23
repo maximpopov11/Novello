@@ -4,6 +4,7 @@ import android.app.Application;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.LruCache;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,6 +14,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 
 /**
  * Application class for creating and configuring volley requests.<br>
@@ -48,6 +50,7 @@ public class AppController extends Application {
         super.onCreate();
         instance = this;
         createRequestQueue();
+        Log.d(TAG, "App Controller Started");
     }
 
     /**
@@ -66,7 +69,8 @@ public class AppController extends Application {
     private void createRequestQueue() {
         cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
         network = new BasicNetwork(new HurlStack());
-        requestQueue = new RequestQueue(cache, network);
+        // requestQueue = new RequestQueue(cache, network);
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
         createImageLoader();
     }
 
