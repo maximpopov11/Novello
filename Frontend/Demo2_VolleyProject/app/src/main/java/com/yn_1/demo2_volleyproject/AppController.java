@@ -122,7 +122,7 @@ public class AppController extends Application {
 
             @Override
             public Bitmap getBitmap(String url) {
-                return cache.get(Const.URL);
+                return cache.get(Const.baseUrl);
             }
 
             @Override

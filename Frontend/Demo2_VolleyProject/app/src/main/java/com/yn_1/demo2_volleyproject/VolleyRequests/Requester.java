@@ -15,7 +15,7 @@ public interface Requester<E> {
      * Volley GET Method: <br>
      * For requesting a value to get from the server.
      */
-    void getRequest(String url, VolleyCommand command,
+    void getRequest(String path, VolleyCommand command,
                  Map<String, String> headers, Map<String, String> params);
 
     /**
@@ -28,7 +28,7 @@ public interface Requester<E> {
      * @param headers Headers for the request
      * @param params Parameters for the request
      */
-    void postRequest(String url, E post, VolleyCommand command,
+    void postRequest(String path, E post, VolleyCommand command,
                      Map<String, String> headers, Map<String, String> params);
 
     /**
@@ -41,7 +41,7 @@ public interface Requester<E> {
      * @param headers Headers for the request
      * @param params Parameters for the request
      */
-    void putRequest(String url, E put, VolleyCommand command,
+    void putRequest(String path, E put, VolleyCommand command,
                     Map<String, String> headers, Map<String, String> params);
 
     /**
@@ -53,6 +53,6 @@ public interface Requester<E> {
      * @param headers Headers for the request
      * @param params Parameters for the request
      */
-    void deleteRequest(String url, VolleyCommand command,
+    void deleteRequest(String path, VolleyCommand command,
                        Map<String, String> headers, Map<String, String> params);
 }

@@ -11,6 +11,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.yn_1.demo2_volleyproject.AppController;
+import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 
 import java.util.Map;
@@ -26,17 +27,18 @@ public class StringRequester implements Requester<String> {
     public static final String TAG="json_array_req";
 
     @Override
-    public void getRequest(String url, VolleyCommand command,
+    public void getRequest(String path, VolleyCommand command,
                              Map<String, String> headers, Map<String, String> params) {
         StringRequest getStringRequest = new StringRequest(
-                Request.Method.GET, url,
-                response -> {
-                    Log.d(TAG, response.toString());
-                    command.execute(response);
-                }, error -> {
-                    VolleyLog.d(TAG, "Error: " + error.getMessage());
-                    Log.d(TAG, "Error: " + error.getMessage());
-                })
+            Request.Method.GET, Const.baseUrl+path,
+            response -> {
+                Log.d(TAG, response.toString());
+                command.execute(response);
+            }, error -> {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
+            })
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -63,17 +65,18 @@ public class StringRequester implements Requester<String> {
     }
 
     @Override
-    public void postRequest(String url, String post, VolleyCommand command,
+    public void postRequest(String path, String post, VolleyCommand command,
                             Map<String, String> headers, Map<String, String> params) {
         StringRequest postStringRequest = new StringRequest(
-                Request.Method.POST, url,
-                response -> {
-                    Log.d(TAG, response.toString());
-                    command.execute(response);
-                }, error -> {
-            VolleyLog.d(TAG, "Error: " + error.getMessage());
-            Log.d(TAG, "Error: " + error.getMessage());
-        })
+            Request.Method.POST, Const.baseUrl+path,
+            response -> {
+                Log.d(TAG, response.toString());
+                command.execute(response);
+            }, error -> {
+                command.onError(error);
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+            })
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -96,17 +99,18 @@ public class StringRequester implements Requester<String> {
     }
 
     @Override
-    public void putRequest(String url, String put, VolleyCommand command,
+    public void putRequest(String path, String put, VolleyCommand command,
                            Map<String, String> headers, Map<String, String> params) {
         StringRequest putStringRequest = new StringRequest(
-                Request.Method.PUT, url,
-                response -> {
-                    Log.d(TAG, response.toString());
-                    command.execute(response);
-                }, error -> {
-            VolleyLog.d(TAG, "Error: " + error.getMessage());
-            Log.d(TAG, "Error: " + error.getMessage());
-        })
+            Request.Method.PUT, Const.baseUrl+path,
+            response -> {
+                Log.d(TAG, response.toString());
+                command.execute(response);
+            }, error -> {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
+            })
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -129,17 +133,18 @@ public class StringRequester implements Requester<String> {
     }
 
     @Override
-    public void deleteRequest(String url, VolleyCommand command,
+    public void deleteRequest(String path, VolleyCommand command,
                               Map<String, String> headers, Map<String, String> params) {
         StringRequest deleteStringRequest = new StringRequest(
-                Request.Method.DELETE, url,
-                response -> {
-                    Log.d(TAG, response.toString());
-                    command.execute(response);
-                }, error -> {
-            VolleyLog.d(TAG, "Error: " + error.getMessage());
-            Log.d(TAG, "Error: " + error.getMessage());
-        })
+            Request.Method.DELETE, Const.baseUrl+path,
+            response -> {
+                Log.d(TAG, response.toString());
+                command.execute(response);
+            }, error -> {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
+            })
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
