@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.yn_1.demo2_volleyproject.Book;
+import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.R;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 import com.yn_1.demo2_volleyproject.VolleyRequests.StringRequester;
@@ -82,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
         StringRequester titleRequester = new StringRequester();
         StringCommand command = new StringCommand();
-        //todo: give it the correct URL (not yet implemented because URL is not yet ready)
-        titleRequester.postRequest("url", title, command, null, null);
+        //todo: give it the correct URL extension
+        titleRequester.postRequest(Const.baseUrl + "/book", title, command, null, null);
         if (command.string != null) {
             return new Book(command.string);
         }
@@ -100,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void execute(String data) {
             this.string = data;
+        }
+
+        @Override
+        public void onError(VolleyError error) {
+
         }
 
     }
