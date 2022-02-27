@@ -10,7 +10,10 @@ import android.widget.TextView;
 
 import com.yn_1.demo2_volleyproject.Book;
 import com.yn_1.demo2_volleyproject.R;
+import com.yn_1.demo2_volleyproject.VolleyCommand;
 import com.yn_1.demo2_volleyproject.VolleyRequests.StringRequester;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -77,24 +80,28 @@ public class MainActivity extends AppCompatActivity {
      */
     private Book searchLibrary(String title) {
 
-//        StringRequester titleRequester = new StringRequester();
-//        titleRequester.postRequest();
-        return null;
+        StringRequester titleRequester = new StringRequester();
+        StringCommand command = new StringCommand();
+        //todo: give it the correct URL (not yet implemented because URL is not yet ready)
+        titleRequester.postRequest("url", title, command, null, null);
+        if (command.string != null) {
+            return new Book(command.string);
+        }
+        else {
+            return null;
+        }
 
     }
-    //version which searches the library arrayList existing only in the front end
-//    private Book searchLibrary(String title) {
-//
-//        Book searching = null;
-//        for (int i = 0; i < library.size(); i++) {
-//            Book candidate = library.get(i);
-//            if (candidate.getTitle().equals(title)) {
-//                searching = candidate;
-//                break;
-//            }
-//        }
-//        return searching;
-//
-//    }
+
+    private class StringCommand implements VolleyCommand<String> {
+
+        String string = null;
+
+        @Override
+        public void execute(String data) {
+            this.string = data;
+        }
+
+    }
 
 }
