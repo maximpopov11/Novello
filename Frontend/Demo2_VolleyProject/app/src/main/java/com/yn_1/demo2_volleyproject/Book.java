@@ -10,7 +10,7 @@ public class Book {
     double rating;
 
     /**
-     * Default constructor
+     * Constructor
      * @param title book title
      * @param author book author
      * @param publicationYear book publication year
@@ -23,6 +23,18 @@ public class Book {
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.rating = rating;
+    }
+
+    /**
+     * Constructor
+     * @param title book title
+     */
+    public Book(String title) {
+        this.title = title;
+        this.author = "unknown author";
+        this.publicationYear = -1;
+        this.isbn = "unknown isbn";
+        this.rating = -1;
     }
 
     /**
