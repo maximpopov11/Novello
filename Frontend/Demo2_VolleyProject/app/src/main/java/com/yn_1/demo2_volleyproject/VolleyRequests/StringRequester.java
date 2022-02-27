@@ -35,6 +35,7 @@ public class StringRequester implements Requester<String> {
                     command.execute(response);
                 }, error -> {
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    Log.d(TAG, "Error: " + error.getMessage());
                 })
         {
             @Override
@@ -71,6 +72,7 @@ public class StringRequester implements Requester<String> {
                     command.execute(response);
                 }, error -> {
             VolleyLog.d(TAG, "Error: " + error.getMessage());
+            Log.d(TAG, "Error: " + error.getMessage());
         })
         {
             @Override
@@ -103,6 +105,7 @@ public class StringRequester implements Requester<String> {
                     command.execute(response);
                 }, error -> {
             VolleyLog.d(TAG, "Error: " + error.getMessage());
+            Log.d(TAG, "Error: " + error.getMessage());
         })
         {
             @Override
@@ -135,6 +138,7 @@ public class StringRequester implements Requester<String> {
                     command.execute(response);
                 }, error -> {
             VolleyLog.d(TAG, "Error: " + error.getMessage());
+            Log.d(TAG, "Error: " + error.getMessage());
         })
         {
             @Override

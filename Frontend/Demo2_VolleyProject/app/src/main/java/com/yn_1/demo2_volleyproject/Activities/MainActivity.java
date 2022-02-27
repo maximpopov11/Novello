@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.yn_1.demo2_volleyproject.Book;
 import com.yn_1.demo2_volleyproject.R;
+import com.yn_1.demo2_volleyproject.VolleyRequests.StringRequester;
 
 import java.util.ArrayList;
 
@@ -76,16 +77,23 @@ public class MainActivity extends AppCompatActivity {
      */
     private Book searchLibrary(String title) {
 
-        Book searching = null;
-        for (int i = 0; i < library.size(); i++) {
-            Book candidate = library.get(i);
-            if (candidate.getTitle().equals(title)) {
-                searching = candidate;
-                break;
-            }
-        }
-        return searching;
+        StringRequester titleRequester = new StringRequester();
+        titleRequester.postRequest();
 
     }
+    //version which searches the library arrayList existing only in the front end
+//    private Book searchLibrary(String title) {
+//
+//        Book searching = null;
+//        for (int i = 0; i < library.size(); i++) {
+//            Book candidate = library.get(i);
+//            if (candidate.getTitle().equals(title)) {
+//                searching = candidate;
+//                break;
+//            }
+//        }
+//        return searching;
+//
+//    }
 
 }

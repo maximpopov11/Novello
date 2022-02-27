@@ -36,6 +36,7 @@ public class JsonObjectRequester implements Requester<JSONObject> {
                     command.execute(response);
                 }, error -> {
             VolleyLog.d(TAG, "Error: " + error.getMessage());
+            Log.d(TAG, "Error: " + error.getMessage());
         })
         {
             @Override
@@ -68,6 +69,7 @@ public class JsonObjectRequester implements Requester<JSONObject> {
                     command.execute(response);
                 }, error -> {
             VolleyLog.d(TAG, "Error: " + error.getMessage());
+            Log.d(TAG, "Error: " + error.getMessage());
         })
         {
             @Override
@@ -100,6 +102,7 @@ public class JsonObjectRequester implements Requester<JSONObject> {
                     command.execute(response);
                 }, error -> {
             VolleyLog.d(TAG, "Error: " + error.getMessage());
+            Log.d(TAG, "Error: " + error.getMessage());
         })
         {
             @Override
@@ -132,6 +135,7 @@ public class JsonObjectRequester implements Requester<JSONObject> {
                     command.execute(response);
                 }, error -> {
             VolleyLog.d(TAG, "Error: " + error.getMessage());
+            Log.d(TAG, "Error: " + error.getMessage());
         })
         {
             @Override
