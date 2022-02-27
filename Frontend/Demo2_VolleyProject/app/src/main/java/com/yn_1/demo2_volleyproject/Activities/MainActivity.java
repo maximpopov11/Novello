@@ -77,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private Book searchLibrary(String title) {
 
-        StringRequester titleRequester = new StringRequester();
-        titleRequester.postRequest();
+//        StringRequester titleRequester = new StringRequester();
+//        titleRequester.postRequest();
+        return null;
 
     }
     //version which searches the library arrayList existing only in the front end
