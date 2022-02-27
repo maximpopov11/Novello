@@ -84,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         StringRequester titleRequester = new StringRequester();
         StringCommand command = new StringCommand();
-        //todo: give it the correct URL extension
-        titleRequester.postRequest(Const.baseUrl + "/book", title, command, null, null);
+        titleRequester.postRequest(Const.baseUrl + "/addBooks", title, command, null, null);
         if (command.string != null) {
             return new Book(command.string);
         }
