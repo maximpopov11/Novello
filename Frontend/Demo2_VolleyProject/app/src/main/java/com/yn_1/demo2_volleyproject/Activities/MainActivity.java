@@ -28,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
     TextView selectedBook;
     TextView showSearched;
 
-    //Collection of books
-    ArrayList<Book> library = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void populateLibrary() {
 
-        library.add(new Book("Roba's Autobiography", "Roba", 2022, "3", 9000));
-        library.add(new Book("Life of Kevin", "Kyle", 2022, "7", 2.2));
-        library.add(new Book("Life of Kyle", "Other Kyle", 2022, "number", 4.3));
-
+        StringRequester titleAddRequester = new StringRequester();
+        StringCommand command = new StringCommand();
+        //todo: test post request
+        titleAddRequester.postRequest(Const.baseUrl + "/addBooks", "{title: Roba's Autobiography}", command, null, null);
     }
 
     /**
@@ -84,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         StringRequester titleRequester = new StringRequester();
         StringCommand command = new StringCommand();
-        titleRequester.postRequest(Const.baseUrl + "/addBooks", title, command, null, null);
+        //todo: test get request
+        titleRequester.getRequest(Const.baseUrl + "/addBooks/{title: " + title + "}", command, null, null);
         if (command.string != null) {
             return new Book(command.string);
         }
@@ -96,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class StringCommand implements VolleyCommand<String> {
 
+        //todo: given as an array, but here it says it is given as a String, should the interface be changed?
         String string = null;
 
         @Override
