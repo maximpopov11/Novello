@@ -1,36 +1,36 @@
-package com.yn_1.demo2_volleyproject.VolleyRequests;
+package com.yn_1.demo2_volleyproject.VolleyRequesters;
 
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Header;
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.yn_1.demo2_volleyproject.AppController;
 import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 
+import org.json.JSONObject;
+
 import java.util.Map;
 
 /**
- * Volley string request class.
+ * Volley JSON object request class.
  *
  * @author Maxim Popov
  */
-public class StringRequester implements Requester<String> {
+public class JsonObjectRequester implements Requester<JSONObject> {
 
     // Request tag for debugging.
     public static final String TAG="json_array_req";
 
     @Override
-    public void getRequest(String path, VolleyCommand command,
-                             Map<String, String> headers, Map<String, String> params) {
-        StringRequest getStringRequest = new StringRequest(
-            Request.Method.GET, Const.baseUrl+path,
+    public void getRequest(String path, JSONObject get, VolleyCommand command,
+                                 Map<String, String> headers, Map<String, String> params) {
+        JsonObjectRequest getJsonArrayRequest = new JsonObjectRequest(
+            Request.Method.GET, Const.baseUrl+path, get,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
@@ -42,40 +42,36 @@ public class StringRequester implements Requester<String> {
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                if (headers == null) {
+                if (headers == null)
                     return super.getHeaders();
-                }
-                else {
+                else
                     return headers;
-                }
             }
 
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                if (headers == null) {
+                if (headers == null)
                     return super.getParams();
-                }
-                else {
+                else
                     return headers;
-                }
             }
         };
-        AppController.getInstance().addToRequestQueue(getStringRequest, TAG);
+        AppController.getInstance().addToRequestQueue(getJsonArrayRequest, TAG);
     }
 
     @Override
-    public void postRequest(String path, String post, VolleyCommand command,
+    public void postRequest(String path, JSONObject post, VolleyCommand command,
                             Map<String, String> headers, Map<String, String> params) {
-        StringRequest postStringRequest = new StringRequest(
-            Request.Method.POST, Const.baseUrl+path,
+        JsonObjectRequest postJsonArrayRequest = new JsonObjectRequest(
+            Request.Method.POST, Const.baseUrl+path, post,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
             }, error -> {
-                command.onError(error);
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
             })
         {
             @Override
@@ -95,14 +91,14 @@ public class StringRequester implements Requester<String> {
                     return headers;
             }
         };
-        AppController.getInstance().addToRequestQueue(postStringRequest, TAG);
+        AppController.getInstance().addToRequestQueue(postJsonArrayRequest, TAG);
     }
 
     @Override
-    public void putRequest(String path, String put, VolleyCommand command,
+    public void putRequest(String path, JSONObject put, VolleyCommand command,
                            Map<String, String> headers, Map<String, String> params) {
-        StringRequest putStringRequest = new StringRequest(
-            Request.Method.PUT, Const.baseUrl+path,
+        JsonObjectRequest putJsonArrayRequest = new JsonObjectRequest(
+            Request.Method.PUT, Const.baseUrl+path, put,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
@@ -129,14 +125,14 @@ public class StringRequester implements Requester<String> {
                     return headers;
             }
         };
-        AppController.getInstance().addToRequestQueue(putStringRequest, TAG);
+        AppController.getInstance().addToRequestQueue(putJsonArrayRequest, TAG);
     }
 
     @Override
-    public void deleteRequest(String path, VolleyCommand command,
+    public void deleteRequest(String path, JSONObject delete, VolleyCommand command,
                               Map<String, String> headers, Map<String, String> params) {
-        StringRequest deleteStringRequest = new StringRequest(
-            Request.Method.DELETE, Const.baseUrl+path,
+        JsonObjectRequest deleteJsonArrayRequest = new JsonObjectRequest(
+            Request.Method.DELETE, Const.baseUrl+path, delete,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
@@ -163,7 +159,7 @@ public class StringRequester implements Requester<String> {
                     return headers;
             }
         };
-        AppController.getInstance().addToRequestQueue(deleteStringRequest, TAG);
+        AppController.getInstance().addToRequestQueue(deleteJsonArrayRequest, TAG);
     }
 
 }

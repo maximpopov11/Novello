@@ -4,16 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.yn_1.demo2_volleyproject.R;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
-import com.yn_1.demo2_volleyproject.VolleyRequests.ImageRequester;
-import com.yn_1.demo2_volleyproject.VolleyRequests.JsonArrayRequester;
-import com.yn_1.demo2_volleyproject.VolleyRequests.JsonObjectRequester;
+import com.yn_1.demo2_volleyproject.VolleyRequesters.ImageRequester;
+import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonArrayRequester;
+import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,16 +34,16 @@ public class TestRequestsActivity extends AppCompatActivity {
 
         JsonArrayRequester requester = new JsonArrayRequester();
         JsonArrayTestCommand jsonArrayTestCommand = new JsonArrayTestCommand();
-        requester.getRequest("https://api.androidhive.info/volley/person_array.json", jsonArrayTestCommand, null, null);
+        requester.getRequest("https://api.androidhive.info/volley/person_array.json", null, jsonArrayTestCommand, null, null);
 
         ImageRequester requester2 = new ImageRequester();
         ImageTestCommand imageTestCommand = new ImageTestCommand();
-        requester2.getRequest("https://api.androidhive.info/volley/volley-image.jpg", imageTestCommand, null, null);
+        requester2.getRequest("https://api.androidhive.info/volley/volley-image.jpg", null, imageTestCommand, null, null);
 
         JsonObjectRequester requester3 = new JsonObjectRequester();
         JSONObjectTestCommand jsonObjectTestCommand = new JSONObjectTestCommand();
         requester3.getRequest("https://06817084-8904-405a-8e1b-2c60a3fae2a2.mock.pstmn.io/library/?userID=1&email=robaa@iastate.edu&bookTitle=The%20Brothers%20Karamazov",
-                jsonObjectTestCommand, null, null);
+                null, jsonObjectTestCommand, null, null);
     }
 
     class JsonArrayTestCommand implements VolleyCommand<JSONArray> {

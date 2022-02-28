@@ -1,4 +1,4 @@
-package com.yn_1.demo2_volleyproject.VolleyRequests;
+package com.yn_1.demo2_volleyproject.VolleyRequesters;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -23,7 +23,7 @@ public class ImageRequester implements Requester<Bitmap> {
     public static final String TAG="image_req";
 
     @Override
-    public void getRequest(String path, VolleyCommand command,
+    public void getRequest(String path, Bitmap get, VolleyCommand command,
                             Map<String, String> headers, Map<String, String> params) {
         ImageRequest getImageRequest = new ImageRequest(Const.baseUrl+path,
             bitmap -> {
@@ -69,7 +69,7 @@ public class ImageRequester implements Requester<Bitmap> {
     }
 
     @Override
-    public void deleteRequest(String path, VolleyCommand command,
+    public void deleteRequest(String path, Bitmap delete, VolleyCommand command,
                               Map<String, String> headers, Map<String, String> params) {
         // Keep this empty
     }
