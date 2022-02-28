@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         StringRequester titleRequester = new StringRequester();
         StringCommand command = new StringCommand();
-        //todo: test get request
-        titleRequester.getRequest(Const.baseUrl + "/addBooks/{title: " + title + "}", command, null, null);
+        //todo: test get requests
+        titleRequester.getRequest(Const.baseUrl + "/addBooks/"+ title, command, null, null);
         if (command.string != null) {
             return new Book(command.string);
         }
