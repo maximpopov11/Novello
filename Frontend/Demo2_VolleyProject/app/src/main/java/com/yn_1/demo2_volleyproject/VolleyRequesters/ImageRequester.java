@@ -1,12 +1,14 @@
-package com.yn_1.demo2_volleyproject.VolleyRequests;
+package com.yn_1.demo2_volleyproject.VolleyRequesters;
 
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import com.android.volley.AuthFailureError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageRequest;
 import com.yn_1.demo2_volleyproject.AppController;
+import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 import java.util.Map;
 
@@ -21,16 +23,17 @@ public class ImageRequester implements Requester<Bitmap> {
     public static final String TAG="image_req";
 
     @Override
-    public void getRequest(String url, VolleyCommand command,
+    public void getRequest(String path, Bitmap get, VolleyCommand command,
                             Map<String, String> headers, Map<String, String> params) {
-        ImageRequest getImageRequest = new ImageRequest(url,
+        ImageRequest getImageRequest = new ImageRequest(Const.baseUrl+path,
             bitmap -> {
                 Log.d(TAG, bitmap.toString());
                 command.execute(bitmap);
             }, 0, 0, ImageView.ScaleType.CENTER_INSIDE, null,
             error -> {
-                System.out.println();
-                System.out.println();
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
             })
         {
             @Override
@@ -54,19 +57,19 @@ public class ImageRequester implements Requester<Bitmap> {
     }
 
     @Override
-    public void postRequest(String url, Bitmap post, VolleyCommand command,
+    public void postRequest(String path, Bitmap post, VolleyCommand command,
                             Map<String, String> headers, Map<String, String> params) {
         // Keep this empty
     }
 
     @Override
-    public void putRequest(String url, Bitmap put, VolleyCommand command,
+    public void putRequest(String path, Bitmap put, VolleyCommand command,
                            Map<String, String> headers, Map<String, String> params) {
         // Keep this empty
     }
 
     @Override
-    public void deleteRequest(String url, VolleyCommand command,
+    public void deleteRequest(String path, Bitmap delete, VolleyCommand command,
                               Map<String, String> headers, Map<String, String> params) {
         // Keep this empty
     }

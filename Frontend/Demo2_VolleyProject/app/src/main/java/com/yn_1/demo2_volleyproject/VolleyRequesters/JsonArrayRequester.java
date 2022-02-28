@@ -1,4 +1,4 @@
-package com.yn_1.demo2_volleyproject.VolleyRequests;
+package com.yn_1.demo2_volleyproject.VolleyRequesters;
 
 import android.util.Log;
 import androidx.annotation.Nullable;
@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.yn_1.demo2_volleyproject.AppController;
+import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 
 import org.json.JSONArray;
@@ -24,15 +25,17 @@ public class JsonArrayRequester implements Requester<JSONArray> {
     public static final String TAG="json_array_req";
 
     @Override
-    public void getRequest(String url, VolleyCommand command,
+    public void getRequest(String path, JSONArray get, VolleyCommand command,
                                 Map<String, String> headers, Map<String, String> params) {
         JsonArrayRequest getJsonArrayRequest = new JsonArrayRequest(
-            Request.Method.GET, url, null,
+            Request.Method.GET, Const.baseUrl+path, get,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
             }, error -> {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
             })
         {
             @Override
@@ -56,15 +59,17 @@ public class JsonArrayRequester implements Requester<JSONArray> {
     }
 
     @Override
-    public void postRequest(String url, JSONArray post, VolleyCommand command,
+    public void postRequest(String path, JSONArray post, VolleyCommand command,
                             Map<String, String> headers, Map<String, String> params) {
         JsonArrayRequest postJsonArrayRequest = new JsonArrayRequest(
-            Request.Method.POST, url, post,
+            Request.Method.POST, Const.baseUrl+path, post,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
             }, error -> {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
             })
         {
             @Override
@@ -88,15 +93,17 @@ public class JsonArrayRequester implements Requester<JSONArray> {
     }
 
     @Override
-    public void putRequest(String url, JSONArray put, VolleyCommand command,
+    public void putRequest(String path, JSONArray put, VolleyCommand command,
                            Map<String, String> headers, Map<String, String> params) {
         JsonArrayRequest putJsonArrayRequest = new JsonArrayRequest(
-            Request.Method.PUT, url, put,
+            Request.Method.PUT, Const.baseUrl+path, put,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
             }, error -> {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
             })
         {
             @Override
@@ -120,15 +127,17 @@ public class JsonArrayRequester implements Requester<JSONArray> {
     }
 
     @Override
-    public void deleteRequest(String url, VolleyCommand command,
+    public void deleteRequest(String path, JSONArray delete, VolleyCommand command,
                               Map<String, String> headers, Map<String, String> params) {
         JsonArrayRequest deleteJsonArrayRequest = new JsonArrayRequest(
-            Request.Method.DELETE, url, null,
+            Request.Method.DELETE, Const.baseUrl+path, delete,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
             }, error -> {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, "Error: " + error.getMessage());
+                command.onError(error);
             })
         {
             @Override

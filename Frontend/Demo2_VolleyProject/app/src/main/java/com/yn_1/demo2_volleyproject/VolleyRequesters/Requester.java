@@ -1,4 +1,4 @@
-package com.yn_1.demo2_volleyproject.VolleyRequests;
+package com.yn_1.demo2_volleyproject.VolleyRequesters;
 
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 
@@ -12,47 +12,54 @@ import java.util.Map;
 public interface Requester<E> {
 
     /**
-     * Volley GET Method: <br>
-     * For requesting a value to get from the server.
+     * Volley DELETE Method: <br>
+     * For requesting a value to delete from the server.
+     *
+     * @param path URL path to the request
+     * @param get Object to get
+     * @param command Command to run upon a response
+     * @param headers Headers for the request
+     * @param params Parameters for the request
      */
-    void getRequest(String url, VolleyCommand command,
+    void getRequest(String path, E get, VolleyCommand command,
                  Map<String, String> headers, Map<String, String> params);
 
     /**
      * Volley POST Method: <br>
-     * For requesting a value to add to the server.
+     * For requesting a value to modify in the server.
      *
-     * @param url URL to the request
+     * @param path URL path to the request
      * @param post Object to post
      * @param command Command to run upon a response
      * @param headers Headers for the request
      * @param params Parameters for the request
      */
-    void postRequest(String url, E post, VolleyCommand command,
+    void postRequest(String path, E post, VolleyCommand command,
                      Map<String, String> headers, Map<String, String> params);
 
     /**
      * Volley PUT Method: <br>
-     * For requesting a value to change in the server.
+     * For requesting a value to add to the server.
      *
-     * @param url URL to the request
+     * @param path URL path to the request
      * @param put Object to put
      * @param command Command to run upon a response
      * @param headers Headers for the request
      * @param params Parameters for the request
      */
-    void putRequest(String url, E put, VolleyCommand command,
+    void putRequest(String path, E put, VolleyCommand command,
                     Map<String, String> headers, Map<String, String> params);
 
     /**
      * Volley DELETE Method: <br>
      * For requesting a value to delete from the server.
      *
-     * @param url URL to the request
+     * @param path URL path to the request
+     * @param delete Object to delete
      * @param command Command to run upon a response
      * @param headers Headers for the request
      * @param params Parameters for the request
      */
-    void deleteRequest(String url, VolleyCommand command,
+    void deleteRequest(String path, E delete, VolleyCommand command,
                        Map<String, String> headers, Map<String, String> params);
 }

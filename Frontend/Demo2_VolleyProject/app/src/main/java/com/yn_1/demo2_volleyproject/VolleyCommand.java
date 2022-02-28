@@ -1,5 +1,7 @@
 package com.yn_1.demo2_volleyproject;
 
+import com.android.volley.VolleyError;
+
 /**
  * Command structure for volley requests. <br>
  * Determines what code to execute upon a response.
@@ -13,4 +15,9 @@ public interface VolleyCommand<E> {
      * @param data The data response of the request
      */
     void execute(E data);
+    /**
+     * Command error method.
+     * @param error The error received
+     */
+    void onError(VolleyError error);
 }

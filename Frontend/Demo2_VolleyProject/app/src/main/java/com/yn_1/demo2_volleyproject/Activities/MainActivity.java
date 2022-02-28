@@ -3,13 +3,22 @@ package com.yn_1.demo2_volleyproject.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.yn_1.demo2_volleyproject.Book;
+import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.R;
+import com.yn_1.demo2_volleyproject.VolleyCommand;
+import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
+import com.yn_1.demo2_volleyproject.VolleyRequesters.StringRequester;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
     String searchedTitle;
     TextView selectedBook;
     TextView showSearched;
-
-    //Collection of books
-    ArrayList<Book> library = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void populateLibrary() {
 
-        library.add(new Book("Roba's Autobiography", "Roba", 2022, "3", 9000));
-        library.add(new Book("Life of Kevin", "Kyle", 2022, "7", 2.2));
-        library.add(new Book("Life of Kyle", "Other Kyle", 2022, "number", 4.3));
-
+        StringRequester titleAddRequester = new StringRequester();
+        StringCommand command = new StringCommand();
+        //todo: test post request
+        titleAddRequester.postRequest(Const.baseUrl + "/addBooks", "{title: Roba's Autobiography}", command, null, null);
     }
 
     /**
@@ -76,15 +82,71 @@ public class MainActivity extends AppCompatActivity {
      */
     private Book searchLibrary(String title) {
 
-        Book searching = null;
-        for (int i = 0; i < library.size(); i++) {
-            Book candidate = library.get(i);
-            if (candidate.getTitle().equals(title)) {
-                searching = candidate;
-                break;
-            }
+        StringRequester titleRequester = new StringRequester();
+        StringCommand command = new StringCommand();
+        //todo: test get request
+        titleRequester.getRequest(Const.baseUrl + "/addBooks/{title: " + title + "}", command, null, null);
+        if (command.string != null) {
+            return new Book(command.string);
         }
-        return searching;
+        else {
+            return null;
+        }
+
+    }
+
+    private void changeBookRating(int rating) {
+        JSONObject bookToRate = new JSONObject();
+        try {
+            bookToRate.put("rating", rating);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequester requester = new JsonObjectRequester();
+        requester.putRequest("books", bookToRate, new VolleyCommand<JSONObject>() {
+            @Override
+            public void execute(JSONObject data) { }
+
+            @Override
+            public void onError(VolleyError error) {
+                Log.e(requester.TAG, "Error on delete: Book not found.");
+            }
+        }, null, null);
+    }
+
+    private void deleteBookFromLibrary(String title) {
+        JSONObject bookToRemove = new JSONObject();
+        try {
+            bookToRemove.put("title", title);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequester requester = new JsonObjectRequester();
+        requester.deleteRequest("books", bookToRemove, new VolleyCommand<JSONObject>() {
+            @Override
+            public void execute(JSONObject data) { }
+
+            @Override
+            public void onError(VolleyError error) {
+                Log.e(requester.TAG, "Error on delete: Book not found.");
+            }
+        }, null, null);
+    }
+
+    private class StringCommand implements VolleyCommand<String> {
+
+        //todo: given as an array, but here it says it is given as a String, should the interface be changed?
+        String string = null;
+
+        @Override
+        public void execute(String data) {
+            this.string = data;
+        }
+
+        @Override
+        public void onError(VolleyError error) {
+
+        }
 
     }
 
