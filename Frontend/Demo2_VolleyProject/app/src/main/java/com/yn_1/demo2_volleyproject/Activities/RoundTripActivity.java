@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class RoundTripActivity extends AppCompatActivity {
 
     //Book search objects
     EditText stringInput;
@@ -95,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param rating
+     * @author Roba Abbajabal
+     */
     private void changeBookRating(int rating) {
         JSONObject bookToRate = new JSONObject();
         try {
@@ -114,6 +119,11 @@ public class MainActivity extends AppCompatActivity {
         }, null, null);
     }
 
+    /**
+     *
+     * @param title
+     * @author Roba Abbajabal
+     */
     private void deleteBookFromLibrary(String title) {
         JSONObject bookToRemove = new JSONObject();
         try {
