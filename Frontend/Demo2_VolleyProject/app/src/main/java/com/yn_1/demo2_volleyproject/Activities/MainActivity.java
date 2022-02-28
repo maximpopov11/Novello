@@ -3,6 +3,7 @@ package com.yn_1.demo2_volleyproject.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,9 +14,11 @@ import com.yn_1.demo2_volleyproject.Book;
 import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.R;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
-import com.yn_1.demo2_volleyproject.VolleyRequests.StringRequester;
+import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
+import com.yn_1.demo2_volleyproject.VolleyRequesters.StringRequester;
 
-import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -90,6 +93,44 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
+    }
+
+    private void changeBookRating(int rating) {
+        JSONObject bookToRate = new JSONObject();
+        try {
+            bookToRate.put("rating", rating);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequester requester = new JsonObjectRequester();
+        requester.putRequest("books", bookToRate, new VolleyCommand<JSONObject>() {
+            @Override
+            public void execute(JSONObject data) { }
+
+            @Override
+            public void onError(VolleyError error) {
+                Log.e(requester.TAG, "Error on delete: Book not found.");
+            }
+        }, null, null);
+    }
+
+    private void deleteBookFromLibrary(String title) {
+        JSONObject bookToRemove = new JSONObject();
+        try {
+            bookToRemove.put("title", title);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequester requester = new JsonObjectRequester();
+        requester.deleteRequest("books", bookToRemove, new VolleyCommand<JSONObject>() {
+            @Override
+            public void execute(JSONObject data) { }
+
+            @Override
+            public void onError(VolleyError error) {
+                Log.e(requester.TAG, "Error on delete: Book not found.");
+            }
+        }, null, null);
     }
 
     private class StringCommand implements VolleyCommand<String> {

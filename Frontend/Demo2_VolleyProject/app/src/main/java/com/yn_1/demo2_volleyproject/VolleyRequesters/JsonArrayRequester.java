@@ -1,4 +1,4 @@
-package com.yn_1.demo2_volleyproject.VolleyRequests;
+package com.yn_1.demo2_volleyproject.VolleyRequesters;
 
 import android.util.Log;
 import androidx.annotation.Nullable;
@@ -25,10 +25,10 @@ public class JsonArrayRequester implements Requester<JSONArray> {
     public static final String TAG="json_array_req";
 
     @Override
-    public void getRequest(String path, VolleyCommand command,
+    public void getRequest(String path, JSONArray get, VolleyCommand command,
                                 Map<String, String> headers, Map<String, String> params) {
         JsonArrayRequest getJsonArrayRequest = new JsonArrayRequest(
-            Request.Method.GET, Const.baseUrl+path, null,
+            Request.Method.GET, Const.baseUrl+path, get,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
@@ -127,10 +127,10 @@ public class JsonArrayRequester implements Requester<JSONArray> {
     }
 
     @Override
-    public void deleteRequest(String path, VolleyCommand command,
+    public void deleteRequest(String path, JSONArray delete, VolleyCommand command,
                               Map<String, String> headers, Map<String, String> params) {
         JsonArrayRequest deleteJsonArrayRequest = new JsonArrayRequest(
-            Request.Method.DELETE, Const.baseUrl+path, null,
+            Request.Method.DELETE, Const.baseUrl+path, delete,
             response -> {
                 Log.d(TAG, response.toString());
                 command.execute(response);
