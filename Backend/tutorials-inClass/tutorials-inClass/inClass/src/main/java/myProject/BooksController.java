@@ -30,6 +30,11 @@ public class BooksController {
         return db.findAll();
     }
 
+    @RequestMapping("/pandas")
+    List<Books> showMeThebandas() {
+        return db.findAll();
+    }
+
 
     @DeleteMapping("/book/{id}")
     String deleteBook(@PathVariable Integer id) {
