@@ -5,8 +5,8 @@ import javax.persistence.*;
 @Entity
 class Books {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         Integer bookID;
 
         @Column
@@ -15,12 +15,22 @@ class Books {
         @Column
         String title;
 
+        @Column
+        String author;
+
+        @Column
+        Integer publicationYear;
+
+        @Column
+        Integer rating;
 
         @Column
         Double MSRP;
 
         @Column
         String genre;
+
+
 
     public Integer getBookID() {
         return bookID;
@@ -29,6 +39,10 @@ class Books {
     public String getTitle() {
         return title;
     }
+
+    public String getAuthor(){ return author;}
+
+    public Integer getPublicationYear(){ return publicationYear;}
 
     public Integer getISBN() {
         return ISBN;
@@ -41,9 +55,8 @@ class Books {
     public Double getMSRP() {
         return MSRP;
     }
-//    public void setID(int id)
-//    {
-//        bookID = id;
-//    }
+
+    public Integer getRating(){return rating;}
+
 
 }
