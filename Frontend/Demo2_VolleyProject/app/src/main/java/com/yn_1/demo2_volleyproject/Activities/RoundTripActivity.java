@@ -71,8 +71,8 @@ public class RoundTripActivity extends AppCompatActivity {
 
         StringRequester titleAddRequester = new StringRequester();
         StringCommand command = new StringCommand();
-        //todo: test post request
-        titleAddRequester.postRequest(Const.baseUrl + "/addBooks", "{title: Roba's Autobiography}", command, null, null);
+        //todo: test put request
+        titleAddRequester.postRequest(Const.baseUrl + "/addBooks/0000000000001", null, command, null, null);
     }
 
     /**
@@ -85,7 +85,7 @@ public class RoundTripActivity extends AppCompatActivity {
         StringRequester titleRequester = new StringRequester();
         StringCommand command = new StringCommand();
         //todo: test get requests
-        titleRequester.getRequest(Const.baseUrl + "/addBooks/", title, command, null, null);
+        titleRequester.getRequest(Const.baseUrl + "/addBooks/" + title, null, command, null, null);
         if (command.string != null) {
             return new Book(command.string);
         }
