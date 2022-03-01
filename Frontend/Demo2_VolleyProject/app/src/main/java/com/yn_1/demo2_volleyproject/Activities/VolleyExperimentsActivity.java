@@ -17,7 +17,7 @@ import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class TestRequestsActivity extends AppCompatActivity {
+public class VolleyExperimentsActivity extends AppCompatActivity {
 
     public static TextView testView;
     public static ImageView imageView;
@@ -25,7 +25,7 @@ public class TestRequestsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_volley_experiments);
 
         testView = findViewById(R.id.testView);
         testView.setText("Loading...");

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yn_1.demo2_volleyproject" >
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    package="com.yn_1.demo2_volleyproject">
 
     <application
         android:name=".AppController"
@@ -12,10 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Demo2_VolleyProject"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activities.TestRequestsActivity"
-            android:exported="true" >
+            android:name=".Activities.PostmanExperimentsActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,9 +21,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Activities.VolleyExperimentsActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".Activities.RoundTripActivity"
             android:exported="true"
             android:label="Demo 2: Volley" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

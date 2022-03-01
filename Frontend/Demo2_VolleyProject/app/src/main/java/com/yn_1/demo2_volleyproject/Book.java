@@ -7,7 +7,7 @@ public class Book {
     String author;
     int publicationYear;
     String isbn;
-    double rating;
+    int rating;
 
     /**
      * Constructor
@@ -17,7 +17,7 @@ public class Book {
      * @param isbn book isbn
      * @param rating book rating
      */
-    public Book(String title, String author, int publicationYear, String isbn, double rating) {
+    public Book(String title, String author, int publicationYear, String isbn, int rating) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -42,6 +42,27 @@ public class Book {
      */
     public String getTitle() {
         return title;
+    }
+
+    /**
+     * @return book author
+     */
+    public String getAuthor() {
+        return author;
+    }
+
+    /**
+     * @return book rating
+     */
+    public int getRating() {
+        return rating;
+    }
+
+    /**
+     * @return book isbn
+     */
+    public String getISBN() {
+        return isbn;
     }
 
     /**
