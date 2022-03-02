@@ -4,6 +4,9 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.TableLayout;
@@ -14,9 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
 import com.yn_1.demo2_volleyproject.Book;
+import com.yn_1.demo2_volleyproject.CustomRadioButtonGroup;
 import com.yn_1.demo2_volleyproject.R;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonArrayRequester;
+import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,8 +32,11 @@ import java.util.List;
 
 public class PostmanExperimentsActivity extends AppCompatActivity {
 
-    List<Book> bookCollection = new ArrayList<Book>();
+    List<Book> bookCollection = new ArrayList<>();
     TableLayout table;
+    CustomRadioButtonGroup radioButtonGroup = new CustomRadioButtonGroup();
+    Button removeButton;
+    Button changeRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +44,20 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_postman_experiments);
         table = findViewById(R.id.PostmanTable);
         retrieveBooks();
+
+        removeButton = findViewById(R.id.removeBook);
+        changeRating = findViewById(R.id.changeRating);
+        removeButton.setOnClickListener(removeButtonListener);
+
     }
 
     /**
      * @author Roba Abbajabal
      */
     public void retrieveBooks() {
+        bookCollection = new ArrayList<>();
+        table.removeViews(1, table.getChildCount()-1);
+
         JsonArrayRequester req = new JsonArrayRequester();
         req.getRequest("library/books", null, new VolleyCommand<JSONArray>()
         {
@@ -51,11 +67,12 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
                 {
                     try {
                         JSONObject book = data.getJSONObject(i);
-                        String isbn  = book.getString("ISBN");
+                        int bookID = book.getInt("bookID");
+                        String isbn  = book.getString("isbn");
                         String title = book.getString("title");
                         String author = book.getString("author");
                         int rating = book.getInt("rating");
-                        putBookOnTable(isbn, title, author, rating);
+                        putBookOnTable(bookID, title, author, isbn, rating);
                         Log.d("Retrieve books", "Works");
                     }
                     catch (JSONException e) {
@@ -78,8 +95,9 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
      * @param rating
      * @author Roba Abbajabal
      */
-    public void putBookOnTable(String isbn, String title, String author, int rating) {
-        Book book = new Book(title, author, -1, isbn, rating);
+    public void putBookOnTable(int bookID, String title, String author, String isbn, int rating) {
+
+        Book book = new Book(bookID, title, author, -1, isbn, rating);
         bookCollection.add(book);
         TableRow bookRow = new TableRow(this);
         bookRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
@@ -95,6 +113,8 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
         selectButton.setButtonTintList(temp);
         selectButton.setText(null);
         bookRow.addView(selectButton);
+        radioButtonGroup.addButtonToGroup(selectButton);
+        selectButton.setOnClickListener(radioButtonGroup.listener);
 
         TextView titleText = new TextView(this);
         titleText.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 4));
@@ -124,4 +144,51 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
 
         table.addView(bookRow);
     }
+
+    /**
+     *
+     * @param book
+     * @author Roba Abbajabal
+     */
+    private void deleteBookFromLibrary(Book book) {
+        JSONObject bookToRemove = new JSONObject();
+        try {
+            bookToRemove.put("bookID", book.getISBN());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequester requester = new JsonObjectRequester();
+        requester.deleteRequest("book/"+book.getISBN(), null, new VolleyCommand<JSONObject>() {
+            @Override
+            public void execute(JSONObject data) { }
+
+            @Override
+            public void onError(VolleyError error) {
+                Log.e(requester.TAG, "Error on delete: Book not found.");
+            }
+        }, null, null);
+    }
+
+    public View.OnClickListener removeButtonListener = v -> {
+        RadioButton chosenButton = null;
+        for (RadioButton button : radioButtonGroup.getButtonCollection()) {
+            if (button.isChecked()) {
+                chosenButton = button;
+            }
+        }
+        if (chosenButton == null) {
+            return;
+        }
+
+        // Gets the title, removes book at title (index 1 should be where the text view is located)
+        String theTitle = ((TextView)((ViewGroup)chosenButton.getParent()).getChildAt(1)).getText().toString();
+        // Gets the title, removes the book
+        for (Book book : bookCollection) {
+            if (book.getTitle() == theTitle) {
+                deleteBookFromLibrary(book);
+                retrieveBooks();
+            }
+        }
+        // table.removeView((View)chosenButton.getParent()); //Directly removes row
+    };
 }

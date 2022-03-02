@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.yn_1.demo2_volleyproject.Book;
+import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.R;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
@@ -60,7 +61,18 @@ public class RoundTripActivity extends AppCompatActivity {
 
         JsonObjectRequester titleAddRequester = new JsonObjectRequester();
         JsonObjectCommand command = new JsonObjectCommand();
-        titleAddRequester.postRequest("library/0000000000001", null, command, null, null);
+        //to postman
+//        titleAddRequester.postRequest("library/0000000000001", null, command, null, null);
+        //to backend
+        //todo: give json its info
+        JSONObject bookJson = new JSONObject();
+        try {
+            bookJson.put("title", "book title 1");
+            bookJson.put("isbn", "00");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        titleAddRequester.postRequest(Const.postmanMockUrl + "addBooks", bookJson, command, null, null);
     }
 
     /**
@@ -72,7 +84,19 @@ public class RoundTripActivity extends AppCompatActivity {
 
         JsonObjectRequester titleRequester = new JsonObjectRequester();
         JsonObjectCommand command = new JsonObjectCommand();
-        titleRequester.getRequest("library/books/" + isbn, null, command, null, null);
+        //to postman
+//        titleRequester.getRequest("library/books/" + isbn, null, command, null, null);
+        //to backend
+        JSONObject bookJson = new JSONObject();
+        try {
+            bookJson.put("isbn", isbn);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //post isbn search being ready
+//        titleRequester.getRequest("book", bookJson, command, null, null);
+        //pre isbn search being ready: id search
+        titleRequester.getRequest(Const.postmanMockUrl + "book/0", bookJson, command, null, null);
 
     }
 
@@ -88,7 +112,7 @@ public class RoundTripActivity extends AppCompatActivity {
             selectedBook.setText(text);
         }
         else {
-            selectedBook.setText("isbn: " + searchedIsbn + " not found in library.");
+            selectedBook.setText(Const.postmanMockUrl + "isbn: " + searchedIsbn + " not found in library.");
         }
 
     }
@@ -107,30 +131,6 @@ public class RoundTripActivity extends AppCompatActivity {
         }
         JsonObjectRequester requester = new JsonObjectRequester();
         requester.putRequest("books", bookToRate, new VolleyCommand<JSONObject>() {
-            @Override
-            public void execute(JSONObject data) { }
-
-            @Override
-            public void onError(VolleyError error) {
-                Log.e(requester.TAG, "Error on delete: Book not found.");
-            }
-        }, null, null);
-    }
-
-    /**
-     *
-     * @param title
-     * @author Roba Abbajabal
-     */
-    private void deleteBookFromLibrary(String title) {
-        JSONObject bookToRemove = new JSONObject();
-        try {
-            bookToRemove.put("title", title);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequester requester = new JsonObjectRequester();
-        requester.deleteRequest("books", bookToRemove, new VolleyCommand<JSONObject>() {
             @Override
             public void execute(JSONObject data) { }
 

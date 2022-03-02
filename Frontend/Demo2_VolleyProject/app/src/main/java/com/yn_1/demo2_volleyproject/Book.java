@@ -8,6 +8,7 @@ public class Book {
     int publicationYear;
     String isbn;
     int rating;
+    int bookID;
 
     /**
      * Constructor
@@ -17,7 +18,8 @@ public class Book {
      * @param isbn book isbn
      * @param rating book rating
      */
-    public Book(String title, String author, int publicationYear, String isbn, int rating) {
+    public Book(int bookID, String title, String author, int publicationYear, String isbn, int rating) {
+        this.bookID = bookID;
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -72,4 +74,10 @@ public class Book {
         return title + " by " + author;
     }
 
+    /**
+     * @return book id
+     */
+    public int getBookID() {
+        return bookID;
+    }
 }
