@@ -69,10 +69,9 @@ public class RoundTripActivity extends AppCompatActivity {
      */
     private void populateLibrary() {
 
-        StringRequester titleAddRequester = new StringRequester();
-        StringCommand command = new StringCommand();
-        //todo: test put request
-        titleAddRequester.postRequest(Const.baseUrl + "/addBooks/0000000000001", null, command, null, null);
+        JsonObjectRequester titleAddRequester = new JsonObjectRequester();
+        JsonObjectCommand command = new JsonObjectCommand();
+        titleAddRequester.postRequest("library/0000000000001", null, command, null, null);
     }
 
     /**
@@ -82,12 +81,12 @@ public class RoundTripActivity extends AppCompatActivity {
      */
     private Book searchLibrary(String title) {
 
-        StringRequester titleRequester = new StringRequester();
-        StringCommand command = new StringCommand();
-        //todo: test get requests
-        titleRequester.getRequest(Const.baseUrl + "/addBooks/" + title, null, command, null, null);
-        if (command.string != null) {
-            return new Book(command.string);
+        JsonObjectRequester titleRequester = new JsonObjectRequester();
+        JsonObjectCommand command = new JsonObjectCommand();
+        title = "0000000000001";
+        titleRequester.getRequest("library/books/" + title, null, command, null, null);
+        if (command.title != null) {
+            return new Book(command.title);
         }
         else {
             return null;
@@ -143,14 +142,17 @@ public class RoundTripActivity extends AppCompatActivity {
         }, null, null);
     }
 
-    private class StringCommand implements VolleyCommand<String> {
+    private class JsonObjectCommand implements VolleyCommand<JSONObject> {
 
-        //todo: given as an array, but here it says it is given as a String, should the interface be changed?
-        String string = null;
+        String title = null;
 
         @Override
-        public void execute(String data) {
-            this.string = data;
+        public void execute(JSONObject data) {
+            try {
+                title = data.getString("title");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
