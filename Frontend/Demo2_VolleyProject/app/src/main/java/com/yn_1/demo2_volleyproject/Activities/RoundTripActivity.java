@@ -15,19 +15,16 @@ import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.R;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
-import com.yn_1.demo2_volleyproject.VolleyRequesters.StringRequester;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class RoundTripActivity extends AppCompatActivity {
 
     //Book search objects
     EditText stringInput;
     Button submitSearchButton;
-    String searchedTitle;
+    String searchedIsbn;
     TextView selectedBook;
     TextView showSearched;
 
@@ -41,7 +38,7 @@ public class RoundTripActivity extends AppCompatActivity {
 
         //Book search
         stringInput = (EditText) findViewById(R.id.searchBookTitle);
-        stringInput.setHint("Input book title...");
+        stringInput.setHint("Input book isbn...");
         showSearched = (TextView) findViewById(R.id.showSearched);
         selectedBook = (TextView) findViewById(R.id.selectedBook);
         submitSearchButton = (Button) findViewById(R.id.submitSearch);
@@ -49,16 +46,9 @@ public class RoundTripActivity extends AppCompatActivity {
         submitSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchedTitle = stringInput.getText().toString();
-                showSearched.setText("Searched for " + searchedTitle + "!");
-                Book searchedBook = searchLibrary(searchedTitle);
-                if (searchedBook != null) {
-                    String text = searchedBook.toString() + " found in library!";
-                    selectedBook.setText(text);
-                }
-                else {
-                    selectedBook.setText(searchedTitle + " not found in library.");
-                }
+                searchedIsbn = stringInput.getText().toString();
+                showSearched.setText("Searched for " + searchedIsbn + "!");
+                searchLibrary(searchedIsbn);
             }
         });
 
@@ -69,28 +59,58 @@ public class RoundTripActivity extends AppCompatActivity {
      */
     private void populateLibrary() {
 
-        StringRequester titleAddRequester = new StringRequester();
-        StringCommand command = new StringCommand();
-        //todo: test post request
-        titleAddRequester.postRequest(Const.baseUrl + "/addBooks", "{title: Roba's Autobiography}", command, null, null);
+        JsonObjectRequester titleAddRequester = new JsonObjectRequester();
+        JsonObjectCommand command = new JsonObjectCommand();
+        //to postman
+//        titleAddRequester.postRequest("library/0000000000001", null, command, null, null);
+        //to backend
+        JSONObject bookJson = new JSONObject();
+        try {
+            bookJson.put("title", "book title 1");
+            bookJson.put("isbn", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        titleAddRequester.postRequest("addBooks", bookJson, command, null, null);
     }
 
     /**
      * Searches for a book in the library
-     * @param title is the title of the book to search for
+     * @param isbn is the isbn of the book to search for
      * @return a book if one is found or null is not
      */
-    private Book searchLibrary(String title) {
+    private void searchLibrary(String isbn) {
 
-        StringRequester titleRequester = new StringRequester();
-        StringCommand command = new StringCommand();
-        //todo: test get requests
-        titleRequester.getRequest(Const.baseUrl + "/addBooks/", title, command, null, null);
-        if (command.string != null) {
-            return new Book(command.string);
+        JsonObjectRequester titleRequester = new JsonObjectRequester();
+        JsonObjectCommand command = new JsonObjectCommand();
+        //to postman
+//        titleRequester.getRequest("library/books/" + isbn, null, command, null, null);
+        //to backend
+        JSONObject bookJson = new JSONObject();
+        try {
+            bookJson.put("isbn", isbn);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //post isbn search being ready
+//        titleRequester.getRequest("book", bookJson, command, null, null);
+        //pre isbn search being ready: id search
+        titleRequester.getRequest( "book/10", bookJson, command, null, null);
+
+    }
+
+    private void searchResult(JsonObjectCommand command) {
+
+        Book book = null;
+        if (command.title != null) {
+            book = new Book(command.title);
+        }
+        if (book != null) {
+            String text = book.getTitle() + " found in library!";
+            selectedBook.setText(text);
         }
         else {
-            return null;
+            selectedBook.setText(Const.postmanMockUrl + "isbn: " + searchedIsbn + " not found in library.");
         }
 
     }
@@ -119,38 +139,18 @@ public class RoundTripActivity extends AppCompatActivity {
         }, null, null);
     }
 
-    /**
-     *
-     * @param title
-     * @author Roba Abbajabal
-     */
-    private void deleteBookFromLibrary(String title) {
-        JSONObject bookToRemove = new JSONObject();
-        try {
-            bookToRemove.put("title", title);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequester requester = new JsonObjectRequester();
-        requester.deleteRequest("books", bookToRemove, new VolleyCommand<JSONObject>() {
-            @Override
-            public void execute(JSONObject data) { }
+    private class JsonObjectCommand implements VolleyCommand<JSONObject> {
 
-            @Override
-            public void onError(VolleyError error) {
-                Log.e(requester.TAG, "Error on delete: Book not found.");
-            }
-        }, null, null);
-    }
-
-    private class StringCommand implements VolleyCommand<String> {
-
-        //todo: given as an array, but here it says it is given as a String, should the interface be changed?
-        String string = null;
+        String title = null;
 
         @Override
-        public void execute(String data) {
-            this.string = data;
+        public void execute(JSONObject data) {
+            try {
+                title = data.getString("title");
+                searchResult(this);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

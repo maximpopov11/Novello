@@ -28,13 +28,13 @@ public class MyController {
 	}
 
 
-	@PutMapping("/person/{id}")
-	Person updatePerson(@RequestBody Person p, @PathVariable Integer id) {
-		Person old_p = db.findById(id).  orElseThrow(RuntimeException::new);
-		old_p.setAddress(p.address);
-		db.save(old_p);
-		return old_p;
-	}
+//	@PutMapping("/person/{id}")
+//	Person updatePerson(@RequestBody Person p, @PathVariable Integer id) {
+//		Person old_p = db.findById(id).  orElseThrow(RuntimeException::new);
+//		old_p.setAddress(p.address);
+//		db.save(old_p);
+//		return old_p;
+//	}
 
 	@DeleteMapping("/person/{id}")
 	String deletePerson(@PathVariable Integer id) {

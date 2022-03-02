@@ -10,41 +10,85 @@ class Books {
         Integer bookID;
 
         @Column
-        Integer ISBN;
+        String isbn;
 
         @Column
         String title;
 
+        @Column
+        String author;
 
         @Column
-        Double MSRP;
+        Integer publicationYear;
+
+        @Column
+        Integer rating;
+
+        @Column
+        Double msrp;
 
         @Column
         String genre;
+
 
 
     public Integer getBookID() {
         return bookID;
     }
 
+    public void setBookID(Integer bookID) {
+        this.bookID = bookID;
+    }
+
     public String getTitle() {
         return title;
     }
 
-    public Integer getISBN() {
-        return ISBN;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor(){ return author;}
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Integer getPublicationYear(){ return publicationYear;}
+
+    public void setPublicationYear(Integer publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
+    public String getISBN() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getGenre() {
         return genre;
     }
 
-    public Double getMSRP() {
-        return MSRP;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
-//    public void setID(int id)
-//    {
-//        bookID = id;
-//    }
+
+    public Double getMSRP() {
+        return msrp;
+    }
+
+    public void setMsrp(Double msrp) {
+        this.msrp = msrp;
+    }
+
+    public Integer getRating(){return rating;}
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
 
 }
