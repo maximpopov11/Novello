@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.yn_1.demo2_volleyproject.Book;
+import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.R;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
@@ -95,7 +96,7 @@ public class RoundTripActivity extends AppCompatActivity {
         //post isbn search being ready
 //        titleRequester.getRequest("book", bookJson, command, null, null);
         //pre isbn search being ready: id search
-        titleRequester.getRequest("book/0", bookJson, command, null, null);
+        titleRequester.getRequest(Const.baseUrl + "book/0", bookJson, command, null, null);
 
     }
 
@@ -111,7 +112,7 @@ public class RoundTripActivity extends AppCompatActivity {
             selectedBook.setText(text);
         }
         else {
-            selectedBook.setText("isbn: " + searchedIsbn + " not found in library.");
+            selectedBook.setText(Const.baseUrl + "isbn: " + searchedIsbn + " not found in library.");
         }
 
     }
