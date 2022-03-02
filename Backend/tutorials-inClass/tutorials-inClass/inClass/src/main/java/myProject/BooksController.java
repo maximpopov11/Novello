@@ -13,8 +13,7 @@ public class BooksController {
     BooksDB db;
 
     @PostMapping("/addBooks")
-    Books creatBooks(@RequestBody Books b)
-    {
+    Books creatBooks(@RequestBody Books b) {
         db.save(b);
         return b;
     }
@@ -25,7 +24,7 @@ public class BooksController {
 //    }
 
     @GetMapping("/book/{id}")
-    Optional<Books> getBook(@PathVariable Integer id){
+    Optional<Books> getBook(@PathVariable Integer id) {
         return db.findById(id);
     }
 
@@ -47,17 +46,24 @@ public class BooksController {
 
     @PutMapping("/book/{id}")
     Books updateBook(@RequestBody Books b, @PathVariable Integer id) {
-		Books old_b = db.findById(id).  orElseThrow(RuntimeException::new);
-		old_b.setIsbn(b.isbn);
-        old_b.setTitle(b.title);
-        old_b.setAuthor(b.author);
-        old_b.setPublicationYear(b.publicationYear);
-        old_b.setRating(b.rating);
-        old_b.setMsrp(b.msrp);
-        old_b.setGenre(b.genre);
-		db.save(old_b);
-		return old_b;
-	}
+        Books old_b = db.findById(id).orElseThrow(RuntimeException::new);
+        if (b.isbn != null)
+            old_b.setIsbn(b.isbn);
+        if (b.title != null)
+            old_b.setTitle(b.title);
+        if (b.author != null)
+            old_b.setAuthor(b.author);
+        if (b.publicationYear != null)
+            old_b.setPublicationYear(b.publicationYear);
+        if (b.rating != null)
+            old_b.setRating(b.rating);
+        if (b.msrp != null)
+            old_b.setMsrp(b.msrp);
+        if (b.genre != null)
+            old_b.setGenre(b.genre);
+        db.save(old_b);
+        return old_b;
+    }
 
 
     @DeleteMapping("/book/{id}")
