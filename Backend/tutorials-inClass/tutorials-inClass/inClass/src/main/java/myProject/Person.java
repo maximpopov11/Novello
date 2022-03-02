@@ -6,20 +6,64 @@ import javax.persistence.*;
 class Person {
 	
 	@Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	
 	@Column
-	String user;
-	
+	String name;
+
 	@Column
-	String address;
+	Integer accountType;
+
+	@Column
+	String username;
+
+	@Column
+	String password;
+
+	@Column
+	String securityQuestion;
+
+	@Column
+	String securityAnswer;
+
+	@Column
+	String email;
+
+	@Column
+	Integer age;
+
+//	@Column
+//	Books library;
+
+//	@Column
+//	CREDIT CARD INFO
+//
+//	@Column
+//	Friends JSON
+
+
 	
 	public Integer getId() { return id; }
-	
-	public String getUser() { return user; }
-	public String getAddress() { return address; }
-	public void setAddress(String address) { this.address = address; }
+
+	public String getName() { return name; }
+
+	public Integer getAccountType() { return accountType; }
+
+	public Integer getAge() { return age; }
+
+	public String getUsername() { return username; }
+
+	public String getPassword() { return password; }
+
+	public String getSecurityQuestion() { return securityQuestion; }
+
+	public String getSecurityAnswer() { return securityAnswer; }
+
+	public String getEmail() { return email; }
+
+
+
 	
 	
 }
