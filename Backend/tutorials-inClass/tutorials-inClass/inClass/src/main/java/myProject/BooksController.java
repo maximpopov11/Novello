@@ -45,11 +45,19 @@ public class BooksController {
         return db.findAll();
     }
 
-//    @RequestMapping("/pandas")
-//    List<Books> showMeThebandas() {
-//        return db.findAll();
-//    }
-
+    @PutMapping("/book/update/{id}")
+    Books updateBook(@RequestBody Books b, @PathVariable Integer id) {
+		Books old_b = db.findById(id).  orElseThrow(RuntimeException::new);
+		old_b.setIsbn(b.isbn);
+        old_b.setTitle(b.title);
+        old_b.setAuthor(b.author);
+        old_b.setPublicationYear(b.publicationYear);
+        old_b.setRating(b.rating);
+        old_b.setMsrp(b.msrp);
+        old_b.setGenre(b.genre);
+		db.save(old_b);
+		return old_b;
+	}
 
 
     @DeleteMapping("/book/{id}")
