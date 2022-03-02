@@ -72,13 +72,13 @@ public class RoundTripActivity extends AppCompatActivity {
 
         JsonObjectRequester titleRequester = new JsonObjectRequester();
         JsonObjectCommand command = new JsonObjectCommand();
-        isbn = "0000000000001";
         titleRequester.getRequest("library/books/" + isbn, null, command, null, null);
 
     }
 
     private void searchResult(JsonObjectCommand command) {
 
+        //todo: nonexistant isbn search does not print not found
         Book book = null;
         if (command.title != null) {
             book = new Book(command.title);
@@ -88,7 +88,7 @@ public class RoundTripActivity extends AppCompatActivity {
             selectedBook.setText(text);
         }
         else {
-            selectedBook.setText(searchedIsbn + " not found in library.");
+            selectedBook.setText("isbn: " + searchedIsbn + " not found in library.");
         }
 
     }
@@ -148,6 +148,7 @@ public class RoundTripActivity extends AppCompatActivity {
         @Override
         public void execute(JSONObject data) {
             try {
+                //todo: this is not reached if the given isbn does not exist in the library
                 title = data.getString("title");
                 searchResult(this);
             } catch (JSONException e) {
