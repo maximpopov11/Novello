@@ -72,7 +72,7 @@ public class RoundTripActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        titleAddRequester.postRequest("addBooks", bookJson, command, null, null);
+        titleAddRequester.postRequest(Const.postmanMockUrl + "addBooks", bookJson, command, null, null);
     }
 
     /**
@@ -96,7 +96,7 @@ public class RoundTripActivity extends AppCompatActivity {
         //post isbn search being ready
 //        titleRequester.getRequest("book", bookJson, command, null, null);
         //pre isbn search being ready: id search
-        titleRequester.getRequest(Const.baseUrl + "book/0", bookJson, command, null, null);
+        titleRequester.getRequest(Const.postmanMockUrl + "book/0", bookJson, command, null, null);
 
     }
 
@@ -112,7 +112,7 @@ public class RoundTripActivity extends AppCompatActivity {
             selectedBook.setText(text);
         }
         else {
-            selectedBook.setText(Const.baseUrl + "isbn: " + searchedIsbn + " not found in library.");
+            selectedBook.setText(Const.postmanMockUrl + "isbn: " + searchedIsbn + " not found in library.");
         }
 
     }
