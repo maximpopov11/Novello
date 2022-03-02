@@ -5,22 +5,32 @@ import javax.persistence.*;
 @Entity
 class Books {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         Integer bookID;
 
         @Column
-        Integer ISBN;
+        String isbn;
 
         @Column
         String title;
 
+        @Column
+        String author;
 
         @Column
-        Double MSRP;
+        Integer publicationYear;
+
+        @Column
+        Integer rating;
+
+        @Column
+        Double msrp;
 
         @Column
         String genre;
+
+
 
     public Integer getBookID() {
         return bookID;
@@ -30,8 +40,12 @@ class Books {
         return title;
     }
 
-    public Integer getISBN() {
-        return ISBN;
+    public String getAuthor(){ return author;}
+
+    public Integer getPublicationYear(){ return publicationYear;}
+
+    public String getISBN() {
+        return isbn;
     }
 
     public String getGenre() {
@@ -39,11 +53,10 @@ class Books {
     }
 
     public Double getMSRP() {
-        return MSRP;
+        return msrp;
     }
-//    public void setID(int id)
-//    {
-//        bookID = id;
-//    }
+
+    public Integer getRating(){return rating;}
+
 
 }
