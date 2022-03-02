@@ -22,6 +22,7 @@ class Books {
         @Column
         String genre;
 
+
     public Integer getBookID() {
         return bookID;
     }
