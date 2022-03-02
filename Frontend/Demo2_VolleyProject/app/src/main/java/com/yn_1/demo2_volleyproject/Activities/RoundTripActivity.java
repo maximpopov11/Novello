@@ -140,30 +140,6 @@ public class RoundTripActivity extends AppCompatActivity {
         }, null, null);
     }
 
-    /**
-     *
-     * @param title
-     * @author Roba Abbajabal
-     */
-    private void deleteBookFromLibrary(String title) {
-        JSONObject bookToRemove = new JSONObject();
-        try {
-            bookToRemove.put("title", title);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequester requester = new JsonObjectRequester();
-        requester.deleteRequest("books", bookToRemove, new VolleyCommand<JSONObject>() {
-            @Override
-            public void execute(JSONObject data) { }
-
-            @Override
-            public void onError(VolleyError error) {
-                Log.e(requester.TAG, "Error on delete: Book not found.");
-            }
-        }, null, null);
-    }
-
     private class JsonObjectCommand implements VolleyCommand<JSONObject> {
 
         String title = null;
