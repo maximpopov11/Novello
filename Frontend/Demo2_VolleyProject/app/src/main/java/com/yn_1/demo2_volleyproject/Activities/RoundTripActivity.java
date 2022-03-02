@@ -3,6 +3,7 @@ package com.yn_1.demo2_volleyproject.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,15 +64,14 @@ public class RoundTripActivity extends AppCompatActivity {
         //to postman
 //        titleAddRequester.postRequest("library/0000000000001", null, command, null, null);
         //to backend
-        //todo: give json its info
         JSONObject bookJson = new JSONObject();
         try {
             bookJson.put("title", "book title 1");
-            bookJson.put("isbn", "00");
+            bookJson.put("isbn", 0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        titleAddRequester.postRequest(Const.postmanMockUrl + "addBooks", bookJson, command, null, null);
+        titleAddRequester.postRequest("addBooks", bookJson, command, null, null);
     }
 
     /**
@@ -95,13 +95,12 @@ public class RoundTripActivity extends AppCompatActivity {
         //post isbn search being ready
 //        titleRequester.getRequest("book", bookJson, command, null, null);
         //pre isbn search being ready: id search
-        titleRequester.getRequest(Const.postmanMockUrl + "book/0", bookJson, command, null, null);
+        titleRequester.getRequest( "book/10", bookJson, command, null, null);
 
     }
 
     private void searchResult(JsonObjectCommand command) {
 
-        //todo: nonexistant isbn search does not print not found
         Book book = null;
         if (command.title != null) {
             book = new Book(command.title);
@@ -116,6 +115,30 @@ public class RoundTripActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param rating
+     * @author Roba Abbajabal
+     */
+    private void changeBookRating(int rating) {
+        JSONObject bookToRate = new JSONObject();
+        try {
+            bookToRate.put("rating", rating);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequester requester = new JsonObjectRequester();
+        requester.putRequest("books", bookToRate, new VolleyCommand<JSONObject>() {
+            @Override
+            public void execute(JSONObject data) { }
+
+            @Override
+            public void onError(VolleyError error) {
+                Log.e(requester.TAG, "Error on delete: Book not found.");
+            }
+        }, null, null);
+    }
+
     private class JsonObjectCommand implements VolleyCommand<JSONObject> {
 
         String title = null;
@@ -123,7 +146,6 @@ public class RoundTripActivity extends AppCompatActivity {
         @Override
         public void execute(JSONObject data) {
             try {
-                //todo: this is not reached if the given isbn does not exist in the library
                 title = data.getString("title");
                 searchResult(this);
             } catch (JSONException e) {
