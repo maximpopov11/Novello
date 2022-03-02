@@ -11,23 +11,19 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.yn_1.demo2_volleyproject.Book;
-import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.R;
 import com.yn_1.demo2_volleyproject.VolleyCommand;
 import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
-import com.yn_1.demo2_volleyproject.VolleyRequesters.StringRequester;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class RoundTripActivity extends AppCompatActivity {
 
     //Book search objects
     EditText stringInput;
     Button submitSearchButton;
-    String searchedTitle;
+    String searchedIsbn;
     TextView selectedBook;
     TextView showSearched;
 
@@ -41,7 +37,7 @@ public class RoundTripActivity extends AppCompatActivity {
 
         //Book search
         stringInput = (EditText) findViewById(R.id.searchBookTitle);
-        stringInput.setHint("Input book title...");
+        stringInput.setHint("Input book isbn...");
         showSearched = (TextView) findViewById(R.id.showSearched);
         selectedBook = (TextView) findViewById(R.id.selectedBook);
         submitSearchButton = (Button) findViewById(R.id.submitSearch);
@@ -49,16 +45,9 @@ public class RoundTripActivity extends AppCompatActivity {
         submitSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchedTitle = stringInput.getText().toString();
-                showSearched.setText("Searched for " + searchedTitle + "!");
-                Book searchedBook = searchLibrary(searchedTitle);
-                if (searchedBook != null) {
-                    String text = searchedBook.toString() + " found in library!";
-                    selectedBook.setText(text);
-                }
-                else {
-                    selectedBook.setText(searchedTitle + " not found in library.");
-                }
+                searchedIsbn = stringInput.getText().toString();
+                showSearched.setText("Searched for " + searchedIsbn + "!");
+                searchLibrary(searchedIsbn);
             }
         });
 
@@ -76,20 +65,30 @@ public class RoundTripActivity extends AppCompatActivity {
 
     /**
      * Searches for a book in the library
-     * @param title is the title of the book to search for
+     * @param isbn is the isbn of the book to search for
      * @return a book if one is found or null is not
      */
-    private Book searchLibrary(String title) {
+    private void searchLibrary(String isbn) {
 
         JsonObjectRequester titleRequester = new JsonObjectRequester();
         JsonObjectCommand command = new JsonObjectCommand();
-        title = "0000000000001";
-        titleRequester.getRequest("library/books/" + title, null, command, null, null);
+        isbn = "0000000000001";
+        titleRequester.getRequest("library/books/" + isbn, null, command, null, null);
+
+    }
+
+    private void searchResult(JsonObjectCommand command) {
+
+        Book book = null;
         if (command.title != null) {
-            return new Book(command.title);
+            book = new Book(command.title);
+        }
+        if (book != null) {
+            String text = book.getTitle() + " found in library!";
+            selectedBook.setText(text);
         }
         else {
-            return null;
+            selectedBook.setText(searchedIsbn + " not found in library.");
         }
 
     }
@@ -150,6 +149,7 @@ public class RoundTripActivity extends AppCompatActivity {
         public void execute(JSONObject data) {
             try {
                 title = data.getString("title");
+                searchResult(this);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
