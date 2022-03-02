@@ -60,7 +60,18 @@ public class RoundTripActivity extends AppCompatActivity {
 
         JsonObjectRequester titleAddRequester = new JsonObjectRequester();
         JsonObjectCommand command = new JsonObjectCommand();
-        titleAddRequester.postRequest("library/0000000000001", null, command, null, null);
+        //to postman
+//        titleAddRequester.postRequest("library/0000000000001", null, command, null, null);
+        //to backend
+        //todo: give json its info
+        JSONObject bookJson = new JSONObject();
+        try {
+            bookJson.put("title", "book title 1");
+            bookJson.put("isbn", "00");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        titleAddRequester.postRequest("addBooks", bookJson, command, null, null);
     }
 
     /**
@@ -72,7 +83,19 @@ public class RoundTripActivity extends AppCompatActivity {
 
         JsonObjectRequester titleRequester = new JsonObjectRequester();
         JsonObjectCommand command = new JsonObjectCommand();
-        titleRequester.getRequest("library/books/" + isbn, null, command, null, null);
+        //to postman
+//        titleRequester.getRequest("library/books/" + isbn, null, command, null, null);
+        //to backend
+        JSONObject bookJson = new JSONObject();
+        try {
+            bookJson.put("isbn", isbn);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //post isbn search being ready
+//        titleRequester.getRequest("book", bookJson, command, null, null);
+        //pre isbn search being ready: id search
+        titleRequester.getRequest("book/0", bookJson, command, null, null);
 
     }
 
