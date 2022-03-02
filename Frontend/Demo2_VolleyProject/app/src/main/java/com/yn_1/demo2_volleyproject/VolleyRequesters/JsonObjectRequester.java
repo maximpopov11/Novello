@@ -25,7 +25,7 @@ import java.util.Map;
 public class JsonObjectRequester implements Requester<JSONObject> {
 
     // Request tag for debugging.
-    public static final String TAG="json_array_req";
+    public static final String TAG="json_object_req";
 
     @Override
     public void getRequest(String path, JSONObject get, VolleyCommand command,

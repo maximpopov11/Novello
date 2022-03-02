@@ -24,7 +24,7 @@ import java.util.Map;
 public class StringRequester implements Requester<String> {
 
     // Request tag for debugging.
-    public static final String TAG="json_array_req";
+    public static final String TAG="string_req";
 
     @Override
     public void getRequest(String path, String get, VolleyCommand command,

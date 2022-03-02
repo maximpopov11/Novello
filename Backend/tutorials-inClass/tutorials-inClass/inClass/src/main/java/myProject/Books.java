@@ -5,8 +5,8 @@ import javax.persistence.*;
 @Entity
 class Books {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
         Integer bookID;
 
         @Column
