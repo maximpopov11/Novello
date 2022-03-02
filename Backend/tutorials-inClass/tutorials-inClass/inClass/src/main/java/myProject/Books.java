@@ -10,7 +10,7 @@ class Books {
         Integer bookID;
 
         @Column
-        Integer ISBN;
+        String isbn;
 
         @Column
         String title;
@@ -25,7 +25,7 @@ class Books {
         Integer rating;
 
         @Column
-        Double MSRP;
+        Double msrp;
 
         @Column
         String genre;
@@ -44,8 +44,8 @@ class Books {
 
     public Integer getPublicationYear(){ return publicationYear;}
 
-    public Integer getISBN() {
-        return ISBN;
+    public String getISBN() {
+        return isbn;
     }
 
     public String getGenre() {
@@ -53,7 +53,7 @@ class Books {
     }
 
     public Double getMSRP() {
-        return MSRP;
+        return msrp;
     }
 
     public Integer getRating(){return rating;}
