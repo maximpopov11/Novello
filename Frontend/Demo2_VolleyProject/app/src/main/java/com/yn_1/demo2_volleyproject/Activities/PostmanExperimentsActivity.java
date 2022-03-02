@@ -1,19 +1,23 @@
 package com.yn_1.demo2_volleyproject.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
@@ -56,6 +60,7 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
         removeButton.setOnClickListener(removeButtonListener);
         addButton.setOnClickListener(switchActivity);
         searchButton.setOnClickListener(switchActivity);
+        changeRating.setOnClickListener(changeRatingListener);
     }
 
     /**
@@ -66,7 +71,7 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
         table.removeViews(1, table.getChildCount()-1);
 
         JsonArrayRequester req = new JsonArrayRequester();
-        req.getRequest("/books", null, new VolleyCommand<JSONArray>()
+        req.getRequest("books", null, new VolleyCommand<JSONArray>()
         {
             @Override
             public void execute(JSONArray data) {
@@ -154,27 +159,65 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
 
     /**
      *
-     * @param newRating
      * @author Roba Abbajabal
      */
-    private void changeBookRating(Book book, int newRating) {
-        JSONObject bookToRate = new JSONObject();
-        try {
-            bookToRate.put("rating", newRating);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequester requester = new JsonObjectRequester();
-        requester.postRequest("book/"+book.getBookID(), bookToRate, new VolleyCommand<JSONObject>() {
+    public View.OnClickListener changeRatingListener = v -> {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Input new rating:");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(input);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void execute(JSONObject data) { }
+            public void onClick(DialogInterface dialog, int which) {
+                RadioButton chosenButton = null;
+                for (RadioButton button : radioButtonGroup.getButtonCollection()) {
+                    if (button.isChecked()) {
+                        chosenButton = button;
+                    }
+                }
+                if (chosenButton == null) {
+                    return;
+                }
 
-            @Override
-            public void onError(VolleyError error) {
-                Log.e(requester.TAG, "Error on delete: Book not found.");
+                // Gets the title, removes book at title (index 1 should be where the text view is located)
+                String theTitle = ((TextView) ((ViewGroup) chosenButton.getParent()).getChildAt(1)).getText().toString();
+
+                for (Book book : bookCollection) {
+                    if (book.getTitle() == theTitle) {
+                        int newRating = Integer.parseInt(input.getText().toString());
+                        JSONObject bookToRate = new JSONObject();
+                        try {
+                            bookToRate.put("rating", newRating);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        JsonObjectRequester requester = new JsonObjectRequester();
+                        Log.d("ID", "book/"+book.getBookID());
+                        requester.putRequest("book/"+book.getBookID(), bookToRate, new VolleyCommand<JSONObject>() {
+                            @Override
+                            public void execute(JSONObject data) {
+                                retrieveBooks();
+                            }
+
+                            @Override
+                            public void onError(VolleyError error) {
+                                Log.e(requester.TAG, "Error on delete: Book not found.");
+                            }
+                        }, null, null);
+                        retrieveBooks();
+                    }
+                }
             }
-        }, null, null);
-    }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    };
 
     /**
      *
