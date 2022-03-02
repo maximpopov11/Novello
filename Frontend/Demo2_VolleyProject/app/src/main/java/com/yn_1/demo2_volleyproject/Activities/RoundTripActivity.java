@@ -3,7 +3,6 @@ package com.yn_1.demo2_volleyproject.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,30 +90,6 @@ public class RoundTripActivity extends AppCompatActivity {
             selectedBook.setText("isbn: " + searchedIsbn + " not found in library.");
         }
 
-    }
-
-    /**
-     *
-     * @param rating
-     * @author Roba Abbajabal
-     */
-    private void changeBookRating(int rating) {
-        JSONObject bookToRate = new JSONObject();
-        try {
-            bookToRate.put("rating", rating);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequester requester = new JsonObjectRequester();
-        requester.putRequest("books", bookToRate, new VolleyCommand<JSONObject>() {
-            @Override
-            public void execute(JSONObject data) { }
-
-            @Override
-            public void onError(VolleyError error) {
-                Log.e(requester.TAG, "Error on delete: Book not found.");
-            }
-        }, null, null);
     }
 
     private class JsonObjectCommand implements VolleyCommand<JSONObject> {
