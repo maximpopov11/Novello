@@ -45,7 +45,7 @@ public class BooksController {
         return db.findAll();
     }
 
-    @PutMapping("/book/update/{id}")
+    @PutMapping("/book/{id}")
     Books updateBook(@RequestBody Books b, @PathVariable Integer id) {
 		Books old_b = db.findById(id).  orElseThrow(RuntimeException::new);
 		old_b.setIsbn(b.isbn);
