@@ -1,5 +1,6 @@
 package com.yn_1.demo2_volleyproject.Activities;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
     CustomRadioButtonGroup radioButtonGroup = new CustomRadioButtonGroup();
     Button removeButton;
     Button changeRating;
+    Button addButton;
+    Button searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +50,12 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
 
         removeButton = findViewById(R.id.removeBook);
         changeRating = findViewById(R.id.changeRating);
-        removeButton.setOnClickListener(removeButtonListener);
+        addButton = findViewById(R.id.addBook);
+        searchButton = findViewById(R.id.searchActivityButton);
 
+        removeButton.setOnClickListener(removeButtonListener);
+        addButton.setOnClickListener(switchActivity);
+        searchButton.setOnClickListener(switchActivity);
     }
 
     /**
@@ -59,7 +66,7 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
         table.removeViews(1, table.getChildCount()-1);
 
         JsonArrayRequester req = new JsonArrayRequester();
-        req.getRequest("library/books", null, new VolleyCommand<JSONArray>()
+        req.getRequest("/books", null, new VolleyCommand<JSONArray>()
         {
             @Override
             public void execute(JSONArray data) {
@@ -147,18 +154,36 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
 
     /**
      *
-     * @param book
+     * @param newRating
      * @author Roba Abbajabal
      */
-    private void deleteBookFromLibrary(Book book) {
-        JSONObject bookToRemove = new JSONObject();
+    private void changeBookRating(Book book, int newRating) {
+        JSONObject bookToRate = new JSONObject();
         try {
-            bookToRemove.put("bookID", book.getISBN());
+            bookToRate.put("rating", newRating);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         JsonObjectRequester requester = new JsonObjectRequester();
-        requester.deleteRequest("book/"+book.getISBN(), null, new VolleyCommand<JSONObject>() {
+        requester.postRequest("book/"+book.getBookID(), bookToRate, new VolleyCommand<JSONObject>() {
+            @Override
+            public void execute(JSONObject data) { }
+
+            @Override
+            public void onError(VolleyError error) {
+                Log.e(requester.TAG, "Error on delete: Book not found.");
+            }
+        }, null, null);
+    }
+
+    /**
+     *
+     * @param book
+     * @author Roba Abbajabal
+     */
+    private void deleteBookFromLibrary(Book book) {
+        JsonObjectRequester requester = new JsonObjectRequester();
+        requester.deleteRequest("book/"+book.getBookID(), null, new VolleyCommand<JSONObject>() {
             @Override
             public void execute(JSONObject data) { }
 
@@ -182,7 +207,7 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
 
         // Gets the title, removes book at title (index 1 should be where the text view is located)
         String theTitle = ((TextView)((ViewGroup)chosenButton.getParent()).getChildAt(1)).getText().toString();
-        // Gets the title, removes the book
+
         for (Book book : bookCollection) {
             if (book.getTitle() == theTitle) {
                 deleteBookFromLibrary(book);
@@ -190,5 +215,10 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
             }
         }
         // table.removeView((View)chosenButton.getParent()); //Directly removes row
+    };
+
+    public View.OnClickListener switchActivity = v -> {
+        Intent intent = new Intent(this, RoundTripActivity.class);
+        startActivity(intent);
     };
 }
