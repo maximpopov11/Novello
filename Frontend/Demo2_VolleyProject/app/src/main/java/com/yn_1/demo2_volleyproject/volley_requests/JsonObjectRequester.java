@@ -1,4 +1,4 @@
-package com.yn_1.demo2_volleyproject.VolleyRequesters;
+package com.yn_1.demo2_volleyproject.volley_requests;
 
 import android.util.Log;
 
@@ -10,9 +10,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.yn_1.demo2_volleyproject.AppController;
 import com.yn_1.demo2_volleyproject.Const;
-import com.yn_1.demo2_volleyproject.VolleyCommand;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;

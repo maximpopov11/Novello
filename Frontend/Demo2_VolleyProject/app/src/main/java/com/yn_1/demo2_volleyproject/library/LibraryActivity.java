@@ -1,4 +1,4 @@
-package com.yn_1.demo2_volleyproject.Activities;
+package com.yn_1.demo2_volleyproject.library;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,12 +21,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
-import com.yn_1.demo2_volleyproject.Book;
+import com.yn_1.demo2_volleyproject.old.RoundTripActivity;
 import com.yn_1.demo2_volleyproject.CustomRadioButtonGroup;
 import com.yn_1.demo2_volleyproject.R;
-import com.yn_1.demo2_volleyproject.VolleyCommand;
-import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonArrayRequester;
-import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
+import com.yn_1.demo2_volleyproject.volley_requests.VolleyCommand;
+import com.yn_1.demo2_volleyproject.volley_requests.JsonArrayRequester;
+import com.yn_1.demo2_volleyproject.volley_requests.JsonObjectRequester;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostmanExperimentsActivity extends AppCompatActivity {
+public class LibraryActivity extends AppCompatActivity {
 
     List<Book> bookCollection = new ArrayList<>();
     TableLayout table;
@@ -64,6 +64,7 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
     }
 
     /**
+     * Method for retrieving all books from user's library
      * @author Roba Abbajabal
      */
     public void retrieveBooks() {
@@ -152,13 +153,14 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
         ratingBar.setRating(rating);
         ratingBar.setScaleX(.3f);
         ratingBar.setScaleY(.3f);
+        ratingBar.setIsIndicator(true);
         bookRow.addView(ratingBar);
 
         table.addView(bookRow);
     }
 
     /**
-     *
+     * Listener for changing a rating
      * @author Roba Abbajabal
      */
     public View.OnClickListener changeRatingListener = v -> {
@@ -220,7 +222,7 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
     };
 
     /**
-     *
+     * Helper method for removing a book
      * @param book
      * @author Roba Abbajabal
      */
@@ -237,6 +239,10 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
         }, null, null);
     }
 
+    /**
+     * Listener for removing a book
+     * @author Roba Abbajabal
+     */
     public View.OnClickListener removeButtonListener = v -> {
         RadioButton chosenButton = null;
         for (RadioButton button : radioButtonGroup.getButtonCollection()) {
@@ -260,6 +266,10 @@ public class PostmanExperimentsActivity extends AppCompatActivity {
         // table.removeView((View)chosenButton.getParent()); //Directly removes row
     };
 
+    /**
+     * Listener for switching to Maxim's activity
+     * @author Roba Abbajabal
+     */
     public View.OnClickListener switchActivity = v -> {
         Intent intent = new Intent(this, RoundTripActivity.class);
         startActivity(intent);

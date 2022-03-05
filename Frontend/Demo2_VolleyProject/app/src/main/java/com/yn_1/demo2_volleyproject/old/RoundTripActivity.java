@@ -1,20 +1,19 @@
-package com.yn_1.demo2_volleyproject.Activities;
+package com.yn_1.demo2_volleyproject.old;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.yn_1.demo2_volleyproject.Book;
+import com.yn_1.demo2_volleyproject.library.Book;
 import com.yn_1.demo2_volleyproject.Const;
 import com.yn_1.demo2_volleyproject.R;
-import com.yn_1.demo2_volleyproject.VolleyCommand;
-import com.yn_1.demo2_volleyproject.VolleyRequesters.JsonObjectRequester;
+import com.yn_1.demo2_volleyproject.volley_requests.VolleyCommand;
+import com.yn_1.demo2_volleyproject.volley_requests.JsonObjectRequester;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,30 +112,6 @@ public class RoundTripActivity extends AppCompatActivity {
             selectedBook.setText(Const.postmanMockUrl + "isbn: " + searchedIsbn + " not found in library.");
         }
 
-    }
-
-    /**
-     *
-     * @param rating
-     * @author Roba Abbajabal
-     */
-    private void changeBookRating(int rating) {
-        JSONObject bookToRate = new JSONObject();
-        try {
-            bookToRate.put("rating", rating);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequester requester = new JsonObjectRequester();
-        requester.putRequest("books", bookToRate, new VolleyCommand<JSONObject>() {
-            @Override
-            public void execute(JSONObject data) { }
-
-            @Override
-            public void onError(VolleyError error) {
-                Log.e(requester.TAG, "Error on delete: Book not found.");
-            }
-        }, null, null);
     }
 
     private class JsonObjectCommand implements VolleyCommand<JSONObject> {
