@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Demo2_VolleyProject"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activities.PostmanExperimentsActivity"
+            android:name=".library.LibraryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.VolleyExperimentsActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".Activities.RoundTripActivity"
+            android:name=".old.RoundTripActivity"
             android:exported="true"
             android:label="Demo 2: Volley" />
     </application>
