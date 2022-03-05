@@ -33,13 +33,13 @@ class Person {
 	@Column
 	Integer age;
 
-	@ManyToOne
-	@JoinColumn(name = "bk_book_id")
-	Books bk;
-
-	public Books getBk() {
-		return bk;
-	}
+//	@OneToMany
+//	@JoinColumn(name = "bk_book_id")
+//	Books bk;
+//
+//	public Books getBk() {
+//		return bk;
+//	}
 
 //	@ManyToOne
 //	@JoinColumn(name = "friends_id")
