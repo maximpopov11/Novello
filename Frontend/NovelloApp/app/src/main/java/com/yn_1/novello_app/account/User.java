@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * User interface <br>
  * The creation of a user account should be done in user implementation constructor.
+ * @author Roba Abbajabal
  */
 public interface User {
 
