@@ -18,9 +18,9 @@ android-build: #this is another job
    - android_tag         #this is LINK to the docker runner on the remote-server        
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
-    - chmod +x ./Frontend/Demo2_VolleyProject/gradlew
+    - chmod +x ./Frontend/NovelloApp/gradlew
   script:
-    - cd Frontend/Demo2_VolleyProject
+    - cd Frontend/NovelloApp
     - ./gradlew assemble
   
 autoDeploy:
