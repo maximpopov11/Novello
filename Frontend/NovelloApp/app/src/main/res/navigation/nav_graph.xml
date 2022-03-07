@@ -10,4 +10,9 @@
         android:name="com.yn_1.novello_app.library.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.yn_1.novello_app.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>
