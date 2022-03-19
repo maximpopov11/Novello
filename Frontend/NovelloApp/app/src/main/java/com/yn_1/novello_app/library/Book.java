@@ -10,6 +10,10 @@ public class Book {
     int rating;
     int bookID;
 
+    // User-specific, for categories like currently reading, wishlist, etc.
+    // Array because a book can be in multiple categories.
+    String[] categoryID;
+
     /**
      * Constructor
      * @param title book title
