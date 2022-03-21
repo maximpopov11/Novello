@@ -85,13 +85,13 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
 
 
     @Override
-    public void displayAllBooks(Book[] books) {
+    public void displayAllBooks(List<Book> books) {
         for (Book book : books) {
             for (String categoryID : book.categoryID) {
                 for (HorizontalScrollView realCategory : categories) {
                     if (categoryID != realCategory.toString())
                     {
-                        ImageButton button = model.createImageFromBook(book);
+                        ImageButton button = model.createImageFromBook(book, this.getContext());
                         realCategory.addView(button);
                     }
                 }

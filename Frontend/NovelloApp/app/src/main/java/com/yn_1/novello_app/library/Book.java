@@ -9,6 +9,7 @@ public class Book {
     String isbn;
     int rating;
     int bookID;
+    String imageURL;
 
     // User-specific, for categories like currently reading, wishlist, etc.
     // Array because a book can be in multiple categories.
@@ -22,7 +23,7 @@ public class Book {
      * @param isbn book isbn
      * @param rating book rating
      */
-    public Book(int bookID, String title, String author, int publicationYear, String isbn, int rating) {
+    public Book(int bookID, String title, String author, int publicationYear, String isbn, int rating, String imageURL) {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
