@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class MyController {
+public class PersonController {
 
 	@Autowired
-	MyDatabase db;
+	PersonDB db;
 
 	@GetMapping("/person/{id}")
 	Person getPerson(@PathVariable Integer id) {
