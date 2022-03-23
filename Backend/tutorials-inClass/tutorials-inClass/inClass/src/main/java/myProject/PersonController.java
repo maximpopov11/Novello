@@ -17,7 +17,7 @@ public class PersonController {
           orElseThrow(RuntimeException::new);
 	}
 	@RequestMapping("/persons")
-	List<Person> hello() {
+	List<Person> getPersons() {
 		return db.findAll();
 	}
 
