@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryModel implements LibraryContract.Model {
+
     private List<Book> bookCollection;
-    LibraryContract.View view;
 
     @Override
     public void fetchAllBooks(User user) {
@@ -63,14 +63,9 @@ public class LibraryModel implements LibraryContract.Model {
     }
 
     @Override
-    public ImageButton createImageFromBook(Book book, Context context) {
-        ImageButton button = new ImageButton(context);
-        button.setLayoutParams(new HorizontalScrollView.LayoutParams
-                (HorizontalScrollView.LayoutParams.MATCH_PARENT,
-                 HorizontalScrollView.LayoutParams.MATCH_PARENT));
-        button.setBackgroundColor(Color.TRANSPARENT);
+    public void assignImageToBook(String imageURL, ImageButton button) {
         ImageRequester req = new ImageRequester();
-        req.getRequest(book.imageURL, null, new VolleyCommand<Bitmap>() {
+        req.getRequest(imageURL, null, new VolleyCommand<Bitmap>() {
             @Override
             public void execute(Bitmap image) {
                 button.setImageBitmap(image);
@@ -79,15 +74,10 @@ public class LibraryModel implements LibraryContract.Model {
             @Override
             public void onError(VolleyError error) { }
         }, null, null);
-        button.setOnClickListener(v -> {
-            view.displayBook(book);
-        });
-        button.setOnLongClickListener(null); //TODO: Hold to show dialog to remove, rate, etc.
-        return button;
     }
 
     @Override
-    public List<Book> getBookCollection(List<Book> books) {
+    public List<Book> getUserBookCollection() {
         return bookCollection;
     }
 

@@ -1,5 +1,9 @@
 package com.yn_1.novello_app.library;
 
+import android.widget.ImageButton;
+
+import java.util.List;
+
 public class Book {
 
     //book fields
@@ -9,11 +13,14 @@ public class Book {
     String isbn;
     int rating;
     int bookID;
-    String imageURL;
+    private String imageURL;
+    private ImageButton linkedImageButton;
 
-    // User-specific, for categories like currently reading, wishlist, etc.
+    // User-specific fields, for categories like currently reading, wishlist, etc.
+    // Works because each user gets their own instance of book
     // Array because a book can be in multiple categories.
-    String[] categoryID;
+    private List<String> userCategoryID;
+
 
     /**
      * Constructor
@@ -30,6 +37,24 @@ public class Book {
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.rating = rating;
+        this.imageURL = imageURL;
+    }
+
+    /**
+     * Constructor for instantiating a copy of the book for the user library
+     * @param book The book to be copied
+     * @param userCategoryID Categories book should be in for user library
+     */
+    public Book(Book book, List<String> userCategoryID) {
+        bookID = book.bookID;
+        title = book.title;
+        author = book.author;
+        publicationYear = book.publicationYear;
+        isbn = book.isbn;
+        rating = book.rating;
+        imageURL = book.imageURL;
+
+        this.userCategoryID = userCategoryID;
     }
 
     /**
@@ -85,4 +110,34 @@ public class Book {
     public int getBookID() {
         return bookID;
     }
+
+    /**
+     *
+     * @return
+     */
+    public String getImageURL() { return imageURL; }
+
+    /**
+     *
+     * @return
+     */
+    public ImageButton getImageButton() { return linkedImageButton; }
+
+    /**
+     *
+     * @param button
+     */
+    public void setImageButton(ImageButton button) { linkedImageButton = button; }
+
+    /**
+     *
+     * @return
+     */
+    public List<String> getUserCategoryId() { return userCategoryID; }
+
+    /**
+     *
+     * @param categoryName
+     */
+    public void addUserCategoryID(String categoryName) { userCategoryID.add(categoryName); }
 }

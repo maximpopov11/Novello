@@ -1,29 +1,31 @@
 package com.yn_1.novello_app;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.NavHost;
-import androidx.navigation.NavHostController;
-import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.home.HomeFragment;
 import com.yn_1.novello_app.library.LibraryFragment;
 
+import java.util.List;
+
 public class NavBarActivity extends AppCompatActivity {
+
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
+
+        currentUser = (User) getIntent().getSerializableExtra("User");
 
         BottomNavigationView navBar = findViewById(R.id.bottom_nav);
 
@@ -49,5 +51,9 @@ public class NavBarActivity extends AppCompatActivity {
                 }
             }
         );
+    }
+
+    public User getUser() {
+        return currentUser;
     }
 }

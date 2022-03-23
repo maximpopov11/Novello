@@ -10,8 +10,8 @@ import java.util.List;
 public interface LibraryContract {
     interface Model {
         void fetchAllBooks(User user);
-        ImageButton createImageFromBook(Book book, Context context);
-        List<Book> getBookCollection(List<Book> books);
+        void assignImageToBook(String imageURL, ImageButton button);
+        List<Book> getUserBookCollection();
         List<Book> addBookToCollection(Book book);
         List<Book> removeBookFromCollection(Book book);
     }
@@ -22,8 +22,10 @@ public interface LibraryContract {
     }
 
     interface Presenter {
-        void onViewCreated(User user);
+        void onViewCreated(User user, Context context);
         void onBookTapped(User user, Book book);
         void onBookHeld(User user, Book book);
+        ImageButton createBookButton(Book book, Context context);
+        List<ImageButton> getBookButtons();
     }
 }
