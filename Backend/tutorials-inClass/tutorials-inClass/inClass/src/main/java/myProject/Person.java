@@ -33,32 +33,32 @@ class Person {
 	@Column
 	Integer age;
 
+//	@OneToMany(mappedBy = "person")
+//	private Set<BookRating> ratings;
+
+
 //	@OneToMany
 //	@JoinColumn(name = "bk_book_id")
-//	Books bk;
-//
-//	public Books getBk() {
-//		return bk;
-//	}
+/*
 
-//	@ManyToOne
-//	@JoinColumn(name = "friends_id")
-//	Person friends;
-//
-//	public Person getFriends() {
-//		return friends;
-//	}
+	public Books getBk() {
+		return bk;
+	}
+	@ManyToOne
+	@JoinColumn(name = "friends_id")
+	Person friends;
 
+	public Person getFriends() {
+		return friends;
+	}
+	@Column
+	Books library;
+	@Column
+	CREDIT CARD INFO
 
-//	@Column
-//	Books library;
-
-//	@Column
-//	CREDIT CARD INFO
-//
-//	@Column
-//	Friends JSON
-
+	@Column
+	Friends JSON
+*/
 
 
 	public Integer getId() { return id; }
