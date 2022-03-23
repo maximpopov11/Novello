@@ -1,6 +1,7 @@
 package myProject;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 class Person {
@@ -32,6 +33,9 @@ class Person {
 
 	@Column
 	Integer age;
+
+	@OneToMany(mappedBy = "person")
+	Set<BookRating> ratings;
 
 //	@OneToMany(mappedBy = "person")
 //	private Set<BookRating> ratings;
