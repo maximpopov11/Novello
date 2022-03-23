@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 
 import java.util.List;
@@ -69,9 +70,13 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Get resources
         currentlyReadingView = view.findViewById(R.id.currentlyReadingView);
         wishlistView = view.findViewById(R.id.wishlistView);
         readView = view.findViewById(R.id.readView);
+
+        // Start the presenter
+        presenter.onViewCreated(((NavBarActivity)getActivity()).getUser(), getContext());
     }
 
 

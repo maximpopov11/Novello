@@ -2,6 +2,7 @@ package com.yn_1.novello_app.library;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 
@@ -35,28 +36,28 @@ public class LibraryPresenter implements LibraryContract.Presenter {
     }
 
     @Override
-    public void onBookTapped(User user, Book book) {
+    public void onBookTapped(Book book) {
         view.displayBook(book);
     }
 
     // TODO: On book held, allow user to remove book or rate book in user collection
     @Override
-    public void onBookHeld(User user, Book book) {
-
-    }
+    public void onBookHeld(Book book) { }
 
     @Override
     public ImageButton createBookButton(Book book, Context context) {
         ImageButton button = new ImageButton(context);
-        button.setLayoutParams(new HorizontalScrollView.LayoutParams
-                (HorizontalScrollView.LayoutParams.MATCH_PARENT,
-                        HorizontalScrollView.LayoutParams.MATCH_PARENT));
+
+        LayoutParams params = new LayoutParams(175,
+                HorizontalScrollView.LayoutParams.MATCH_PARENT);
+        params.setMargins(5, 0, 5, 0);
+        button.setLayoutParams(params);
         button.setBackgroundColor(Color.YELLOW);
 
         model.assignImageToBook(book.getImageURL(), button);
 
         button.setOnClickListener(v -> {
-            view.displayBook(book);
+            onBookTapped(book);
         });
         button.setOnLongClickListener(null); //TODO: Hold to show dialog to remove, rate, etc.
         return button;
