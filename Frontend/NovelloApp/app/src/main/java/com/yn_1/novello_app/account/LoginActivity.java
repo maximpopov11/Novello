@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
@@ -66,10 +67,10 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void loginResult(boolean loginSucceeded) {
 
-        //todo: go to dashboard once dashboard is created
-
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         if (loginSucceeded) {
+            Intent intent = new Intent(this, NavBarActivity.class);
+            startActivity(intent);
             alert.setMessage("Login succeeded! Pretend like this went to the dashboard like it's supposed to!");
         }
         else {
