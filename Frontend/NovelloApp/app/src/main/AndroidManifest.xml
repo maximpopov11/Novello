@@ -12,6 +12,12 @@
         android:theme="@style/Theme.NovelloApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".account.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".account.CreateAccountActivity"
+            android:exported="true" />
+        <activity
             android:name=".NavBarActivity"
             android:exported="false" />
         <activity
