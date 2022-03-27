@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 import com.yn_1.novello_app.account.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryPresenter implements LibraryContract.Presenter {
@@ -24,15 +25,13 @@ public class LibraryPresenter implements LibraryContract.Presenter {
     }
 
     @Override
+    public void beforeViewCreated(User user) {
+        Log.d("Presenter", "beforeViewCreated() called");
+        model.fetchAllBooks(user, view, this);
+    }
+
+    @Override
     public void onViewCreated(User user, Context context) {
-        model.fetchAllBooks(user);
-
-        for (Book book : model.getUserBookCollection()) {
-            ImageButton bookButton = createBookButton(book, context);
-            bookButtons.add(bookButton);
-            book.setImageButton(bookButton);
-        }
-
         view.displayAllBooks(model.getUserBookCollection());
     }
 
@@ -46,22 +45,28 @@ public class LibraryPresenter implements LibraryContract.Presenter {
     public void onBookHeld(Book book) { }
 
     @Override
-    public ImageButton createBookButton(Book book, Context context) {
-        ImageButton button = new ImageButton(context);
+    public void createBookButtons(Context context) {
+        bookButtons = new ArrayList<>();
+        Log.d("Library", "Book collection size " + model.getUserBookCollection().size());
+        for (Book book : model.getUserBookCollection()) {
+            ImageButton button = new ImageButton(context);
 
-        LayoutParams params = new LayoutParams(175,
-                HorizontalScrollView.LayoutParams.MATCH_PARENT);
-        params.setMargins(5, 0, 5, 0);
-        button.setLayoutParams(params);
-        button.setBackgroundColor(Color.YELLOW);
+            LayoutParams params = new LayoutParams(175,
+                    HorizontalScrollView.LayoutParams.MATCH_PARENT);
+            params.setMargins(5, 0, 5, 0);
+            button.setLayoutParams(params);
+            button.setBackgroundColor(Color.YELLOW);
 
-        model.assignImageToBook(book.getImageURL(), button);
+            model.assignImageToBook(book.getImageURL(), button, view);
 
-        button.setOnClickListener(v -> {
-            onBookTapped(book);
-        });
-        button.setOnLongClickListener(null); //TODO: Hold to show dialog to remove, rate, etc.
-        return button;
+            button.setOnClickListener(v -> {
+                onBookTapped(book);
+            });
+            button.setOnLongClickListener(null); //TODO: Hold to show dialog to remove, rate, etc.
+
+            bookButtons.add(button);
+            book.setImageButton(button);
+        }
     }
 
     @Override

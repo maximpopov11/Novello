@@ -20,14 +20,14 @@ public interface LibraryContract {
          * Fetches all books in the user library from the database
          * @param user
          */
-        void fetchAllBooks(User user);
+        void fetchAllBooks(User user, LibraryContract.View view, LibraryContract.Presenter presenter);
 
         /**
          * Fetches the cover image of the book from the database, and assigns it to the book
          * @param imageURL
          * @param button
          */
-        void assignImageToBook(String imageURL, ImageButton button);
+        void assignImageToBook(String imageURL, ImageButton button, LibraryContract.View presenter);
 
         /**
          * Returns the user book collection
@@ -66,6 +66,8 @@ public interface LibraryContract {
          * @param book
          */
         void displayBook(Book book);
+
+        void startPresenter();
     }
 
     /**
@@ -73,6 +75,9 @@ public interface LibraryContract {
      * For handling UI logic.
      */
     interface Presenter {
+
+        void beforeViewCreated(User user);
+
         /**
          * Handles initialization logic when the library fragment is displayed.
          * @param user
@@ -94,11 +99,10 @@ public interface LibraryContract {
 
         /**
          * Creates an image button for the book.
-         * @param book
          * @param context
          * @return
          */
-        ImageButton createBookButton(Book book, Context context);
+        void createBookButtons(Context context);
 
         /**
          * Obtains all image buttons of books. Note: May be redundant.

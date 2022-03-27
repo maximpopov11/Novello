@@ -25,7 +25,7 @@ public class ImageRequester implements Requester<Bitmap> {
     @Override
     public void getRequest(String path, Bitmap get, VolleyCommand command,
                             Map<String, String> headers, Map<String, String> params) {
-        ImageRequest getImageRequest = new ImageRequest(Const.baseUrl+path,
+        ImageRequest getImageRequest = new ImageRequest(path,
             bitmap -> {
                 Log.d(TAG, bitmap.toString());
                 command.execute(bitmap);

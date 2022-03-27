@@ -1,5 +1,6 @@
 package com.yn_1.novello_app.library;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 
+import com.yn_1.novello_app.Const;
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryFragment extends Fragment implements LibraryContract.View {
@@ -58,6 +62,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
 
         // Create a new library presenter instance, that holds a library model instance
         presenter = new LibraryPresenter(new LibraryModel(), this);
+
+        // Receives data
+        presenter.beforeViewCreated(((NavBarActivity)getActivity()).getUser());
     }
 
     @Override
@@ -76,6 +83,14 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         wishlistView = view.findViewById(R.id.wishlist);
         readView = view.findViewById(R.id.read);
 
+        categories = new ArrayList<>();
+        categories.add(currentlyReadingView);
+        categories.add(wishlistView);
+        categories.add(readView);
+    }
+
+    @Override
+    public void startPresenter() {
         // Start the presenter
         presenter.onViewCreated(((NavBarActivity)getActivity()).getUser(), getContext());
     }
@@ -83,11 +98,13 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
 
     @Override
     public void displayAllBooks(List<Book> books) {
+        Log.d("Library", "displayAllBooks() reached");
         for (Book book : books) {
             for (HorizontalScrollView realCategory : categories) {
-                if (book.getUserCategoryId() == realCategory.toString())
+                Log.d("Library", getView().getResources().getResourceName(realCategory.getId()));
+                if (getView().getResources().getResourceName(realCategory.getId()).equals("com.yn_1.novello_app:id/" + book.getUserCategoryId()))
                 {
-                    realCategory.addView(book.getImageButton());
+                    ((LinearLayout)realCategory.getChildAt(0)).addView(book.getImageButton());
                     Log.d("Library", book.getTitle() + "added");
                 }
             }
@@ -99,5 +116,17 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         Fragment bookFragment = new Fragment(); // TODO: Replace with real fragment
         getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
                 bookFragment).addToBackStack(null).commit();
+    }
+
+    @Nullable
+    @Override
+    public Context getContext() {
+        return super.getContext();
+    }
+
+    @Nullable
+    @Override
+    public View getView() {
+        return super.getView();
     }
 }
