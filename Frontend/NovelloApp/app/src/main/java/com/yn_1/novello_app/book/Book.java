@@ -1,8 +1,6 @@
-package com.yn_1.novello_app.library;
+package com.yn_1.novello_app.book;
 
 import android.widget.ImageButton;
-
-import java.util.List;
 
 public class Book {
 

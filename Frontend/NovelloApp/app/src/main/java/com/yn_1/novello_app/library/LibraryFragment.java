@@ -1,28 +1,33 @@
 package com.yn_1.novello_app.library;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import com.yn_1.novello_app.Const;
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.book.Book;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryFragment extends Fragment implements LibraryContract.View {
 
+    // Presenter accessible from View
     private LibraryContract.Presenter presenter;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -129,5 +134,17 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
     @Override
     public View getView() {
         return super.getView();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        presenter.createBookMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        presenter.onBookMenuItemSelected(item);
+        return true;
     }
 }

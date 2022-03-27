@@ -7,9 +7,8 @@ import android.widget.ImageButton;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
-import com.yn_1.novello_app.Const;
-import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.account.User;
+import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.volley_requests.ImageRequester;
 import com.yn_1.novello_app.volley_requests.JsonArrayRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
@@ -19,18 +18,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LibraryModel implements LibraryContract.Model {
-
     private List<Book> bookCollection;
-    int AHHHH;
-    int AHHHH2;
+    private int bookCount;
 
+    // Collection of book buttons
+    private Map<ImageButton, Book> bookButtons;
+
+    private int finishedCollectionCounter;
     @Override
     public void fetchAllBooks(User user, LibraryContract.View view, LibraryContract.Presenter presenter) {
-        AHHHH=0;
+        bookButtons = null;
+        bookCount = 0;
+        finishedCollectionCounter = 0;
         bookCollection = new ArrayList<>();
+        bookButtons = new HashMap<>();
         for (int i = 0; i < 3; i++) {
             String categoryPath = "";
             switch (i) {
@@ -65,12 +71,13 @@ public class LibraryModel implements LibraryContract.Model {
                                     Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, imageUrl);
                                     newBook.setUserCategoryID(finalCategoryPath);
                                     bookCollection.add(newBook);
+                                    bookCount++;
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
-                            AHHHH++;
-                            if (AHHHH == 3) {
+                            finishedCollectionCounter++;
+                            if (finishedCollectionCounter == COLLECTION_COUNT) {
                                 Log.d("Model", "fetchAllBooks() finished");
                                 presenter.createBookButtons(((Fragment) view).getContext());
                             }
@@ -84,16 +91,17 @@ public class LibraryModel implements LibraryContract.Model {
         }
     }
 
+    private int finishedImagesCounter;
     @Override
-    public void assignImageToBook(String imageURL, ImageButton button, LibraryContract.View view) {
+    public void assignImageToBook(Book book, String imageURL, ImageButton button, LibraryContract.View view) {
         ImageRequester req = new ImageRequester();
         req.getRequest(imageURL, null, new VolleyCommand<Bitmap>() {
             @Override
             public void execute(Bitmap image) {
-                Bitmap newImage = Bitmap.createScaledBitmap(image, 175*3, 280*3, true);
+                Bitmap newImage = Bitmap.createScaledBitmap(image, BOOK_SIZE[0], BOOK_SIZE[1], true);
                 button.setImageBitmap(newImage);
-                AHHHH2++;
-                if (AHHHH2 == 9) {
+                finishedImagesCounter++;
+                if (finishedImagesCounter == bookCount) {
                     Log.d("Model", "assignImageToBook() finished");
                     view.startPresenter();
                 }
@@ -121,5 +129,23 @@ public class LibraryModel implements LibraryContract.Model {
     @Override
     public List<Book> removeBookFromCollection(Book book) {
         return null;
+    }
+
+    @Override
+    public Map<ImageButton, Book> getBookButtons() {
+        return bookButtons;
+    }
+
+    @Override
+    public void addBookButton(Book book, ImageButton button) {
+        if (bookButtons == null) {
+            bookButtons = new HashMap<>();
+        }
+        bookButtons.put(button, book);
+    }
+
+    @Override
+    public Book getBookButton(ImageButton button) {
+        return bookButtons.get(button);
     }
 }

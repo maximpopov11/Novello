@@ -3,22 +3,24 @@ package com.yn_1.novello_app.library;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
-import android.widget.FrameLayout;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 
-import com.yn_1.novello_app.account.User;
+import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.yn_1.novello_app.account.User;
+import com.yn_1.novello_app.book.Book;
 
 public class LibraryPresenter implements LibraryContract.Presenter {
 
+    // Model and View accessible from Presenter
     private LibraryContract.Model model;
     private LibraryContract.View view;
 
-    private List<ImageButton> bookButtons;
+    private ImageButton currentMenuButton;
 
     public LibraryPresenter(LibraryContract.Model model, LibraryContract.View view) {
         this.model = model;
@@ -47,31 +49,42 @@ public class LibraryPresenter implements LibraryContract.Presenter {
 
     @Override
     public void createBookButtons(Context context) {
-        bookButtons = new ArrayList<>();
         Log.d("Library", "Book collection size " + model.getUserBookCollection().size());
         for (Book book : model.getUserBookCollection()) {
             ImageButton button = new ImageButton(context);
 
-            LayoutParams params = new LayoutParams(175*3,
-                    280*3);
+            LayoutParams params = new LayoutParams(model.BOOK_SIZE[0],
+                    model.BOOK_SIZE[1]);
             params.setMargins(15, 0, 15, 0);
             button.setLayoutParams(params);
             button.setBackgroundColor(Color.YELLOW);
 
-            model.assignImageToBook(book.getImageURL(), button, view);
+            model.assignImageToBook(book, book.getImageURL(), button, view);
 
+            // Click listener
             button.setOnClickListener(v -> {
                 onBookTapped(book);
             });
-            button.setOnLongClickListener(null); //TODO: Hold to show dialog to remove, rate, etc.
+            // Long click listener
+            ((Fragment)view).registerForContextMenu(button);
 
-            bookButtons.add(button);
+            model.addBookButton(book, button);
             book.setImageButton(button);
         }
     }
 
     @Override
-    public List<ImageButton> getBookButtons() {
-        return bookButtons;
+    public void createBookMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("Book Options");
+        menu.add(0, v.getId(), 0, "Go To Book");
+        //TODO: Add more menu options
+        currentMenuButton = (ImageButton)v;
+    }
+
+    @Override
+    public void onBookMenuItemSelected(MenuItem item) {
+        if (item.getTitle() == "Go To Book") {
+            view.displayBook(model.getBookButton(currentMenuButton));
+        }
     }
 }
