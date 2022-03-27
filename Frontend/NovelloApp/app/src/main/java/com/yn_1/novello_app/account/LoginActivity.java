@@ -50,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //todo: correct URL in next line
-            userRequester.postRequest("getUser", accountCredentialsJson, command, null, null);
+            //todo: test next line
+            userRequester.getRequest("person", accountCredentialsJson, command, null, null);
         });
 
         createAccount.setOnClickListener(v -> {

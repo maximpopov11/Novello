@@ -56,8 +56,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //todo: correct URL in next line
-                userAddRequester.postRequest("addUser", userJson, command, null, null);
+                //todo: test next line
+                userAddRequester.postRequest("person", userJson, command, null, null);
             }
             else {
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
