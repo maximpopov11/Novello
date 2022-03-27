@@ -18,12 +18,22 @@ public class BookRating {
     @JoinColumn(name = "Book_id")
     Books book;
 
+    int rating;
+
     public BookRatingKey getId() {
         return id;
     }
 
     public void setId(BookRatingKey id) {
         this.id = id;
+    }
+
+    public void setRating(int rating){
+        this.rating = rating;
+    }
+    public int getRating()
+    {
+        return rating;
     }
 
     @Override
