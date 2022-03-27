@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.yn_1.novello_app.account.User;
+import com.yn_1.novello_app.account.UserImpl;
 import com.yn_1.novello_app.home.HomeFragment;
 import com.yn_1.novello_app.library.LibraryFragment;
 
@@ -25,7 +26,10 @@ public class NavBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
 
-        currentUser = (User) getIntent().getSerializableExtra("User");
+        // Commented for testing
+        //currentUser = (User) getIntent().getSerializableExtra("User");
+        currentUser = new UserImpl("testUser");
+
 
         BottomNavigationView navBar = findViewById(R.id.bottom_nav);
 

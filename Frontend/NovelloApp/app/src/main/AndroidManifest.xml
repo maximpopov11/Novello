@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".library.LibraryActivity"
+            android:name=".old.LibraryActivity"
             android:exported="true"/>
         <activity
             android:name=".old.RoundTripActivity"

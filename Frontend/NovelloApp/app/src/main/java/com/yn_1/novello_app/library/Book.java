@@ -19,7 +19,7 @@ public class Book {
     // User-specific fields, for categories like currently reading, wishlist, etc.
     // Works because each user gets their own instance of book
     // Array because a book can be in multiple categories.
-    private List<String> userCategoryID;
+    private String userCategoryID;
 
 
     /**
@@ -45,7 +45,7 @@ public class Book {
      * @param book The book to be copied
      * @param userCategoryID Categories book should be in for user library
      */
-    public Book(Book book, List<String> userCategoryID) {
+    public Book(Book book, String userCategoryID) {
         bookID = book.bookID;
         title = book.title;
         author = book.author;
@@ -133,11 +133,11 @@ public class Book {
      *
      * @return
      */
-    public List<String> getUserCategoryId() { return userCategoryID; }
+    public String getUserCategoryId() { return userCategoryID; }
 
     /**
      *
      * @param categoryName
      */
-    public void addUserCategoryID(String categoryName) { userCategoryID.add(categoryName); }
+    public void setUserCategoryID(String categoryName) { userCategoryID = categoryName; }
 }

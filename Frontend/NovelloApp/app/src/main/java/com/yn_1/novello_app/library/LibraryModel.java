@@ -1,13 +1,7 @@
 package com.yn_1.novello_app.library;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.util.Log;
-import android.view.View;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
-import android.widget.TableRow;
 
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.account.User;
@@ -29,37 +23,54 @@ public class LibraryModel implements LibraryContract.Model {
     @Override
     public void fetchAllBooks(User user) {
         bookCollection = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            String categoryPath;
+            switch (i) {
+                case 0:
+                    categoryPath = "currentlyReading";
+                    break;
+                case 1:
+                    categoryPath = "wishlist";
+                    break;
 
-        JsonArrayRequester req = new JsonArrayRequester();
-        req.getRequest(user.getUserId()+"library", null, new VolleyCommand<JSONArray>()
-        {
-            @Override
-            public void execute(JSONArray data) {
-                for (int i = 0; i < data.length(); i++)
-                {
-                    try {
-                        JSONObject book = data.getJSONObject(i);
-                        int bookID = book.getInt("bookID");
-                        String title = book.getString("title");
-                        String author = book.getString("author");
-                        int publicationYear = book.getInt("publicationYear");
-                        String isbn  = book.getString("isbn");
-                        int rating = book.getInt("rating");
-                        String imageUrl = book.getString("imageUrl");
-                        Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, imageUrl);
-                        bookCollection.add(newBook);
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
+                case 2:
+                    categoryPath = "read";
+                    break;
+                default:
+                    categoryPath="";
+                    break;
+            }
+
+            JsonArrayRequester req = new JsonArrayRequester();
+            req.getRequest(user.getUsername() + "/library/"+categoryPath,
+                    null, new VolleyCommand<JSONArray>() {
+                @Override
+                public void execute(JSONArray data) {
+                    for (int i = 0; i < data.length(); i++) {
+                        try {
+                            JSONObject book = data.getJSONObject(i);
+                            int bookID = book.getInt("bookID");
+                            String title = book.getString("title");
+                            String author = book.getString("author");
+                            int publicationYear = book.getInt("publicationYear");
+                            String isbn = book.getString("isbn");
+                            int rating = book.getInt("rating");
+                            String imageUrl = book.getString("imageUrl");
+                            Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, imageUrl);
+                            newBook.setUserCategoryID(categoryPath);
+                            bookCollection.add(newBook);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onError(VolleyError error) {
+                @Override
+                public void onError(VolleyError error) {
 
-            }
-        }, null, null);
+                }
+            }, null, null);
+        }
     }
 
     @Override

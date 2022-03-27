@@ -55,7 +55,7 @@
                 android:text="Currently Reading" />
 
             <HorizontalScrollView
-                android:id="@+id/currentlyReadingView"
+                android:id="@+id/currentlyReading"
                 android:layout_width="match_parent"
                 android:layout_height="280dp">
 
@@ -116,7 +116,7 @@
                 android:text="Wishlist" />
 
             <HorizontalScrollView
-                android:id="@+id/wishlistView"
+                android:id="@+id/wishlist"
                 android:layout_width="match_parent"
                 android:layout_height="280dp">
 
@@ -133,7 +133,7 @@
                 android:text="Read" />
 
             <HorizontalScrollView
-                android:id="@+id/readView"
+                android:id="@+id/read"
                 android:layout_width="match_parent"
                 android:layout_height="280dp">
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,9 +72,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         super.onViewCreated(view, savedInstanceState);
 
         // Get resources
-        currentlyReadingView = view.findViewById(R.id.currentlyReadingView);
-        wishlistView = view.findViewById(R.id.wishlistView);
-        readView = view.findViewById(R.id.readView);
+        currentlyReadingView = view.findViewById(R.id.currentlyReading);
+        wishlistView = view.findViewById(R.id.wishlist);
+        readView = view.findViewById(R.id.read);
 
         // Start the presenter
         presenter.onViewCreated(((NavBarActivity)getActivity()).getUser(), getContext());
@@ -83,12 +84,11 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
     @Override
     public void displayAllBooks(List<Book> books) {
         for (Book book : books) {
-            for (String categoryID : book.getUserCategoryId()) {
-                for (HorizontalScrollView realCategory : categories) {
-                    if (categoryID == realCategory.toString())
-                    {
-                        realCategory.addView(book.getImageButton());
-                    }
+            for (HorizontalScrollView realCategory : categories) {
+                if (book.getUserCategoryId() == realCategory.toString())
+                {
+                    realCategory.addView(book.getImageButton());
+                    Log.d("Library", book.getTitle() + "added");
                 }
             }
         }

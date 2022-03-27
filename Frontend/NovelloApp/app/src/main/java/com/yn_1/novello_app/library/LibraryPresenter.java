@@ -2,13 +2,13 @@ package com.yn_1.novello_app.library;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 
 import com.yn_1.novello_app.account.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryPresenter implements LibraryContract.Presenter {
@@ -27,9 +27,10 @@ public class LibraryPresenter implements LibraryContract.Presenter {
     public void onViewCreated(User user, Context context) {
         model.fetchAllBooks(user);
 
-        bookButtons = new ArrayList<ImageButton>();
         for (Book book : model.getUserBookCollection()) {
-            bookButtons.add(createBookButton(book, context));
+            ImageButton bookButton = createBookButton(book, context);
+            bookButtons.add(bookButton);
+            book.setImageButton(bookButton);
         }
 
         view.displayAllBooks(model.getUserBookCollection());
