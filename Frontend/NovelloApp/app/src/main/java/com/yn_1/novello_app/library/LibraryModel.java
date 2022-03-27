@@ -90,7 +90,8 @@ public class LibraryModel implements LibraryContract.Model {
         req.getRequest(imageURL, null, new VolleyCommand<Bitmap>() {
             @Override
             public void execute(Bitmap image) {
-                button.setImageBitmap(image);
+                Bitmap newImage = Bitmap.createScaledBitmap(image, 175*3, 280*3, true);
+                button.setImageBitmap(newImage);
                 AHHHH2++;
                 if (AHHHH2 == 9) {
                     Log.d("Model", "assignImageToBook() finished");

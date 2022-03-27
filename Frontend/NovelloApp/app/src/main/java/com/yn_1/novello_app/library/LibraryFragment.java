@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.yn_1.novello_app.Const;
 import com.yn_1.novello_app.NavBarActivity;
@@ -59,17 +60,17 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
-
-        // Create a new library presenter instance, that holds a library model instance
-        presenter = new LibraryPresenter(new LibraryModel(), this);
-
-        // Receives data
-        presenter.beforeViewCreated(((NavBarActivity)getActivity()).getUser());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Create a new library presenter instance, that holds a library model instance
+        presenter = new LibraryPresenter(new LibraryModel(), this);
+
+        // Receives data
+        presenter.beforeViewCreated(((NavBarActivity)getActivity()).getUser());
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_library, container, false);
     }

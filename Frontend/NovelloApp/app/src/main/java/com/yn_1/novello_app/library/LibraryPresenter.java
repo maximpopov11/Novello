@@ -3,6 +3,7 @@ package com.yn_1.novello_app.library;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
@@ -51,9 +52,9 @@ public class LibraryPresenter implements LibraryContract.Presenter {
         for (Book book : model.getUserBookCollection()) {
             ImageButton button = new ImageButton(context);
 
-            LayoutParams params = new LayoutParams(175,
-                    HorizontalScrollView.LayoutParams.MATCH_PARENT);
-            params.setMargins(5, 0, 5, 0);
+            LayoutParams params = new LayoutParams(175*3,
+                    280*3);
+            params.setMargins(15, 0, 15, 0);
             button.setLayoutParams(params);
             button.setBackgroundColor(Color.YELLOW);
 

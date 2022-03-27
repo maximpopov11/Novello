@@ -34,13 +34,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_magnifying_glass" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:layout_marginTop="0dp">
+        android:layout_marginTop="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Currently Reading" />
+                android:text="Currently Reading"
+                android:textSize="24sp" />
 
             <HorizontalScrollView
                 android:id="@+id/currentlyReading"
@@ -73,38 +75,6 @@
                         android:src="@drawable/ic_launcher_background"
                         app:srcCompat="@android:drawable/screen_background_dark" />
 
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="175dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#FFF200"
-                        android:src="@drawable/ic_launcher_background"
-                        app:srcCompat="@android:drawable/screen_background_dark" />
-
-                    <ImageView
-                        android:id="@+id/imageView4"
-                        android:layout_width="175dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#FFF200"
-                        android:src="@drawable/ic_launcher_background"
-                        app:srcCompat="@android:drawable/screen_background_dark" />
-
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="175dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#FFF200"
-                        android:src="@drawable/ic_launcher_background"
-                        app:srcCompat="@android:drawable/screen_background_dark" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -113,7 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Wishlist" />
+                android:text="Wishlist"
+                android:textSize="24sp" />
 
             <HorizontalScrollView
                 android:id="@+id/wishlist"
@@ -130,7 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Read" />
+                android:text="Read"
+                android:textSize="24sp" />
 
             <HorizontalScrollView
                 android:id="@+id/read"
@@ -139,10 +111,14 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"/>
             </HorizontalScrollView>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
