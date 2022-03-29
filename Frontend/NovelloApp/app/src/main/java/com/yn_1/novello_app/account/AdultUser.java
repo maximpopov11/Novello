@@ -2,9 +2,10 @@ package com.yn_1.novello_app.account;
 
 import com.yn_1.novello_app.library.Book;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AdultUser implements User {
+public class AdultUser implements User, Serializable {
 
     String username;
     String password;

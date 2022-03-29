@@ -17,6 +17,8 @@ import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Activity for logging in. Start screen upon opening app.
  */
@@ -26,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordInputView;
     Button login;
     Button createAccount;
+    String username;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(v -> {
             JsonObjectRequester userRequester = new JsonObjectRequester();
             JsonObjectCommand command = new JsonObjectCommand();
-            String username = usernameInputView.getText().toString();
-            String password = passwordInputView.getText().toString();
+            username = usernameInputView.getText().toString();
+            password = passwordInputView.getText().toString();
             JSONObject accountCredentialsJson = new JSONObject();
             try {
                 accountCredentialsJson.put("username", username);
@@ -69,7 +73,10 @@ public class LoginActivity extends AppCompatActivity {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         if (loginSucceeded) {
+            //todo: receive user id to save in user
+            AdultUser user = new AdultUser(username, password, -1);
             Intent intent = new Intent(this, NavBarActivity.class);
+            intent.putExtra("USER", (Serializable) user);
             startActivity(intent);
             alert.setMessage("Login succeeded! Pretend like this went to the dashboard like it's supposed to!");
         }
