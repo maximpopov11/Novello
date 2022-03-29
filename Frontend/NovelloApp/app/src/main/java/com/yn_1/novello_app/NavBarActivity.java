@@ -14,13 +14,18 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.yn_1.novello_app.account.AdultUser;
 
 public class NavBarActivity extends AppCompatActivity {
+
+    AdultUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
+
+        user = (AdultUser) getIntent().getSerializableExtra("USER");
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
