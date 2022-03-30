@@ -2,7 +2,6 @@ package com.yn_1.novello_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,15 +11,15 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.yn_1.novello_app.account.User;
-import com.yn_1.novello_app.account.UserImpl;
 import com.yn_1.novello_app.home.HomeFragment;
 import com.yn_1.novello_app.library.LibraryFragment;
+import com.yn_1.novello_app.account.AdultUser;
 
 import java.util.List;
 
 public class NavBarActivity extends AppCompatActivity {
 
-    private User currentUser;
+    private AdultUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +27,10 @@ public class NavBarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nav_bar);
 
         // Server: Gets user from LoginActivity
-        //currentUser = (User) getIntent().getSerializableExtra("User");
+        // user = (AdultUser) getIntent().getSerializableExtra("USER");
 
         // Postman: Used for individual testing
-        currentUser = new UserImpl("testUser");
+        user = new AdultUser("testUser", null, -1);
 
 
         BottomNavigationView navBar = findViewById(R.id.bottom_nav);
@@ -61,6 +60,6 @@ public class NavBarActivity extends AppCompatActivity {
     }
 
     public User getUser() {
-        return currentUser;
+        return user;
     }
 }
