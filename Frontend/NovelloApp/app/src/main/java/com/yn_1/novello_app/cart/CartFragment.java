@@ -1,7 +1,9 @@
 package com.yn_1.novello_app.cart;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
@@ -45,6 +47,7 @@ public class CartFragment extends Fragment {
                 {new Book(0, "book 1", "author 1", 0, "isbn1", 0,"imageURL1"),
                 new Book(0, "book 1", "author 1", 0, "isbn2", 0, "imageURL2")};
         for (Book book : cartBooks) {
+            ImageButton imageButton = new ImageButton(getView().getContext());
             //todo: show book image
             //innerLayout.addView(book.getImage());
             //todo: show book info (price, author, etc.) next to image
