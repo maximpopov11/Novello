@@ -32,6 +32,7 @@ public class CartView extends Fragment {
         //todo: get to cart from nav bar
         //todo: leave cart through nav bar
         super.onCreate(savedInstanceState);
+        //
 
         presenter = new CartPresenter();
         model = new CartModel();
