@@ -24,20 +24,26 @@ public class BookRatingController {
         brk.setPersonId(pid);
 
         br.setId(brk);
+        //br.getRating() to find and make sure it is a correct amount
         db.save(br);
         return br;
     }
     @PutMapping("/addReview/{bid}/{pid}")
     BookRating creatReview(@PathVariable Integer bid, @PathVariable Integer pid, @RequestBody BookRating br) {
-       // br.setBook(bdb.findById(bid).orElseThrow());
-        //br.setPerson(pdb.findById(pid).orElseThrow());
+        br.setBook(bdb.findById(bid).orElseThrow());
+        br.setPerson(pdb.findById(pid).orElseThrow());
 
         BookRatingKey brk = new BookRatingKey();
         brk.setBookId(bid);
         brk.setPersonId(pid);
 
+//        Optional<BookRating> oldReview =  db.findById(bid);
+//        oldReview.pid = pid// how do I find the embedded Id
+//        if (br.rating!= null)
+//            br.setRating(brk.rating);
 
         br.setId(brk);
+
         db.save(br);
         return br;
     }
