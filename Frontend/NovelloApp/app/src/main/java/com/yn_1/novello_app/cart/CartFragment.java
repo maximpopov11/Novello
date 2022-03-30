@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.book.Book;
+import com.yn_1.novello_app.library.LibraryFragment;
 
 /**
  * Cart screen
@@ -31,7 +32,10 @@ public class CartFragment extends Fragment {
         addBooksToLayout();
 
         purchase.setOnClickListener(v -> {
-            //todo: leave cart through pay screen
+            //todo: test leave cart through pay screen
+            Fragment libraryFragment = LibraryFragment.newInstance();
+            getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
+                    libraryFragment).addToBackStack(null).commit();
         });
 
     }
