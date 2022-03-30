@@ -63,13 +63,13 @@ public interface LibraryContract {
         List<Book> removeBookFromCollection(Book book);
 
         /**
-         * Obtains all image buttons of books. Note: May be redundant.
+         * Obtains all image buttons of books.
          * @return
          */
         Map<ImageButton, Book> getBookButtons();
 
         /**
-         * Add image buttons to collection. Note: May be redundant.
+         * Add image buttons to collection.
          * @param button
          */
         void addBookButton(Book book, ImageButton button);

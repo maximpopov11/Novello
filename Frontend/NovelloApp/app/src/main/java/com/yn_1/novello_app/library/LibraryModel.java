@@ -29,6 +29,8 @@ public class LibraryModel implements LibraryContract.Model {
     // Collection of book buttons
     private Map<ImageButton, Book> bookButtons;
 
+    private final String[] categoryPaths = {"currentlyReading", "wishlist", "read"};
+
     private int finishedCollectionCounter;
     @Override
     public void fetchAllBooks(User user, LibraryContract.View view, LibraryContract.Presenter presenter) {
@@ -37,23 +39,11 @@ public class LibraryModel implements LibraryContract.Model {
         finishedCollectionCounter = 0;
         bookCollection = new ArrayList<>();
         bookButtons = new HashMap<>();
-        for (int i = 0; i < 3; i++) {
-            String categoryPath = "";
-            switch (i) {
-                case 0:
-                    categoryPath = "currentlyReading";
-                    break;
-                case 1:
-                    categoryPath = "wishlist";
-                    break;
 
-                case 2:
-                    categoryPath = "read";
-                    break;
-            }
+        for (int i = 0; i < 3; i++) {
+            String categoryPath = categoryPaths[i];
 
             JsonArrayRequester req = new JsonArrayRequester();
-            String finalCategoryPath = categoryPath;
             req.getRequest(user.getUsername() + "/library/"+categoryPath,
                     null, new VolleyCommand<JSONArray>() {
                         @Override
@@ -69,7 +59,7 @@ public class LibraryModel implements LibraryContract.Model {
                                     int rating = book.getInt("rating");
                                     String imageUrl = book.getString("imageUrl");
                                     Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, imageUrl);
-                                    newBook.setUserCategoryID(finalCategoryPath);
+                                    newBook.setUserCategoryID(categoryPath);
                                     bookCollection.add(newBook);
                                     bookCount++;
                                 } catch (JSONException e) {

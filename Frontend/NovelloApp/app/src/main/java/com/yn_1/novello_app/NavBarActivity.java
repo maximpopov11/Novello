@@ -27,8 +27,10 @@ public class NavBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
 
-        // Commented for testing
+        // Server: Gets user from LoginActivity
         //currentUser = (User) getIntent().getSerializableExtra("User");
+
+        // Postman: Used for individual testing
         currentUser = new UserImpl("testUser");
 
 

@@ -30,13 +30,6 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
     // Presenter accessible from View
     private LibraryContract.Presenter presenter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-
     // Fragment components
     List<HorizontalScrollView> categories;
     HorizontalScrollView currentlyReadingView;
@@ -47,15 +40,11 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
      * @return A new instance of fragment LibraryFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static LibraryFragment newInstance(String param1) {
+    public static LibraryFragment newInstance() {
         LibraryFragment fragment = new LibraryFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -63,7 +52,7 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            // Set arguments
         }
     }
 
