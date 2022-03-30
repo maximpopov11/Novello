@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
-import com.yn_1.novello_app.library.Book;
+import com.yn_1.novello_app.book.Book;
 
 /**
  * Cart screen
@@ -37,8 +37,9 @@ public class CartFragment extends Fragment {
     }
 
     private void addBooksToLayout() {
-        Book[] cartBooks = {new Book(0, "book 1", "author 1", 0, "isbn1", 0),
-                new Book(0, "book 1", "author 1", 0, "isbn2", 0)};
+        Book[] cartBooks =
+                {new Book(0, "book 1", "author 1", 0, "isbn1", 0,"imageURL1"),
+                new Book(0, "book 1", "author 1", 0, "isbn2", 0, "imageURL2")};
         for (Book book : cartBooks) {
             //todo: show book image
             //innerLayout.addView(book.getImage());

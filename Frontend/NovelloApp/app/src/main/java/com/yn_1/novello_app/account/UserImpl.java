@@ -7,6 +7,7 @@ import java.util.List;
 public class UserImpl implements User {
 
     String username;
+    UserType userType;
 
     public UserImpl(String username) {
         this.username = username;
@@ -23,8 +24,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setAccountType(UserType type) {
-
+    public void setUserType(UserType type) {
+        this.userType = type;
     }
 
     @Override
@@ -43,7 +44,7 @@ public class UserImpl implements User {
     }
 
     @Override
-    public UserType getAccountType() {
+    public UserType getUserType() {
         return null;
     }
 
