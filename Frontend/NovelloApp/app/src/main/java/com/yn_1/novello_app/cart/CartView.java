@@ -13,10 +13,15 @@ import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.library.LibraryFragment;
 
+import java.util.List;
+
 /**
- * Cart screen
+ * Cart screen view
  */
-public class CartFragment extends Fragment {
+public class CartView extends Fragment {
+
+    CartPresenter presenter;
+    CartModel model;
 
     Button purchase;
     LinearLayout innerLayout;
@@ -28,10 +33,14 @@ public class CartFragment extends Fragment {
         //todo: leave cart through nav bar
         super.onCreate(savedInstanceState);
 
+        presenter = new CartPresenter();
+        model = new CartModel();
+
         purchase.findViewById(R.id.purchase);
         innerLayout.findViewById(R.id.cartLinearLayoutInner);
 
-        addBooksToLayout();
+        List<Book> cartBooks = presenter.getCartBooks();
+        addBooksToLayout(cartBooks);
 
         purchase.setOnClickListener(v -> {
             //todo: test leave cart through pay screen
@@ -42,10 +51,7 @@ public class CartFragment extends Fragment {
 
     }
 
-    private void addBooksToLayout() {
-        Book[] cartBooks =
-                {new Book(0, "book 1", "author 1", 0, "isbn1", 0,"imageURL1"),
-                new Book(0, "book 1", "author 1", 0, "isbn2", 0, "imageURL2")};
+    private void addBooksToLayout(List<Book> cartBooks) {
         for (Book book : cartBooks) {
             ImageButton imageButton = new ImageButton(getView().getContext());
             //todo: show book image
