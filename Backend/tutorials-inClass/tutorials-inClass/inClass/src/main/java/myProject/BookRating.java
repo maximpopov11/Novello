@@ -21,6 +21,9 @@ public class BookRating {
     //@Column
     int rating;
 
+    String review;
+
+
 
     public BookRatingKey getId() {
         return id;
@@ -43,6 +46,8 @@ public class BookRating {
     {
         return rating;
     }
+    public String getReview(){return review;}
+    public void setReview(){this.review = review;}
 
     @Override
     public int hashCode() {

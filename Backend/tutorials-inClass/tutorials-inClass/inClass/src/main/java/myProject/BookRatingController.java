@@ -27,6 +27,20 @@ public class BookRatingController {
         db.save(br);
         return br;
     }
+    @PutMapping("/addReview/{bid}/{pid}")
+    BookRating creatReview(@PathVariable Integer bid, @PathVariable Integer pid, @RequestBody BookRating br) {
+       // br.setBook(bdb.findById(bid).orElseThrow());
+        //br.setPerson(pdb.findById(pid).orElseThrow());
+
+        BookRatingKey brk = new BookRatingKey();
+        brk.setBookId(bid);
+        brk.setPersonId(pid);
+
+
+        br.setId(brk);
+        db.save(br);
+        return br;
+    }
 
 //    @GetMapping("/book/{bid}/person/{pid}")
 //    Optional<BookRating> getBookRating(@PathVariable Integer bid, @PathVariable Integer pid) {
