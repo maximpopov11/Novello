@@ -21,7 +21,6 @@ import java.util.List;
 public class CartView extends Fragment {
 
     CartPresenter presenter;
-    CartModel model;
 
     Button purchase;
     LinearLayout innerLayout;
@@ -32,10 +31,8 @@ public class CartView extends Fragment {
         //todo: get to cart from nav bar
         //todo: leave cart through nav bar
         super.onCreate(savedInstanceState);
-        //
 
         presenter = new CartPresenter();
-        model = new CartModel();
 
         purchase.findViewById(R.id.purchase);
         innerLayout.findViewById(R.id.cartLinearLayoutInner);

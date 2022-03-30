@@ -9,10 +9,14 @@ import java.util.List;
  */
 public class CartPresenter {
 
+    CartModel model;
+
+    public CartPresenter() {
+        model = new CartModel();
+    }
 
     public List<Book> getCartBooks() {
-        //todo: implement
-        return null;
+        return model.getCartBooks();
     }
 
 }
