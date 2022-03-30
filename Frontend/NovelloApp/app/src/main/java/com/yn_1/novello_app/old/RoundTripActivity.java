@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.yn_1.novello_app.library.Book;
+import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.Const;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;

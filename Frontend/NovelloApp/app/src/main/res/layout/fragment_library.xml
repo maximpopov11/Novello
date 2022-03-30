@@ -34,31 +34,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_magnifying_glass" />
 
-    <ScrollView
-        android:layout_width="410dp"
-        android:layout_height="558dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="97dp">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:layout_marginTop="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Currently Reading" />
+                android:text=" Currently Reading"
+                android:textSize="24sp" />
 
             <HorizontalScrollView
+                android:id="@+id/currentlyReading"
                 android:layout_width="match_parent"
-                android:layout_height="183dp">
+                android:layout_height="280dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"/>
             </HorizontalScrollView>
 
             <TextView
@@ -66,11 +71,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Wishlist" />
+                android:text=" Wishlist"
+                android:textSize="24sp" />
 
             <HorizontalScrollView
+                android:id="@+id/wishlist"
                 android:layout_width="match_parent"
-                android:layout_height="199dp">
+                android:layout_height="280dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -82,17 +89,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Read" />
+                android:text=" Read"
+                android:textSize="24sp" />
 
             <HorizontalScrollView
+                android:id="@+id/read"
                 android:layout_width="match_parent"
-                android:layout_height="157dp">
+                android:layout_height="280dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"/>
             </HorizontalScrollView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

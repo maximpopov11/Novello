@@ -13,9 +13,6 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".NavBarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".library.LibraryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".old.LibraryActivity"
+            android:exported="true"/>
         <activity
             android:name=".old.RoundTripActivity"
             android:exported="true" />

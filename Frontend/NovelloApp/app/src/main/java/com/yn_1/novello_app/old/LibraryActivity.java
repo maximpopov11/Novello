@@ -1,4 +1,4 @@
-package com.yn_1.novello_app.library;
+package com.yn_1.novello_app.old;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
-import com.yn_1.novello_app.old.RoundTripActivity;
+import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.CustomRadioButtonGroup;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
@@ -110,7 +110,7 @@ public class LibraryActivity extends AppCompatActivity {
      */
     public void putBookOnTable(int bookID, String title, String author, String isbn, int rating) {
 
-        Book book = new Book(bookID, title, author, -1, isbn, rating);
+        Book book = new Book(bookID, title, author, -1, isbn, rating, null);
         bookCollection.add(book);
         TableRow bookRow = new TableRow(this);
         bookRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));

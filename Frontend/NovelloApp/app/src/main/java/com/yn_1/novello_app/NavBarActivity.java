@@ -1,52 +1,66 @@
 package com.yn_1.novello_app;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.yn_1.novello_app.account.User;
+import com.yn_1.novello_app.account.UserImpl;
+import com.yn_1.novello_app.home.HomeFragment;
+import com.yn_1.novello_app.library.LibraryFragment;
+
+import java.util.List;
 
 public class NavBarActivity extends AppCompatActivity {
+
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_bar);
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
-        NavigationUI.setupWithNavController(bottomNav, navController);
+        // Server: Gets user from LoginActivity
+        //currentUser = (User) getIntent().getSerializableExtra("User");
 
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                switch (destination.getId())
-                {
-                    case R.id.homeFragment:
-                        bottomNav.setVisibility(View.VISIBLE);
-                        navController.navigate(R.id.homeFragment);
-                        break;
-                    case R.id.libraryFragment:
-                        bottomNav.setVisibility(View.VISIBLE);
-                        navController.navigate(R.id.libraryFragment);
-                        break;
-                    default:
-                        bottomNav.setVisibility(View.GONE);
-                        Log.d("Navigation", "Button received error");
-                        break;
+        // Postman: Used for individual testing
+        currentUser = new UserImpl("testUser");
+
+
+        BottomNavigationView navBar = findViewById(R.id.bottom_nav);
+
+        ((NavigationBarView) navBar).setOnItemSelectedListener (
+            new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                    switch (item.getItemId()) {
+                        case R.id.homeFragment:
+                            transaction.replace(R.id.nav_host_fragment, new HomeFragment()).commit();
+                            return true;
+
+                        case R.id.libraryFragment:
+                            transaction.replace(R.id.nav_host_fragment, new LibraryFragment()).commit();
+                            return true;
+
+                        default:
+                            return false;
+                    }
                 }
             }
-        });
+        );
+    }
+
+    public User getUser() {
+        return currentUser;
     }
 }

@@ -1,50 +1,50 @@
 package com.yn_1.novello_app.library;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.book.Book;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LibraryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class LibraryFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class LibraryFragment extends Fragment implements LibraryContract.View {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // Presenter accessible from View
+    private LibraryContract.Presenter presenter;
 
-    public LibraryFragment() {
-        // Required empty public constructor
-    }
+    // Fragment components
+    List<HorizontalScrollView> categories;
+    HorizontalScrollView currentlyReadingView;
+    HorizontalScrollView wishlistView;
+    HorizontalScrollView readView;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment LibraryFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static LibraryFragment newInstance(String param1, String param2) {
+    public static LibraryFragment newInstance() {
         LibraryFragment fragment = new LibraryFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -52,15 +52,88 @@ public class LibraryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // Set arguments
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Create a new library presenter instance, that holds a library model instance
+        presenter = new LibraryPresenter(new LibraryModel(), this);
+
+        // Receives data
+        presenter.beforeViewCreated(((NavBarActivity)getActivity()).getUser());
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_library, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Get resources
+        currentlyReadingView = view.findViewById(R.id.currentlyReading);
+        wishlistView = view.findViewById(R.id.wishlist);
+        readView = view.findViewById(R.id.read);
+
+        categories = new ArrayList<>();
+        categories.add(currentlyReadingView);
+        categories.add(wishlistView);
+        categories.add(readView);
+    }
+
+    @Override
+    public void startPresenter() {
+        // Start the presenter
+        presenter.onViewCreated(((NavBarActivity)getActivity()).getUser(), getContext());
+    }
+
+
+    @Override
+    public void displayAllBooks(List<Book> books) {
+        Log.d("Library", "displayAllBooks() reached");
+        for (Book book : books) {
+            for (HorizontalScrollView realCategory : categories) {
+                Log.d("Library", getView().getResources().getResourceName(realCategory.getId()));
+                if (getView().getResources().getResourceName(realCategory.getId()).equals("com.yn_1.novello_app:id/" + book.getUserCategoryId()))
+                {
+                    ((LinearLayout)realCategory.getChildAt(0)).addView(book.getImageButton());
+                    Log.d("Library", book.getTitle() + "added");
+                }
+            }
+        }
+    }
+
+    @Override
+    public void displayBook(Book book) {
+        Fragment bookFragment = new Fragment(); // TODO: Replace with real fragment
+        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
+                bookFragment).addToBackStack(null).commit();
+    }
+
+    @Nullable
+    @Override
+    public Context getContext() {
+        return super.getContext();
+    }
+
+    @Nullable
+    @Override
+    public View getView() {
+        return super.getView();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        presenter.createBookMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        presenter.onBookMenuItemSelected(item);
+        return true;
     }
 }
