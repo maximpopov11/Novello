@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.library.LibraryFragment;
 
@@ -22,6 +23,8 @@ public class CartView extends Fragment {
 
     CartPresenter presenter;
 
+    User user;
+
     Button purchase;
     LinearLayout innerLayout;
 
@@ -33,6 +36,9 @@ public class CartView extends Fragment {
         super.onCreate(savedInstanceState);
 
         presenter = new CartPresenter();
+
+        user = ((NavBarActivity)getActivity()).getUser();
+        presenter.setUser(user);
 
         purchase.findViewById(R.id.purchase);
         innerLayout.findViewById(R.id.cartLinearLayoutInner);
