@@ -14,6 +14,7 @@ import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.library.LibraryFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class CartView extends Fragment {
         //todo: leave cart through nav bar
         super.onCreate(savedInstanceState);
 
-        presenter = new CartPresenter();
+        presenter = new CartPresenter(this);
 
         user = ((NavBarActivity)getActivity()).getUser();
         presenter.setUser(user);
@@ -43,13 +44,16 @@ public class CartView extends Fragment {
         purchase.findViewById(R.id.purchase);
         innerLayout.findViewById(R.id.cartLinearLayoutInner);
 
-        List<Book> cartBooks = presenter.getCartBooks();
-        addBooksToLayout(cartBooks);
+        presenter.getCartBooks();
 
         purchase.setOnClickListener(v -> {
             presenter.purchaseClicked(this);
         });
 
+    }
+
+    public void sendCart(ArrayList<Book> cart) {
+        addBooksToLayout(cart);
     }
 
     /**
