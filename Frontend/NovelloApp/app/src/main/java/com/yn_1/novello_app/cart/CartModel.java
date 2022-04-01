@@ -10,19 +10,29 @@ import java.util.List;
  */
 public class CartModel {
 
-    User user;
+    User user = null;
 
+    /**
+     * Constructor
+     */
     public CartModel() {
 
     }
 
+    /**
+     * @return books in cart
+     */
     public List<Book> getCartBooks() {
-        //todo: find user
         //todo: get user cart books
         return null;
     }
 
+    /**
+     * Sets user
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
+
 }

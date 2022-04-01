@@ -47,6 +47,7 @@ public class PurchaseFragment extends Fragment {
             //todo: test next line
             purchaseRequester.postRequest("cart", purchaseJson, command, null, null);
             //todo: complete transaction
+            //todo: upon purchase move book to unread category (from cart category)
         });
 
     }

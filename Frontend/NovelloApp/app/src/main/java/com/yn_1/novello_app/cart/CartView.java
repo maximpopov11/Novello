@@ -47,18 +47,19 @@ public class CartView extends Fragment {
         addBooksToLayout(cartBooks);
 
         purchase.setOnClickListener(v -> {
-            //todo: test leave cart through pay screen
-            Fragment libraryFragment = LibraryFragment.newInstance();
-            getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
-                    libraryFragment).addToBackStack(null).commit();
+            presenter.purchaseClicked(this);
         });
 
     }
 
+    /**
+     * Adds book information to cart screen
+     * @param cartBooks are the books to add
+     */
     private void addBooksToLayout(List<Book> cartBooks) {
         for (Book book : cartBooks) {
             ImageButton imageButton = new ImageButton(getView().getContext());
-            //todo: show book image
+            //todo: show book info in rows: image, title, author, price, remove from cart button, move to wishlist
             //innerLayout.addView(book.getImage());
             //todo: show book info (price, author, etc.) next to image
         }
