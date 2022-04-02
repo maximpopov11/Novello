@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RatingDB extends JpaRepository<BookRating, Integer> {
+public interface RatingDB extends JpaRepository<BookRating, BookRatingKey> {
 
 }
