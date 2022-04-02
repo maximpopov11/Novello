@@ -1,5 +1,8 @@
 package com.yn_1.novello_app.book;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
 /**
  * Contract for Book's MVP Design Pattern.
  */
@@ -9,8 +12,11 @@ public interface BookContract {
      * For storing data and communicating with database.
      */
     interface Model {
-        Book fetchBook();
+        int[] BOOK_SIZE = {175*2, 280*2};
+        void fetchBook(BookContract.View view);
+        void fetchImage(String imageUrl, BookContract.View view);
         Book getBook();
+        Bitmap getBookCover();
         void fetchReviews();
         Object[] getReviews();
     }
@@ -20,7 +26,7 @@ public interface BookContract {
      * For displaying data via the UI. Is the fragment of the screen.
      */
     interface View {
-        void startPresenter();
+        void startView();
         void displayComponents(Book book);
     }
 
@@ -38,5 +44,7 @@ public interface BookContract {
          * Handles initialization logic when the library fragment is displayed.
          */
         void onViewCreated();
+
+        void onDisplayBookCover(ImageView coverView);
     }
 }

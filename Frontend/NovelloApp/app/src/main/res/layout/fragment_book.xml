@@ -21,7 +21,7 @@
                 android:layout_width="175dp"
                 android:layout_height="280dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="8dp"
                 android:background="#000000"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintStart_toStartOf="parent"
@@ -29,10 +29,11 @@
 
             <TextView
                 android:id="@+id/titleText"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_width="411dp"
+                android:layout_height="73dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text=" [Title]"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,6 +77,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/publicationYearText" />
 
             <TextView
+                android:id="@+id/priceText"
+                android:layout_width="218dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text=" Price: $"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/bookImageView"
+                app:layout_constraintTop_toBottomOf="@+id/ratingTitle" />
+
+            <TextView
                 android:id="@+id/ratingTitle"
                 android:layout_width="58dp"
                 android:layout_height="19dp"
@@ -106,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="(4.5)"
+                android:text="(0.0)"
                 android:textSize="10sp"
                 app:layout_constraintStart_toEndOf="@+id/ratingBar"
                 app:layout_constraintTop_toTopOf="@+id/ratingBar" />
@@ -114,16 +128,18 @@
             <TextView
                 android:id="@+id/descriptionText"
                 android:layout_width="220dp"
-                android:layout_height="159dp"
+                android:layout_height="129dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text=" Description:"
                 android:textColor="#000000"
+                android:textSize="8sp"
                 app:layout_constraintBottom_toBottomOf="@+id/bookImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/bookImageView"
-                app:layout_constraintTop_toBottomOf="@+id/ratingTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/priceText"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/reviewsText"
@@ -131,7 +147,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Reviews:"
+                android:text=" Reviews:"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
