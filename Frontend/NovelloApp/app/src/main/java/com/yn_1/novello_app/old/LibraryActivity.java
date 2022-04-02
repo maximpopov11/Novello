@@ -110,7 +110,7 @@ public class LibraryActivity extends AppCompatActivity {
      */
     public void putBookOnTable(int bookID, String title, String author, String isbn, int rating) {
 
-        Book book = new Book(bookID, title, author, -1, isbn, rating, null);
+        Book book = new Book(bookID, title, author, -1, isbn, rating, null, null);
         bookCollection.add(book);
         TableRow bookRow = new TableRow(this);
         bookRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));

@@ -2,6 +2,7 @@ package com.yn_1.novello_app.book;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -19,38 +20,35 @@ import com.yn_1.novello_app.R;
  */
 public class BookFragment extends Fragment implements BookContract.View {
 
+    private BookContract.Presenter presenter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
 
     private TextView titleText;
     private TextView authorText;
-    private TextView publicationText;
+    private TextView publicationYearText;
     private TextView isbnText;
     private RatingBar ratingBar;
     private TextView ratingText;
-    private TextView description;
+    private TextView descriptionText;
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-
-    public BookFragment() {
-        // Required empty public constructor
-    }
+    private int bookID;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param bookID Parameter 1.
      * @return A new instance of fragment BookFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BookFragment newInstance(String param1, String param2) {
+    public static BookFragment newInstance(int bookID) {
         BookFragment fragment = new BookFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, bookID);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,24 +57,49 @@ public class BookFragment extends Fragment implements BookContract.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            bookID = getArguments().getInt(ARG_PARAM1);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Create a new book presenter instance, that holds a book model instance
+        presenter = new BookPresenter(new BookModel(), this);
+
+        // Receives data
+        presenter.beforeViewCreated();
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_book, container, false);
     }
 
     @Override
-    public void startPresenter() {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        titleText = view.findViewById(R.id.titleText);
+        authorText = view.findViewById(R.id.authorText);
+        publicationYearText = view.findViewById(R.id.publicationYearText);
+        isbnText = view.findViewById(R.id.isbnText);
+        ratingBar = view.findViewById(R.id.ratingBar);
+        ratingText = view.findViewById(R.id.ratingText);
+        descriptionText = view.findViewById(R.id.descriptionText);
     }
 
     @Override
-    public void displayComponents(BookContract.View view) {
+    public void startPresenter() {
+        presenter.onViewCreated();
+    }
 
+    @Override
+    public void displayComponents(Book book) {
+        titleText.setText(book.getTitle());
+        authorText.setText(book.getAuthor());
+        publicationYearText.setText(book.getPublicationYear());
+        isbnText.setText(book.getISBN());
+        ratingBar.setRating(book.getRating());
+        ratingText.setText(book.getRating());
+        descriptionText.setText(book.getPublicationYear());
     }
 }

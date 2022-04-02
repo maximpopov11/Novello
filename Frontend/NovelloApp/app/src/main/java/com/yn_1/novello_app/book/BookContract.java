@@ -9,6 +9,7 @@ public interface BookContract {
      * For storing data and communicating with database.
      */
     interface Model {
+        Book fetchBook();
         Book getBook();
         void fetchReviews();
         Object[] getReviews();
@@ -20,7 +21,7 @@ public interface BookContract {
      */
     interface View {
         void startPresenter();
-        void displayComponents(View view);
+        void displayComponents(Book book);
     }
 
     /**
