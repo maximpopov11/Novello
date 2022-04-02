@@ -85,7 +85,8 @@ public class LibraryActivity extends AppCompatActivity {
                         String title = book.getString("title");
                         String author = book.getString("author");
                         int rating = book.getInt("rating");
-                        putBookOnTable(bookID, title, author, isbn, rating);
+                        double price = book.getDouble("price");
+                        putBookOnTable(bookID, title, author, isbn, rating, price);
                         Log.d("Retrieve books", "Works");
                     }
                     catch (JSONException e) {
@@ -108,9 +109,9 @@ public class LibraryActivity extends AppCompatActivity {
      * @param rating
      * @author Roba Abbajabal
      */
-    public void putBookOnTable(int bookID, String title, String author, String isbn, int rating) {
+    public void putBookOnTable(int bookID, String title, String author, String isbn, int rating, double price) {
 
-        Book book = new Book(bookID, title, author, -1, isbn, rating, null);
+        Book book = new Book(bookID, title, author, -1, isbn, rating, price, null);
         bookCollection.add(book);
         TableRow bookRow = new TableRow(this);
         bookRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
