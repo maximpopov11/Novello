@@ -9,6 +9,7 @@ import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.volley_requests.ImageRequester;
 import com.yn_1.novello_app.volley_requests.JsonArrayRequester;
+import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
 import org.json.JSONArray;
@@ -54,6 +55,10 @@ public class CartModel {
         this.user = user;
     }
 
+    /**
+     * Sends cart books to view
+     * @param data
+     */
     private void booksReceived(JSONArray data) {
         for (int i = 0; i < data.length(); i++) {
             try {
@@ -76,6 +81,11 @@ public class CartModel {
         }
     }
 
+    /**
+     * Assigns image to book
+     * @param book
+     * @param imageButton
+     */
     public void assignImageToBook(Book book, ImageButton imageButton) {
         ImageRequester req = new ImageRequester();
         req.getRequest(book.getImageURL(), null, new VolleyCommand<Bitmap>() {
@@ -89,6 +99,23 @@ public class CartModel {
             @Override
             public void onError(VolleyError error) { }
         }, null, null);
+    }
+
+    /**
+     * Removes book from cart
+     * @param book
+     */
+    public void removeBookFromCart(Book book) {
+        //todo: delete request to remove book from user
+    }
+
+    /**
+     * Moves book from cart to waitlsit
+     * @param book
+     */
+    public void moveBookToWaitlist(Book book) {
+        removeBookFromCart(book);
+        //todo: put request on book (but category = wishlist)
     }
 
     /**

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
 import com.yn_1.novello_app.Const;
@@ -79,21 +80,22 @@ public class CartView extends Fragment {
             imageButton.setLayoutParams(imageParams);
             imageButton.setBackgroundColor(Color.YELLOW);
             presenter.model.assignImageToBook(book, imageButton);
-
-            //book info
-            TextView textView = new TextView(getView().getContext());
-            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(Image_Width, Image_Height);
-            textParams.setMargins(15, 15, 15, 15);
-            textView.setLayoutParams(textParams);
-            textView.setText("Title: " + book.getTitle() + "\nAuthor: " + book.getAuthor() + "\n" + "Price: $" + book.getPrice());
+            innerLayout.addView(book.getImageButton());
 
             imageButton.setOnClickListener(v -> {
                 //todo: image button on click
             });
 
+            //book info
+            TextView textView = new TextView(getView().getContext());
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(Image_Width, Image_Height);
+            textParams.setMargins(Image_Width + 15, 15, 15, 15);
+            textView.setLayoutParams(textParams);
+            textView.setText("Title: " + book.getTitle() + "\nAuthor: " + book.getAuthor() + "\n" + "Price: $" + book.getPrice());
+            innerLayout.addView(textView);
+
             book.setImageButton(imageButton);
 
-            innerLayout.addView(book.getImageButton());
         }
     }
 
