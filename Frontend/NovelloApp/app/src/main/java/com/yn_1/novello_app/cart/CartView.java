@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -68,14 +69,23 @@ public class CartView extends Fragment {
      */
     private void addBooksToLayout(List<Book> cartBooks) {
         for (Book book : cartBooks) {
-            //todo: show book info in rows: imageButton, title, author, price, remove from cart button, move to wishlist
-            ImageButton imageButton = new ImageButton(getView().getContext());
+            //todo: remove from cart button
+            //todo: move to wishlist button
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Image_Width, Image_Height);
-            params.setMargins(15, 0, 15, 0);
-            imageButton.setLayoutParams(params);
+            //image button
+            ImageButton imageButton = new ImageButton(getView().getContext());
+            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(Image_Width, Image_Height);
+            imageParams.setMargins(15, 0, 15, 0);
+            imageButton.setLayoutParams(imageParams);
             imageButton.setBackgroundColor(Color.YELLOW);
-            //todo: set image bitmap
+            presenter.model.assignImageToBook(book, imageButton);
+
+            //book info
+            TextView textView = new TextView(getView().getContext());
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(Image_Width, Image_Height);
+            textParams.setMargins(15, 15, 15, 15);
+            textView.setLayoutParams(textParams);
+            textView.setText("Title: " + book.getTitle() + "\nAuthor: " + book.getAuthor() + "\n" + "Price: $" + book.getPrice());
 
             imageButton.setOnClickListener(v -> {
                 //todo: image button on click

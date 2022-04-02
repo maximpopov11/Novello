@@ -1,8 +1,13 @@
 package com.yn_1.novello_app.cart;
 
+import android.graphics.Bitmap;
+import android.util.Log;
+import android.widget.ImageButton;
+
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
+import com.yn_1.novello_app.volley_requests.ImageRequester;
 import com.yn_1.novello_app.volley_requests.JsonArrayRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
@@ -68,6 +73,21 @@ public class CartModel {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void assignImageToBook(Book book, ImageButton imageButton) {
+        ImageRequester req = new ImageRequester();
+        req.getRequest(book.getImageURL(), null, new VolleyCommand<Bitmap>() {
+            @Override
+            public void execute(Bitmap image) {
+                Bitmap newImage = Bitmap.createScaledBitmap(image, presenter.view.Image_Width, presenter.view.Image_Height,
+                        true);
+                imageButton.setImageBitmap(newImage);
+            }
+
+            @Override
+            public void onError(VolleyError error) { }
+        }, null, null);
     }
 
     /**

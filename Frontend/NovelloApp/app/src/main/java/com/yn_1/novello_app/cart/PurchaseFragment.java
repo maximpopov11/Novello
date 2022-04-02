@@ -3,14 +3,12 @@ package com.yn_1.novello_app.cart;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.yn_1.novello_app.R;
-import com.yn_1.novello_app.account.AdultUser;
-import com.yn_1.novello_app.account.LoginActivity;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
@@ -22,6 +20,7 @@ public class PurchaseFragment extends Fragment {
     Button finish;
     EditText creditCardInput;
     String creditCardNumber;
+    TextView priceText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,13 @@ public class PurchaseFragment extends Fragment {
 
         finish.findViewById(R.id.finishPurchase);
         creditCardInput.findViewById(R.id.creditCardInput);
-        //todo: show total price and list of book titles in vertical scroll view
+        priceText.findViewById(R.id.price);
+        //todo: get cart from cart fragment
+        //todo: show list of book titles in vertical scroll view
+
+        double price = 0;
+        //todo set price
+        priceText.setText("Price = $" + price);
 
         finish.setOnClickListener(v -> {
             creditCardNumber = creditCardInput.getText().toString();
