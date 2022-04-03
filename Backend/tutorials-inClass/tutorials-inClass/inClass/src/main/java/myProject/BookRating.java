@@ -1,12 +1,12 @@
 package myProject;
 
-import org.apache.catalina.valves.StuckThreadDetectionValve;
-
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 public class BookRating {
     @EmbeddedId
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     BookRatingKey id;
     @ManyToOne
     @MapsId("personId")
@@ -18,6 +18,13 @@ public class BookRating {
     @JoinColumn(name = "Book_id")
     Books book;
 
+    //@Column
+    int rating;
+
+    String review;
+
+
+
     public BookRatingKey getId() {
         return id;
     }
@@ -25,6 +32,22 @@ public class BookRating {
     public void setId(BookRatingKey id) {
         this.id = id;
     }
+
+    public void setRating(int rating){
+        this.rating = rating;
+    }
+    public void setBook(Books id){this.book = id;}
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public int getRating()
+    {
+        return rating;
+    }
+    public String getReview(){return review;}
+    public void setReview(){this.review = review;}
 
     @Override
     public int hashCode() {

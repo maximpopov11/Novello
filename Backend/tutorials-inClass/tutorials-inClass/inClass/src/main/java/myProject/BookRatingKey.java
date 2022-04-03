@@ -11,6 +11,22 @@ public class BookRatingKey implements Serializable {
     @Column(name = "Book_Id")
     Integer bookId;
 
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
+    }
+
+    public Integer getBookId() {
+        return bookId;
+    }
+
+    public Integer getPersonId() {
+        return personId;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
