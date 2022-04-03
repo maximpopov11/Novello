@@ -37,6 +37,9 @@ class Person {
 	@OneToMany(mappedBy = "person")
 	Set<BookRating> ratings;
 
+	@OneToMany(mappedBy = "person")
+	Set<Library> library;
+
 //	@OneToMany(mappedBy = "person")
 //	private Set<BookRating> ratings;
 

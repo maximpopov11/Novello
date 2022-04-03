@@ -34,6 +34,14 @@ class Books {
         @OneToMany(mappedBy = "book")
         Set<BookRating> ratings;
 
+        @Column
+        String url;
+
+        @OneToMany(mappedBy = "book")
+        Set<Library> library;
+
+
+
     public Integer getBookID() {
         return bookID;
     }
@@ -94,5 +102,13 @@ class Books {
 
     public Set<BookRating> getRatings() {
         return ratings;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }
