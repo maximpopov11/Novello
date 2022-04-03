@@ -3,6 +3,8 @@ package myProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
+import java.util.NoSuchElementException;
 
 
 
@@ -18,8 +20,6 @@ public class BookRatingController {
 
     @PostMapping("/addRating/{bid}/{pid}")
     BookRating creatBookRating(@PathVariable Integer bid, @PathVariable Integer pid, @RequestBody BookRating br) {
-        //br.setBook(bdb.findById(bid).orElseThrow());
-        //br.setPerson(pdb.findById(pid).orElseThrow());
 
         BookRatingKey brk = new BookRatingKey();
         brk.setBookId(bid);
@@ -30,7 +30,6 @@ public class BookRatingController {
         Books b = bdb.findById(bid).orElseThrow();
         br.setBook(b);
         br.setPerson(p);
-        //br.getRating() to find and make sure it is a correct amount
         db.save(br);
         return br;
     }
@@ -62,4 +61,13 @@ public class BookRatingController {
 
         return br;
     }
+//    Optional<Integer> op = Optional.of(9455);
+//
+//    // print supplier
+//    System.out.println("Hi)")
+//        System.out.println("Optional: + op");
+//
+//    // orElseThrow supplier
+//        System.out.println("Value by orElseThrow("+ "ArithmeticException::new) method: "+ op.orElseThrow(ArithmeticException::new));
+
 }
