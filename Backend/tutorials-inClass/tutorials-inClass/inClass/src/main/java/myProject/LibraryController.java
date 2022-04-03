@@ -32,6 +32,52 @@ public class LibraryController {
     db.save(l);
 
 }
+@GetMapping("/getPage/{bid}/{pid}")
+    int getPage(@PathVariable Integer bid, @PathVariable Integer pid){
+
+    LibraryKey lk = new LibraryKey();
+        lk.setBookId(bid);
+        lk.setPersonId(pid);
+    Library l = db.findById(lk).orElseThrow(() -> new NoSuchElementException());
+    return l.getPage();
+}
+
+    @PutMapping("/setPage/{bid}/{pid}/{page}")
+    int getPage(@PathVariable Integer bid, @PathVariable Integer pid,@PathVariable Integer page){
+
+        LibraryKey lk = new LibraryKey();
+            lk.setBookId(bid);
+            lk.setPersonId(pid);
+        Library l = db.findById(lk).orElseThrow(() -> new NoSuchElementException());
+        l.setPage(page);
+        return l.getPage();
+    }
+
+    @PutMapping("/setCatagory/{bid}/{pid}/{catagory}")
+    int setCatagory(@PathVariable Integer bid, @PathVariable Integer pid,@PathVariable Integer catagory){
+
+        LibraryKey lk = new LibraryKey();
+            lk.setBookId(bid);
+            lk.setPersonId(pid);
+        Library l = db.findById(lk).orElseThrow(() -> new NoSuchElementException());
+        l.setCatagory(catagory);
+        return l.getCatagory();
+    }
+
+    @DeleteMapping("/deleteBookFromUser/{bid}/{pid}}")
+    void setCatagory(@PathVariable Integer bid, @PathVariable Integer pid){
+
+        LibraryKey lk = new LibraryKey();
+        lk.setBookId(bid);
+        lk.setPersonId(pid);
+        db.deleteById(lk);
+//        l.setCatagory(catagory);
+//        return l.getCatagory();
+    }
+
+
+
+
 
 
 }
