@@ -5,6 +5,10 @@ package com.yn_1.novello_app.discovery;
  */
 public class DiscoveryPresenter {
 
+    //todo: get all books
+    //todo: recommendation algorithm
+    //todo: show recommended books
+
     DiscoveryView view;
     DiscoveryModel model;
 
@@ -15,6 +19,7 @@ public class DiscoveryPresenter {
     public DiscoveryPresenter(DiscoveryView view) {
         this.view = view;
         this.model = new DiscoveryModel(this);
+        model.getAllBooks();
     }
 
 }
