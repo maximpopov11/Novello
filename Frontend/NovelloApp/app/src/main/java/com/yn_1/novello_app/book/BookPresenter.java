@@ -23,6 +23,7 @@ public class BookPresenter implements BookContract.Presenter {
     public void onViewCreated() {
         // Display stuff with view call, getting book from model class
         view.displayComponents(model.getBook());
+        view.populateReviewsTable(model.getReviews());
     }
 
     @Override

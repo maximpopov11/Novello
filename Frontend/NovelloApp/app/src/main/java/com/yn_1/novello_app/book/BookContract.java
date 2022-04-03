@@ -3,6 +3,8 @@ package com.yn_1.novello_app.book;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
+import java.util.Map;
+
 /**
  * Contract for Book's MVP Design Pattern.
  */
@@ -17,8 +19,8 @@ public interface BookContract {
         void fetchImage(String imageUrl, BookContract.View view);
         Book getBook();
         Bitmap getBookCover();
-        void fetchReviews();
-        Object[] getReviews();
+        void fetchReviews(BookContract.View view);
+        Map<Integer, String[]> getReviews();
     }
 
     /**
@@ -28,6 +30,7 @@ public interface BookContract {
     interface View {
         void startView();
         void displayComponents(Book book);
+        void populateReviewsTable(Map<Integer, String[]> reviews);
     }
 
     /**

@@ -5,17 +5,24 @@ import android.util.Log;
 
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.volley_requests.ImageRequester;
+import com.yn_1.novello_app.volley_requests.JsonArrayRequester;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BookModel implements BookContract.Model {
 
     private int bookID;
     private Book currentBook;
     private Bitmap currentCover;
+    private Map<Integer, String[]> reviews;
 
     public BookModel(int bookID) {
         this.bookID = bookID;
@@ -60,7 +67,7 @@ public class BookModel implements BookContract.Model {
             @Override
             public void execute(Bitmap image) {
                 currentCover = Bitmap.createScaledBitmap(image, BOOK_SIZE[0], BOOK_SIZE[1], true);
-                view.startView();
+                fetchReviews(view);
             }
 
             @Override
@@ -81,12 +88,35 @@ public class BookModel implements BookContract.Model {
     }
 
     @Override
-    public void fetchReviews() {
+    public void fetchReviews(BookContract.View view) {
+        JsonArrayRequester req = new JsonArrayRequester();
+        req.getRequest("books/" + bookID + "/reviews", null, new VolleyCommand<JSONArray>() {
+            @Override
+            public void execute(JSONArray data) {
+                reviews = new HashMap<>();
+                for (int i = 0; i < data.length(); i++) {
+                    try {
+                        JSONObject object = data.getJSONObject(i);
+                        String userID = object.getString("userId");
+                        String rating = object.getString("rating");
+                        String review = object.getString("review");
+                        reviews.put(i, new String[]{userID, rating, review});
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                view.startView();
+            }
 
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        }, null, null);
     }
 
     @Override
-    public Object[] getReviews() {
-        return new Object[0];
+    public Map<Integer, String[]> getReviews() {
+        return reviews;
     }
 }
