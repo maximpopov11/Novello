@@ -5,12 +5,14 @@ import android.widget.ImageButton;
 public class Book {
 
     //book fields
+    int bookID;
     String title;
     String author;
     int publicationYear;
     String isbn;
-    int rating;
-    int bookID;
+    double rating;
+    double price;
+    String description;
     private String imageURL;
     private ImageButton linkedImageButton;
 
@@ -28,13 +30,15 @@ public class Book {
      * @param isbn book isbn
      * @param rating book rating
      */
-    public Book(int bookID, String title, String author, int publicationYear, String isbn, int rating, String imageURL) {
+    public Book(int bookID, String title, String author, int publicationYear, String isbn, double rating, double price, String description, String imageURL) {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.rating = rating;
+        this.price = price;
+        this.description = description;
         this.imageURL = imageURL;
     }
 
@@ -84,7 +88,7 @@ public class Book {
     /**
      * @return book rating
      */
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
@@ -107,6 +111,29 @@ public class Book {
      */
     public int getBookID() {
         return bookID;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getPublicationYear() {
+        return publicationYear;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     *
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**
