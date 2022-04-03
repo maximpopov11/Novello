@@ -88,7 +88,7 @@ public class LibraryPresenter implements LibraryContract.Presenter {
         if (item.getTitle() == "Go To Book") {
             view.displayBook(model.getBookButton(currentMenuButton));
         }
-        if (item.getTitle() == "Go To Book") {
+        if (item.getTitle() == "Read Book") {
             Book book = model.getBookButton(currentMenuButton);
             if (book.getUserCategoryId() == "currentlyReading") {
                 view.readBook(book);

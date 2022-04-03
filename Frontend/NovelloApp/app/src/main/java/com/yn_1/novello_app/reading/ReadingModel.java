@@ -20,7 +20,7 @@ public class ReadingModel implements ReadingContract.Model {
     @Override
     public void fetchProgress(User user, int bookID, ReadingContract.View view) {
         StringRequester req = new StringRequester();
-        req.getRequest("baseUrl/" + user.getUserId() + "/library/currentlyReading" + bookID,
+        req.getRequest(user.getUserId() + "/library/currentlyReading" + bookID,
             null, new VolleyCommand<String>() {
                 @Override
                 public void execute(String data) {
@@ -42,7 +42,7 @@ public class ReadingModel implements ReadingContract.Model {
     @Override
     public void saveProgress(User user, int bookID, int progress) {
         StringRequester req = new StringRequester();
-        req.getRequest("baseUrl/" + user.getUserId() + "/library/currentlyReading" + bookID,
+        req.getRequest(user.getUserId() + "/library/currentlyReading" + bookID,
                 String.valueOf(progress), new VolleyCommand<String>() {
                     @Override
                     public void execute(String data) {

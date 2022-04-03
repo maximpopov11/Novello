@@ -11,6 +11,7 @@ public class Book {
     String isbn;
     int rating;
     int bookID;
+    private String readingURL;
     private String imageURL;
     private ImageButton linkedImageButton;
 
@@ -28,13 +29,14 @@ public class Book {
      * @param isbn book isbn
      * @param rating book rating
      */
-    public Book(int bookID, String title, String author, int publicationYear, String isbn, int rating, String imageURL) {
+    public Book(int bookID, String title, String author, int publicationYear, String isbn, int rating, String readingURL, String imageURL) {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.rating = rating;
+        this.readingURL = readingURL;
         this.imageURL = imageURL;
     }
 
@@ -107,6 +109,14 @@ public class Book {
      */
     public int getBookID() {
         return bookID;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getReadingURL() {
+        return readingURL;
     }
 
     /**

@@ -118,7 +118,7 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         LibraryFragmentDirections.ActionLibraryFragmentToReadingFragment action =
                 LibraryFragmentDirections.actionLibraryFragmentToReadingFragment();
         action.setBookID(book.getBookID());
-        action.setReadingLink(book.getImageURL());
+        action.setReadingLink(book.getReadingURL());
         ((NavBarActivity)getActivity()).getController().navigate(action);
     }
 

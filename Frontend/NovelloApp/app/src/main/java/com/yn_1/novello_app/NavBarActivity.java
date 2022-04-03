@@ -1,6 +1,5 @@
 package com.yn_1.novello_app;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,16 +8,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.yn_1.novello_app.account.User;
-import com.yn_1.novello_app.home.HomeFragment;
-import com.yn_1.novello_app.library.LibraryFragment;
 import com.yn_1.novello_app.account.AdultUser;
-
-import java.util.List;
 
 public class NavBarActivity extends AppCompatActivity {
 
@@ -51,11 +44,11 @@ public class NavBarActivity extends AppCompatActivity {
 
                     switch (item.getItemId()) {
                         case R.id.homeFragment:
-                            transaction.replace(R.id.nav_host_fragment, new HomeFragment()).commit();
+                            controller.navigate(R.id.homeFragment);
                             return true;
 
                         case R.id.libraryFragment:
-                            transaction.replace(R.id.nav_host_fragment, new LibraryFragment()).commit();
+                            controller.navigate(R.id.libraryFragment);
                             return true;
 
                         default:
