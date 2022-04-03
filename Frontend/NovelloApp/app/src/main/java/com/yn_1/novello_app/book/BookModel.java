@@ -45,7 +45,7 @@ public class BookModel implements BookContract.Model {
                     String descriptionText = data.getString("description");
                     String imageURL = data.getString("imageUrl");
                     currentBook = new Book(bookID, titleText, authorText, publicationYearText, isbnText,
-                            ratingText, priceText, descriptionText, imageURL);
+                            ratingText, priceText, descriptionText, null, imageURL);
                     fetchImage(imageURL, view);
                 }
                 catch (JSONException e) {

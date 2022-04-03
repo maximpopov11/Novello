@@ -10,7 +10,7 @@ public class Book {
     String author;
     int publicationYear;
     String isbn;
-    int rating;
+    double rating;
     double price;
     String description;
     private String readingURL;
