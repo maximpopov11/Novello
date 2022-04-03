@@ -2,6 +2,7 @@ package myProject;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,13 @@ public class BooksController {
     Books creatBooks(@RequestBody Books b) {
         db.save(b);
         return b;
+    }
+    @PostMapping("/addAllBooks")
+    void createAllBooks(@RequestBody Books[] b){
+        for(int i = 0; i<b.length;i++){
+        db.save(b[i]);
+        }
+
     }
 
 //    @GetMapping("/book/{id}")

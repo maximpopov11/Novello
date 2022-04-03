@@ -16,6 +16,13 @@ public class PersonController {
 		return db.findById(id).
           orElseThrow(RuntimeException::new);
 	}
+	@PostMapping("/addAllPersons")
+	void createAllPersons(@RequestBody Person[] p){
+		for(int i = 0; i<p.length;i++){
+			db.save(p[i]);
+		}
+
+	}
 	@RequestMapping("/persons")
 	List<Person> getPersons() {
 		return db.findAll();
