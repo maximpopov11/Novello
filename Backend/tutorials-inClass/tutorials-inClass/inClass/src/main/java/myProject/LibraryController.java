@@ -32,7 +32,7 @@ public class LibraryController {
     db.save(l);
 
 }
-@GetMapping("/getPage/{bid}/{pid}")
+    @GetMapping("/getPage/{bid}/{pid}")
     int getPage(@PathVariable Integer bid, @PathVariable Integer pid){
 
     LibraryKey lk = new LibraryKey();
@@ -53,7 +53,7 @@ public class LibraryController {
         return l.getPage();
     }
 
-    @PutMapping("/setCatagory/{bid}/{pid}/{catagory}")
+    @PutMapping("/setCatagory/{bid}/{pid}/{category}")
     int setCatagory(@PathVariable Integer bid, @PathVariable Integer pid,@PathVariable Integer catagory){
 
         LibraryKey lk = new LibraryKey();
@@ -74,12 +74,21 @@ public class LibraryController {
 //        l.setCatagory(catagory);
 //        return l.getCatagory();
     }
-    @GetMapping("/getAllBooksFromUser/{pid}")
-    Set<Library> getAllBooksFromUser(@PathVariable Integer pid){
-
+    @GetMapping("/library/{pid}/{category}")
+    Set<Library> getAllBooksFromUser(@PathVariable Integer pid,@PathVariable Integer category){
+        //return by category
         Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
         return p.getLibrary();
     }
+
+    @GetMapping("/library/{pid}")
+    Set<Library> getAllBooksFromUser(@PathVariable Integer pid){
+        Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
+        return p.getLibrary();
+    }
+
+
+
     @GetMapping("/getAllUsersFromBook/{bid}")
     Set<Library> getAllBooksFromBook(@PathVariable Integer bid){
 

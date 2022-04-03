@@ -79,10 +79,11 @@ public class BooksController {
         db.deleteById(id);
         return "deleted " + id;
     }
-    @GetMapping("/getUrl/{id}")
-    String getUrl(@PathVariable Integer id){
 
-        Books b = db.findById(id).orElseThrow(RuntimeException::new);
-        return b.getUrl();
+    @GetMapping("/getUrl/{bid}")
+    String getUrl(@PathVariable Integer bid){
+
+        Books b = db.findById(bid).orElseThrow(RuntimeException::new);
+        return b.getReadingUrl();
     }
 }

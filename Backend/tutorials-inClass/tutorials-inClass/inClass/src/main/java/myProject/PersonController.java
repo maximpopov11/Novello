@@ -18,6 +18,10 @@ public class PersonController {
           orElseThrow(RuntimeException::new);
 	}
 
+	//getmapping person {json: username and password}
+	//user id
+	//0 if failed
+
 
 
 	@PostMapping("/addAllPersons")

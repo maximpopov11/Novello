@@ -31,11 +31,17 @@ class Books {
         @Column
         String genre;
 
+        @Column
+        String description;
+
         @OneToMany(mappedBy = "book")
         Set<BookRating> ratings;
 
         @Column
-        String url;
+        String readingUrl;
+
+        @Column
+        String imageUrl;
 
         @OneToMany(mappedBy = "book")
         Set<Library> librarys;
@@ -44,9 +50,36 @@ class Books {
         return librarys;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getReadingUrl() {
+        return readingUrl;
+    }
+
+    public Set<Library> getLibrarys() {
+        return librarys;
+    }
 
     public Integer getBookID() {
         return bookID;
+    }
+
+    public Double getMsrp() {
+        return msrp;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setBookID(Integer bookID) {
@@ -107,11 +140,4 @@ class Books {
         return ratings;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUrl() {
-        return url;
-    }
 }
