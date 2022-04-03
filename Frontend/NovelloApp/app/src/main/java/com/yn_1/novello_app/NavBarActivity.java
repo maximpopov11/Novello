@@ -36,12 +36,8 @@ public class NavBarActivity extends AppCompatActivity {
         BottomNavigationView navBar = findViewById(R.id.bottom_nav);
         NavigationUI.setupWithNavController(navBar, controller);
 
-
         navBar.setOnItemSelectedListener (
                 item -> {
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-
                     switch (item.getItemId()) {
                         case R.id.homeFragment:
                             controller.navigate(R.id.homeFragment);

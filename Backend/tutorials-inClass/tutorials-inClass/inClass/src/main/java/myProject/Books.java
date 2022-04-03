@@ -92,5 +92,7 @@ class Books {
         this.rating = rating;
     }
 
-
+    public Set<BookRating> getRatings() {
+        return ratings;
+    }
 }
