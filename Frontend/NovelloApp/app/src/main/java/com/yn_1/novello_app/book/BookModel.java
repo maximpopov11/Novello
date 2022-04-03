@@ -40,7 +40,7 @@ public class BookModel implements BookContract.Model {
                     int publicationYearText = data.getInt("publicationYear");
                     String isbnText = data.getString("isbn");
                     double ratingText = data.getDouble("rating");
-                    double priceText = data.getDouble("price");
+                    double priceText = data.getDouble("msrp");
                     Log.d("price", "Book price: " + priceText);
                     String descriptionText = data.getString("description");
                     String imageURL = data.getString("imageUrl");

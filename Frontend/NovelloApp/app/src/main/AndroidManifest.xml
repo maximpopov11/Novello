@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NovelloApp"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".account.LoginActivity"
             android:exported="true">
@@ -20,15 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".account.CreateAccountActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".NavBarActivity"
             android:exported="true">
@@ -38,9 +35,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".old.LibraryActivity"
             android:exported="true"/>
+
         <activity
             android:name=".old.RoundTripActivity"
             android:exported="true" />

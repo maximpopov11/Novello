@@ -44,7 +44,7 @@ public class LibraryModel implements LibraryContract.Model {
             String categoryPath = categoryPaths[i];
 
             JsonArrayRequester req = new JsonArrayRequester();
-            req.getRequest(user.getUsername() + "/library/"+categoryPath,
+            req.getRequest("library/" + user.getUserId() + "/" + categoryPath,
                     null, new VolleyCommand<JSONArray>() {
                         @Override
                         public void execute(JSONArray data) {
