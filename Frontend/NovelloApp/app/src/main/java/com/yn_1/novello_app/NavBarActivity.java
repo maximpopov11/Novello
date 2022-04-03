@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -20,6 +23,7 @@ import java.util.List;
 public class NavBarActivity extends AppCompatActivity {
 
     private AdultUser user;
+    private NavController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +36,16 @@ public class NavBarActivity extends AppCompatActivity {
         // Postman: Used for individual testing
         user = new AdultUser("testUser", null, -1);
 
+        NavHostFragment host = (NavHostFragment)
+                getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        controller = host.getNavController();
 
         BottomNavigationView navBar = findViewById(R.id.bottom_nav);
+        NavigationUI.setupWithNavController(navBar, controller);
 
-        ((NavigationBarView) navBar).setOnItemSelectedListener (
-            new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        navBar.setOnItemSelectedListener (
+                item -> {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
 
@@ -55,11 +62,12 @@ public class NavBarActivity extends AppCompatActivity {
                             return false;
                     }
                 }
-            }
         );
     }
 
     public User getUser() {
         return user;
     }
+
+    public NavController getController() {return controller; }
 }

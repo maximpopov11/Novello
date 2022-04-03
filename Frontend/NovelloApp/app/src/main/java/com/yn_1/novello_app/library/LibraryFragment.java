@@ -113,6 +113,15 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
                 bookFragment).addToBackStack(null).commit();
     }
 
+    @Override
+    public void readBook(Book book) {
+        LibraryFragmentDirections.ActionLibraryFragmentToReadingFragment action =
+                LibraryFragmentDirections.actionLibraryFragmentToReadingFragment();
+        action.setBookID(book.getBookID());
+        action.setReadingLink(book.getImageURL());
+        ((NavBarActivity)getActivity()).getController().navigate(action);
+    }
+
     @Nullable
     @Override
     public Context getContext() {

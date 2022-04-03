@@ -102,6 +102,12 @@ public interface LibraryContract {
          * @param book
          */
         void displayBook(Book book);
+
+        /**
+         * Transitions to the book reading fragment for reading a book online.
+         * @param book
+         */
+        void readBook(Book book);
     }
 
     /**

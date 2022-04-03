@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -77,6 +78,7 @@ public class LibraryPresenter implements LibraryContract.Presenter {
     public void createBookMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         menu.setHeaderTitle("Book Options");
         menu.add(0, v.getId(), 0, "Go To Book");
+        menu.add(0, v.getId(), 1, "Read Book");
         //TODO: Add more menu options
         currentMenuButton = (ImageButton)v;
     }
@@ -85,6 +87,19 @@ public class LibraryPresenter implements LibraryContract.Presenter {
     public void onBookMenuItemSelected(MenuItem item) {
         if (item.getTitle() == "Go To Book") {
             view.displayBook(model.getBookButton(currentMenuButton));
+        }
+        if (item.getTitle() == "Go To Book") {
+            Book book = model.getBookButton(currentMenuButton);
+            if (book.getUserCategoryId() == "currentlyReading") {
+                view.readBook(book);
+            }
+            else
+            {
+                Toast toast = Toast.makeText(currentMenuButton.getContext(),
+                        "Error: App not owned or not in currently reading category.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 }
