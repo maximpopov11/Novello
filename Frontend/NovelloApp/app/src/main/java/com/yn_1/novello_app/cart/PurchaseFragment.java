@@ -9,11 +9,14 @@ import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class PurchaseFragment extends Fragment {
 
@@ -21,6 +24,7 @@ public class PurchaseFragment extends Fragment {
     EditText creditCardInput;
     String creditCardNumber;
     TextView priceText;
+    List<Book> cart;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,9 @@ public class PurchaseFragment extends Fragment {
         //todo: show list of book titles in vertical scroll view
 
         double price = 0;
-        //todo set price
+        for (Book book : cart) {
+            price += book.getPrice();
+        }
         priceText.setText("Price = $" + price);
 
         finish.setOnClickListener(v -> {
