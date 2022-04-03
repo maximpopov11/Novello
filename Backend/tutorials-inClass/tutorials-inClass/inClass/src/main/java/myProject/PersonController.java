@@ -1,6 +1,7 @@
 package myProject;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,9 @@ public class PersonController {
 		return db.findById(id).
           orElseThrow(RuntimeException::new);
 	}
+
+
+
 	@PostMapping("/addAllPersons")
 	void createAllPersons(@RequestBody Person[] p){
 		for(int i = 0; i<p.length;i++){
@@ -33,6 +37,7 @@ public class PersonController {
 		db.save(p);
 		return p;
 	}
+
 	@PutMapping("/person/{id}")
 	Person updatePerson(@RequestBody Person p, @PathVariable Integer id) {
 		Person old_p = db.findById(id).orElseThrow(RuntimeException::new);

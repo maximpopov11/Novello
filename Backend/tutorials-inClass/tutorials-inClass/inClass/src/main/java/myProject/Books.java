@@ -38,8 +38,11 @@ class Books {
         String url;
 
         @OneToMany(mappedBy = "book")
-        Set<Library> library;
+        Set<Library> librarys;
 
+    public Set<Library> getLibrary() {
+        return librarys;
+    }
 
 
     public Integer getBookID() {

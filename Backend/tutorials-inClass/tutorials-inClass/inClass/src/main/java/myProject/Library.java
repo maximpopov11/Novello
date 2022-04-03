@@ -1,7 +1,5 @@
 package myProject;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.*;
 
 @Entity
@@ -19,7 +17,8 @@ public class Library {
     @JoinColumn(name = "Book_id")
     Books book;
 
-    int catagory;
+    int category;
+
     int page;
 
     public int getPage() {
@@ -30,6 +29,7 @@ public class Library {
         this.page = page;
     }
 
+
     public Books getBook() {
         return book;
     }
@@ -38,12 +38,12 @@ public class Library {
         this.book = book;
     }
 
-    public int getCatagory() {
-        return catagory;
+    public int getCategory() {
+        return category;
     }
 
-    public void setCatagory(int catagory) {
-        this.catagory = catagory;
+    public void setCategory(int catagory) {
+        this.category = catagory;
     }
 
     public Person getPerson() {

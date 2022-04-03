@@ -68,6 +68,12 @@ public class BookRatingController {
         Books b = bdb.findById(bid).orElseThrow(() -> new NoSuchElementException());
         return b.getRatings();
     }
+    @GetMapping("/getAllRatingsFromUser/{pid}")
+    Set<BookRating> getAllratingsFromUser(@PathVariable Integer pid){
+
+        Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
+        return p.getRatings();
+    }
 //    Optional<Integer> op = Optional.of(9455);
 //
 //    // print supplier

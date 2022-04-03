@@ -60,12 +60,12 @@ public class LibraryController {
             lk.setBookId(bid);
             lk.setPersonId(pid);
         Library l = db.findById(lk).orElseThrow(() -> new NoSuchElementException());
-        l.setCatagory(catagory);
-        return l.getCatagory();
+        l.setCategory(catagory);
+        return l.getCategory();
     }
 
-    @DeleteMapping("/deleteBookFromUser/{bid}/{pid}}")
-    void setCatagory(@PathVariable Integer bid, @PathVariable Integer pid){
+    @DeleteMapping("/deleteBookFromUser/{bid}/{pid}")
+    void deleteBook(@PathVariable Integer bid, @PathVariable Integer pid){
 
         LibraryKey lk = new LibraryKey();
         lk.setBookId(bid);
@@ -74,6 +74,19 @@ public class LibraryController {
 //        l.setCatagory(catagory);
 //        return l.getCatagory();
     }
+    @GetMapping("/getAllBooksFromUser/{pid}")
+    Set<Library> getAllBooksFromUser(@PathVariable Integer pid){
+
+        Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
+        return p.getLibrary();
+    }
+    @GetMapping("/getAllUsersFromBook/{bid}")
+    Set<Library> getAllBooksFromBook(@PathVariable Integer bid){
+
+        Books p = bdb.findById(bid).orElseThrow(() -> new NoSuchElementException());
+        return p.getLibrary();
+    }
+
 
 
 
