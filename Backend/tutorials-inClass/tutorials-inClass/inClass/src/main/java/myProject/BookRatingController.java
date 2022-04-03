@@ -26,8 +26,8 @@ public class BookRatingController {
         brk.setPersonId(pid);
 
         br.setId(brk);
-        Person p = pdb.findById(pid).orElseThrow();
-        Books b = bdb.findById(bid).orElseThrow();
+        Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
+        Books b = bdb.findById(bid).orElseThrow(() -> new NoSuchElementException());
         br.setBook(b);
         br.setPerson(p);
         db.save(br);
@@ -39,7 +39,7 @@ public class BookRatingController {
         BookRatingKey brk = new BookRatingKey();
         brk.setBookId(bid);
         brk.setPersonId(pid);
-        BookRating ratingToReturn = db.findById(brk).orElseThrow();
+        BookRating ratingToReturn = db.findById(brk).orElseThrow(() -> new NoSuchElementException());
         return ratingToReturn;
     }
 
@@ -48,12 +48,12 @@ public class BookRatingController {
         BookRatingKey brk = new BookRatingKey();
         brk.setBookId(bid);
         brk.setPersonId(pid);
-        BookRating oldRating = db.findById(brk).orElseThrow();
+        BookRating oldRating = db.findById(brk).orElseThrow(() -> new NoSuchElementException());
         if (oldRating.getRating() != 0) {
             br.setRating(oldRating.getRating());
         }
-        Person p = pdb.findById(pid).orElseThrow();
-        Books b = bdb.findById(bid).orElseThrow();
+        Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
+        Books b = bdb.findById(bid).orElseThrow(() -> new NoSuchElementException());
         br.setId(brk);
         br.setBook(b);
         br.setPerson(p);
