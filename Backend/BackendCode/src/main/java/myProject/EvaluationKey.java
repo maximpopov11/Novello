@@ -5,26 +5,28 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class LibraryKey implements Serializable {
+public class EvaluationKey implements Serializable {
+
     @Column(name = "Person_Id")
     Integer personId;
+
     @Column(name = "Book_Id")
     Integer bookId;
-
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
-
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
-    }
 
     public Integer getBookId() {
         return bookId;
     }
 
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
+
     public Integer getPersonId() {
         return personId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     @Override
@@ -44,18 +46,15 @@ public class LibraryKey implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        LibraryKey other = (LibraryKey) obj;
+        EvaluationKey other = (EvaluationKey) obj;
         if (bookId == null) {
             if (other.bookId != null)
                 return false;
         } else if (!bookId.equals(other.bookId))
             return false;
         if (personId == null) {
-            if (other.personId != null)
-                return false;
-        } else if (!personId.equals(other.personId))
-            return false;
-        return true;
+            return other.personId == null;
+        } else return personId.equals(other.personId);
     }
 }
 

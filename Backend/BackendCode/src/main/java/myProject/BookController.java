@@ -1,27 +1,27 @@
 package myProject;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
-public class BooksController {
+public class BookController {
 
     @Autowired
-    BooksDB db;
+    BookInterface db;
 
     @PostMapping("/addBooks")
-    Books creatBooks(@RequestBody Books b) {
+    Book creatBooks(@RequestBody Book b) {
         db.save(b);
         return b;
     }
+
     @PostMapping("/addAllBooks")
-    void createAllBooks(@RequestBody Books[] b){
-        for(int i = 0; i<b.length;i++){
-        db.save(b[i]);
+    void createAllBooks(@RequestBody Book[] b) {
+        for (int i = 0; i < b.length; i++) {
+            db.save(b[i]);
         }
 
     }
@@ -32,7 +32,7 @@ public class BooksController {
 //    }
 
     @GetMapping("/book/{id}")
-    Optional<Books> getBook(@PathVariable Integer id) {
+    Optional<Book> getBook(@PathVariable Integer id) {
         return db.findById(id);
     }
 
@@ -48,13 +48,13 @@ public class BooksController {
 
 
     @RequestMapping("/books")
-    List<Books> showMeTheBooks() {
+    List<Book> showMeTheBooks() {
         return db.findAll();
     }
 
     @PutMapping("/book/{id}")
-    Books updateBook(@RequestBody Books b, @PathVariable Integer id) {
-        Books old_b = db.findById(id).orElseThrow(RuntimeException::new);
+    Book updateBook(@RequestBody Book b, @PathVariable Integer id) {
+        Book old_b = db.findById(id).orElseThrow(RuntimeException::new);
         if (b.isbn != null)
             old_b.setIsbn(b.isbn);
         if (b.title != null)
@@ -63,8 +63,8 @@ public class BooksController {
             old_b.setAuthor(b.author);
         if (b.publicationYear != null)
             old_b.setPublicationYear(b.publicationYear);
-        if (b.rating != null)
-            old_b.setRating(b.rating);
+        if (b.OverallRating != null)
+            old_b.setOverallRating(b.OverallRating);
         if (b.msrp != null)
             old_b.setMsrp(b.msrp);
         if (b.genre != null)
@@ -81,9 +81,9 @@ public class BooksController {
     }
 
     @GetMapping("/getUrl/{bid}")
-    String getUrl(@PathVariable Integer bid){
+    String getUrl(@PathVariable Integer bid) {
 
-        Books b = db.findById(bid).orElseThrow(RuntimeException::new);
+        Book b = db.findById(bid).orElseThrow(RuntimeException::new);
         return b.getReadingUrl();
     }
 }

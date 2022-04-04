@@ -1,7 +1,5 @@
 package myProject;
 
-import net.minidev.json.annotate.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,16 +10,15 @@ public class Library {
     @ManyToOne
     @MapsId("personId")
     @JoinColumn(name = "Person_id")
-    Person person;
+    User user;
 
 
     @ManyToOne
     @MapsId("bookId")
     @JoinColumn(name = "Book_id")
-    Books book;
+    Book book;
 
     int category;
-
     int page;
 
     public int getPage() {
@@ -32,12 +29,11 @@ public class Library {
         this.page = page;
     }
 
-
-    public Books getBook() {
+    public Book getBook() {
         return book;
     }
 
-    public void setBook(Books book) {
+    public void setBook(Book book) {
         this.book = book;
     }
 
@@ -49,21 +45,22 @@ public class Library {
         this.category = catagory;
     }
 
-    public Person getPerson() {
-        return person;
+    public User getPerson() {
+        return user;
+    }
+
+    public void setPerson(User user) {
+        this.user = user;
+    }
+
+    public LibraryKey getId() {
+        return id;
     }
 
     public void setId(LibraryKey id) {
         this.id = id;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public LibraryKey getId() {
-        return id;
-    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -82,9 +79,7 @@ public class Library {
             return false;
         Library other = (Library) obj;
         if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-}}
+            return other.id == null;
+        } else return id.equals(other.id);
+    }
+}
