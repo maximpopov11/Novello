@@ -1,5 +1,7 @@
 package myProject;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ class Books {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
         Integer bookID;
 
         @Column
@@ -43,12 +46,10 @@ class Books {
         @Column
         String imageUrl;
 
-        @OneToMany(mappedBy = "book")
-        Set<Library> librarys;
 
-    public Set<Library> getLibrary() {
-        return librarys;
-    }
+        @OneToMany(mappedBy = "book")
+        Set<Library> library;
+
 
     public String getImageUrl() {
         return imageUrl;
@@ -58,33 +59,10 @@ class Books {
         return readingUrl;
     }
 
-    public Set<Library> getLibrarys() {
-        return librarys;
+    public Set<Library> getLibrary() {
+        return library;
     }
 
-    public Integer getBookID() {
-        return bookID;
-    }
-
-    public Double getMsrp() {
-        return msrp;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setBookID(Integer bookID) {
-        this.bookID = bookID;
-    }
 
     public String getTitle() {
         return title;

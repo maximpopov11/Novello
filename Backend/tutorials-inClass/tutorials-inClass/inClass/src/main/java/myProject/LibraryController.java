@@ -1,5 +1,6 @@
 package myProject;
 
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,16 +72,14 @@ public class LibraryController {
         lk.setBookId(bid);
         lk.setPersonId(pid);
         db.deleteById(lk);
-//        l.setCatagory(catagory);
-//        return l.getCatagory();
     }
     @GetMapping("/library/{pid}/{category}")
-    Set<Library> getAllBooksFromUser(@PathVariable Integer pid,@PathVariable Integer category){
+    Set<Library> getAllBooksFromUserCategory(@PathVariable Integer pid,@PathVariable Integer category){
         //return by category
         Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
         return p.getLibrary();
     }
-
+    @JsonIgnore
     @GetMapping("/library/{pid}")
     Set<Library> getAllBooksFromUser(@PathVariable Integer pid){
         Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());

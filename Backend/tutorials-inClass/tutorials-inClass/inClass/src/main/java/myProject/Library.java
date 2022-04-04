@@ -1,5 +1,7 @@
 package myProject;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Library {
     @MapsId("personId")
     @JoinColumn(name = "Person_id")
     Person person;
+
 
     @ManyToOne
     @MapsId("bookId")

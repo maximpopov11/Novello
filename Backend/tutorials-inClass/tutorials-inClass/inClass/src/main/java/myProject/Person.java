@@ -38,14 +38,14 @@ class Person {
 	Set<BookRating> ratings;
 
 	@OneToMany(mappedBy = "person")
-	Set<Library> librarys;
+	Set<Library> library;
 
 	public Set<BookRating> getRatings() {
 		return ratings;
 	}
 
 	public void setLibrary(Set<Library> library) {
-		this.librarys = library;
+		this.library = library;
 	}
 
 	public void setRatings(Set<BookRating> ratings) {
@@ -107,6 +107,6 @@ class Person {
     public void setEmail(String email) { this.email = email; }
 
 	public Set<Library> getLibrary() {
-		return librarys;
+		return library;
 	}
 }
