@@ -6,14 +6,17 @@ import java.io.Serializable;
 
 @Embeddable
 public class BookRatingKey implements Serializable {
+
     @Column(name = "Person_Id")
     Integer personId;
+
     @Column(name = "Book_Id")
     Integer bookId;
 
     public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
+
 
     public void setPersonId(Integer personId) {
         this.personId = personId;

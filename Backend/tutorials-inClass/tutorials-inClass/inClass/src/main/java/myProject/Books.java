@@ -48,6 +48,7 @@ class Books {
         String imageUrl;
 
         @OneToMany(mappedBy = "book")
+        @JsonIgnore
         Set<Library> library;
 
 
@@ -55,51 +56,42 @@ class Books {
 
     public String getReadingUrl() { return readingUrl; }
 
-    public String getTitle() { return title; }
-
     public void setTitle(String title) { this.title = title; }
-
-    public String getAuthor(){ return author;}
+    public String getTitle() { return title; }
 
     public void setAuthor(String author) {
         this.author = author;
     }
-
-    public Integer getPublicationYear(){ return publicationYear;}
+    public String getAuthor(){ return author;}
 
     public void setPublicationYear(Integer publicationYear) {
         this.publicationYear = publicationYear;
     }
-
-    public String getISBN() {
-        return isbn;
-    }
+    public Integer getPublicationYear(){ return publicationYear;}
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-
-    public String getGenre() {
-        return genre;
+    public String getISBN() {
+        return isbn;
     }
 
     public void setGenre(String genre) {
         this.genre = genre;
     }
-
-    public Double getMSRP() {
-        return msrp;
+    public String getGenre() {
+        return genre;
     }
 
     public void setMsrp(Double msrp) {
         this.msrp = msrp;
     }
-
-    public Integer getRating(){return rating;}
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
+    public Double getMSRP() {
+        return msrp;
     }
+
+    public void setRating(Integer rating) { this.rating = rating; }
+    public Integer getRating(){return rating;}
 
     public Set<BookRating> getRatings() {
         return ratings;

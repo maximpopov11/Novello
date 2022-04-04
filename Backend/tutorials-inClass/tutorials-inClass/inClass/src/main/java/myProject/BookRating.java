@@ -5,9 +5,10 @@ import java.util.Optional;
 
 @Entity
 public class BookRating {
+
     @EmbeddedId
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     BookRatingKey id;
+
     @ManyToOne
     @MapsId("personId")
     @JoinColumn(name = "Person_id")
@@ -18,34 +19,34 @@ public class BookRating {
     @JoinColumn(name = "Book_id")
     Books book;
 
-    //@Column
     int rating;
-
     String review;
-
-    public BookRatingKey getId() {
-        return id;
-    }
 
     public void setId(BookRatingKey id) {
         this.id = id;
+    }
+    public BookRatingKey getId() {
+        return id;
     }
 
     public void setRating(int rating){
         this.rating = rating;
     }
-    public void setBook(Books id){this.book = id;}
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     public int getRating()
     {
         return rating;
     }
-    public String getReview(){return review;}
+
+    public void setBook(Books id){this.book = id;}
+    public Books getBook() { return book; }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+    public Person getPerson() { return person; }
+
     public void setReview(){this.review = review;}
+    public String getReview(){return review;}
 
     @Override
     public int hashCode() {

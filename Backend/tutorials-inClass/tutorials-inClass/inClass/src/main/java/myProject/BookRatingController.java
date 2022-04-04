@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 public class BookRatingController {
+
     @Autowired
     RatingDB db;
     @Autowired
@@ -30,6 +31,7 @@ public class BookRatingController {
         Books b = bdb.findById(bid).orElseThrow(() -> new NoSuchElementException());
         br.setBook(b);
         br.setPerson(p);
+
         db.save(br);
         return br;
     }
@@ -74,13 +76,4 @@ public class BookRatingController {
         Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
         return p.getRatings();
     }
-//    Optional<Integer> op = Optional.of(9455);
-//
-//    // print supplier
-//    System.out.println("Hi)")
-//        System.out.println("Optional: + op");
-//
-//    // orElseThrow supplier
-//        System.out.println("Value by orElseThrow("+ "ArithmeticException::new) method: "+ op.orElseThrow(ArithmeticException::new));
-
 }
