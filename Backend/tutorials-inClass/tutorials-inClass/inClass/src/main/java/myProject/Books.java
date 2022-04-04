@@ -1,5 +1,6 @@
 package myProject;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -8,8 +9,8 @@ import java.util.Set;
 @Entity
 class Books {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
 
         Integer bookID;
 
@@ -46,31 +47,17 @@ class Books {
         @Column
         String imageUrl;
 
-
         @OneToMany(mappedBy = "book")
         Set<Library> library;
 
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+    public String getImageUrl() { return imageUrl; }
 
-    public String getReadingUrl() {
-        return readingUrl;
-    }
+    public String getReadingUrl() { return readingUrl; }
 
-    public Set<Library> getLibrary() {
-        return library;
-    }
+    public String getTitle() { return title; }
 
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setTitle(String title) { this.title = title; }
 
     public String getAuthor(){ return author;}
 
@@ -117,5 +104,7 @@ class Books {
     public Set<BookRating> getRatings() {
         return ratings;
     }
+
+    public Set<Library> getLibrary() { return library; }
 
 }

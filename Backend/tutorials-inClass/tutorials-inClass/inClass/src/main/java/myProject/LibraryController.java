@@ -1,9 +1,12 @@
 package myProject;
 
+import net.minidev.json.JSONObject;
 import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -77,9 +80,25 @@ public class LibraryController {
     Set<Library> getAllBooksFromUserCategory(@PathVariable Integer pid,@PathVariable Integer category){
         //return by category
         Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
-        return p.getLibrary();
+        Set<Library> library = p.getLibrary();
+
+        Set<Library> librarySet = new HashSet<>();
+
+        Iterator<Library> libraryIterator = library.iterator();
+
+        Library l = new Library();
+
+        int c;
+        while(libraryIterator.hasNext()){
+            l = libraryIterator.next();
+            c = l.getCategory();
+            if(c == category){
+                librarySet.add(l);
+            }
+        }
+        return librarySet;
     }
-    @JsonIgnore
+
     @GetMapping("/library/{pid}")
     Set<Library> getAllBooksFromUser(@PathVariable Integer pid){
         Person p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());

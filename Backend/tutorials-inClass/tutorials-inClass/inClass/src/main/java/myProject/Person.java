@@ -1,5 +1,7 @@
 package myProject;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -40,9 +42,7 @@ class Person {
 	@OneToMany(mappedBy = "person")
 	Set<Library> library;
 
-	public Set<BookRating> getRatings() {
-		return ratings;
-	}
+	public Set<BookRating> getRatings() { return ratings; }
 
 	public void setLibrary(Set<Library> library) {
 		this.library = library;
@@ -51,33 +51,6 @@ class Person {
 	public void setRatings(Set<BookRating> ratings) {
 		this.ratings = ratings;
 	}
-	//	@OneToMany(mappedBy = "person")
-//	private Set<BookRating> ratings;
-
-
-//	@OneToMany
-//	@JoinColumn(name = "bk_book_id")
-/*
-
-	public Books getBk() {
-		return bk;
-	}
-	@ManyToOne
-	@JoinColumn(name = "friends_id")
-	Person friends;
-
-	public Person getFriends() {
-		return friends;
-	}
-	@Column
-	Books library;
-	@Column
-	CREDIT CARD INFO
-
-	@Column
-	Friends JSON
-*/
-
 
 	public Integer getId() { return id; }
 	public void setId(Integer id){ this.id = id; }
@@ -106,7 +79,5 @@ class Person {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-	public Set<Library> getLibrary() {
-		return library;
-	}
+	public Set<Library> getLibrary() { return library; }
 }

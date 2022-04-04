@@ -23,8 +23,6 @@ public class BookRating {
 
     String review;
 
-
-
     public BookRatingKey getId() {
         return id;
     }
