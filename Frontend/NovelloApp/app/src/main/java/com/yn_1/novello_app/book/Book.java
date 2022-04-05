@@ -115,8 +115,6 @@ public class Book {
         return bookID;
     }
 
-    public double getPrice() {return price;}
-
     /**
      *
      * @return

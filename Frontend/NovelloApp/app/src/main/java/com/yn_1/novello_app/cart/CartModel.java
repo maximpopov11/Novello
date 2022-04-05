@@ -69,10 +69,12 @@ public class CartModel {
                 String author = book.getString("author");
                 int publicationYear = book.getInt("publicationYear");
                 String isbn = book.getString("isbn");
-                int rating = book.getInt("rating");
+                double rating = book.getInt("rating");
                 double price = book.getDouble("msrp");
+                String description = book.getString("description");
                 String imageUrl = book.getString("imageUrl");
-                Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, price, imageUrl);
+                String readingUrl = book.getString("readingUrl");
+                Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
                 newBook.setUserCategoryID("cart");
                 cart.add(newBook);
                 presenter.sendCart(cart);
