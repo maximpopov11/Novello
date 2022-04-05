@@ -43,7 +43,8 @@ public class CartModel {
     public void getCartBooks() {
         JsonArrayRequester cartBookRequester = new JsonArrayRequester();
         JsonArrayCommand command = new JsonArrayCommand();
-        cartBookRequester.getRequest(user.getUsername() + "/library/cart", null, command,
+        //todo: 2 represents cart. Set that in an enum.
+        cartBookRequester.getRequest("library/" + user.getUserId() + "2", null, command,
                 null, null);
     }
 
@@ -69,7 +70,7 @@ public class CartModel {
                 int publicationYear = book.getInt("publicationYear");
                 String isbn = book.getString("isbn");
                 int rating = book.getInt("rating");
-                double price = book.getDouble("price");
+                double price = book.getDouble("msrp");
                 String imageUrl = book.getString("imageUrl");
                 Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, price, imageUrl);
                 newBook.setUserCategoryID("cart");

@@ -48,15 +48,12 @@ public class PurchaseFragment extends Fragment {
             creditCardNumber = creditCardInput.getText().toString();
             JsonObjectRequester purchaseRequester = new JsonObjectRequester();
             JsonObjectCommand command = new JsonObjectCommand();
-            //todo: add cart information to purchaseJson
-            JSONObject purchaseJson = new JSONObject();
-            try {
-                purchaseJson.put("CreditCardNumber", creditCardNumber);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            //todo: 3 represents currently reading. Set that in an enum.
+            //todo: get user and provide user id in request
+            for (Book book : cart) {
+                purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + "set this to userID" + "/" + 3,
+                        null, command, null, null);
             }
-            //todo: test next line
-            purchaseRequester.postRequest("cart", purchaseJson, command, null, null);
             //todo: complete transaction
             //todo: upon purchase move book to unread category (from cart category)
         });
