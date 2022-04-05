@@ -115,8 +115,7 @@ public class CartModel {
      * @param book
      */
     public void moveBookToWaitlist(Book book) {
-        removeBookFromCart(book);
-        //todo: put request on book (but category = wishlist)
+        //todo: put request on book to move to waitlist
     }
 
     /**

@@ -61,10 +61,7 @@ public class CartPresenter {
      * @param cartView
      */
     public void openPurchase(CartView cartView) {
-        //todo: change how changing fragments works when roba's code is merged
-        Fragment libraryFragment = LibraryFragment.newInstance();
-        cartView.getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
-                libraryFragment).addToBackStack(null).commit();
+        //todo: PRE DEMO: go to purchase fragment
     }
 
 }

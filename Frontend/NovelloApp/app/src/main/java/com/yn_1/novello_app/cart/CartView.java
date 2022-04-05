@@ -40,8 +40,8 @@ public class CartView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        //todo: get to cart from nav bar
-        //todo: leave cart through nav bar
+        //todo: PRE DEMO: get to cart from nav bar
+        //todo: PRE DEMO: leave cart through nav bar
         super.onCreate(savedInstanceState);
 
         presenter = new CartPresenter(this);

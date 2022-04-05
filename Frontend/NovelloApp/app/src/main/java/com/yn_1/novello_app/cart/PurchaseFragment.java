@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.book.Book;
+import com.yn_1.novello_app.library.LibraryFragment;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
@@ -29,14 +30,14 @@ public class PurchaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        //todo: leave purchase through nav bar
+        //todo: PRE DEMO: leave purchase through nav bar
         super.onCreate(savedInstanceState);
 
         finish.findViewById(R.id.finishPurchase);
         creditCardInput.findViewById(R.id.creditCardInput);
         priceText.findViewById(R.id.price);
-        //todo: get cart from cart fragment
-        //todo: show list of book titles in vertical scroll view
+        //todo: PRE DEMO: get cart from cart fragment
+        //todo: show list of book titles/authors/prices in vertical scroll view
 
         double price = 0;
         for (Book book : cart) {
@@ -50,7 +51,7 @@ public class PurchaseFragment extends Fragment {
                 JsonObjectRequester purchaseRequester = new JsonObjectRequester();
                 JsonObjectCommand command = new JsonObjectCommand();
                 //todo: 3 represents unread. Set that in an enum.
-                //todo: get user and provide user id in request
+                //todo: PRE DEMO: get user and provide user id in request
                 for (Book book : cart) {
                     purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + "set this to userID" + "/" + 3,
                             null, command, null, null);
@@ -64,20 +65,20 @@ public class PurchaseFragment extends Fragment {
     }
 
     /**
-     * //todo: move to user or other more appropriate location
      * @param creditCardNumber
      * @return true if the card can be charged
      */
     private boolean canChargeCard(String creditCardNumber) {
+        //todo: move to user or other more appropriate location
         return true;
     }
 
     /**
-     * //todo: move to user or other more appropriate location
      * @param creditCardNumber
      * @return true if the card was charged successfully
      */
     private boolean chargeCard(String creditCardNumber) {
+        //todo: move to user or other more appropriate location
         return true;
     }
 
@@ -87,7 +88,7 @@ public class PurchaseFragment extends Fragment {
      */
     private void purchaseResult(boolean succeeded) {
         if (chargeCard(creditCardNumber)) {
-            //todo: go to dashbaord
+            //todo: PRE DEMO: go to dashboard
         }
         else {
             //todo: card could not be charged, do something about it
