@@ -6,7 +6,8 @@ package com.yn_1.novello_app.discovery;
 public class DiscoveryPresenter {
 
     //todo: get all books
-    //todo: recommendation algorithm
+    //todo: get user books: url = "library/personID"
+    //todo: recommendation algorithm using rating, genre, and author
     //todo: show recommended books
 
     DiscoveryView view;

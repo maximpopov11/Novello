@@ -34,8 +34,7 @@ public class DiscoveryModel {
 
         JsonArrayRequester allBooksRequester = new JsonArrayRequester();
         JsonArrayCommand command = new JsonArrayCommand();
-        //todo: test request
-        allBooksRequester.getRequest("library", null, command, null, null);
+        allBooksRequester.getRequest("books", null, command, null, null);
 
     }
 
