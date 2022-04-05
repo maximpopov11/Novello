@@ -14,5 +14,61 @@
         android:id="@+id/libraryFragment"
         android:name="com.yn_1.novello_app.library.LibraryFragment"
         android:label="fragment_library"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_libraryFragment_to_readingFragment"
+            app:destination="@id/readingFragment" >
+            <argument
+                android:name="readingLink"
+                android:defaultValue="null" />
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+        </action>
+        <action
+            android:id="@+id/action_libraryFragment_to_bookFragment"
+            app:destination="@id/bookFragment" >
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/readingFragment"
+        android:name="com.yn_1.novello_app.reading.ReadingFragment"
+        android:label="fragment_reading"
+        tools:layout="@layout/fragment_reading" >
+        <argument
+            android:name="readingLink"
+            app:argType="string" />
+        <argument
+            android:name="bookID"
+            app:argType="integer"
+            android:id="@+id/action_libraryFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.yn_1.novello_app.book.BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" >
+        <argument
+            android:name="bookID"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartView"
+        android:name="com.yn_1.novello_app.cart.CartView"
+        android:label="CartView" >
+        <action
+            android:id="@+id/action_cartView_to_purchaseFragment"
+            app:destination="@id/purchaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="com.yn_1.novello_app.cart.PurchaseFragment"
+        android:label="PurchaseFragment" >
+        <argument android:name="something"
+            app:argType="string" />
+    </fragment>
 </navigation>

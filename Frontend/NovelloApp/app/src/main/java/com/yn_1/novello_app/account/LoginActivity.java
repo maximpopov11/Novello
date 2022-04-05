@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //todo: test next line
             userRequester.getRequest("person", accountCredentialsJson, command, null, null);
         });
 
@@ -67,14 +66,13 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Moves to starting screen after login (dashboard)
-     * @param loginSucceeded is true if the login information matches an existing user
+     * @param userID is the user's ID. It is 0 if the login failed.
      */
-    private void loginResult(boolean loginSucceeded) {
+    private void loginResult(int userID) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        if (loginSucceeded) {
-            //todo: receive user id to save in user
-            AdultUser user = new AdultUser(username, password, -1);
+        if (userID != 0) {
+            AdultUser user = new AdultUser(username, password, userID);
             Intent intent = new Intent(this, NavBarActivity.class);
             intent.putExtra("USER", (Serializable) user);
             startActivity(intent);
@@ -94,7 +92,12 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void execute(JSONObject data) {
-            loginResult(data != null);
+            try {
+                int userID = data.getInt("userID");
+                loginResult(userID);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

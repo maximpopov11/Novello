@@ -56,7 +56,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //todo: test next line
                 userAddRequester.postRequest("person", userJson, command, null, null);
             }
             else {

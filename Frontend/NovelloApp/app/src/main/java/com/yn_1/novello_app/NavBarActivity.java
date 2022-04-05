@@ -1,25 +1,22 @@
 package com.yn_1.novello_app;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.yn_1.novello_app.account.User;
-import com.yn_1.novello_app.home.HomeFragment;
-import com.yn_1.novello_app.library.LibraryFragment;
 import com.yn_1.novello_app.account.AdultUser;
-
-import java.util.List;
 
 public class NavBarActivity extends AppCompatActivity {
 
     private AdultUser user;
+    private NavController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,34 +29,34 @@ public class NavBarActivity extends AppCompatActivity {
         // Postman: Used for individual testing
         user = new AdultUser("testUser", null, -1);
 
+        NavHostFragment host = (NavHostFragment)
+                getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        controller = host.getNavController();
 
         BottomNavigationView navBar = findViewById(R.id.bottom_nav);
+        NavigationUI.setupWithNavController(navBar, controller);
 
-        ((NavigationBarView) navBar).setOnItemSelectedListener (
-            new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-
+        navBar.setOnItemSelectedListener (
+                item -> {
                     switch (item.getItemId()) {
                         case R.id.homeFragment:
-                            transaction.replace(R.id.nav_host_fragment, new HomeFragment()).commit();
+                            controller.navigate(R.id.homeFragment);
                             return true;
 
                         case R.id.libraryFragment:
-                            transaction.replace(R.id.nav_host_fragment, new LibraryFragment()).commit();
+                            controller.navigate(R.id.libraryFragment);
                             return true;
 
                         default:
                             return false;
                     }
                 }
-            }
         );
     }
 
     public User getUser() {
         return user;
     }
+
+    public NavController getController() {return controller; }
 }

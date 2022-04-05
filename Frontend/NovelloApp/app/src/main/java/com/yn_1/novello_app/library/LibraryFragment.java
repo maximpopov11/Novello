@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.ContextMenu;
@@ -108,9 +111,19 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
 
     @Override
     public void displayBook(Book book) {
-        Fragment bookFragment = new Fragment(); // TODO: Replace with real fragment
-        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
-                bookFragment).addToBackStack(null).commit();
+        LibraryFragmentDirections.ActionLibraryFragmentToBookFragment action =
+                LibraryFragmentDirections.actionLibraryFragmentToBookFragment();
+        action.setBookID(book.getBookID());
+        ((NavBarActivity)getActivity()).getController().navigate(action);
+    }
+
+    @Override
+    public void readBook(Book book) {
+        LibraryFragmentDirections.ActionLibraryFragmentToReadingFragment action =
+                LibraryFragmentDirections.actionLibraryFragmentToReadingFragment();
+        action.setBookID(book.getBookID());
+        action.setReadingLink(book.getReadingURL());
+        ((NavBarActivity)getActivity()).getController().navigate(action);
     }
 
     @Nullable

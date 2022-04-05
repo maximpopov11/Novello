@@ -40,11 +40,11 @@ public class LibraryModel implements LibraryContract.Model {
         bookCollection = new ArrayList<>();
         bookButtons = new HashMap<>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < categoryPaths.length; i++) {
             String categoryPath = categoryPaths[i];
 
             JsonArrayRequester req = new JsonArrayRequester();
-            req.getRequest(user.getUsername() + "/library/"+categoryPath,
+            req.getRequest("library/" + user.getUserId() + "/" + categoryPath,
                     null, new VolleyCommand<JSONArray>() {
                         @Override
                         public void execute(JSONArray data) {
@@ -57,9 +57,10 @@ public class LibraryModel implements LibraryContract.Model {
                                     int publicationYear = book.getInt("publicationYear");
                                     String isbn = book.getString("isbn");
                                     int rating = book.getInt("rating");
-                                    double price = book.getDouble("price");
+                                    double price = book.getDouble("msrp");
+                                    String bookUrl = book.getString("bookUrl");
                                     String imageUrl = book.getString("imageUrl");
-                                    Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, price, imageUrl);
+                                    Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, 
                                     newBook.setUserCategoryID(categoryPath);
                                     bookCollection.add(newBook);
                                     bookCount++;
