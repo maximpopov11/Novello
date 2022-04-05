@@ -46,18 +46,39 @@ public class PurchaseFragment extends Fragment {
 
         finish.setOnClickListener(v -> {
             creditCardNumber = creditCardInput.getText().toString();
-            JsonObjectRequester purchaseRequester = new JsonObjectRequester();
-            JsonObjectCommand command = new JsonObjectCommand();
-            //todo: 3 represents currently reading. Set that in an enum.
-            //todo: get user and provide user id in request
-            for (Book book : cart) {
-                purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + "set this to userID" + "/" + 3,
-                        null, command, null, null);
+            if (canChargeCard(creditCardNumber)) {
+                JsonObjectRequester purchaseRequester = new JsonObjectRequester();
+                JsonObjectCommand command = new JsonObjectCommand();
+                //todo: 3 represents unread. Set that in an enum.
+                //todo: get user and provide user id in request
+                for (Book book : cart) {
+                    purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + "set this to userID" + "/" + 3,
+                            null, command, null, null);
+                }
             }
-            //todo: complete transaction
-            //todo: upon purchase move book to unread category (from cart category)
+            else {
+                //todo: card cannot be charged, do something about it
+            }
         });
 
+    }
+
+    /**
+     * //todo: move to user or other more appropriate location
+     * @param creditCardNumber
+     * @return true if the card can be charged
+     */
+    private boolean canChargeCard(String creditCardNumber) {
+        return true;
+    }
+
+    /**
+     * //todo: move to user or other more appropriate location
+     * @param creditCardNumber
+     * @return true if the card was charged successfully
+     */
+    private boolean chargeCard(String creditCardNumber) {
+        return true;
     }
 
     /**
@@ -65,7 +86,12 @@ public class PurchaseFragment extends Fragment {
      * @param succeeded is true if the purchase was successful
      */
     private void purchaseResult(boolean succeeded) {
-        //todo: go to dashbaord
+        if (chargeCard(creditCardNumber)) {
+            //todo: go to dashbaord
+        }
+        else {
+            //todo: card could not be charged, do something about it
+        }
     }
 
     /**
