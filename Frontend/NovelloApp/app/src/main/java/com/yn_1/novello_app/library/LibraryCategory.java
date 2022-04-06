@@ -13,7 +13,7 @@ public enum LibraryCategory {
     WISHLIST (1, "wishlist", new boolean[]{true, false, true, false, false, false}),
     CART (2, "cart", new boolean[]{true, true, false, true, false, false}),
     BACKLOG (3, "backlog", new boolean[]{false, false, false, false, true, false}),
-    CURRENTLY_READING (4, "currently_reading", new boolean[]{false, false, false, true, false, true}),
+    CURRENTLY_READING (4, "currentlyReading", new boolean[]{false, false, false, true, false, true}),
     READ (5, "read", new boolean[]{false, false, false, true, true, false});
 
     private int categoryIndex;
@@ -89,17 +89,36 @@ public enum LibraryCategory {
      */
     private void putInCategory(LibraryCategory newCategory, int userID, JSONObject book) {
         JsonObjectRequester categoryReq = new JsonObjectRequester();
-        String pathUrl = "library/" + userID + "/" + newCategory.getCategoryIndex();
-        categoryReq.putRequest(pathUrl, book, new VolleyCommand<JSONObject>() {
-            @Override
-            public void execute(JSONObject data) {
-                Log.d("Transaction", "Transaction successfully completed.");
-            }
+        // If NONE: DELETE book
+        if (newCategory == NONE)
+        {
+            String pathUrl = userID + "/library/" + categoryIndex;
+            categoryReq.deleteRequest(pathUrl, book, new VolleyCommand<JSONObject>() {
+                @Override
+                public void execute(JSONObject data) {
+                    Log.d("Transaction", "Transaction successfully completed.");
+                }
 
-            @Override
-            public void onError(VolleyError error) {
-                Log.d("Transaction", "Unable to PUT book in user category.");
-            }
-        }, null, null);
+                @Override
+                public void onError(VolleyError error) {
+                    Log.d("Transaction", "Unable to PUT book in user category.");
+                }
+            }, null, null);
+        }
+        // Else: PUT book in new category
+        else {
+            String pathUrl = userID + "/library/" + newCategory.getCategoryIndex();
+            categoryReq.putRequest(pathUrl, book, new VolleyCommand<JSONObject>() {
+                @Override
+                public void execute(JSONObject data) {
+                    Log.d("Transaction", "Transaction successfully completed.");
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+                    Log.d("Transaction", "Unable to PUT book in user category.");
+                }
+            }, null, null);
+        }
     }
 }

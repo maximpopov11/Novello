@@ -6,9 +6,9 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -21,7 +21,8 @@ public class LibraryPresenter implements LibraryContract.Presenter {
     private LibraryContract.Model model;
     private LibraryContract.View view;
 
-    private ImageButton currentMenuButton;
+    private Book currentSelectedBook;
+    private LibraryCategory currentSelectedCategory;
 
     public LibraryPresenter(LibraryContract.Model model, LibraryContract.View view) {
         this.model = model;
@@ -76,30 +77,74 @@ public class LibraryPresenter implements LibraryContract.Presenter {
 
     @Override
     public void createBookMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        currentSelectedBook = model.getBookButton((ImageButton)v);
+        HorizontalScrollView parent = (HorizontalScrollView) ((ImageButton)v).getParent().getParent();
         menu.setHeaderTitle("Book Options");
         menu.add(0, v.getId(), 0, "Go To Book");
-        menu.add(0, v.getId(), 1, "Read Book");
-        //TODO: Add more menu options
-        currentMenuButton = (ImageButton)v;
+
+        final String start = "app:id/";
+        final String id = parent.toString().substring(parent.toString().lastIndexOf(" ")+1);
+        Log.d("Menu", id);
+        switch (id)
+        {
+            case start+"wishlist}":
+                currentSelectedCategory = LibraryCategory.WISHLIST;
+                menu.add(0, v.getId(), 1, "Remove");
+                menu.add(0, v.getId(), 2, "Add to Cart");
+                break;
+            case start+"backlog}":
+                currentSelectedCategory = LibraryCategory.BACKLOG;
+                menu.add(0, v.getId(), 1, "Move to Currently Reading");
+                break;
+            case start+"currentlyReading}":
+                currentSelectedCategory = LibraryCategory.CURRENTLY_READING;
+                menu.add(0, v.getId(), 1, "Read Book");
+                menu.add(0, v.getId(), 2, "Move to Backlog");
+                menu.add(0, v.getId(), 3, "Move to Read");
+                break;
+            case start+"read}":
+                currentSelectedCategory = LibraryCategory.READ;
+                menu.add(0, v.getId(), 1, "Rate/Review");
+                menu.add(0, v.getId(), 2, "Move to Backlog");
+                menu.add(0, v.getId(), 3, "Move to Currently Reading");
+                break;
+        }
     }
 
     @Override
-    public void onBookMenuItemSelected(MenuItem item) {
-        if (item.getTitle() == "Go To Book") {
-            view.displayBook(model.getBookButton(currentMenuButton));
-        }
-        if (item.getTitle() == "Read Book") {
-            Book book = model.getBookButton(currentMenuButton);
-            if (book.getUserCategoryId() == "currentlyReading") {
-                view.readBook(book);
-            }
-            else
-            {
-                Toast toast = Toast.makeText(currentMenuButton.getContext(),
-                        "Error: App not owned or not in currently reading category.",
-                        Toast.LENGTH_SHORT);
-                toast.show();
-            }
+    public void onBookMenuItemSelected(User user, MenuItem item) {
+        switch (item.getTitle().toString())
+        {
+            case "Go To Book":
+                view.displayBook(currentSelectedBook);
+                break;
+            case "Read Book":
+                view.readBook(currentSelectedBook);
+                break;
+            case "Remove":
+                currentSelectedCategory.performTransaction(LibraryCategory.NONE,
+                        user.getUserId(), currentSelectedBook.getBookID());
+                break;
+            case "Add to Wishlist":
+                currentSelectedCategory.performTransaction(LibraryCategory.WISHLIST,
+                        user.getUserId(), currentSelectedBook.getBookID());
+                break;
+            case "Add to Cart":
+                currentSelectedCategory.performTransaction(LibraryCategory.CART,
+                        user.getUserId(), currentSelectedBook.getBookID());
+                break;
+            case "Move to Backlog":
+                currentSelectedCategory.performTransaction(LibraryCategory.BACKLOG,
+                        user.getUserId(), currentSelectedBook.getBookID());
+                break;
+            case "Move to Currently Reading":
+                currentSelectedCategory.performTransaction(LibraryCategory.CURRENTLY_READING,
+                        user.getUserId(), currentSelectedBook.getBookID());
+                break;
+            case "Move to Read":
+                currentSelectedCategory.performTransaction(LibraryCategory.READ,
+                        user.getUserId(), currentSelectedBook.getBookID());
+                break;
         }
     }
 }

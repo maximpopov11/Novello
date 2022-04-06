@@ -1,14 +1,10 @@
 package com.yn_1.novello_app.library;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.ContextMenu;
@@ -17,9 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
@@ -38,6 +32,7 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
     HorizontalScrollView currentlyReadingView;
     HorizontalScrollView wishlistView;
     HorizontalScrollView readView;
+    HorizontalScrollView backlog;
 
     /**
      * Use this factory method to create a new instance of
@@ -80,11 +75,13 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         currentlyReadingView = view.findViewById(R.id.currentlyReading);
         wishlistView = view.findViewById(R.id.wishlist);
         readView = view.findViewById(R.id.read);
+        backlog = view.findViewById(R.id.backlog);
 
         categories = new ArrayList<>();
         categories.add(currentlyReadingView);
         categories.add(wishlistView);
         categories.add(readView);
+        categories.add(backlog);
     }
 
     @Override
@@ -103,7 +100,7 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
                 if (getView().getResources().getResourceName(realCategory.getId()).equals("com.yn_1.novello_app:id/" + book.getUserCategoryId()))
                 {
                     ((LinearLayout)realCategory.getChildAt(0)).addView(book.getImageButton());
-                    Log.d("Library", book.getTitle() + "added");
+                    Log.d("Library", book.getTitle() + " added");
                 }
             }
         }
@@ -146,7 +143,7 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        presenter.onBookMenuItemSelected(item);
+        presenter.onBookMenuItemSelected(((NavBarActivity)getActivity()).getUser(), item);
         return true;
     }
 }
