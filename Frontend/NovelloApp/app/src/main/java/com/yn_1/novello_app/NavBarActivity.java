@@ -47,7 +47,7 @@ public class NavBarActivity extends AppCompatActivity {
                             controller.navigate(R.id.libraryFragment);
                             return true;
 
-                        case R.id.shopFragment:
+                        case R.id.cartView:
                             controller.navigate(R.id.cartView);
                             return true;
                             
