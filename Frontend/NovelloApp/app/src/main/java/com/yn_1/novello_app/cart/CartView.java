@@ -3,12 +3,14 @@ package com.yn_1.novello_app.cart;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
@@ -49,9 +51,6 @@ public class CartView extends Fragment {
         user = ((NavBarActivity)getActivity()).getUser();
         presenter.setUser(user);
 
-        purchase.findViewById(R.id.purchase);
-        innerLayout.findViewById(R.id.cartLinearLayoutInner);
-
         presenter.getCartBooks();
 
         purchase.setOnClickListener(v -> {
@@ -71,6 +70,15 @@ public class CartView extends Fragment {
             ((NavBarActivity)getActivity()).getController().navigate(action);
 
         });
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        purchase = view.findViewById(R.id.purchase);
+        innerLayout = view.findViewById(R.id.cartLinearLayoutInner);
 
     }
 
