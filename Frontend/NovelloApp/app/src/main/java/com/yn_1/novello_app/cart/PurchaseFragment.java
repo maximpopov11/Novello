@@ -28,7 +28,8 @@ public class PurchaseFragment extends Fragment {
     TextView priceText;
 
     int userID;
-    Book[] cart;
+    int[] cartIDs;
+    float[] cartPrices;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,12 +41,13 @@ public class PurchaseFragment extends Fragment {
         priceText.findViewById(R.id.price);
 
         userID = PurchaseFragmentArgs.fromBundle(getArguments()).getUserID();
-        cart = PurchaseFragmentArgs.fromBundle(getArguments()).getCart();
+        cartIDs = PurchaseFragmentArgs.fromBundle(getArguments()).getCartIDs();
+        cartPrices = PurchaseFragmentArgs.fromBundle(getArguments()).getCartPrices();
         //todo: show list of book titles/authors/prices in vertical scroll view
 
         double price = 0;
-        for (Book book : cart) {
-            price += book.getPrice();
+        for (int i = 0; i < cartPrices.length; i++) {
+            price += cartPrices[i];
         }
         priceText.setText("Price = $" + price);
 
@@ -55,8 +57,9 @@ public class PurchaseFragment extends Fragment {
                 JsonObjectRequester purchaseRequester = new JsonObjectRequester();
                 JsonObjectCommand command = new JsonObjectCommand();
                 //todo: 3 represents unread. Set that in an enum.
-                for (Book book : cart) {
-                    purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + userID + "/" + 3,
+                for (int i = 0; i < cartIDs.length; i++) {
+                    int bookID = cartIDs[i];
+                    purchaseRequester.postRequest("setCategory/" + bookID + "/" + userID + "/" + 3,
                             null, command, null, null);
                 }
             }

@@ -74,8 +74,6 @@
         android:id="@+id/purchaseFragment"
         android:name="com.yn_1.novello_app.cart.PurchaseFragment"
         android:label="PurchaseFragment" >
-        <argument android:name="cart"
-            app:argType="com.yn_1.novello_app.book.Book[]" />
         <argument
             android:name="userID"
             app:argType="integer"
@@ -83,5 +81,11 @@
         <action
             android:id="@+id/action_purchaseFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="cartPrices"
+            app:argType="float[]" />
+        <argument
+            android:name="cartIDs"
+            app:argType="integer[]" />
     </fragment>
 </navigation>

@@ -55,11 +55,21 @@ public class CartView extends Fragment {
         presenter.getCartBooks();
 
         purchase.setOnClickListener(v -> {
+
+            float[] prices = new float[cart.size()];
+            int[] ids = new int[cart.size()];
+            for (int i = 0; i < cart.size(); i++) {
+                prices[i] = (float)cart.get(i).getPrice();
+                ids[i] = cart.get(i).getBookID();
+            }
+
             CartViewDirections.ActionCartViewToPurchaseFragment action =
-                    CartViewDirections.actionCartViewToPurchaseFragment(null);
+                    CartViewDirections.actionCartViewToPurchaseFragment(null, null, null);
             action.setUserID(user.getUserId());
-            action.setCart((Book[])cart.toArray());
+            action.setCartPrices(prices);
+            action.setCartIDs(ids);
             ((NavBarActivity)getActivity()).getController().navigate(action);
+
         });
 
     }

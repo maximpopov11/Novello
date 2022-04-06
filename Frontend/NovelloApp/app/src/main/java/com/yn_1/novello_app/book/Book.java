@@ -1,10 +1,12 @@
 package com.yn_1.novello_app.book;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageButton;
 
 import java.io.Serializable;
 
-public class Book implements Serializable {
+public class Book implements Parcelable {
 
     //book fields
     int bookID;
@@ -177,4 +179,25 @@ public class Book implements Serializable {
      * @param categoryName
      */
     public void setUserCategoryID(String categoryName) { userCategoryID = categoryName; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(bookID);
+        dest.writeString(title);
+        dest.writeString(author);
+        dest.writeInt(publicationYear);
+        dest.writeString(isbn);
+        dest.writeDouble(rating);
+        dest.writeDouble(price);
+        dest.writeString(description);
+        dest.writeString(readingURL);
+        dest.writeString(imageURL);
+        //ImageButton not linked
+        dest.writeString(userCategoryID);
+    }
 }
