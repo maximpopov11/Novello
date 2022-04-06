@@ -108,6 +108,12 @@ public interface LibraryContract {
          * @param book
          */
         void readBook(Book book);
+
+        /**
+         * Transitions to the post review fragment for adding a review and rating to the book.
+         * @param book
+         */
+        void reviewBook(Book book);
     }
 
     /**

@@ -32,6 +32,13 @@
                 android:name="bookID"
                 android:defaultValue="-1" />
         </action>
+        <action
+            android:id="@+id/action_libraryFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" >
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/readingFragment"
@@ -99,5 +106,21 @@
             android:name="userID"
             app:argType="integer"
             android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.yn_1.novello_app.review.ReviewFragment"
+        android:label="fragment_review"
+        tools:layout="@layout/fragment_review" >
+        <action
+            android:id="@+id/action_reviewFragment_to_bookFragment"
+            app:destination="@id/bookFragment" >
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+        </action>
+        <argument
+            android:name="bookID"
+            app:argType="integer" />
     </fragment>
 </navigation>

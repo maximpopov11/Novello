@@ -121,6 +121,9 @@ public class LibraryPresenter implements LibraryContract.Presenter {
             case "Read Book":
                 view.readBook(currentSelectedBook);
                 break;
+            case "Rate/Review":
+                view.reviewBook(currentSelectedBook);
+                break;
             case "Remove":
                 currentSelectedCategory.performTransaction(LibraryCategory.NONE,
                         user.getUserId(), currentSelectedBook.getBookID());
