@@ -3,12 +3,18 @@ package com.yn_1.novello_app.cart;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
@@ -31,7 +37,7 @@ public class CartView extends Fragment {
     CartPresenter presenter;
 
     User user;
-    ArrayList<Book> cart;
+    ArrayList<Book> cart = new ArrayList<>();
 
     Button purchase;
     LinearLayout innerLayout;
@@ -49,10 +55,28 @@ public class CartView extends Fragment {
         user = ((NavBarActivity)getActivity()).getUser();
         presenter.setUser(user);
 
-        purchase.findViewById(R.id.purchase);
-        innerLayout.findViewById(R.id.cartLinearLayoutInner);
-
         presenter.getCartBooks();
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        Log.d("Cart", "CartView entered on create view.");
+
+        return inflater.inflate(R.layout.fragment_cart, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Log.d("Cart", "CartView entered on view created.");
+
+        purchase = view.findViewById(R.id.purchase);
+        innerLayout = view.findViewById(R.id.cartLinearLayoutInner);
 
         purchase.setOnClickListener(v -> {
 
@@ -64,7 +88,7 @@ public class CartView extends Fragment {
             }
 
             CartViewDirections.ActionCartViewToPurchaseFragment action =
-                    CartViewDirections.actionCartViewToPurchaseFragment(null, null, null);
+                    CartViewDirections.actionCartViewToPurchaseFragment();
             action.setUserID(user.getUserId());
             action.setCartPrices(prices);
             action.setCartIDs(ids);

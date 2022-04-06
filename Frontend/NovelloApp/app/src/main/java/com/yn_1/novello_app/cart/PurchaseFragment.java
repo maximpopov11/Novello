@@ -1,10 +1,16 @@
 package com.yn_1.novello_app.cart;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
@@ -35,10 +41,6 @@ public class PurchaseFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
 
-        finish.findViewById(R.id.finishPurchase);
-        creditCardInput.findViewById(R.id.creditCardInput);
-        priceText.findViewById(R.id.price);
-
         userID = PurchaseFragmentArgs.fromBundle(getArguments()).getUserID();
         cartIDs = PurchaseFragmentArgs.fromBundle(getArguments()).getCartIDs();
         cartPrices = PurchaseFragmentArgs.fromBundle(getArguments()).getCartPrices();
@@ -49,6 +51,26 @@ public class PurchaseFragment extends Fragment {
             price += cartPrices[i];
         }
         priceText.setText("Price = $" + price);
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        Log.d("Purchase", "Purchase entered on create view.");
+
+        return inflater.inflate(R.layout.fragment_cart, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        finish = view.findViewById(R.id.finishPurchase);
+        creditCardInput = view.findViewById(R.id.creditCardInput);
+        priceText = view.findViewById(R.id.price);
 
         finish.setOnClickListener(v -> {
             creditCardNumber = creditCardInput.getText().toString();

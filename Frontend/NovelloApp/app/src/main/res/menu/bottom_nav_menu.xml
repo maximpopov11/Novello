@@ -21,8 +21,8 @@
         android:icon="@drawable/ic_chat_bubble"
         android:title="Chat" />
     <item
-        android:id="@+id/shopFragment"
+        android:id="@+id/cartView"
         android:enabled="true"
         android:icon="@drawable/ic_shopping_bag"
-        android:title="Shop" />
+        android:title="Cart" />
 </menu>

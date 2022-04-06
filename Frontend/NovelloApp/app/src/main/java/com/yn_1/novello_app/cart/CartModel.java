@@ -44,7 +44,7 @@ public class CartModel {
         JsonArrayRequester cartBookRequester = new JsonArrayRequester();
         JsonArrayCommand command = new JsonArrayCommand();
         //todo: 2 represents cart. Set that in an enum.
-        cartBookRequester.getRequest("library/" + user.getUserId() + "2", null, command,
+        cartBookRequester.getRequest("library/" + user.getUserId() + "/2", null, command,
                 null, null);
     }
 
@@ -67,6 +67,7 @@ public class CartModel {
                 int bookID = book.getInt("bookID");
                 String title = book.getString("title");
                 String author = book.getString("author");
+                String genre = book.getString("genre");
                 int publicationYear = book.getInt("publicationYear");
                 String isbn = book.getString("isbn");
                 double rating = book.getInt("rating");
@@ -74,7 +75,7 @@ public class CartModel {
                 String description = book.getString("description");
                 String imageUrl = book.getString("imageUrl");
                 String readingUrl = book.getString("readingUrl");
-                Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
+                Book newBook = new Book(bookID, title, author, genre, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
                 newBook.setUserCategoryID("cart");
                 cart.add(newBook);
                 presenter.sendCart(cart);
