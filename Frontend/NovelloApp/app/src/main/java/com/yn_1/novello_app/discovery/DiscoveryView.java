@@ -5,6 +5,10 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +30,8 @@ public class DiscoveryView extends Fragment {
 
     DiscoveryPresenter presenter;
 
+    TableLayout tableLayout;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -46,15 +52,31 @@ public class DiscoveryView extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        tableLayout = view.findViewById(R.id.discoveryTableLayout);
+
     }
 
     /**
      * Displays recommended books
-     * @param recommendations
+     * @param sortedRecommendations is a sorted ArrayList of books by recommendation rating
      */
-    public void showRecommendedBooks(ArrayList<Pair<Book, Double>> recommendations) {
+    public void showRecommendedBooks(ArrayList<Pair<Book, Double>> sortedRecommendations) {
 
-        //todo: show all recommended books in scroll view
+        //todo: does text view need layout params?
+        for (Pair<Book, Double> pair : sortedRecommendations) {
+            TableRow tableRow = new TableRow(getContext());
+            TextView textView = new TextView(getContext());
+            Book book = pair.first;
+            String text = book.getTitle() + " by " + book.getAuthor()
+                    + "\nGenre: "+ book.getGenre() + "\nRating: " + book.getRating();
+            textView.setText(text);
+            tableRow.addView(textView);
+            TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams();
+            tableRowParams.setMargins(5, 5, 5, 5);
+            tableRow.setLayoutParams(tableRowParams);
+            tableLayout.addView(tableRow);
+        }
 
     }
 

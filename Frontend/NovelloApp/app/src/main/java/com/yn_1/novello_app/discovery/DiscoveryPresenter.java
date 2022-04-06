@@ -100,6 +100,8 @@ public class DiscoveryPresenter {
             }
         }
 
+        //todo: sort recommendations by higher rating first
+
         //show recommended books
         view.showRecommendedBooks(recommendations);
 
