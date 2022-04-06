@@ -18,12 +18,15 @@ public class DiscoveryModel {
 
     DiscoveryPresenter presenter;
 
+    int userID;
+
     /**
      * Constructor
      * @param presenter
      */
-    public DiscoveryModel (DiscoveryPresenter presenter) {
+    public DiscoveryModel (DiscoveryPresenter presenter, int userID) {
         this.presenter = presenter;
+        this.userID = userID;
     }
 
     /**
@@ -41,8 +44,7 @@ public class DiscoveryModel {
 
         JsonArrayRequester userBooksRequester = new JsonArrayRequester();
         JsonArrayCommandUserBooks command = new JsonArrayCommandUserBooks();
-        //todo: provide user ID in next line
-        userBooksRequester.getRequest("library/" + "userID", null, command, null, null);
+        userBooksRequester.getRequest("library/" + userID, null, command, null, null);
 
     }
 

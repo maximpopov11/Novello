@@ -39,7 +39,8 @@ public class DiscoveryView extends Fragment {
         //todo: leave cart through nav bar
         super.onCreate(savedInstanceState);
 
-        presenter = new DiscoveryPresenter(this);
+        int userID = DiscoveryViewArgs.fromBundle(getArguments()).getUserID();
+        presenter = new DiscoveryPresenter(this, userID);
 
     }
 

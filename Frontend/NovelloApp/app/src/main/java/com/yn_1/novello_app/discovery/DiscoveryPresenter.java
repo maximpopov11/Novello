@@ -16,6 +16,7 @@ public class DiscoveryPresenter {
     DiscoveryView view;
     DiscoveryModel model;
 
+    int userID;
     ArrayList<Book> allBooks;
     ArrayList<Book> userBooks;
 
@@ -23,9 +24,10 @@ public class DiscoveryPresenter {
      * Constructor
      * @param view
      */
-    public DiscoveryPresenter(DiscoveryView view) {
+    public DiscoveryPresenter(DiscoveryView view, int userID) {
         this.view = view;
-        this.model = new DiscoveryModel(this);
+        this.userID = userID;
+        this.model = new DiscoveryModel(this, userID);
         model.getAllBooks();
         model.getUserBooks();
     }
