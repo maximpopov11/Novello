@@ -66,8 +66,6 @@
             <argument
                 android:name="userID"
                 android:defaultValue="-1" />
-            <argument
-                android:name="cart" />
         </action>
     </fragment>
     <fragment
@@ -83,9 +81,13 @@
             app:destination="@id/homeFragment" />
         <argument
             android:name="cartPrices"
-            app:argType="float[]" />
+            app:argType="float[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="cartIDs"
-            app:argType="integer[]" />
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

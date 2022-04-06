@@ -37,7 +37,7 @@ public class CartView extends Fragment {
     CartPresenter presenter;
 
     User user;
-    ArrayList<Book> cart;
+    ArrayList<Book> cart = new ArrayList<>();
 
     Button purchase;
     LinearLayout innerLayout;
@@ -66,6 +66,7 @@ public class CartView extends Fragment {
         Log.d("Cart", "CartView entered on create view.");
 
         return inflater.inflate(R.layout.fragment_cart, container, false);
+
     }
 
     @Override
@@ -87,7 +88,7 @@ public class CartView extends Fragment {
             }
 
             CartViewDirections.ActionCartViewToPurchaseFragment action =
-                    CartViewDirections.actionCartViewToPurchaseFragment(null, null, null);
+                    CartViewDirections.actionCartViewToPurchaseFragment();
             action.setUserID(user.getUserId());
             action.setCartPrices(prices);
             action.setCartIDs(ids);
