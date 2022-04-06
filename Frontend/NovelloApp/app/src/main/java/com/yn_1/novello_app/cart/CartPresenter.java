@@ -48,20 +48,4 @@ public class CartPresenter {
         model.setUser(user);
     }
 
-    /**
-     * Purchase clicked
-     * @param cartView
-     */
-    public void purchaseClicked(CartView cartView) {
-        openPurchase(cartView);
-    }
-
-    /**
-     * Goes to purchase screen
-     * @param cartView
-     */
-    public void openPurchase(CartView cartView) {
-        //todo: PRE DEMO: go to purchase fragment
-    }
-
 }
