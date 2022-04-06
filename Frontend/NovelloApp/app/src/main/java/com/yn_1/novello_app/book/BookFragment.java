@@ -1,5 +1,6 @@
 package com.yn_1.novello_app.book;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -116,14 +117,15 @@ public class BookFragment extends Fragment implements BookContract.View {
     public void populateReviewsTable(Map<Integer, String[]> reviews) {
         for (int i = 0; i < reviews.size(); i++) {
             TableRow row = new TableRow(getContext());
+            row.setBackgroundColor(Color.YELLOW);
 
             TextView userID = new TextView(getContext());
             TextView userRating = new TextView(getContext());
             TextView userReview = new TextView(getContext());
 
             userID.setText(reviews.get(i)[0]);
-            userRating.setText(reviews.get(i)[0]);
-            userReview.setText(reviews.get(i)[0]);
+            userRating.setText(reviews.get(i)[1]);
+            userReview.setText(reviews.get(i)[2]);
 
             row.addView(userID);
             row.addView(userRating);

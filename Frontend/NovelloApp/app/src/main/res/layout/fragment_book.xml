@@ -18,14 +18,73 @@
 
             <ImageView
                 android:id="@+id/bookImageView"
-                android:layout_width="175dp"
-                android:layout_height="280dp"
+                android:layout_width="87dp"
+                android:layout_height="140dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:background="#000000"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:isIndicator="true"
+                android:scaleX="1"
+                android:scaleY="1"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingTitle"
+                app:layout_constraintStart_toEndOf="@+id/ratingTitle"
+                app:layout_constraintTop_toTopOf="@+id/ratingTitle"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TableLayout
+                android:id="@+id/reviewsTable"
+                android:layout_width="411dp"
+                android:layout_height="241dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reviewsText">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/green">
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="User"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="Rating"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="239dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="Comment"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+            </TableLayout>
 
             <TextView
                 android:id="@+id/titleText"
@@ -48,6 +107,7 @@
                 android:text=" Author:"
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/bookImageView"
                 app:layout_constraintTop_toTopOf="@+id/bookImageView" />
 
@@ -60,6 +120,7 @@
                 android:text=" Publication Year:"
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/bookImageView"
                 app:layout_constraintTop_toBottomOf="@+id/authorText" />
 
@@ -100,20 +161,6 @@
                 app:layout_constraintStart_toEndOf="@+id/bookImageView"
                 app:layout_constraintTop_toBottomOf="@+id/isbnText" />
 
-            <RatingBar
-                android:id="@+id/ratingBar"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:isIndicator="true"
-                android:scaleX="1"
-                android:scaleY="1"
-                app:layout_constraintBottom_toBottomOf="@+id/ratingTitle"
-                app:layout_constraintStart_toEndOf="@+id/ratingTitle"
-                app:layout_constraintTop_toTopOf="@+id/ratingTitle"
-                app:layout_constraintVertical_bias="0.0" />
-
             <TextView
                 android:id="@+id/ratingText"
                 android:layout_width="wrap_content"
@@ -127,25 +174,21 @@
 
             <TextView
                 android:id="@+id/descriptionText"
-                android:layout_width="220dp"
-                android:layout_height="129dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="363dp"
+                android:layout_height="178dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text=" Description:"
                 android:textColor="#000000"
-                android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="@+id/bookImageView"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/bookImageView"
-                app:layout_constraintTop_toBottomOf="@+id/priceText"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priceText" />
 
             <TextView
                 android:id="@+id/reviewsText"
                 android:layout_width="409dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text=" Reviews:"
                 android:textColor="#000000"
@@ -153,54 +196,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookImageView" />
-
-            <TableLayout
-                android:id="@+id/reviewsTable"
-                android:layout_width="411dp"
-                android:layout_height="241dp"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reviewsText">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/green" >
-
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center"
-                        android:text="User"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center"
-                        android:text="Rating"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="239dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center"
-                        android:text="Comment"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-
-                </TableRow>
-
-            </TableLayout>
+                app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
