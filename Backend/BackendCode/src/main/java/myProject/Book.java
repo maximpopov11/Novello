@@ -10,7 +10,6 @@ class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     Integer bookID;
 
     @Column

@@ -11,6 +11,7 @@ import java.util.Set;
 
 @RestController
 public class LibraryController {
+
     @Autowired
     LibraryInterface db;
     @Autowired
@@ -32,7 +33,6 @@ public class LibraryController {
         l.setBook(b);
         l.setPerson(p);
         db.save(l);
-
     }
 
     @GetMapping("/getPage/{bid}/{pid}")
