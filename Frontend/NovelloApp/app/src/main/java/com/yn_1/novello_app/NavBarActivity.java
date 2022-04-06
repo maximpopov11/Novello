@@ -50,7 +50,11 @@ public class NavBarActivity extends AppCompatActivity {
                         case R.id.cartView:
                             controller.navigate(R.id.cartView);
                             return true;
-                            
+
+                        case R.id.discoverFragment:
+                            controller.navigate(R.id.discoverFragment);
+                            return true;
+
                         default:
                             return false;
                     }
