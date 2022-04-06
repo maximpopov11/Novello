@@ -1,5 +1,6 @@
 package myProject;
 
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +18,17 @@ public class UserController {
                 orElseThrow(RuntimeException::new);
     }
 
-    //getmapping person {json: username and password}
-    //user id
-    //0 if failed
+    @GetMapping("/login/{id}")
+    int login(@RequestBody JSONObject json, @PathVariable Integer id){
+        User user = db.findById(id).orElseThrow(RuntimeException::new);
+
+        if(!user.username.equals(json.getAsString("username"))){
+            return 0;
+        }
+        if(!user.password.equals(json.getAsString("password"))){
+            return 0;
+        }
+        return 1;    }
 
 
     @PostMapping("/addAllPersons")
