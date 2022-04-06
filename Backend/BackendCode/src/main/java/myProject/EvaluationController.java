@@ -18,7 +18,7 @@ public class EvaluationController {
     @Autowired
     UserInterface pdb;
 
-    @PutMapping("/addEvaluation/{bid}/{pid}")
+    @PutMapping("/evaluation/{bid}/{pid}")
     Evaluation creatEvaluation(@PathVariable Integer bid, @PathVariable Integer pid, @RequestBody Evaluation br) {
 
         EvaluationKey brk = new EvaluationKey();
