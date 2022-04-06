@@ -4,6 +4,7 @@ import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -39,9 +40,7 @@ public class UserController {
 
     @PostMapping("/addAllPersons")
     void createAllPersons(@RequestBody User[] p) {
-        for (int i = 0; i < p.length; i++) {
-            db.save(p[i]);
-        }
+        db.saveAll(Arrays.asList(p));
 
     }
 
