@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            userRequester.getRequest("person", accountCredentialsJson, command, null, null);
+            userRequester.getRequest("login", accountCredentialsJson, command, null, null);
         });
 
         createAccount.setOnClickListener(v -> {
