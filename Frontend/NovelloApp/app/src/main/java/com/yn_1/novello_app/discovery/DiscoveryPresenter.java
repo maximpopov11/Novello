@@ -1,5 +1,7 @@
 package com.yn_1.novello_app.discovery;
 
+import android.util.Pair;
+
 import com.yn_1.novello_app.book.Book;
 
 import java.util.ArrayList;
@@ -65,30 +67,41 @@ public class DiscoveryPresenter {
      */
     private void runRecommendationAlgorithm() {
 
-        //todo: recommendation algorithm using rating, genre, and author
-        //todo: show recommended books
+        //constants
+        final int MIN_RECOMMENDED_RATING = 3;
+        final int AUTHOR_WEIGHT = 3;
+        final int GENRE_WEIGHT = 1;
 
-        //go through all user library books
-            //count author ++ for respective author
-            //count genre ++ for respective genre
-        //go through all books
-            //if rating >= 3, give recommendation rating:
-                //rec rating = max (rating * author weight (3) * count author) or (rating * genre weight (1) * count genre)
-        //recommended = top x (< if less than x) recommendation rating books
-        //show recommended in view
-
+        //author and genre count
         HashMap<String, Integer> authorHashMap = new HashMap<String, Integer>();
         HashMap<String, Integer> genreHashMap = new HashMap<String, Integer>();
         for (Book book : userBooks) {
             String author = book.getAuthor();
             String genre = book.getGenre();
-            if (authorHashMap.containsKey(author)) {
+            authorHashMap.put(author, authorHashMap.get(author) + 1);
+            genreHashMap.put(genre, genreHashMap.get(genre) + 1);
+        }
 
-            }
-            else {
-
+        //book recommendation rating set
+        ArrayList<Pair<Book, Double>> recommendations = new ArrayList<>();
+        for (Book book : allBooks) {
+            if (book.getRating() >= MIN_RECOMMENDED_RATING) {
+                Integer numAuthor = authorHashMap.get(book.getAuthor());
+                if (numAuthor == null) {
+                    numAuthor = 0;
+                }
+                Integer numGenre = genreHashMap.get(book.getGenre());
+                if (numGenre == null) {
+                    numGenre = 0;
+                }
+                double recommendationRating =
+                        book.getRating() * Math.max(AUTHOR_WEIGHT * numAuthor, GENRE_WEIGHT * numGenre);
+                recommendations.add(new Pair<>(book, recommendationRating));
             }
         }
+
+        //show recommended books
+        view.showRecommendedBooks(recommendations);
 
     }
 
