@@ -6,12 +6,13 @@ import android.widget.ImageButton;
 
 import java.io.Serializable;
 
-public class Book implements Parcelable {
+public class Book {
 
     //book fields
     int bookID;
     String title;
     String author;
+    String genre;
     int publicationYear;
     String isbn;
     double rating;
@@ -35,10 +36,12 @@ public class Book implements Parcelable {
      * @param isbn book isbn
      * @param rating book rating
      */
-    public Book(int bookID, String title, String author, int publicationYear, String isbn, double rating, double price, String description, String readingURL, String imageURL) {
+    public Book(int bookID, String title, String author, String genre, int publicationYear,
+                String isbn, double rating, double price, String description, String readingURL, String imageURL) {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
+        this.genre = genre;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.rating = rating;
@@ -90,6 +93,11 @@ public class Book implements Parcelable {
     public String getAuthor() {
         return author;
     }
+
+    /**
+     * @return book genre
+     */
+    public String getGenre() {return genre;}
 
     /**
      * @return book rating
@@ -180,24 +188,4 @@ public class Book implements Parcelable {
      */
     public void setUserCategoryID(String categoryName) { userCategoryID = categoryName; }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(bookID);
-        dest.writeString(title);
-        dest.writeString(author);
-        dest.writeInt(publicationYear);
-        dest.writeString(isbn);
-        dest.writeDouble(rating);
-        dest.writeDouble(price);
-        dest.writeString(description);
-        dest.writeString(readingURL);
-        dest.writeString(imageURL);
-        //ImageButton not linked
-        dest.writeString(userCategoryID);
-    }
 }
