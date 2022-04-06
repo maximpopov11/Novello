@@ -26,7 +26,7 @@ public interface LibraryContract {
          * COLLECTION_COUNT: Number of collection {e.g.: Reading, Wishlist, etc.}
          * BOOK_SIZE: The dimensions of a book
          */
-        int COLLECTION_COUNT = 3;
+        int COLLECTION_COUNT = 4;
         int[] BOOK_SIZE = {175*3, 280*3};
 
         /**
@@ -158,6 +158,6 @@ public interface LibraryContract {
         /**
          * Handles logic for book menu item selection
          */
-        void onBookMenuItemSelected(MenuItem item);
+        void onBookMenuItemSelected(User user, MenuItem item);
     }
 }

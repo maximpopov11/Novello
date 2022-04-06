@@ -26,8 +26,9 @@ public class PurchaseFragment extends Fragment {
     EditText creditCardInput;
     String creditCardNumber;
     TextView priceText;
-    List<Book> cart;
     int userID;
+    int[] cartIDs;
+    float[] cartPrices;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,14 +38,15 @@ public class PurchaseFragment extends Fragment {
         finish.findViewById(R.id.finishPurchase);
         creditCardInput.findViewById(R.id.creditCardInput);
         priceText.findViewById(R.id.price);
-        cart = PurchaseFragmentArgs.fromBundle(getArguments()).getCart();
-        userID = PurchaseFragmentArgs.fromBundle(getArguments()).getUserID();
 
+        userID = PurchaseFragmentArgs.fromBundle(getArguments()).getUserID();
+        cartIDs = PurchaseFragmentArgs.fromBundle(getArguments()).getCartIDs();
+        cartPrices = PurchaseFragmentArgs.fromBundle(getArguments()).getCartPrices();
         //todo: show list of book titles/authors/prices in vertical scroll view
 
         double price = 0;
-        for (Book book : cart) {
-            price += book.getPrice();
+        for (int i = 0; i < cartPrices.length; i++) {
+            price += cartPrices[i];
         }
         priceText.setText("Price = $" + price);
 
@@ -54,8 +56,9 @@ public class PurchaseFragment extends Fragment {
                 JsonObjectRequester purchaseRequester = new JsonObjectRequester();
                 JsonObjectCommand command = new JsonObjectCommand();
                 //todo: 3 represents unread. Set that in an enum.
-                for (Book book : cart) {
-                    purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + userID + "/" + 3,
+                for (int i = 0; i < cartIDs.length; i++) {
+                    int bookID = cartIDs[i];
+                    purchaseRequester.postRequest("setCategory/" + bookID + "/" + userID + "/" + 3,
                             null, command, null, null);
                 }
             }
@@ -90,9 +93,8 @@ public class PurchaseFragment extends Fragment {
      */
     private void purchaseResult(boolean succeeded) {
         if (chargeCard(creditCardNumber)) {
-            PurchaseFragmentDirections.ActionPurchaseFragmentToHomeFragment action =
-                    new PurchaseFragmentDirections.ActionPurchaseFragmentToHomeFragment();
-            ((NavBarActivity)getActivity()).getController().navigate(action);
+            ((NavBarActivity)getActivity()).getController().navigate(PurchaseFragmentDirections.
+                    actionPurchaseFragmentToHomeFragment());
         }
         else {
             //todo: card could not be charged, do something about it

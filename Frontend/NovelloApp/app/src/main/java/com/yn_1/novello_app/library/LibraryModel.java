@@ -29,8 +29,6 @@ public class LibraryModel implements LibraryContract.Model {
     // Collection of book buttons
     private Map<ImageButton, Book> bookButtons;
 
-    private final String[] categoryPaths = {"currentlyReading", "wishlist", "read"};
-
     private int finishedCollectionCounter;
     @Override
     public void fetchAllBooks(User user, LibraryContract.View view, LibraryContract.Presenter presenter) {
@@ -40,11 +38,16 @@ public class LibraryModel implements LibraryContract.Model {
         bookCollection = new ArrayList<>();
         bookButtons = new HashMap<>();
 
-        for (int i = 0; i < categoryPaths.length; i++) {
-            String categoryPath = categoryPaths[i];
+        for (int categoryIndex = 1; categoryIndex < LibraryCategory.values().length; categoryIndex++) {
+
+            // Index 2 is cart, which we should skip
+            if (categoryIndex == 2)
+                continue;
+
+            final int finalCategoryIndex = categoryIndex;
 
             JsonArrayRequester req = new JsonArrayRequester();
-            req.getRequest("library/" + user.getUserId() + "/" + categoryPath,
+            req.getRequest(user.getUserId() + "/library/" + categoryIndex,
                     null, new VolleyCommand<JSONArray>() {
                         @Override
                         public void execute(JSONArray data) {
@@ -62,7 +65,7 @@ public class LibraryModel implements LibraryContract.Model {
                                     String bookUrl = book.getString("bookUrl");
                                     String imageUrl = book.getString("imageUrl");
                                     Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, price, description, bookUrl, imageUrl);
-                                    newBook.setUserCategoryID(categoryPath);
+                                    newBook.setUserCategoryID(LibraryCategory.values()[finalCategoryIndex].getStringFormat());
                                     bookCollection.add(newBook);
                                     bookCount++;
                                 } catch (JSONException e) {
