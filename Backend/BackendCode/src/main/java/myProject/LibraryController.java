@@ -53,6 +53,7 @@ public class LibraryController {
         lk.setPersonId(pid);
         Library l = db.findById(lk).orElseThrow(NoSuchElementException::new);
         l.setPage(page);
+        db.save(l);
         return l.getPage();
     }
 
@@ -64,6 +65,7 @@ public class LibraryController {
         lk.setPersonId(pid);
         Library l = db.findById(lk).orElseThrow(NoSuchElementException::new);
         l.setCategory(category);
+        db.save(l);
         return l.getCategory();
     }
 
