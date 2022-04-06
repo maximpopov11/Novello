@@ -54,11 +54,12 @@ public class LibraryModel implements LibraryContract.Model {
                                     int bookID = book.getInt("bookID");
                                     String title = book.getString("title");
                                     String author = book.getString("author");
+                                    String genre = book.getString("genre");
                                     int publicationYear = book.getInt("publicationYear");
                                     String isbn = book.getString("isbn");
                                     int rating = book.getInt("rating");
                                     String imageUrl = book.getString("imageUrl");
-                                    Book newBook = new Book(bookID, title, author, publicationYear, isbn, rating, -1, null, imageUrl);
+                                    Book newBook = new Book(bookID, title, author, genre, publicationYear, isbn, rating, -1, null, imageUrl);
                                     newBook.setUserCategoryID(categoryPath);
                                     bookCollection.add(newBook);
                                     bookCount++;

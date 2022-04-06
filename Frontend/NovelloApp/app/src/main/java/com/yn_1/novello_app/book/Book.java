@@ -8,6 +8,7 @@ public class Book {
     int bookID;
     String title;
     String author;
+    String genre;
     int publicationYear;
     String isbn;
     double rating;
@@ -30,10 +31,11 @@ public class Book {
      * @param isbn book isbn
      * @param rating book rating
      */
-    public Book(int bookID, String title, String author, int publicationYear, String isbn, double rating, double price, String description, String imageURL) {
+    public Book(int bookID, String title, String author, String genre, int publicationYear, String isbn, double rating, double price, String description, String imageURL) {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
+        this.genre = genre;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.rating = rating;
@@ -84,6 +86,11 @@ public class Book {
     public String getAuthor() {
         return author;
     }
+
+    /**
+     * @return book genre
+     */
+    public String getGenre() {return genre;}
 
     /**
      * @return book rating

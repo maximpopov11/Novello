@@ -30,6 +30,7 @@ public class BookModel implements BookContract.Model {
                 try {
                     String titleText = data.getString("title");
                     String authorText = data.getString("author");
+                    String genreText = data.getString("genre");
                     int publicationYearText = data.getInt("publicationYear");
                     String isbnText = data.getString("isbn");
                     double ratingText = data.getDouble("rating");
@@ -37,7 +38,7 @@ public class BookModel implements BookContract.Model {
                     Log.d("price", "Book price: " + priceText);
                     String descriptionText = data.getString("description");
                     String imageURL = data.getString("imageUrl");
-                    currentBook = new Book(bookID, titleText, authorText, publicationYearText, isbnText,
+                    currentBook = new Book(bookID, titleText, authorText, genreText, publicationYearText, isbnText,
                             ratingText, priceText, descriptionText, imageURL);
                     fetchImage(imageURL, view);
                 }
