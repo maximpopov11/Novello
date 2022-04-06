@@ -18,17 +18,23 @@ public class UserController {
                 orElseThrow(RuntimeException::new);
     }
 
-    @GetMapping("/login/{id}")
-    int login(@RequestBody JSONObject json, @PathVariable Integer id){
-        User user = db.findById(id).orElseThrow(RuntimeException::new);
+    @GetMapping("/login")
+    JSONObject login(@RequestBody JSONObject json){
+        User user;
+        JSONObject jsonReturn = new JSONObject();
+        int i;
+        for(i = 1; i<db.count(); i++){
+            user = db.findById(i).orElseThrow(RuntimeException::new);
+            if(user.username.equals(json.getAsString("username"))){
+                if(user.password.equals(json.getAsString("password"))){
+                    jsonReturn.appendField("userID",i);
+                    return jsonReturn;
+                }
+            }
 
-        if(!user.username.equals(json.getAsString("username"))){
-            return 0;
         }
-        if(!user.password.equals(json.getAsString("password"))){
-            return 0;
-        }
-        return 1;    }
+        return null;
+    }
 
 
     @PostMapping("/addAllPersons")
