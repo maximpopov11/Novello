@@ -123,6 +123,14 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         ((NavBarActivity)getActivity()).getController().navigate(action);
     }
 
+    @Override
+    public void reviewBook(Book book) {
+        LibraryFragmentDirections.ActionLibraryFragmentToReviewFragment action =
+                LibraryFragmentDirections.actionLibraryFragmentToReviewFragment();
+        action.setBookID(book.getBookID());
+        ((NavBarActivity)getActivity()).getController().navigate(action);
+    }
+
     @Nullable
     @Override
     public Context getContext() {

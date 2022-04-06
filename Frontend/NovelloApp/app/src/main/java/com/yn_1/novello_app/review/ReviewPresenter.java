@@ -16,7 +16,7 @@ public class ReviewPresenter implements ReviewContract.Presenter {
 
     @Override
     public void onPostButtonPressed(User user, double rating, String review) {
-        model.postReview(user, rating, review);
+        model.postReview(this, user, rating, review);
     }
 
     @Override

@@ -34,7 +34,11 @@
         </action>
         <action
             android:id="@+id/action_libraryFragment_to_reviewFragment"
-            app:destination="@id/reviewFragment" />
+            app:destination="@id/reviewFragment" >
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/readingFragment"

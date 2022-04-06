@@ -12,20 +12,19 @@ import org.json.JSONObject;
 
 public class ReviewModel implements ReviewContract.Model {
 
-    private ReviewContract.VolleyListener volleyListener;
     private int bookID;
 
-    public ReviewModel(ReviewContract.VolleyListener volleyListener, int bookID) {
-        this.volleyListener = volleyListener;
+    public ReviewModel(int bookID) {
         this.bookID = bookID;
     }
 
     @Override
-    public void postReview(User user, double rating, String review) {
+    public void postReview(ReviewContract.VolleyListener volleyListener, User user, double rating, String review) {
         JSONObject post = new JSONObject();
         try {
             post.put("userId", user.getUserId());
             post.put("rating", rating);
+            post.put("review", review);
         } catch (JSONException e) {
             e.printStackTrace();
         }

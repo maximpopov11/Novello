@@ -53,7 +53,7 @@ public class ReviewFragment extends Fragment implements ReviewContract.View {
         int bookID = ReviewFragmentArgs.fromBundle(getArguments()).getBookID();
 
         // Instantiate the presenter
-        presenter = new ReviewPresenter(this, new ReviewModel(presenter, bookID));
+        presenter = new ReviewPresenter(this, new ReviewModel(bookID));
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_review, container, false);
@@ -65,7 +65,7 @@ public class ReviewFragment extends Fragment implements ReviewContract.View {
 
         // Find components
         ratingBar = view.findViewById(R.id.postReviewRatingBar);
-        reviewText = view.findViewById(R.id.reviewsText);
+        reviewText = view.findViewById(R.id.postReviewText);
         postReviewButton = view.findViewById(R.id.postReviewButton);
 
         // Set the on click listener to a method in the presenter
