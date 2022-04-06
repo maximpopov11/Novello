@@ -48,6 +48,16 @@ public class PurchaseFragment extends Fragment {
         }
         priceText.setText("Price = $" + price);
 
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        finish = view.findViewById(R.id.finishPurchase);
+        creditCardInput = view.findViewById(R.id.creditCardInput);
+        priceText = view.findViewById(R.id.price);
+
         finish.setOnClickListener(v -> {
             creditCardNumber = creditCardInput.getText().toString();
             if (canChargeCard(creditCardNumber)) {
@@ -64,16 +74,6 @@ public class PurchaseFragment extends Fragment {
                 //todo: card cannot be charged, do something about it
             }
         });
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        finish = view.findViewById(R.id.finishPurchase);
-        creditCardInput = view.findViewById(R.id.creditCardInput);
-        priceText = view.findViewById(R.id.price);
 
     }
 

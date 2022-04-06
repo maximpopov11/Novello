@@ -53,6 +53,15 @@ public class CartView extends Fragment {
 
         presenter.getCartBooks();
 
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        purchase = view.findViewById(R.id.purchase);
+        innerLayout = view.findViewById(R.id.cartLinearLayoutInner);
+
         purchase.setOnClickListener(v -> {
 
             float[] prices = new float[cart.size()];
@@ -70,15 +79,6 @@ public class CartView extends Fragment {
             ((NavBarActivity)getActivity()).getController().navigate(action);
 
         });
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        purchase = view.findViewById(R.id.purchase);
-        innerLayout = view.findViewById(R.id.cartLinearLayoutInner);
 
     }
 
