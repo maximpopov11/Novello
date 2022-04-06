@@ -36,14 +36,14 @@ class Book {
     @Column
     String description;
 
-    @OneToMany(mappedBy = "book")
-    Set<Evaluation> evaluation;
-
     @Column
     String readingUrl;
 
     @Column
     String imageUrl;
+
+    @OneToMany(mappedBy = "book")
+    Set<Evaluation> evaluation;
 
     @OneToMany(mappedBy = "book")
     @JsonIgnore
