@@ -1,6 +1,8 @@
 package myProject;
 
-import net.minidev.json.annotate.JsonIgnore;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -43,6 +45,7 @@ class Book {
     String imageUrl;
 
     @OneToMany(mappedBy = "book")
+    @JsonIgnore
     Set<Evaluation> evaluation;
 
     @OneToMany(mappedBy = "book")

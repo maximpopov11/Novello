@@ -19,6 +19,7 @@ public class Library {
     Book book;
 
     int category;
+
     int page;
 
     public int getPage() {
