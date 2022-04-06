@@ -93,7 +93,13 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void execute(JSONObject data) {
             try {
-                int userID = data.getInt("userID");
+                int userID;
+                if (data != null) {
+                    userID = data.getInt("userID");
+                }
+                else {
+                    userID = 0;
+                }
                 loginResult(userID);
             } catch (JSONException e) {
                 e.printStackTrace();
