@@ -41,7 +41,6 @@ public class CartView extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         //todo: PRE DEMO: get to cart from nav bar
-        //todo: PRE DEMO: leave cart through nav bar
         super.onCreate(savedInstanceState);
 
         presenter = new CartPresenter(this);
@@ -55,7 +54,11 @@ public class CartView extends Fragment {
         presenter.getCartBooks();
 
         purchase.setOnClickListener(v -> {
-            presenter.purchaseClicked(this);
+            CartViewDirections.ActionCartViewToPurchaseFragment action =
+                    new CartViewDirections.ActionCartViewToPurchaseFragment();
+            action.setCart(presenter.cart);
+            action.setUserID(user.getUserId());
+            ((NavBarActivity)getActivity()).getController().navigate(action);
         });
 
     }
