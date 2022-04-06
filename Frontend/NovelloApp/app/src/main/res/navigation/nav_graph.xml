@@ -62,13 +62,26 @@
         android:label="CartView" >
         <action
             android:id="@+id/action_cartView_to_purchaseFragment"
-            app:destination="@id/purchaseFragment" />
+            app:destination="@id/purchaseFragment" >
+            <argument
+                android:name="userID"
+                android:defaultValue="-1" />
+            <argument
+                android:name="cart" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/purchaseFragment"
         android:name="com.yn_1.novello_app.cart.PurchaseFragment"
         android:label="PurchaseFragment" >
-        <argument android:name="something"
-            app:argType="string" />
+        <argument android:name="cart"
+            app:argType="com.yn_1.novello_app.book.Book[]" />
+        <argument
+            android:name="userID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_purchaseFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

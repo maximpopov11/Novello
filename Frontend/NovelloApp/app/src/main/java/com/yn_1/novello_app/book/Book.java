@@ -2,7 +2,9 @@ package com.yn_1.novello_app.book;
 
 import android.widget.ImageButton;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 
     //book fields
     int bookID;

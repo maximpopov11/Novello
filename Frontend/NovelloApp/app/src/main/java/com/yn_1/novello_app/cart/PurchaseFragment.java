@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.library.LibraryFragment;
@@ -25,18 +26,21 @@ public class PurchaseFragment extends Fragment {
     EditText creditCardInput;
     String creditCardNumber;
     TextView priceText;
-    List<Book> cart;
+
+    int userID;
+    Book[] cart;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        //todo: PRE DEMO: leave purchase through nav bar
         super.onCreate(savedInstanceState);
 
         finish.findViewById(R.id.finishPurchase);
         creditCardInput.findViewById(R.id.creditCardInput);
         priceText.findViewById(R.id.price);
-        //todo: PRE DEMO: get cart from cart fragment
+
+        userID = PurchaseFragmentArgs.fromBundle(getArguments()).getUserID();
+        cart = PurchaseFragmentArgs.fromBundle(getArguments()).getCart();
         //todo: show list of book titles/authors/prices in vertical scroll view
 
         double price = 0;
@@ -51,9 +55,8 @@ public class PurchaseFragment extends Fragment {
                 JsonObjectRequester purchaseRequester = new JsonObjectRequester();
                 JsonObjectCommand command = new JsonObjectCommand();
                 //todo: 3 represents unread. Set that in an enum.
-                //todo: PRE DEMO: get user and provide user id in request
                 for (Book book : cart) {
-                    purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + "set this to userID" + "/" + 3,
+                    purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + userID + "/" + 3,
                             null, command, null, null);
                 }
             }
@@ -88,7 +91,8 @@ public class PurchaseFragment extends Fragment {
      */
     private void purchaseResult(boolean succeeded) {
         if (chargeCard(creditCardNumber)) {
-            //todo: PRE DEMO: go to dashboard
+            ((NavBarActivity)getActivity()).getController().navigate(PurchaseFragmentDirections.
+                    actionPurchaseFragmentToHomeFragment());
         }
         else {
             //todo: card could not be charged, do something about it
