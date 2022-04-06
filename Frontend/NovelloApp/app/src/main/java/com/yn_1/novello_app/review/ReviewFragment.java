@@ -2,12 +2,17 @@ package com.yn_1.novello_app.review;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 
 /**
@@ -15,7 +20,14 @@ import com.yn_1.novello_app.R;
  * Use the {@link ReviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReviewFragment extends Fragment {
+public class ReviewFragment extends Fragment implements ReviewContract.View {
+
+    ReviewContract.Presenter presenter;
+
+    // Declare components
+    RatingBar ratingBar;
+    TextView reviewText;
+    Button postReviewButton;
 
     /**
      * Use this factory method to create a new instance of
@@ -37,7 +49,37 @@ public class ReviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Get the book ID from the bundle
+        int bookID = ReviewFragmentArgs.fromBundle(getArguments()).getBookID();
+
+        // Instantiate the presenter
+        presenter = new ReviewPresenter(this, new ReviewModel(presenter, bookID));
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_review, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Find components
+        ratingBar = view.findViewById(R.id.postReviewRatingBar);
+        reviewText = view.findViewById(R.id.reviewsText);
+        postReviewButton = view.findViewById(R.id.postReviewButton);
+
+        // Set the on click listener to a method in the presenter
+        postReviewButton.setOnClickListener(v ->
+                presenter.onPostButtonPressed(((NavBarActivity)getActivity()).getUser(),
+                ratingBar.getRating(), reviewText.getText().toString())
+        );
+    }
+
+    @Override
+    public void navigateToBookScreen(int bookID) {
+        ReviewFragmentDirections.ActionReviewFragmentToBookFragment action =
+                ReviewFragmentDirections.actionReviewFragmentToBookFragment();
+        action.setBookID(bookID);
+        ((NavBarActivity)getActivity()).getController().navigate(bookID);
     }
 }
