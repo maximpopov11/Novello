@@ -5,6 +5,7 @@ import android.util.Pair;
 import com.yn_1.novello_app.book.Book;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 /**
@@ -100,10 +101,71 @@ public class DiscoveryPresenter {
             }
         }
 
-        //todo: sort recommendations by higher rating first
-
-        //show recommended books
+        sortRecommendations(recommendations);
         view.showRecommendedBooks(recommendations);
+
+    }
+
+    /**
+     * Sorts recommendations highest recommendation rating to lowest
+     * @param recommendations
+     */
+    private void sortRecommendations(ArrayList<Pair<Book, Double>> recommendations) {
+
+        mergeSort(recommendations);
+
+    }
+
+    /**
+     * Recursive merge sort over recommendations
+     * @param recommendations
+     */
+    private static void mergeSort(ArrayList<Pair<Book, Double>> recommendations) {
+
+        if (recommendations.size() < 2) {
+            return;
+        }
+        int mid = recommendations.size() / 2;
+        ArrayList<Pair<Book, Double>> left = new ArrayList<>(mid);
+        ArrayList<Pair<Book, Double>> right = new ArrayList<>(recommendations.size() - mid);
+        for (int i = 0; i < mid; i++) {
+            left.set(i, recommendations.get(i));
+        }
+        for (int i = mid; i < recommendations.size(); i++) {
+            right.set(i - mid, recommendations.get(i));
+        }
+        mergeSort(left);
+        mergeSort(right);
+        merge(recommendations, left, right, mid, recommendations.size() - mid);
+
+    }
+
+    /**
+     * Merge function for merge sort
+     * @param recommendations
+     * @param left
+     * @param right
+     * @param left
+     * @param right
+     */
+    public static void merge(ArrayList<Pair<Book, Double>> recommendations, ArrayList<Pair<Book, Double>> leftArray,
+                             ArrayList<Pair<Book, Double>> rightArray, int left, int right) {
+
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (leftArray.get(i).second >= rightArray.get(j).second) {
+                recommendations.set(k++, leftArray.get(i++));
+            }
+            else {
+                recommendations.set(k++, rightArray.get(j++));
+            }
+        }
+        while (i < left) {
+            recommendations.set(k++, leftArray.get(i++));
+        }
+        while (j < right) {
+            recommendations.set(k++, rightArray.get(j++));
+        }
 
     }
 
