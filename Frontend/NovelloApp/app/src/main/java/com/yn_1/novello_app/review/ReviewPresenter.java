@@ -1,5 +1,7 @@
 package com.yn_1.novello_app.review;
 
+import android.util.Log;
+
 import com.yn_1.novello_app.account.User;
 
 public class ReviewPresenter implements ReviewContract.Presenter {
@@ -19,6 +21,7 @@ public class ReviewPresenter implements ReviewContract.Presenter {
 
     @Override
     public void onReviewSucceeded() {
+        Log.d("Review", "Listener succeeded");
         view.navigateToBookScreen(model.getBookID());
     }
 }
