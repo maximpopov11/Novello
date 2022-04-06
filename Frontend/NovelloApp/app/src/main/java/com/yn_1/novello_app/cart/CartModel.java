@@ -44,7 +44,7 @@ public class CartModel {
         JsonArrayRequester cartBookRequester = new JsonArrayRequester();
         JsonArrayCommand command = new JsonArrayCommand();
         //todo: 2 represents cart. Set that in an enum.
-        cartBookRequester.getRequest("library/" + user.getUserId() + "2", null, command,
+        cartBookRequester.getRequest("library/" + user.getUserId() + "/2", null, command,
                 null, null);
     }
 
