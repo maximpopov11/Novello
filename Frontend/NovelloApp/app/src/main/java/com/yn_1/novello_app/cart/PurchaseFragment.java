@@ -3,52 +3,83 @@ package com.yn_1.novello_app.cart;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.yn_1.novello_app.R;
-import com.yn_1.novello_app.account.AdultUser;
-import com.yn_1.novello_app.account.LoginActivity;
+import com.yn_1.novello_app.book.Book;
+import com.yn_1.novello_app.library.LibraryFragment;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class PurchaseFragment extends Fragment {
 
     Button finish;
     EditText creditCardInput;
     String creditCardNumber;
+    TextView priceText;
+    List<Book> cart;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        //todo: leave purchase through nav bar
+        //todo: PRE DEMO: leave purchase through nav bar
         super.onCreate(savedInstanceState);
 
         finish.findViewById(R.id.finishPurchase);
         creditCardInput.findViewById(R.id.creditCardInput);
-        //todo: show total price and list of book titles in vertical scroll view
+        priceText.findViewById(R.id.price);
+        //todo: PRE DEMO: get cart from cart fragment
+        //todo: show list of book titles/authors/prices in vertical scroll view
+
+        double price = 0;
+        for (Book book : cart) {
+            price += book.getPrice();
+        }
+        priceText.setText("Price = $" + price);
 
         finish.setOnClickListener(v -> {
             creditCardNumber = creditCardInput.getText().toString();
-            JsonObjectRequester purchaseRequester = new JsonObjectRequester();
-            JsonObjectCommand command = new JsonObjectCommand();
-            //todo: add cart information to purchaseJson
-            JSONObject purchaseJson = new JSONObject();
-            try {
-                purchaseJson.put("CreditCardNumber", creditCardNumber);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            if (canChargeCard(creditCardNumber)) {
+                JsonObjectRequester purchaseRequester = new JsonObjectRequester();
+                JsonObjectCommand command = new JsonObjectCommand();
+                //todo: 3 represents unread. Set that in an enum.
+                //todo: PRE DEMO: get user and provide user id in request
+                for (Book book : cart) {
+                    purchaseRequester.postRequest("setCategory/" + book.getBookID() + "/" + "set this to userID" + "/" + 3,
+                            null, command, null, null);
+                }
             }
-            //todo: test next line
-            purchaseRequester.postRequest("cart", purchaseJson, command, null, null);
-            //todo: complete transaction
+            else {
+                //todo: card cannot be charged, do something about it
+            }
         });
 
+    }
+
+    /**
+     * @param creditCardNumber
+     * @return true if the card can be charged
+     */
+    private boolean canChargeCard(String creditCardNumber) {
+        //todo: move to user or other more appropriate location
+        return true;
+    }
+
+    /**
+     * @param creditCardNumber
+     * @return true if the card was charged successfully
+     */
+    private boolean chargeCard(String creditCardNumber) {
+        //todo: move to user or other more appropriate location
+        return true;
     }
 
     /**
@@ -56,7 +87,12 @@ public class PurchaseFragment extends Fragment {
      * @param succeeded is true if the purchase was successful
      */
     private void purchaseResult(boolean succeeded) {
-        //todo: go to dashbaord
+        if (chargeCard(creditCardNumber)) {
+            //todo: PRE DEMO: go to dashboard
+        }
+        else {
+            //todo: card could not be charged, do something about it
+        }
     }
 
     /**
