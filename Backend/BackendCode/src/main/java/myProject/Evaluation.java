@@ -53,7 +53,7 @@ public class Evaluation {
         this.user = user;
     }
 
-    public void setReview() {
+    public void setReview(String review) {
         this.review = review;
     }
 

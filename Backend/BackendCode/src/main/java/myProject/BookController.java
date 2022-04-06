@@ -3,6 +3,7 @@ package myProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,31 +21,15 @@ public class BookController {
 
     @PostMapping("/addAllBooks")
     void createAllBooks(@RequestBody Book[] b) {
-        for (int i = 0; i < b.length; i++) {
-            db.save(b[i]);
-        }
+        db.saveAll(Arrays.asList(b));
 
     }
 
-//    @GetMapping("/book/{id}")
-//    Books getBook(@PathVariable String id){
-//        return db.findById(id);//how to find a column
-//    }
 
     @GetMapping("/book/{id}")
     Optional<Book> getBook(@PathVariable Integer id) {
         return db.findById(id);
     }
-
-//    @PutMapping("/book/{id}")
-//    Books updateBook(@PathVariable Integer id, @RequestBody Books b){
-//        Optional<Books> bk = db.findById(id);
-//        if (bk == null){
-//            return null;
-//        }
-//        db.save
-//        return b;
-//    }
 
 
     @RequestMapping("/books")
@@ -80,10 +65,4 @@ public class BookController {
         return "deleted " + id;
     }
 
-    @GetMapping("/getUrl/{bid}")
-    String getUrl(@PathVariable Integer bid) {
-
-        Book b = db.findById(bid).orElseThrow(RuntimeException::new);
-        return b.getReadingUrl();
-    }
 }

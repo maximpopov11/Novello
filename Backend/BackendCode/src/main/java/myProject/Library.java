@@ -41,8 +41,8 @@ public class Library {
         return category;
     }
 
-    public void setCategory(int catagory) {
-        this.category = catagory;
+    public void setCategory(int category) {
+        this.category = category;
     }
 
     public User getPerson() {

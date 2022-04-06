@@ -26,8 +26,8 @@ public class LibraryController {
         lk.setPersonId(pid);
         Library l = new Library();
         l.setId(lk);
-        User p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
-        Book b = bdb.findById(bid).orElseThrow(() -> new NoSuchElementException());
+        User p = pdb.findById(pid).orElseThrow(NoSuchElementException::new);
+        Book b = bdb.findById(bid).orElseThrow(NoSuchElementException::new);
 
         l.setBook(b);
         l.setPerson(p);
@@ -41,7 +41,7 @@ public class LibraryController {
         LibraryKey lk = new LibraryKey();
         lk.setBookId(bid);
         lk.setPersonId(pid);
-        Library l = db.findById(lk).orElseThrow(() -> new NoSuchElementException());
+        Library l = db.findById(lk).orElseThrow(NoSuchElementException::new);
         return l.getPage();
     }
 
@@ -51,19 +51,19 @@ public class LibraryController {
         LibraryKey lk = new LibraryKey();
         lk.setBookId(bid);
         lk.setPersonId(pid);
-        Library l = db.findById(lk).orElseThrow(() -> new NoSuchElementException());
+        Library l = db.findById(lk).orElseThrow(NoSuchElementException::new);
         l.setPage(page);
         return l.getPage();
     }
 
-    @PutMapping("/setCatagory/{bid}/{pid}/{category}")
-    int setCatagory(@PathVariable Integer bid, @PathVariable Integer pid, @PathVariable Integer catagory) {
+    @PutMapping("/setCategory/{bid}/{pid}/{category}")
+    int setCategory(@PathVariable Integer bid, @PathVariable Integer pid, @PathVariable Integer category) {
 
         LibraryKey lk = new LibraryKey();
         lk.setBookId(bid);
         lk.setPersonId(pid);
-        Library l = db.findById(lk).orElseThrow(() -> new NoSuchElementException());
-        l.setCategory(catagory);
+        Library l = db.findById(lk).orElseThrow(NoSuchElementException::new);
+        l.setCategory(category);
         return l.getCategory();
     }
 
@@ -79,14 +79,14 @@ public class LibraryController {
     @GetMapping("/library/{pid}/{category}")
     Set<Library> getAllBooksFromUserCategory(@PathVariable Integer pid, @PathVariable Integer category) {
         //return by category
-        User p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
+        User p = pdb.findById(pid).orElseThrow(NoSuchElementException::new);
         Set<Library> library = p.getLibrary();
 
         Set<Library> librarySet = new HashSet<>();
 
         Iterator<Library> libraryIterator = library.iterator();
 
-        Library l = new Library();
+        Library l;
 
         int c;
         while (libraryIterator.hasNext()) {
@@ -101,7 +101,7 @@ public class LibraryController {
 
     @GetMapping("/library/{pid}")
     Set<Library> getAllBooksFromUser(@PathVariable Integer pid) {
-        User p = pdb.findById(pid).orElseThrow(() -> new NoSuchElementException());
+        User p = pdb.findById(pid).orElseThrow(NoSuchElementException::new);
         return p.getLibrary();
     }
 
@@ -109,7 +109,7 @@ public class LibraryController {
     @GetMapping("/getAllUsersFromBook/{bid}")
     Set<Library> getAllBooksFromBook(@PathVariable Integer bid) {
 
-        Book p = bdb.findById(bid).orElseThrow(() -> new NoSuchElementException());
+        Book p = bdb.findById(bid).orElseThrow(NoSuchElementException::new);
         return p.getLibrary();
     }
 

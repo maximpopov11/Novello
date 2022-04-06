@@ -50,6 +50,12 @@ class Book {
     @JsonIgnore
     Set<Library> library;
 
+    
+
+    public String getDescription() {
+        return description;
+    }
+
 
     public String getImageUrl() {
         return imageUrl;
