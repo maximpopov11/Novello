@@ -48,8 +48,8 @@ public class BookController {
             old_b.setAuthor(b.author);
         if (b.publicationYear != null)
             old_b.setPublicationYear(b.publicationYear);
-        if (b.OverallRating != null)
-            old_b.setOverallRating(b.OverallRating);
+        if (b.overallRating != null)
+            old_b.setOverallRating(b.overallRating);
         if (b.msrp != null)
             old_b.setMsrp(b.msrp);
         if (b.genre != null)

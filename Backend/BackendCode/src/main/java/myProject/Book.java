@@ -26,7 +26,7 @@ class Book {
     Integer publicationYear;
 
     @Column
-    Integer OverallRating;
+    Double overallRating;
 
     @Column
     Double msrp;
@@ -113,12 +113,12 @@ class Book {
         return msrp;
     }
 
-    public Integer getOverallRating() {
-        return OverallRating;
+    public double getOverallRating() {
+        return overallRating;
     }
 
-    public void setOverallRating(Integer rating) {
-        this.OverallRating = rating;
+    public void setOverallRating(double rating) {
+        this.overallRating = rating;
     }
 
     public Set<Evaluation> getEvaluation() {
