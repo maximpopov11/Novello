@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, NavBarActivity.class);
             intent.putExtra("USER", (Serializable) user);
             startActivity(intent);
-            alert.setMessage("Login succeeded! Pretend like this went to the dashboard like it's supposed to!");
         }
         else {
             alert.setMessage("Login failed. Try again!");
