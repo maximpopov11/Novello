@@ -1,7 +1,6 @@
 package myProject;
 
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -45,19 +44,11 @@ class Book {
     String imageUrl;
 
     @OneToMany(mappedBy = "book")
-    @JsonIgnore
-    Set<Evaluation> evaluation;
-
-    @OneToMany(mappedBy = "book")
-    @JsonIgnore
-    Set<Library> library;
-
-    
+    Set<BookData> bookData;
 
     public String getDescription() {
         return description;
     }
-
 
     public String getImageUrl() {
         return imageUrl;
@@ -123,15 +114,8 @@ class Book {
         this.overallRating = rating;
     }
 
-    public Set<Evaluation> getEvaluation() {
-        return evaluation;
+    public Set<BookData> getBookData() {
+        return bookData;
     }
-
-    public Set<Library> getLibrary() {
-        return library;
-    }
-
-
-
 
 }

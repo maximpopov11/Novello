@@ -13,7 +13,7 @@ public class BookController {
     @Autowired
     BookInterface db;
 
-    @PostMapping("/addBooks")
+    @PostMapping("/book")
     Book creatBooks(@RequestBody Book b) {
         db.save(b);
         return b;
@@ -32,7 +32,7 @@ public class BookController {
     }
 
 
-    @RequestMapping("/books")
+    @RequestMapping("/book")
     List<Book> showMeTheBooks() {
         return db.findAll();
     }

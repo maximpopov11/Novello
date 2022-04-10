@@ -1,5 +1,8 @@
 package myProject;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -35,17 +38,14 @@ class User {
     Integer age;
 
     @OneToMany(mappedBy = "user")
-    Set<Evaluation> Evaluation;
+    Set<BookData> BookData;
 
-    @OneToMany(mappedBy = "user")
-    Set<Library> library;
-
-    public Set<myProject.Evaluation> getEvaluation() {
-        return Evaluation;
+    public Set<BookData> getBookData() {
+        return BookData;
     }
 
-    public void setEvaluation(Set<myProject.Evaluation> evaluation) {
-        Evaluation = evaluation;
+    public void setBookData(Set<BookData> bookData) {
+        BookData = bookData;
     }
 
     public Integer getId() {
@@ -120,11 +120,5 @@ class User {
         this.email = email;
     }
 
-    public Set<Library> getLibrary() {
-        return library;
-    }
 
-    public void setLibrary(Set<Library> library) {
-        this.library = library;
-    }
 }
