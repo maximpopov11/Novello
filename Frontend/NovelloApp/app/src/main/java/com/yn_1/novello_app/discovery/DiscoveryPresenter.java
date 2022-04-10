@@ -86,6 +86,7 @@ public class DiscoveryPresenter {
         }
 
         //book recommendation rating set
+        //todo: dont recommend books user already has
         ArrayList<Pair<Book, Double>> recommendations = new ArrayList<>();
         for (Book book : allBooks) {
             if (book.getRating() >= MIN_RECOMMENDED_RATING) {

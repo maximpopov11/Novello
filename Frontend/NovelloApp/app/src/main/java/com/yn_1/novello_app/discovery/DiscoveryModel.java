@@ -36,7 +36,7 @@ public class DiscoveryModel {
 
         JsonArrayRequester allBooksRequester = new JsonArrayRequester();
         JsonArrayCommandAllBooks command = new JsonArrayCommandAllBooks();
-        allBooksRequester.getRequest("books", null, command, null, null);
+        allBooksRequester.getRequest("book", null, command, null, null);
 
     }
 
@@ -44,7 +44,7 @@ public class DiscoveryModel {
 
         JsonArrayRequester userBooksRequester = new JsonArrayRequester();
         JsonArrayCommandUserBooks command = new JsonArrayCommandUserBooks();
-        userBooksRequester.getRequest("library/" + userID, null, command, null, null);
+        userBooksRequester.getRequest("bookData/user/" + userID, null, command, null, null);
 
     }
 

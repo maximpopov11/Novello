@@ -109,6 +109,8 @@ public class CartView extends Fragment {
      */
     private void addBooksToLayout(List<Book> cartBooks) {
         for (Book book : cartBooks) {
+            //todo: create sample ui and insert book info for each book, creating a new version with each book
+
             //todo: remove from cart button
             //todo: move to wishlist button
 

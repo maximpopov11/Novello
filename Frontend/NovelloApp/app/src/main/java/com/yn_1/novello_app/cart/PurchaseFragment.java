@@ -77,11 +77,19 @@ public class PurchaseFragment extends Fragment {
             if (canChargeCard(creditCardNumber)) {
                 JsonObjectRequester purchaseRequester = new JsonObjectRequester();
                 JsonObjectCommand command = new JsonObjectCommand();
-                //todo: 3 represents unread. Set that in an enum.
                 for (int i = 0; i < cartIDs.length; i++) {
                     int bookID = cartIDs[i];
-                    purchaseRequester.postRequest("setCategory/" + bookID + "/" + userID + "/" + 3,
-                            null, command, null, null);
+                    JSONObject bookJson = new JSONObject();
+                    try {
+                        bookJson.put("userId", userID);
+                        bookJson.put("bookId", bookID);
+                        //todo: 3 represents unread. Set that in an enum.
+                        bookJson.put("category", 3);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    purchaseRequester.putRequest("bookData",
+                            bookJson, command, null, null);
                 }
             }
             else {
