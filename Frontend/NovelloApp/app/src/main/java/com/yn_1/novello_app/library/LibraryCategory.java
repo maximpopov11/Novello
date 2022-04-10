@@ -6,6 +6,7 @@ import com.android.volley.VolleyError;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public enum LibraryCategory {
@@ -66,7 +67,11 @@ public enum LibraryCategory {
                 @Override
                 public void execute(JSONObject book) {
                     // Call a helper method to move the book to a new category.
-                    putInCategory(newCategory, userID, book);
+                    try {
+                        putInCategory(newCategory, userID, book.getInt("bookId"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -85,15 +90,22 @@ public enum LibraryCategory {
      * Helper method for putting book in a new category
      * @param newCategory
      * @param userID
-     * @param book
+     * @param bookID
      */
-    private void putInCategory(LibraryCategory newCategory, int userID, JSONObject book) {
+    private void putInCategory(LibraryCategory newCategory, int userID, int bookID) {
         JsonObjectRequester categoryReq = new JsonObjectRequester();
         // If NONE: DELETE book
         if (newCategory == NONE)
         {
-            String pathUrl = userID + "/library/" + categoryIndex;
-            categoryReq.deleteRequest(pathUrl, book, new VolleyCommand<JSONObject>() {
+            String pathUrl = "bookData";
+            JSONObject object = new JSONObject();
+            try {
+                object.put("bookId", bookID);
+                object.put("userId", userID);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            categoryReq.deleteRequest(pathUrl, object, new VolleyCommand<JSONObject>() {
                 @Override
                 public void execute(JSONObject data) {
                     Log.d("Transaction", "Transaction successfully completed.");
@@ -107,8 +119,18 @@ public enum LibraryCategory {
         }
         // Else: PUT book in new category
         else {
-            String pathUrl = userID + "/library/" + newCategory.getCategoryIndex();
-            categoryReq.putRequest(pathUrl, book, new VolleyCommand<JSONObject>() {
+            String pathUrl = "bookData";
+                    // userID + "/library/" + newCategory.getCategoryIndex();
+            JSONObject object = new JSONObject();
+            try {
+                object.put("bookId", bookID);
+                object.put("userId", userID);
+                object.put("category", newCategory.categoryIndex);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            categoryReq.putRequest(pathUrl, object, new VolleyCommand<JSONObject>() {
                 @Override
                 public void execute(JSONObject data) {
                     Log.d("Transaction", "Transaction successfully completed.");

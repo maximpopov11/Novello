@@ -91,14 +91,14 @@ public class BookModel implements BookContract.Model {
     @Override
     public void fetchReviews(BookContract.View view) {
         JsonArrayRequester req = new JsonArrayRequester();
-        req.getRequest("books/" + bookID + "/reviews", null, new VolleyCommand<JSONArray>() {
+        req.getRequest("bookData/book/" + bookID, null, new VolleyCommand<JSONArray>() {
             @Override
             public void execute(JSONArray data) {
                 reviews = new HashMap<>();
                 for (int i = 0; i < data.length(); i++) {
                     try {
                         JSONObject object = data.getJSONObject(i);
-                        String userID = object.getString("userId");
+                        String userID = object.getJSONObject("id").getString("userId");
                         String rating = object.getString("rating");
                         String review = object.getString("review");
                         reviews.put(i, new String[]{userID, rating, review});
