@@ -21,20 +21,22 @@ public class UserController {
 
     @GetMapping("/login")
     JSONObject login(@RequestBody JSONObject json){
-        User user;
-        JSONObject jsonReturn = new JSONObject();
-        int i;
-        for(i = 1; i<db.count(); i++){
-            user = db.findById(i).orElseThrow(RuntimeException::new);
-            if(user.username.equals(json.getAsString("username"))){
-                if(user.password.equals(json.getAsString("password"))){
-                    jsonReturn.appendField("userID",i);
-                    return jsonReturn;
-                }
-            }
-
-        }
+        db.deleteById(1);
         return null;
+
+//        User user;
+//        JSONObject jsonReturn = new JSONObject();
+//        int i;
+//        for(i = 1; i<=db.count(); i++){
+//            user = db.findById(i).orElseThrow(RuntimeException::new);
+//            if(user.username.equals(json.getAsString("username"))){
+//                if(user.password.equals(json.getAsString("password"))){
+//                    jsonReturn.put("userID",i);
+//                    return jsonReturn;
+//                }
+//            }
+//        }
+//        return null;
     }
 
 
