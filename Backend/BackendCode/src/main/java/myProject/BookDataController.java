@@ -38,13 +38,13 @@ public class BookDataController {
             bookData.setRating((Integer) jsonObject.getAsNumber("rating"));
         }
         if(jsonObject.getAsNumber("review")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("review"));
+            bookData.setReview(jsonObject.getAsString("review"));
         }
         if(jsonObject.getAsNumber("category")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("category"));
+            bookData.setCategory((Integer) jsonObject.getAsNumber("category"));
         }
         if(jsonObject.getAsNumber("page")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("page"));
+            bookData.setPage((Integer) jsonObject.getAsNumber("page"));
         }
 
         db.save(bookData);
