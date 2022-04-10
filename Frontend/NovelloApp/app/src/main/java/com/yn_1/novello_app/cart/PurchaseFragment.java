@@ -46,12 +46,6 @@ public class PurchaseFragment extends Fragment {
         cartPrices = PurchaseFragmentArgs.fromBundle(getArguments()).getCartPrices();
         //todo: show list of book titles/authors/prices in vertical scroll view
 
-        double price = 0;
-        for (int i = 0; i < cartPrices.length; i++) {
-            price += cartPrices[i];
-        }
-        priceText.setText("Price = $" + price);
-
     }
 
     @Nullable
@@ -71,6 +65,12 @@ public class PurchaseFragment extends Fragment {
         finish = view.findViewById(R.id.finishPurchase);
         creditCardInput = view.findViewById(R.id.creditCardInput);
         priceText = view.findViewById(R.id.price);
+
+        double price = 0;
+        for (int i = 0; i < cartPrices.length; i++) {
+            price += cartPrices[i];
+        }
+        priceText.setText("Price = $" + price);
 
         finish.setOnClickListener(v -> {
             creditCardNumber = creditCardInput.getText().toString();
