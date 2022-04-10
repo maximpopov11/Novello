@@ -20,18 +20,19 @@ public class ReviewModel implements ReviewContract.Model {
 
     @Override
     public void postReview(ReviewContract.VolleyListener volleyListener, User user, double rating, String review) {
-        JSONObject post = new JSONObject();
+        JSONObject put = new JSONObject();
         try {
-            post.put("userId", user.getUserId());
-            post.put("rating", rating);
-            post.put("review", review);
+            put.put("userId", user.getUserId());
+            put.put("bookId", bookID);
+            put.put("rating", rating);
+            put.put("review", review);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         JsonObjectRequester req = new JsonObjectRequester();
-        String urlPath = "books/" + bookID + "/addReview";
-        req.postRequest(urlPath, post, new VolleyCommand<JSONObject>() {
+        String urlPath = "bookData";
+        req.putRequest(urlPath, put, new VolleyCommand<JSONObject>() {
             @Override
             public void execute(JSONObject data) {
                 volleyListener.onReviewSucceeded();

@@ -47,7 +47,7 @@ public class LibraryModel implements LibraryContract.Model {
             final int finalCategoryIndex = categoryIndex;
 
             JsonArrayRequester req = new JsonArrayRequester();
-            req.getRequest(user.getUserId() + "/library/" + categoryIndex,
+            req.getRequest("bookData/" + user.getUserId() + "/" + categoryIndex,
                     null, new VolleyCommand<JSONArray>() {
                         @Override
                         public void execute(JSONArray data) {

@@ -2,8 +2,12 @@ package com.yn_1.novello_app.reading;
 
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.account.User;
+import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.StringRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -19,12 +23,24 @@ public class ReadingModel implements ReadingContract.Model {
 
     @Override
     public void fetchProgress(User user, int bookID, ReadingContract.View view) {
-        StringRequester req = new StringRequester();
-        req.getRequest( "getPage/" + bookID + "/" + user.getUserId(),
-            null, new VolleyCommand<String>() {
+        JsonObjectRequester req = new JsonObjectRequester();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("bookId", bookID);
+            object.put("userId", user.getUserId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        req.getRequest( "bookData",
+            object, new VolleyCommand<JSONObject>() {
                 @Override
-                public void execute(String data) {
-                    int progress = Integer.getInteger(data);
+                public void execute(JSONObject data) {
+                    int progress = 0;
+                    try {
+                        progress = data.getInt("page");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     view.jumpToProgress(progress);
                 }
 
@@ -32,18 +48,24 @@ public class ReadingModel implements ReadingContract.Model {
                 public void onError(VolleyError error) {
 
                 }
-            }, null, new HashMap<String, String>() {{
-                    put("user_id", String.valueOf(user.getUserId()));
-                    put("book_id", String.valueOf(bookID));
-                }
-            });
+            }, null, null);
     }
 
     @Override
     public void saveProgress(User user, int bookID, int progress) {
-        StringRequester req = new StringRequester();
-        req.putRequest("setPage/" + bookID + "/" + user.getUserId() + "/" + progress,
-                String.valueOf(progress), new VolleyCommand<String>() {
+        JsonObjectRequester req = new JsonObjectRequester();
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("bookId", bookID);
+            object.put("userId", user.getUserId());
+            object.put("page", progress);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        req.putRequest("bookData",
+                object, new VolleyCommand<String>() {
                     @Override
                     public void execute(String data) {
 
