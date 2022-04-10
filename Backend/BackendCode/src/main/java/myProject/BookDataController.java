@@ -3,8 +3,6 @@ package myProject;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
-
 import java.util.NoSuchElementException;
 import java.util.*;
 
@@ -56,7 +54,6 @@ public class BookDataController {
     @PutMapping("/bookData")
     BookData creatBookData(@RequestBody JSONObject jsonObject) {
 
-
         BookDataKey bookDataKey = new BookDataKey();
         bookDataKey.setBookId((Integer) jsonObject.getAsNumber("bookId"));
         bookDataKey.setUserId((Integer) jsonObject.getAsNumber("userId"));
@@ -67,13 +64,13 @@ public class BookDataController {
             bookData.setRating((Integer) jsonObject.getAsNumber("rating"));
         }
         if(jsonObject.getAsNumber("review")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("review"));
+            bookData.setReview(jsonObject.getAsString("review"));
         }
         if(jsonObject.getAsNumber("category")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("category"));
+            bookData.setCategory((Integer) jsonObject.getAsNumber("category"));
         }
         if(jsonObject.getAsNumber("page")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("page"));
+            bookData.setPage((Integer) jsonObject.getAsNumber("page"));
         }
 
         db.save(bookData);
@@ -101,7 +98,6 @@ public class BookDataController {
 
     @GetMapping("/bookData/book/{bid}")
     Set<BookData> getRatings(@PathVariable Integer bid) {
-
         Book b = bdb.findById(bid).orElseThrow(NoSuchElementException::new);
         return b.getBookData();
     }

@@ -22,7 +22,7 @@ public class BookData {
     @JoinColumn(name = "Book_id")
     Book book;
 
-    int rating;
+    double rating;
 
     String review;
 
@@ -38,7 +38,7 @@ public class BookData {
         this.id = id;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 

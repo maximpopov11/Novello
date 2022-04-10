@@ -29,7 +29,7 @@ public class UserController {
             user = db.findById(i).orElseThrow(RuntimeException::new);
             if(user.username.equals(json.getAsString("username"))){
                 if(user.password.equals(json.getAsString("password"))){
-                    jsonReturn.put("userID",i);
+                    jsonReturn.put("userId",i);
                     return jsonReturn;
                 }
             }

@@ -24,12 +24,10 @@ public class BookController {
         db.saveAll(Arrays.asList(b));
     }
 
-
     @GetMapping("/book/{id}")
     Optional<Book> getBook(@PathVariable Integer id) {
         return db.findById(id);
     }
-
 
     @RequestMapping("/book")
     List<Book> showMeTheBooks() {
