@@ -3,6 +3,7 @@ package myProject;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 import java.util.NoSuchElementException;
 import java.util.*;
@@ -55,6 +56,7 @@ public class BookDataController {
     @PutMapping("/bookData")
     BookData creatBookData(@RequestBody JSONObject jsonObject) {
 
+
         BookDataKey bookDataKey = new BookDataKey();
         bookDataKey.setBookId((Integer) jsonObject.getAsNumber("bookId"));
         bookDataKey.setUserId((Integer) jsonObject.getAsNumber("userId"));
@@ -95,20 +97,42 @@ public class BookDataController {
         bookDataKey.setUserId((Integer) jsonObject.getAsNumber("userId"));
 
         db.deleteById(bookDataKey);
-
     }
 
-    @GetMapping("/bookData/{bid}")
+    @GetMapping("/bookData/book/{bid}")
     Set<BookData> getRatings(@PathVariable Integer bid) {
 
         Book b = bdb.findById(bid).orElseThrow(NoSuchElementException::new);
         return b.getBookData();
     }
-//
-//    @GetMapping("/userBookData/{pid}")
-//    Set<BookData> getAllRatingsFromUser(@PathVariable Integer pid) {
-//
-//        User p = pdb.findById(pid).orElseThrow(NoSuchElementException::new);
-//        return p.getBookData();
-//    }
+
+    @GetMapping("/bookData/{pid}/{category}")
+    Set<BookData> getAllBooksFromUserCategory(@PathVariable Integer pid, @PathVariable Integer category) {
+        //return by category
+        User p = pdb.findById(pid).orElseThrow(NoSuchElementException::new);
+        Set<BookData> library = p.getBookData();
+
+        Set<BookData> librarySet = new HashSet<>();
+
+        Iterator<BookData> libraryIterator = library.iterator();
+
+        BookData l;
+
+        int c;
+        while (libraryIterator.hasNext()) {
+            l = libraryIterator.next();
+            c = l.getCategory();
+            if (c == category) {
+                librarySet.add(l);
+            }
+        }
+        return librarySet;
+    }
+
+    @GetMapping("/bookData/user/{pid}")
+    Set<BookData> getAllRatingsFromUser(@PathVariable Integer pid) {
+
+        User p = pdb.findById(pid).orElseThrow(NoSuchElementException::new);
+        return p.getBookData();
+    }
 }
