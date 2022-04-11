@@ -1,8 +1,6 @@
 package com.yn_1.novello_app;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -51,8 +49,8 @@ public class NavBarActivity extends AppCompatActivity {
                             controller.navigate(R.id.cartView);
                             return true;
 
-                        case R.id.discoverFragment:
-                            controller.navigate(R.id.discoverFragment);
+                        case R.id.discoverView:
+                            controller.navigate(R.id.discoverView);
                             return true;
 
                         default:
