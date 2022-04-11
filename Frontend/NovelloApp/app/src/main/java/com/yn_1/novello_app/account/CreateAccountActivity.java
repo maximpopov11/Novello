@@ -67,6 +67,10 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Navigates to the login screen upon success or prints an error alert upon failure.
+     * @param success
+     */
     void accountCreationResult(boolean success) {
 
         if (success) {
