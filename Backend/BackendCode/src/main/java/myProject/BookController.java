@@ -8,40 +8,39 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Api(value = "Swagger2DemoRestController", description = "REST APIs related to Student Entity!!!!")
+@Api(value = "BookController")
 @RestController
 public class BookController {
 
     @Autowired
     BookInterface db;
 
-    @ApiOperation(value = "Get list of Students in the System ", response = Iterable.class, tags = "getStudents")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "not found!!!") })
+    @ApiOperation(value = "Add a book to the system", response = Iterable.class)
     @PostMapping("/book")
-    Book creatBooks(@RequestBody Book b) {
+    Book addBook(@RequestBody Book b) {
         db.save(b);
         return b;
     }
 
+    @ApiOperation(value = "Add all books to the system", response = Iterable.class)
     @PostMapping("/addAllBooks")
-    void createAllBooks(@RequestBody Book[] b) {
+    void addAllBooks(@RequestBody Book[] b) {
         db.saveAll(Arrays.asList(b));
     }
 
+    @ApiOperation(value = "Get a book from the system", response = Iterable.class)
     @GetMapping("/book/{id}")
     Optional<Book> getBook(@PathVariable Integer id) {
         return db.findById(id);
     }
 
+    @ApiOperation(value = "Get all books from the system", response = Iterable.class)
     @RequestMapping("/book")
-    List<Book> showMeTheBooks() {
+    List<Book> getAllBooks() {
         return db.findAll();
     }
 
+    @ApiOperation(value = "Update a book in the system", response = Iterable.class)
     @PutMapping("/book/{id}")
     Book updateBook(@RequestBody Book b, @PathVariable Integer id) {
         Book old_b = db.findById(id).orElseThrow(RuntimeException::new);
@@ -64,14 +63,16 @@ public class BookController {
     }
 
 
+    @ApiOperation(value = "Delete a book in the system", response = Iterable.class)
     @DeleteMapping("/book/{id}")
     String deleteBook(@PathVariable Integer id) {
         db.deleteById(id);
         return "deleted " + id;
     }
 
+    @ApiOperation(value = "Get the duck screen", response = Iterable.class)
     @GetMapping("/duck")
-    String getDuck(){
+    String duckScreen(){
         return "https://i.pinimg.com/originals/62/37/d4/6237d416dec1d84c8afbb9dce847e2bc.jpg";
     }
 
