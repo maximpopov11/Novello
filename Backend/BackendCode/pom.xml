@@ -96,6 +96,7 @@
 
 	</dependencies>
 
+
 	<build>
     <!-- want to create jar files etc -->
 		<plugins>
