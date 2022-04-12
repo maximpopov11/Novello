@@ -1,5 +1,6 @@
 package myProject;
 
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,12 +8,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Api(value = "Swagger2DemoRestController", description = "REST APIs related to Student Entity!!!!")
 @RestController
 public class BookController {
 
     @Autowired
     BookInterface db;
 
+    @ApiOperation(value = "Get list of Students in the System ", response = Iterable.class, tags = "getStudents")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!") })
     @PostMapping("/book")
     Book creatBooks(@RequestBody Book b) {
         db.save(b);
