@@ -37,6 +37,7 @@ class User {
     @Column
     Integer age;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     Set<BookData> BookData;
 

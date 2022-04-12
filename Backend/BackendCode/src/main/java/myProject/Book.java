@@ -43,6 +43,7 @@ class Book {
     @Column
     String imageUrl;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "book")
     Set<BookData> bookData;
 
