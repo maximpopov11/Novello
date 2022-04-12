@@ -1,35 +1,44 @@
 package myProject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
-public class Evaluation {
+public class BookData {
 
     @EmbeddedId
-    EvaluationKey id;
+    BookDataKey id;
 
+    @JsonIgnore
     @ManyToOne
-    @MapsId("personId")
-    @JoinColumn(name = "Person_id")
+    @MapsId("userId")
+    @JoinColumn(name = "User_id")
     User user;
 
+    @JsonIgnore
     @ManyToOne
     @MapsId("bookId")
     @JoinColumn(name = "Book_id")
     Book book;
 
-    int rating;
+    double rating;
+
     String review;
 
-    public EvaluationKey getId() {
+    int category;
+
+    int page;
+
+    public BookDataKey getId() {
         return id;
     }
 
-    public void setId(EvaluationKey id) {
+    public void setId(BookDataKey id) {
         this.id = id;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
@@ -45,11 +54,11 @@ public class Evaluation {
         this.book = id;
     }
 
-    public User getPerson() {
+    public User getUser() {
         return user;
     }
 
-    public void setPerson(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -60,6 +69,23 @@ public class Evaluation {
     public String getReview() {
         return review;
     }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
 
     @Override
     public int hashCode() {
@@ -77,7 +103,7 @@ public class Evaluation {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Evaluation other = (Evaluation) obj;
+        BookData other = (BookData) obj;
         if (id == null) {
             return other.id == null;
         } else return id.equals(other.id);

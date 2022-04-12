@@ -13,7 +13,7 @@ public class BookController {
     @Autowired
     BookInterface db;
 
-    @PostMapping("/addBooks")
+    @PostMapping("/book")
     Book creatBooks(@RequestBody Book b) {
         db.save(b);
         return b;
@@ -22,17 +22,14 @@ public class BookController {
     @PostMapping("/addAllBooks")
     void createAllBooks(@RequestBody Book[] b) {
         db.saveAll(Arrays.asList(b));
-
     }
-
 
     @GetMapping("/book/{id}")
     Optional<Book> getBook(@PathVariable Integer id) {
         return db.findById(id);
     }
 
-
-    @RequestMapping("/books")
+    @RequestMapping("/book")
     List<Book> showMeTheBooks() {
         return db.findAll();
     }
@@ -63,6 +60,11 @@ public class BookController {
     String deleteBook(@PathVariable Integer id) {
         db.deleteById(id);
         return "deleted " + id;
+    }
+
+    @GetMapping("/duck")
+    String getDuck(){
+        return "https://i.pinimg.com/originals/62/37/d4/6237d416dec1d84c8afbb9dce847e2bc.jpg";
     }
 
 }
