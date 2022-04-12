@@ -41,6 +41,7 @@ class User {
     @OneToMany(mappedBy = "user")
     Set<BookData> BookData;
 
+    @JsonIgnore
     public Set<BookData> getBookData() {
         return BookData;
     }

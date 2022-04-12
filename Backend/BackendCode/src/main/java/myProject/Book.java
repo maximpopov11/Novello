@@ -115,6 +115,7 @@ class Book {
         this.overallRating = rating;
     }
 
+    @JsonIgnore
     public Set<BookData> getBookData() {
         return bookData;
     }

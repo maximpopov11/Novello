@@ -18,6 +18,8 @@ import springfox.documentation.builders.ApiInfoBuilder;
 @EnableSwagger2
 public class SpringFoxConfig {
 
+//    http://localhost:8080/swagger-ui.html
+
     @Bean
     public Docket myDocket() {
         return new Docket(DocumentationType.SWAGGER_2)

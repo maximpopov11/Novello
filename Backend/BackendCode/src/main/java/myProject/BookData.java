@@ -10,13 +10,13 @@ public class BookData {
     @EmbeddedId
     BookDataKey id;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "User_id")
     User user;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @MapsId("bookId")
     @JoinColumn(name = "Book_id")
@@ -45,6 +45,7 @@ public class BookData {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
 
     public Book getBook() {
         return book;
