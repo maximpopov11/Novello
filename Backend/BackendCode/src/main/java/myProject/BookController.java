@@ -28,19 +28,19 @@ public class BookController {
         db.saveAll(Arrays.asList(b));
     }
 
-    @ApiOperation(value = "Get a book from the system", response = Iterable.class)
+    @ApiOperation(value = "Get a book by id from the system", response = Iterable.class)
     @GetMapping("/book/{id}")
     Optional<Book> getBook(@PathVariable Integer id) {
         return db.findById(id);
     }
 
     @ApiOperation(value = "Get all books from the system", response = Iterable.class)
-    @RequestMapping("/book")
+    @GetMapping("/book")
     List<Book> getAllBooks() {
         return db.findAll();
     }
 
-    @ApiOperation(value = "Update a book in the system", response = Iterable.class)
+    @ApiOperation(value = "Update a book by id in the system", response = Iterable.class)
     @PutMapping("/book/{id}")
     Book updateBook(@RequestBody Book b, @PathVariable Integer id) {
         Book old_b = db.findById(id).orElseThrow(RuntimeException::new);
@@ -63,7 +63,7 @@ public class BookController {
     }
 
 
-    @ApiOperation(value = "Delete a book in the system", response = Iterable.class)
+    @ApiOperation(value = "Delete a book by id in the system", response = Iterable.class)
     @DeleteMapping("/book/{id}")
     String deleteBook(@PathVariable Integer id) {
         db.deleteById(id);

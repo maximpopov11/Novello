@@ -34,7 +34,7 @@ class Book {
     @Column
     String genre;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     String description;
 
     @Column
