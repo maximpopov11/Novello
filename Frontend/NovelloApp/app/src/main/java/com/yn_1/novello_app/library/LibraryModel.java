@@ -42,7 +42,7 @@ public class LibraryModel implements LibraryContract.Model {
 
             // Index 2 is cart, which we should skip
             if (categoryIndex == 2)
-                continue;
+               continue;
 
             final int finalCategoryIndex = categoryIndex;
 
@@ -53,19 +53,20 @@ public class LibraryModel implements LibraryContract.Model {
                         public void execute(JSONArray data) {
                             for (int i = 0; i < data.length(); i++) {
                                 try {
-                                    JSONObject book = data.getJSONObject(i);
-                                    int bookID = book.getInt("bookID");
+                                    JSONObject object = data.getJSONObject(i);
+                                    int bookID = object.getJSONObject("id").getInt("bookId");
+                                    JSONObject book = object.getJSONObject("book");
                                     String title = book.getString("title");
                                     String author = book.getString("author");
                                     String genre = book.getString("genre");
                                     int publicationYear = book.getInt("publicationYear");
                                     String isbn = book.getString("isbn");
-                                    double rating = book.getInt("rating");
+                                    double rating = book.getInt("overallRating");
                                     double price = book.getDouble("msrp");
                                     String description = book.getString("description");
-                                    String bookUrl = book.getString("bookUrl");
+                                    String readingUrl = book.getString("readingUrl");
                                     String imageUrl = book.getString("imageUrl");
-                                    Book newBook = new Book(bookID, title, author, genre, publicationYear, isbn, rating, price, description, bookUrl, imageUrl);
+                                    Book newBook = new Book(bookID, title, author, genre, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
                                     newBook.setUserCategoryID(LibraryCategory.values()[finalCategoryIndex].getStringFormat());
                                     bookCollection.add(newBook);
                                     bookCount++;
