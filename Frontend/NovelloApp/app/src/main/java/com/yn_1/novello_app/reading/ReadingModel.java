@@ -1,11 +1,15 @@
 package com.yn_1.novello_app.reading;
 
+import android.util.Log;
+
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.account.User;
+import com.yn_1.novello_app.volley_requests.JsonArrayRequester;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.StringRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +27,7 @@ public class ReadingModel implements ReadingContract.Model {
 
     @Override
     public void fetchProgress(User user, int bookID, ReadingContract.View view) {
-        JsonObjectRequester req = new JsonObjectRequester();
+        JsonArrayRequester req = new JsonArrayRequester();
         JSONObject object = new JSONObject();
         try {
             object.put("bookId", bookID);
@@ -31,16 +35,22 @@ public class ReadingModel implements ReadingContract.Model {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        req.getRequest( "bookData",
-            object, new VolleyCommand<JSONObject>() {
+        req.getRequest( "bookData/" + user.getUserId() + "/4",
+            null, new VolleyCommand<JSONArray>() {
                 @Override
-                public void execute(JSONObject data) {
+                public void execute(JSONArray data) {
                     int progress = 0;
                     try {
-                        progress = data.getInt("page");
+                        for (int arrayIndex = 0; arrayIndex < data.length(); arrayIndex++) {
+                            if (data.getJSONObject(arrayIndex).getJSONObject("id").getInt("bookId") != bookID) {
+                                continue;
+                            }
+                            progress = data.getJSONObject(arrayIndex).getInt("page");
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    Log.d("Reading", "Progress: " + progress);
                     view.jumpToProgress(progress);
                 }
 
@@ -65,9 +75,9 @@ public class ReadingModel implements ReadingContract.Model {
         }
 
         req.putRequest("bookData",
-                object, new VolleyCommand<String>() {
+                object, new VolleyCommand<JSONObject>() {
                     @Override
-                    public void execute(String data) {
+                    public void execute(JSONObject data) {
 
                     }
 

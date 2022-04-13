@@ -27,7 +27,7 @@ public class NavBarActivity extends AppCompatActivity {
         // user = (AdultUser) getIntent().getSerializableExtra("USER");
 
         // Postman: Used for individual testing
-        user = new AdultUser("testUser", null, -1);
+        user = new AdultUser("testUser", null, 1);
 
         NavHostFragment host = (NavHostFragment)
                 getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
