@@ -42,6 +42,8 @@ public class CartView extends Fragment {
     Button purchase;
     LinearLayout innerLayout;
 
+    final int Text_Width = 500;
+    final int Text_Height = 300;
     final int Image_Width = 175;
     final int Image_Height = 280;
 
@@ -118,28 +120,15 @@ public class CartView extends Fragment {
             //todo: remove from cart button
             //todo: move to wishlist button
 
-            //image button
-            ImageButton imageButton = new ImageButton(getView().getContext());
-            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(Image_Width, Image_Height);
-            imageParams.setMargins(15, 0, 15, 0);
-            imageButton.setLayoutParams(imageParams);
-            imageButton.setBackgroundColor(Color.YELLOW);
-            presenter.model.assignImageToBook(book, imageButton);
-            innerLayout.addView(book.getImageButton());
-
-            imageButton.setOnClickListener(v -> {
-                //todo: image button on click
-            });
+            //todo: add book image button
 
             //book info
             TextView textView = new TextView(getView().getContext());
-            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(Image_Width, Image_Height);
-            textParams.setMargins(Image_Width + 15, 15, 15, 15);
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(Text_Width, Text_Height);
+            textParams.setMargins(5, 5, 5, 5);
             textView.setLayoutParams(textParams);
             textView.setText("Title: " + book.getTitle() + "\nAuthor: " + book.getAuthor() + "\n" + "Price: $" + book.getPrice());
             innerLayout.addView(textView);
-
-            book.setImageButton(imageButton);
 
         }
     }

@@ -33,6 +33,8 @@ public class DiscoveryView extends Fragment {
 
     TableLayout tableLayout;
 
+    ArrayList<Pair<Book, Double>> sortedRecommendations = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -48,7 +50,9 @@ public class DiscoveryView extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+
+        return inflater.inflate(R.layout.fragment_discovery_view, container, false);
+
     }
 
     @Override
@@ -65,19 +69,22 @@ public class DiscoveryView extends Fragment {
      */
     public void showRecommendedBooks(ArrayList<Pair<Book, Double>> sortedRecommendations) {
 
+        //todo: add book image button
         //todo: does text view need layout params?
+        int count = 1;
         for (Pair<Book, Double> pair : sortedRecommendations) {
             TableRow tableRow = new TableRow(getContext());
             TextView textView = new TextView(getContext());
             Book book = pair.first;
-            String text = book.getTitle() + " by " + book.getAuthor()
-                    + "\nGenre: "+ book.getGenre() + "\nRating: " + book.getRating();
+            String text = count + ".\n" + book.getTitle() + " by " + book.getAuthor()
+                    + "\nGenre: " + book.getGenre() + "\nRating: " + book.getRating();
             textView.setText(text);
             tableRow.addView(textView);
             TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams();
             tableRowParams.setMargins(5, 5, 5, 5);
             tableRow.setLayoutParams(tableRowParams);
             tableLayout.addView(tableRow);
+            count++;
         }
 
     }

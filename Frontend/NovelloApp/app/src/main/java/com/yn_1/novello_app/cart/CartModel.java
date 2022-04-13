@@ -63,26 +63,25 @@ public class CartModel {
     private void booksReceived(JSONArray data) {
         for (int i = 0; i < data.length(); i++) {
             try {
-                JSONObject book = data.getJSONObject(i);
-                int bookID = book.getInt("bookID");
+                JSONObject book = data.getJSONObject(i).getJSONObject("book");
                 String title = book.getString("title");
                 String author = book.getString("author");
                 String genre = book.getString("genre");
                 int publicationYear = book.getInt("publicationYear");
                 String isbn = book.getString("isbn");
-                double rating = book.getInt("rating");
+                double rating = book.getDouble("overallRating");
                 double price = book.getDouble("msrp");
                 String description = book.getString("description");
                 String imageUrl = book.getString("imageUrl");
                 String readingUrl = book.getString("readingUrl");
-                Book newBook = new Book(bookID, title, author, genre, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
+                Book newBook = new Book(-1, title, author, genre, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
                 newBook.setUserCategoryID("cart");
                 cart.add(newBook);
-                presenter.sendCart(cart);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+        presenter.sendCart(cart);
     }
 
     /**

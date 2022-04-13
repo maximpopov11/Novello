@@ -3,6 +3,7 @@ package myProject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -30,6 +31,7 @@ class Book {
 
     @Min(value = 0, message = "Rating should not be less than 0")
     @Max(value = 10, message = "Rating should not be greater than 10")
+    @ApiModelProperty(notes = "Overall Rating",name="overallRating",required=true,value="6.43")
     @Column
     Double overallRating;
 
