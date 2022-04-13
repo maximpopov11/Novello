@@ -1,6 +1,7 @@
 package myProject;
 
 import io.swagger.annotations.*;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,20 +18,20 @@ public class BookController {
 
     @ApiOperation(value = "Add a book to the system", response = Iterable.class)
     @PostMapping("/book")
-    Book addBook(@RequestBody Book b) {
+    Book addBook(@ApiParam (value = "Json of Book to be added") @RequestBody Book b) {
         db.save(b);
         return b;
     }
 
     @ApiOperation(value = "Add all books to the system", response = Iterable.class)
     @PostMapping("/addAllBooks")
-    void addAllBooks(@RequestBody Book[] b) {
+    void addAllBooks(@ApiParam (value = "Json array of Books to add to the global library") @RequestBody Book[] b) {
         db.saveAll(Arrays.asList(b));
     }
 
     @ApiOperation(value = "Get a book by id from the system", response = Iterable.class)
     @GetMapping("/book/{id}")
-    Optional<Book> getBook(@PathVariable Integer id) {
+    Optional<Book> getBook(@ApiParam (value = "Id of the Book to be found") @PathVariable Integer id) {
         return db.findById(id);
     }
 
@@ -42,7 +43,7 @@ public class BookController {
 
     @ApiOperation(value = "Update a book by id in the system", response = Iterable.class)
     @PutMapping("/book/{id}")
-    Book updateBook(@RequestBody Book b, @PathVariable Integer id) {
+    Book updateBook(@ApiParam (value = "Json of the updated fields of a book") @RequestBody Book b, @ApiParam (value = "Id of the Book to update") @PathVariable Integer id) {
         Book old_b = db.findById(id).orElseThrow(RuntimeException::new);
         if (b.isbn != null)
             old_b.setIsbn(b.isbn);
@@ -65,7 +66,7 @@ public class BookController {
 
     @ApiOperation(value = "Delete a book by id in the system", response = Iterable.class)
     @DeleteMapping("/book/{id}")
-    String deleteBook(@PathVariable Integer id) {
+    String deleteBook(@ApiParam (value = "Id of the Book to be deleted") @PathVariable Integer id) {
         db.deleteById(id);
         return "deleted " + id;
     }
