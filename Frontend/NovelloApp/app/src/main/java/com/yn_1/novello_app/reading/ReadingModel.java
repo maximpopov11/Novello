@@ -78,7 +78,7 @@ public class ReadingModel implements ReadingContract.Model {
                 object, new VolleyCommand<JSONObject>() {
                     @Override
                     public void execute(JSONObject data) {
-
+                        Log.d("Reading", "Saved page number successfully!");
                     }
 
                     @Override

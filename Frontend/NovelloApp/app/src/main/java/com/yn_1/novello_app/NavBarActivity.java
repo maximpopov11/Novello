@@ -53,6 +53,10 @@ public class NavBarActivity extends AppCompatActivity {
                             controller.navigate(R.id.discoverView);
                             return true;
 
+                        case R.id.chatFragment:
+                            controller.navigate(R.id.chatFragment);
+                            return true;
+
                         default:
                             return false;
                     }
