@@ -81,8 +81,18 @@ public class DiscoveryPresenter {
         for (Book book : userBooks) {
             String author = book.getAuthor();
             String genre = book.getGenre();
-            authorHashMap.put(author, authorHashMap.get(author) + 1);
-            genreHashMap.put(genre, genreHashMap.get(genre) + 1);
+            if (authorHashMap.get(author) == null) {
+                authorHashMap.put(author, 1);
+            }
+            else {
+                authorHashMap.put(author, authorHashMap.get(author) + 1);
+            }
+            if (genreHashMap.get(genre) == null) {
+                genreHashMap.put(genre, 1);
+            }
+            else {
+                genreHashMap.put(genre, genreHashMap.get(genre) + 1);
+            }
         }
 
         //book recommendation rating set
