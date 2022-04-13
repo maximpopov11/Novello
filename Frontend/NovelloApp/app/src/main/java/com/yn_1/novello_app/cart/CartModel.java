@@ -69,7 +69,7 @@ public class CartModel {
                 String genre = book.getString("genre");
                 int publicationYear = book.getInt("publicationYear");
                 String isbn = book.getString("isbn");
-                double rating = book.getInt("rating");
+                double rating = book.getDouble("overallRating");
                 double price = book.getDouble("msrp");
                 String description = book.getString("description");
                 String imageUrl = book.getString("imageUrl");
@@ -77,11 +77,11 @@ public class CartModel {
                 Book newBook = new Book(-1, title, author, genre, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
                 newBook.setUserCategoryID("cart");
                 cart.add(newBook);
-                presenter.sendCart(cart);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+        presenter.sendCart(cart);
     }
 
     /**
