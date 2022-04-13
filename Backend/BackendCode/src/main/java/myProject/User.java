@@ -41,6 +41,7 @@ class User {
     @OneToMany(mappedBy = "user")
     Set<BookData> BookData;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "UserInfo_id")
     private UserInfo userInfo;
