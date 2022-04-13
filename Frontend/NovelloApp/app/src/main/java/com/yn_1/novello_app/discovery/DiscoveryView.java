@@ -69,12 +69,14 @@ public class DiscoveryView extends Fragment {
      */
     public void showRecommendedBooks(ArrayList<Pair<Book, Double>> sortedRecommendations) {
 
+        //todo: add book image button
         //todo: does text view need layout params?
+        int count = 1;
         for (Pair<Book, Double> pair : sortedRecommendations) {
             TableRow tableRow = new TableRow(getContext());
             TextView textView = new TextView(getContext());
             Book book = pair.first;
-            String text = book.getTitle() + " by " + book.getAuthor()
+            String text = count + ".\n" + book.getTitle() + " by " + book.getAuthor()
                     + "\nGenre: " + book.getGenre() + "\nRating: " + book.getRating();
             textView.setText(text);
             tableRow.addView(textView);
@@ -82,6 +84,7 @@ public class DiscoveryView extends Fragment {
             tableRowParams.setMargins(5, 5, 5, 5);
             tableRow.setLayoutParams(tableRowParams);
             tableLayout.addView(tableRow);
+            count++;
         }
 
     }
