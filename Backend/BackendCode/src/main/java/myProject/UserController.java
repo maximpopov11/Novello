@@ -13,6 +13,9 @@ public class UserController {
     @Autowired
 	UserInterface db;
 
+    @Autowired
+    UserInfoInterface userInfoInterfaceDB;
+
     @GetMapping("/user/{id}")
 	User getUser(@PathVariable Integer id) {
         return db.findById(id).
@@ -39,43 +42,79 @@ public class UserController {
 
 
     @PostMapping("/addAllUsers")
-    void createAllPersons(@RequestBody User[] p) {
-        db.saveAll(Arrays.asList(p));
+    void createAllPersons(@RequestBody JSONObject[] jsonObject) {
+        for(int i = 0; i < jsonObject.length; i++)
+        {
+            User u = new User();
+            u.setAccountType((Integer) jsonObject[i].getAsNumber("accountType"));
+            u.setUsername(jsonObject[i].getAsString("username"));
+            u.setPassword(jsonObject[i].getAsString("password"));
+            u.setSecurityQuestion(jsonObject[i].getAsString("securityQuestion"));
+            u.setSecurityAnswer(jsonObject[i].getAsString("securityAnswer"));
 
+            UserInfo ui = new UserInfo();
+            ui.setUser(u);
+            ui.setAge((Integer) jsonObject[i].getAsNumber("age"));
+            ui.setEmail(jsonObject[i].getAsString("email"));
+            ui.setName(jsonObject[i].getAsString("name"));
+
+            u.setUserInfo(ui);
+
+            db.save(u);
+            userInfoInterfaceDB.save(ui);
+        }
     }
 
-    @RequestMapping("/users")
+    @GetMapping("/users")//was request mapping
     List<User> getPersons() {
         return db.findAll();
     }
 
     @PostMapping("/user")
-	User createPerson(@RequestBody User p) {
-        db.save(p);
-        return p;
+	User createPerson(@RequestBody JSONObject jsonObject) {
+        User u = new User();
+        u.setAccountType((Integer) jsonObject.getAsNumber("accountType"));
+        u.setUsername(jsonObject.getAsString("username"));
+        u.setPassword(jsonObject.getAsString("password"));
+        u.setSecurityQuestion(jsonObject.getAsString("securityQuestion"));
+        u.setSecurityAnswer(jsonObject.getAsString("securityAnswer"));
+
+        UserInfo ui = new UserInfo();
+        ui.setUser(u);
+        ui.setAge((Integer) jsonObject.getAsNumber("age"));
+        ui.setEmail(jsonObject.getAsString("email"));
+        ui.setName(jsonObject.getAsString("name"));
+
+        u.setUserInfo(ui);
+
+        db.save(u);
+        userInfoInterfaceDB.save(ui);
+        return u;
     }
 
     @PutMapping("/user/{id}")
-	User updatePerson(@RequestBody User p, @PathVariable Integer id) {
-        User old_p = db.findById(id).orElseThrow(RuntimeException::new);
-        if (p.name != null)
-            old_p.setName(p.name);
-        if (p.accountType != null)
-            old_p.setAccountType(p.accountType);
-        if (p.username != null)
-            old_p.setUsername(p.username);
-        if (p.password != null)
-            old_p.setPassword(p.password);
-        if (p.securityAnswer != null)
-            old_p.setSecurityAnswer(p.securityAnswer);
-        if (p.securityQuestion != null)
-            old_p.setSecurityQuestion(p.securityQuestion);
-        if (p.email != null)
-            old_p.setEmail(p.email);
-        if (p.age != null)
-            old_p.setAge(p.age);
-        db.save(old_p);
-        return old_p;
+	User updatePerson(@RequestBody JSONObject jsonObject, @PathVariable Integer id) {
+        User old_u = db.findById(id).orElseThrow(RuntimeException::new);
+        UserInfo old_ui = old_u.getUserInfo();
+        if (jsonObject.getAsString("name") != null)
+            old_ui.setName(jsonObject.getAsString("name"));
+        if ((Integer) jsonObject.getAsNumber("accountType") != null)
+            old_u.setAccountType((Integer) jsonObject.getAsNumber("accountType"));
+        if (jsonObject.getAsString("username") != null)
+            old_u.setUsername(jsonObject.getAsString("username"));
+        if (jsonObject.getAsString("password") != null)
+            old_u.setPassword(jsonObject.getAsString("password"));
+        if (jsonObject.getAsString("securityAnswer")!= null)
+            old_u.setSecurityAnswer(jsonObject.getAsString("securityAnswer"));
+        if (jsonObject.getAsString("securityQuestion") != null)
+            old_u.setSecurityQuestion(jsonObject.getAsString("securityQuestion"));
+        if (jsonObject.getAsString("email") != null)
+            old_ui.setEmail(jsonObject.getAsString("email"));
+        if ((Integer) jsonObject.getAsNumber("age") != null)
+            old_ui.setAge((Integer) jsonObject.getAsNumber("age"));
+        db.save(old_u);
+        userInfoInterfaceDB.save((old_ui));
+        return old_u;
     }
 
     @DeleteMapping("/user/{id}")

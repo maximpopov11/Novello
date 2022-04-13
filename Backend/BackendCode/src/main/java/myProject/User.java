@@ -13,8 +13,8 @@ class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column
-    String name;
+//    @Column
+//    String name;
 
     @Column
     Integer accountType;
@@ -31,15 +31,20 @@ class User {
     @Column
     String securityAnswer;
 
-    @Column
-    String email;
-
-    @Column
-    Integer age;
+//    @Column
+//    String email;
+//
+//    @Column
+//    Integer age;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     Set<BookData> BookData;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "UserInfo_id")
+    private UserInfo userInfo;
 
     @JsonIgnore
     public Set<BookData> getBookData() {
@@ -58,13 +63,13 @@ class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public Integer getAccountType() {
         return accountType;
@@ -74,13 +79,13 @@ class User {
         this.accountType = accountType;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+//    public Integer getAge() {
+//        return age;
+//    }
+//
+//    public void setAge(Integer age) {
+//        this.age = age;
+//    }
 
     public String getUsername() {
         return username;
@@ -114,13 +119,15 @@ class User {
         this.securityAnswer = securityAnswer;
     }
 
-    public String getEmail() {
-        return email;
-    }
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    public UserInfo getUserInfo(){return userInfo; }
+    public void setUserInfo(UserInfo userInfo) {this.userInfo = userInfo; }
 
 }
