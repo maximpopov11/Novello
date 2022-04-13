@@ -142,10 +142,10 @@ public class DiscoveryPresenter {
         ArrayList<Pair<Book, Double>> left = new ArrayList<>(mid);
         ArrayList<Pair<Book, Double>> right = new ArrayList<>(recommendations.size() - mid);
         for (int i = 0; i < mid; i++) {
-            left.set(i, recommendations.get(i));
+            left.add(recommendations.get(i));
         }
         for (int i = mid; i < recommendations.size(); i++) {
-            right.set(i - mid, recommendations.get(i));
+            right.add(recommendations.get(i));
         }
         mergeSort(left);
         mergeSort(right);
