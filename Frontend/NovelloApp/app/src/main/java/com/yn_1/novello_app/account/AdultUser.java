@@ -5,6 +5,9 @@ import com.yn_1.novello_app.book.Book;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Adult user account.
+ */
 public class AdultUser implements User, Serializable {
 
     String username;

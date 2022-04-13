@@ -11,19 +11,62 @@ import java.util.List;
  */
 public interface User {
 
+    /**
+     * Sets the username
+     * @param username
+     */
     void setUsername(String username);
+
+    /**
+     * Sets the password
+     * @param password
+     */
     void setPassword(String password);
+
+    /**
+     * Sets the user type
+     * @param type
+     */
     void setUserType(UserType type);
 
-
+    /**
+     * @return the user ID
+     */
     int getUserId();
+
+    /**
+     * @return the username
+     */
     String getUsername();
+
+    /**
+     * @return the password
+     */
     String getPassword();
+
+    /**
+     * @return the user type
+     */
     UserType getUserType();
+
+    /**
+     * @return a list of friends
+     */
     List<User> getFriends();
+
+    /**
+     * @return a list of books in the library
+     */
     List<Book> getLibrary();
+
+    /**
+     * @return the user URL path
+     */
     String getUserUrlPath();
 
-
+    /**
+     * Adds the given user to the friends list
+     * @param user
+     */
     void addUserToFriendsList(User user);
 }

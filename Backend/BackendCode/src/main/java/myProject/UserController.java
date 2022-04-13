@@ -13,49 +13,49 @@ public class UserController {
     @Autowired
 	UserInterface db;
 
-    @GetMapping("/person/{id}")
-	User getPerson(@PathVariable Integer id) {
+    @GetMapping("/user/{id}")
+	User getUser(@PathVariable Integer id) {
         return db.findById(id).
                 orElseThrow(RuntimeException::new);
     }
 
     @GetMapping("/login")
     JSONObject login(@RequestBody JSONObject json){
+
         User user;
         JSONObject jsonReturn = new JSONObject();
         int i;
-        for(i = 1; i<db.count(); i++){
+        for(i = 1; i<=db.count(); i++){
             user = db.findById(i).orElseThrow(RuntimeException::new);
             if(user.username.equals(json.getAsString("username"))){
                 if(user.password.equals(json.getAsString("password"))){
-                    jsonReturn.appendField("userID",i);
+                    jsonReturn.put("userId",i);
                     return jsonReturn;
                 }
             }
-
         }
         return null;
     }
 
 
-    @PostMapping("/addAllPersons")
+    @PostMapping("/addAllUsers")
     void createAllPersons(@RequestBody User[] p) {
         db.saveAll(Arrays.asList(p));
 
     }
 
-    @RequestMapping("/persons")
+    @RequestMapping("/users")
     List<User> getPersons() {
         return db.findAll();
     }
 
-    @PostMapping("/person")
+    @PostMapping("/user")
 	User createPerson(@RequestBody User p) {
         db.save(p);
         return p;
     }
 
-    @PutMapping("/person/{id}")
+    @PutMapping("/user/{id}")
 	User updatePerson(@RequestBody User p, @PathVariable Integer id) {
         User old_p = db.findById(id).orElseThrow(RuntimeException::new);
         if (p.name != null)
@@ -78,10 +78,12 @@ public class UserController {
         return old_p;
     }
 
-    @DeleteMapping("/person/{id}")
+    @DeleteMapping("/user/{id}")
     String deletePerson(@PathVariable Integer id) {
         db.deleteById(id);
         return "deleted " + id;
     }
+
+
 
 }

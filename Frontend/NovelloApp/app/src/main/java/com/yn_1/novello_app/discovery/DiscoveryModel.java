@@ -40,6 +40,9 @@ public class DiscoveryModel {
 
     }
 
+    /**
+     * Gets all of the user's books to weight the recommendation algorithm
+     */
     public void getUserBooks() {
 
         JsonArrayRequester userBooksRequester = new JsonArrayRequester();

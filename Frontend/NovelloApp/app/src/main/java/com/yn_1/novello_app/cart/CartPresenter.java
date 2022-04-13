@@ -37,6 +37,10 @@ public class CartPresenter {
         model.getCartBooks();
     }
 
+    /**
+     * Sends the cart to the view
+     * @param cart
+     */
     public void sendCart(ArrayList<Book> cart) {
         this.cart = cart;
         view.sendCart(cart);

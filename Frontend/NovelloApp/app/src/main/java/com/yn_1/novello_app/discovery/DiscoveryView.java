@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.cart.CartModel;
@@ -39,7 +40,7 @@ public class DiscoveryView extends Fragment {
         //todo: leave cart through nav bar
         super.onCreate(savedInstanceState);
 
-        int userID = DiscoveryViewArgs.fromBundle(getArguments()).getUserID();
+        int userID = ((NavBarActivity)getActivity()).getUser().getUserId();
         presenter = new DiscoveryPresenter(this, userID);
 
     }

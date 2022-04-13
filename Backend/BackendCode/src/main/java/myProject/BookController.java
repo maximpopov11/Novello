@@ -1,5 +1,6 @@
 package myProject;
 
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,36 +8,39 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Api(value = "BookController")
 @RestController
 public class BookController {
 
     @Autowired
     BookInterface db;
 
-    @PostMapping("/addBooks")
-    Book creatBooks(@RequestBody Book b) {
+    @ApiOperation(value = "Add a book to the system", response = Iterable.class)
+    @PostMapping("/book")
+    Book addBook(@RequestBody Book b) {
         db.save(b);
         return b;
     }
 
+    @ApiOperation(value = "Add all books to the system", response = Iterable.class)
     @PostMapping("/addAllBooks")
-    void createAllBooks(@RequestBody Book[] b) {
+    void addAllBooks(@RequestBody Book[] b) {
         db.saveAll(Arrays.asList(b));
-
     }
 
-
+    @ApiOperation(value = "Get a book by id from the system", response = Iterable.class)
     @GetMapping("/book/{id}")
     Optional<Book> getBook(@PathVariable Integer id) {
         return db.findById(id);
     }
 
-
-    @RequestMapping("/books")
-    List<Book> showMeTheBooks() {
+    @ApiOperation(value = "Get all books from the system", response = Iterable.class)
+    @GetMapping("/book")
+    List<Book> getAllBooks() {
         return db.findAll();
     }
 
+    @ApiOperation(value = "Update a book by id in the system", response = Iterable.class)
     @PutMapping("/book/{id}")
     Book updateBook(@RequestBody Book b, @PathVariable Integer id) {
         Book old_b = db.findById(id).orElseThrow(RuntimeException::new);
@@ -59,10 +63,17 @@ public class BookController {
     }
 
 
+    @ApiOperation(value = "Delete a book by id in the system", response = Iterable.class)
     @DeleteMapping("/book/{id}")
     String deleteBook(@PathVariable Integer id) {
         db.deleteById(id);
         return "deleted " + id;
+    }
+
+    @ApiOperation(value = "Get the duck screen", response = Iterable.class)
+    @GetMapping("/duck")
+    String duckScreen(){
+        return "https://i.pinimg.com/originals/62/37/d4/6237d416dec1d84c8afbb9dce847e2bc.jpg";
     }
 
 }

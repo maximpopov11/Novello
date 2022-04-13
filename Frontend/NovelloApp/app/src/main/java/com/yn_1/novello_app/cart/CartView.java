@@ -98,6 +98,10 @@ public class CartView extends Fragment {
 
     }
 
+    /**
+     * Receives the cart
+     * @param cart
+     */
     public void sendCart(ArrayList<Book> cart) {
         this.cart = cart;
         addBooksToLayout(cart);

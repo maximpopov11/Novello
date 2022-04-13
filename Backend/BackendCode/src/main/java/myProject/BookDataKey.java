@@ -5,9 +5,11 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class LibraryKey implements Serializable {
-    @Column(name = "Person_Id")
-    Integer personId;
+public class BookDataKey implements Serializable {
+
+    @Column(name = "user_Id")
+    Integer userId;
+
     @Column(name = "Book_Id")
     Integer bookId;
 
@@ -19,12 +21,12 @@ public class LibraryKey implements Serializable {
         this.bookId = bookId;
     }
 
-    public Integer getPersonId() {
-        return personId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class LibraryKey implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((bookId == null) ? 0 : bookId.hashCode());
-        result = prime * result + ((personId == null) ? 0 : personId.hashCode());
+        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
         return result;
     }
 
@@ -44,15 +46,15 @@ public class LibraryKey implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        LibraryKey other = (LibraryKey) obj;
+        BookDataKey other = (BookDataKey) obj;
         if (bookId == null) {
             if (other.bookId != null)
                 return false;
         } else if (!bookId.equals(other.bookId))
             return false;
-        if (personId == null) {
-            return other.personId == null;
-        } else return personId.equals(other.personId);
+        if (userId == null) {
+            return other.userId == null;
+        } else return userId.equals(other.userId);
     }
 }
 
