@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,6 +112,7 @@ public class BookFragment extends Fragment implements BookContract.View {
         String descriptionString = " Description: " + book.getDescription();
         descriptionText.setText(descriptionString);
         presenter.onDisplayBookCover(bookCoverView);
+        Log.d("Book", "Book displayed");
     }
 
     @Override

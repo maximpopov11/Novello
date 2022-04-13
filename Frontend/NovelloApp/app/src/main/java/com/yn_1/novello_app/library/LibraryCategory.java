@@ -63,15 +63,11 @@ public enum LibraryCategory {
         if (possibleTransactions[newCategory.getCategoryIndex()]) {
             // Get the book.
             JsonObjectRequester bookReq = new JsonObjectRequester();
-            bookReq.getRequest("books/" + bookID, null, new VolleyCommand<JSONObject>() {
+            bookReq.getRequest("book/" + bookID, null, new VolleyCommand<JSONObject>() {
                 @Override
                 public void execute(JSONObject book) {
                     // Call a helper method to move the book to a new category.
-                    try {
-                        putInCategory(newCategory, userID, book.getInt("bookId"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    putInCategory(newCategory, userID, bookID);
                 }
 
                 @Override
@@ -128,6 +124,7 @@ public enum LibraryCategory {
                 object.put("category", newCategory.categoryIndex);
             } catch (JSONException e) {
                 e.printStackTrace();
+                Log.d("Transaction", "JSON object error.");
             }
 
             categoryReq.putRequest(pathUrl, object, new VolleyCommand<JSONObject>() {

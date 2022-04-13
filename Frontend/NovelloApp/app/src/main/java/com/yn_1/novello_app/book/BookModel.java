@@ -31,7 +31,7 @@ public class BookModel implements BookContract.Model {
     @Override
     public void fetchBook(BookContract.View view) {
         JsonObjectRequester req = new JsonObjectRequester();
-        req.getRequest("books/" + bookID, null, new VolleyCommand<JSONObject>() {
+        req.getRequest("book/" + bookID, null, new VolleyCommand<JSONObject>() {
             @Override
             public void execute(JSONObject data) {
                 try {
@@ -40,7 +40,7 @@ public class BookModel implements BookContract.Model {
                     String genreText = data.getString("genre");
                     int publicationYearText = data.getInt("publicationYear");
                     String isbnText = data.getString("isbn");
-                    double ratingText = data.getDouble("rating");
+                    double ratingText = data.getDouble("overallRating");
                     double priceText = data.getDouble("msrp");
                     Log.d("price", "Book price: " + priceText);
                     String descriptionText = data.getString("description");
