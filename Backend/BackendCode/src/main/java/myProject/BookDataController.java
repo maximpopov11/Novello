@@ -3,6 +3,8 @@ package myProject;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
+
 import java.util.NoSuchElementException;
 import java.util.*;
 
@@ -35,9 +37,9 @@ public class BookDataController {
         bookData.setUser(p);
 
         if(jsonObject.getAsNumber("rating")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("rating"));
+            bookData.setRating((Double) jsonObject.getAsNumber("rating"));
         }
-        if(jsonObject.getAsNumber("review")!=null){
+        if(jsonObject.getAsString("review")!=null){
             bookData.setReview(jsonObject.getAsString("review"));
         }
         if(jsonObject.getAsNumber("category")!=null){
@@ -51,6 +53,43 @@ public class BookDataController {
         return bookData;
     }
 
+    @PostMapping ("/addAllBookData")
+    void addAllBookData(@RequestBody JSONObject[] jsonObjectIn) {
+
+        JSONObject jsonObject;
+        for(int i = 0 ; i < jsonObjectIn.length; i++){
+            jsonObject = jsonObjectIn[i];
+        BookDataKey bookDataKey = new BookDataKey();
+        bookDataKey.setBookId((Integer) jsonObject.getAsNumber("bookId"));
+        bookDataKey.setUserId((Integer) jsonObject.getAsNumber("userId"));
+
+        BookData bookData = new BookData();
+
+
+        bookData.setId(bookDataKey);
+        User p = pdb.findById(bookDataKey.userId).orElseThrow(NoSuchElementException::new);
+        Book b = bdb.findById(bookDataKey.bookId).orElseThrow(NoSuchElementException::new);
+
+        bookData.setBook(b);
+        bookData.setUser(p);
+
+        if(jsonObject.getAsNumber("rating")!=null){
+            bookData.setRating((Double) jsonObject.getAsNumber("rating"));
+        }
+        if(jsonObject.getAsString("review")!=null){
+            bookData.setReview(jsonObject.getAsString("review"));
+        }
+        if(jsonObject.getAsNumber("category")!=null){
+            bookData.setCategory((Integer) jsonObject.getAsNumber("category"));
+        }
+        if(jsonObject.getAsNumber("page")!=null){
+            bookData.setPage((Integer) jsonObject.getAsNumber("page"));
+        }
+
+        db.save(bookData);
+        }
+    }
+
     @PutMapping("/bookData")
     BookData creatBookData(@RequestBody JSONObject jsonObject) {
 
@@ -61,9 +100,9 @@ public class BookDataController {
         BookData bookData = db.findById(bookDataKey).orElseThrow(NoSuchElementException::new);
 
         if(jsonObject.getAsNumber("rating")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("rating"));
+            bookData.setRating((Double) jsonObject.getAsNumber("rating"));
         }
-        if(jsonObject.getAsNumber("review")!=null){
+        if(jsonObject.getAsString("review")!=null){
             bookData.setReview(jsonObject.getAsString("review"));
         }
         if(jsonObject.getAsNumber("category")!=null){

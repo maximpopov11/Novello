@@ -72,6 +72,7 @@ public class LibraryPresenter implements LibraryContract.Presenter {
 
             model.addBookButton(book, button);
             book.setImageButton(button);
+            Log.d("button", "Book button created for " + book.getTitle());
         }
     }
 

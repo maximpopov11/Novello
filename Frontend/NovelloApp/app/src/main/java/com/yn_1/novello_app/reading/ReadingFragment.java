@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 
 public class ReadingFragment extends Fragment implements ReadingContract.View {
@@ -52,6 +53,14 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
 
         webView = view.findViewById(R.id.readingView);
         webView.loadUrl(ReadingFragmentArgs.fromBundle(getArguments()).getReadingLink());
+
+        presenter.onPageLoad(((NavBarActivity)getActivity()).getUser());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.onPageLoad(((NavBarActivity)getActivity()).getUser());
     }
 
     @Nullable
