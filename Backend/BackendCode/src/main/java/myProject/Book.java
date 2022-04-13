@@ -2,11 +2,14 @@ package myProject;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.Api;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
+@Api(value = "BookClass")
 class Book {
 
     @Id
@@ -25,6 +28,8 @@ class Book {
     @Column
     Integer publicationYear;
 
+    @Min(value = 0, message = "Rating should not be less than 0")
+    @Max(value = 10, message = "Rating should not be greater than 10")
     @Column
     Double overallRating;
 

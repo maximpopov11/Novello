@@ -100,9 +100,9 @@ public class BookDataController {
         BookData bookData = db.findById(bookDataKey).orElseThrow(NoSuchElementException::new);
 
         if(jsonObject.getAsNumber("rating")!=null){
-            bookData.setRating((Integer) jsonObject.getAsNumber("rating"));
+            bookData.setRating((Double) jsonObject.getAsNumber("rating"));
         }
-        if(jsonObject.getAsNumber("review")!=null){
+        if(jsonObject.getAsString("review")!=null){
             bookData.setReview(jsonObject.getAsString("review"));
         }
         if(jsonObject.getAsNumber("category")!=null){

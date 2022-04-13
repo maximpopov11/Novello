@@ -1,7 +1,9 @@
 package myProject;
 
+import org.hibernate.cfg.beanvalidation.BeanValidationIntegrator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -14,8 +16,10 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.builders.ApiInfoBuilder;
 
 
+
 @Configuration
 @EnableSwagger2
+@Import(BeanValidationIntegrator.class)
 public class SpringFoxConfig {
 
 //    http://localhost:8080/swagger-ui.html
