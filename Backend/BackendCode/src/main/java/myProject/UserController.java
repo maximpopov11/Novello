@@ -42,13 +42,27 @@ public class UserController {
 
 
     @PostMapping("/addAllUsers")
-    void createAllPersons(@RequestBody User[] p) {
-        for(int i = 0; i < p.length; i++)
+    void createAllPersons(@RequestBody JSONObject[] jsonObject) {
+        for(int i = 0; i < jsonObject.length; i++)
         {
+            User u = new User();
+            u.setAccountType((Integer) jsonObject[i].getAsNumber("accountType"));
+            u.setUsername(jsonObject[i].getAsString("username"));
+            u.setPassword(jsonObject[i].getAsString("password"));
+            u.setSecurityQuestion(jsonObject[i].getAsString("securityQuestion"));
+            u.setSecurityAnswer(jsonObject[i].getAsString("securityAnswer"));
 
+            UserInfo ui = new UserInfo();
+            ui.setUser(u);
+            ui.setAge((Integer) jsonObject[i].getAsNumber("age"));
+            ui.setEmail(jsonObject[i].getAsString("email"));
+            ui.setName(jsonObject[i].getAsString("name"));
+
+            u.setUserInfo(ui);
+
+            db.save(u);
+            userInfoInterfaceDB.save(ui);
         }
-        db.saveAll(Arrays.asList(p));
-
     }
 
     @GetMapping("/users")//was request mapping
