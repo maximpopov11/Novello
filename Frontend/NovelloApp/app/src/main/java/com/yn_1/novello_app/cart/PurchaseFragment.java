@@ -54,7 +54,7 @@ public class PurchaseFragment extends Fragment {
 
         Log.d("Purchase", "Purchase entered on create view.");
 
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        return inflater.inflate(R.layout.fragment_purchase, container, false);
 
     }
 

@@ -56,7 +56,7 @@ public class DiscoveryModel {
      * @param data
      */
     private void sendAllBooksToPresenter(JSONArray data) {
-        ArrayList<Book> allBooks = getBooks(data);
+        ArrayList<Book> allBooks = getBooksAll(data);
         presenter.sendAllBooks(allBooks);
     }
 
@@ -65,32 +65,62 @@ public class DiscoveryModel {
      * @param data
      */
     private void sendUserBooksToPresenter(JSONArray data) {
-        ArrayList<Book> userBooks = getBooks(data);
+        ArrayList<Book> userBooks = getBooksUser(data);
         presenter.sendUserBooks(userBooks);
     }
 
     /**
-     * Gets books from provided JSOON
+     * Gets books from provided JSON in all book format
      * @param data is a JSON of books
      * @return books
      */
-    private ArrayList<Book> getBooks(JSONArray data) {
+    private ArrayList<Book> getBooksAll(JSONArray data) {
 
         ArrayList<Book> userBooks = new ArrayList<>();
         for (int i = 0; i < data.length(); i++) {
             try {
                 JSONObject book = data.getJSONObject(i);
-                int bookID = book.getInt("bookID");
                 String title = book.getString("title");
                 String author = book.getString("author");
                 String genre = book.getString("genre");
                 int publicationYear = book.getInt("publicationYear");
                 String isbn = book.getString("isbn");
-                int rating = book.getInt("rating");
+                int rating = book.getInt("overallRating");
                 int price = book.getInt("msrp");
                 String readingUrl = book.getString("readingUrl");
                 String imageUrl = book.getString("imageUrl");
-                Book newBook = new Book(bookID, title, author, genre, publicationYear, isbn, rating,
+                Book newBook = new Book(-1, title, author, genre, publicationYear, isbn, rating,
+                        -1, null, readingUrl, imageUrl);
+                userBooks.add(newBook);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return userBooks;
+
+    }
+
+    /**
+     * Gets books from provided JSON in user book format
+     * @param data is a JSON of books
+     * @return books
+     */
+    private ArrayList<Book> getBooksUser(JSONArray data) {
+
+        ArrayList<Book> userBooks = new ArrayList<>();
+        for (int i = 0; i < data.length(); i++) {
+            try {
+                JSONObject book = data.getJSONObject(i).getJSONObject("book");
+                String title = book.getString("title");
+                String author = book.getString("author");
+                String genre = book.getString("genre");
+                int publicationYear = book.getInt("publicationYear");
+                String isbn = book.getString("isbn");
+                int rating = book.getInt("overallRating");
+                int price = book.getInt("msrp");
+                String readingUrl = book.getString("readingUrl");
+                String imageUrl = book.getString("imageUrl");
+                Book newBook = new Book(-1, title, author, genre, publicationYear, isbn, rating,
                         -1, null, readingUrl, imageUrl);
                 userBooks.add(newBook);
             } catch (JSONException e) {

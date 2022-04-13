@@ -81,8 +81,18 @@ public class DiscoveryPresenter {
         for (Book book : userBooks) {
             String author = book.getAuthor();
             String genre = book.getGenre();
-            authorHashMap.put(author, authorHashMap.get(author) + 1);
-            genreHashMap.put(genre, genreHashMap.get(genre) + 1);
+            if (authorHashMap.get(author) == null) {
+                authorHashMap.put(author, 1);
+            }
+            else {
+                authorHashMap.put(author, authorHashMap.get(author) + 1);
+            }
+            if (genreHashMap.get(genre) == null) {
+                genreHashMap.put(genre, 1);
+            }
+            else {
+                genreHashMap.put(genre, genreHashMap.get(genre) + 1);
+            }
         }
 
         //book recommendation rating set
@@ -132,10 +142,10 @@ public class DiscoveryPresenter {
         ArrayList<Pair<Book, Double>> left = new ArrayList<>(mid);
         ArrayList<Pair<Book, Double>> right = new ArrayList<>(recommendations.size() - mid);
         for (int i = 0; i < mid; i++) {
-            left.set(i, recommendations.get(i));
+            left.add(recommendations.get(i));
         }
         for (int i = mid; i < recommendations.size(); i++) {
-            right.set(i - mid, recommendations.get(i));
+            right.add(recommendations.get(i));
         }
         mergeSort(left);
         mergeSort(right);
