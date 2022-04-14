@@ -22,7 +22,7 @@ public class DiscoveryModel {
 
     /**
      * Constructor
-     * @param presenter
+     * @param presenter discovery presenter
      */
     public DiscoveryModel (DiscoveryPresenter presenter, int userID) {
         this.presenter = presenter;
@@ -53,7 +53,7 @@ public class DiscoveryModel {
 
     /**
      * Sends received all books to presenter.
-     * @param data
+     * @param data data recieved from backend
      */
     private void sendAllBooksToPresenter(JSONArray data) {
         ArrayList<Book> allBooks = getBooksAll(data);
@@ -62,7 +62,7 @@ public class DiscoveryModel {
 
     /**
      * Sends received user books to presenter.
-     * @param data
+     * @param data data recieved from backend
      */
     private void sendUserBooksToPresenter(JSONArray data) {
         ArrayList<Book> userBooks = getBooksUser(data);

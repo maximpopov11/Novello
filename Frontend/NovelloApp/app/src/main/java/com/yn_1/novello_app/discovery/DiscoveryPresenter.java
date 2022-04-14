@@ -22,7 +22,8 @@ public class DiscoveryPresenter {
 
     /**
      * Constructor
-     * @param view
+     * @param view discovery view
+     * @param userID current user's id
      */
     public DiscoveryPresenter(DiscoveryView view, int userID) {
         this.view = view;
@@ -34,7 +35,7 @@ public class DiscoveryPresenter {
 
     /**
      * Receives all books
-     * @param allBooks
+     * @param allBooks all books available in the app
      */
     public void sendAllBooks(ArrayList<Book> allBooks) {
         this.allBooks = allBooks;
@@ -43,7 +44,7 @@ public class DiscoveryPresenter {
 
     /**
      * Receives user's books
-     * @param userBooks
+     * @param userBooks all books in the user's library
      */
     public void sendUserBooks(ArrayList<Book> userBooks) {
         this.userBooks = userBooks;
@@ -121,7 +122,7 @@ public class DiscoveryPresenter {
 
     /**
      * Sorts recommendations highest recommendation rating to lowest
-     * @param recommendations
+     * @param recommendations list of books to recommend
      */
     private void sortRecommendations(ArrayList<Pair<Book, Double>> recommendations) {
 
@@ -131,7 +132,7 @@ public class DiscoveryPresenter {
 
     /**
      * Recursive merge sort over recommendations
-     * @param recommendations
+     * @param recommendations list of books to recommend
      */
     private static void mergeSort(ArrayList<Pair<Book, Double>> recommendations) {
 
@@ -155,11 +156,11 @@ public class DiscoveryPresenter {
 
     /**
      * Merge function for merge sort
-     * @param recommendations
-     * @param left
-     * @param right
-     * @param left
-     * @param right
+     * @param recommendations list of books to recommend
+     * @param leftArray left half of the array
+     * @param rightArray right half of the array
+     * @param left left index
+     * @param right right index
      */
     public static void merge(ArrayList<Pair<Book, Double>> recommendations, ArrayList<Pair<Book, Double>> leftArray,
                              ArrayList<Pair<Book, Double>> rightArray, int left, int right) {

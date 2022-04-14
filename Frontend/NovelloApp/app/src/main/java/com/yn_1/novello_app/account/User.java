@@ -13,19 +13,19 @@ public interface User {
 
     /**
      * Sets the username
-     * @param username
+     * @param username username
      */
     void setUsername(String username);
 
     /**
      * Sets the password
-     * @param password
+     * @param password password
      */
     void setPassword(String password);
 
     /**
      * Sets the user type
-     * @param type
+     * @param type account type
      */
     void setUserType(UserType type);
 
@@ -66,7 +66,7 @@ public interface User {
 
     /**
      * Adds the given user to the friends list
-     * @param user
+     * @param user user to add to friends list
      */
     void addUserToFriendsList(User user);
 }

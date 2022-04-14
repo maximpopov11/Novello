@@ -17,9 +17,9 @@ public class AdultUser implements User, Serializable {
 
     /**
      * Constructor
-     * @param username
-     * @param password
-     * @param id
+     * @param username username
+     * @param password password
+     * @param id user id
      */
     public AdultUser(String username, String password, int id) {
 

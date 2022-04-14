@@ -101,8 +101,8 @@ public class CartView extends Fragment {
     }
 
     /**
-     * Receives the cart
-     * @param cart
+     * Receives the cart from the presenter
+     * @param cart: array list of books
      */
     public void sendCart(ArrayList<Book> cart) {
         this.cart = cart;

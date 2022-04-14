@@ -32,13 +32,14 @@ public class CartModel {
 
     /**
      * Constructor
+     * Creates a presenter
      */
     public CartModel(CartPresenter presenter) {
         this.presenter = presenter;
     }
 
     /**
-     * @return books in cart
+     * Requests the user's cart books.
      */
     public void getCartBooks() {
         JsonArrayRequester cartBookRequester = new JsonArrayRequester();
@@ -49,8 +50,8 @@ public class CartModel {
     }
 
     /**
-     * Sets user
-     * @param user
+     * Sets the user
+     * @param user current user
      */
     public void setUser(User user) {
         this.user = user;
@@ -58,7 +59,7 @@ public class CartModel {
 
     /**
      * Sends cart books to view
-     * @param data
+     * @param data data recieved from backend
      */
     private void booksReceived(JSONArray data) {
         for (int i = 0; i < data.length(); i++) {
@@ -86,8 +87,8 @@ public class CartModel {
 
     /**
      * Assigns image to book
-     * @param book
-     * @param imageButton
+     * @param book book to get image button
+     * @param imageButton image button to connect to book
      */
     public void assignImageToBook(Book book, ImageButton imageButton) {
         ImageRequester req = new ImageRequester();
@@ -106,18 +107,18 @@ public class CartModel {
 
     /**
      * Removes book from cart
-     * @param book
+     * @param book book to remove from cart
      */
     public void removeBookFromCart(Book book) {
         //todo: delete request to remove book from user
     }
 
     /**
-     * Moves book from cart to waitlsit
-     * @param book
+     * Moves book from cart to wishlist
+     * @param book book to move to wishlist
      */
-    public void moveBookToWaitlist(Book book) {
-        //todo: put request on book to move to waitlist
+    public void moveBookToWishlist(Book book) {
+        //todo: put request on book to move to wishlist
     }
 
     /**

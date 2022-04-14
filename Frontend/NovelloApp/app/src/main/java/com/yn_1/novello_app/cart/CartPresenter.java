@@ -23,7 +23,8 @@ public class CartPresenter {
     ArrayList<Book> cart;
 
     /**
-     * Constructor. Creates model.
+     * Constructor
+     * Creates model
      */
     public CartPresenter(CartView view) {
         this.view = view;
@@ -31,15 +32,15 @@ public class CartPresenter {
     }
 
     /**
-     * @return books in cart
+     * Asks Model to retrieve cart books
      */
     public void getCartBooks() {
         model.getCartBooks();
     }
 
     /**
-     * Sends the cart to the view
-     * @param cart
+     * Sends the cart books to the view
+     * @param cart: array list of books
      */
     public void sendCart(ArrayList<Book> cart) {
         this.cart = cart;
@@ -48,7 +49,7 @@ public class CartPresenter {
 
     /**
      * Sets user for Presenter and Model
-     * @param user
+     * @param user current user
      */
     public void setUser(User user) {
         this.user = user;

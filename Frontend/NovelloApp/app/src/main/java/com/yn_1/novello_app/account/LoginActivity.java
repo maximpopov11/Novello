@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Moves to starting screen after login (dashboard)
+     * Moves to home screen after login if successful and sends an alert otherwise
      * @param userID is the user's ID. It is 0 if the login failed.
      */
     private void loginResult(int userID) {

@@ -100,7 +100,7 @@ public class PurchaseFragment extends Fragment {
     }
 
     /**
-     * @param creditCardNumber
+     * @param creditCardNumber credit card number
      * @return true if the card can be charged
      */
     private boolean canChargeCard(String creditCardNumber) {
@@ -109,7 +109,7 @@ public class PurchaseFragment extends Fragment {
     }
 
     /**
-     * @param creditCardNumber
+     * @param creditCardNumber credit card number
      * @return true if the card was charged successfully
      */
     private boolean chargeCard(String creditCardNumber) {
