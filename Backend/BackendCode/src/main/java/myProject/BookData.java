@@ -1,6 +1,7 @@
 package myProject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 
@@ -22,12 +23,16 @@ public class BookData {
     @JoinColumn(name = "Book_id")
     Book book;
 
+    @ApiModelProperty(allowableValues = "9.5")
     double rating;
 
+    @ApiModelProperty(allowableValues = "This book was really good!")
     String review;
 
+    @ApiModelProperty(allowableValues = "3")
     int category;
 
+    @ApiModelProperty(allowableValues = "243")
     int page;
 
     public BookDataKey getId() {
