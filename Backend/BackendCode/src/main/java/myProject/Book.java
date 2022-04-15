@@ -17,33 +17,43 @@ class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer bookID;
 
+    @ApiModelProperty(allowableValues = "100030499")
     @Column
     String isbn;
 
+    @ApiModelProperty(allowableValues = "Star Wars")
     @Column
     String title;
 
+    @ApiModelProperty(allowableValues = "Teddy")
     @Column
     String author;
 
+    @ApiModelProperty(allowableValues = "2008")
     @Column
     Integer publicationYear;
 
+    @ApiModelProperty(allowableValues = "4.56")
     @Column
     Double overallRating;
 
+    @ApiModelProperty(allowableValues = "9.99")
     @Column
     Double msrp;
 
+    @ApiModelProperty(allowableValues = "Drama")
     @Column
     String genre;
 
+    @ApiModelProperty(allowableValues = "Book about the wars of stars")
     @Column(columnDefinition = "TEXT")
     String description;
 
+    @ApiModelProperty(allowableValues = "www.books.com")
     @Column
     String readingUrl;
 
+    @ApiModelProperty(allowableValues = "www.image.com")
     @Column
     String imageUrl;
 
