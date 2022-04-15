@@ -2,11 +2,14 @@ package com.yn_1.novello_app.home;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.yn_1.novello_app.R;
 
@@ -25,6 +28,9 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ImageButton settings;
+    private ImageButton profile;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -62,5 +68,22 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        settings = view.findViewById(R.id.settings);
+        profile = view.findViewById(R.id.profile);
+
+        settings.setOnClickListener(v -> {
+            //todo: create drop down
+        });
+
+        profile.setOnClickListener(v -> {
+            //todo: create drop down
+        });
+
     }
 }
