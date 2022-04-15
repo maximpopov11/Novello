@@ -128,26 +128,32 @@ public class LibraryPresenter implements LibraryContract.Presenter {
             case "Remove":
                 currentSelectedCategory.performTransaction(LibraryCategory.NONE,
                         user.getUserId(), currentSelectedBook.getBookID());
+                view.refreshScreen();
                 break;
             case "Add to Wishlist":
                 currentSelectedCategory.performTransaction(LibraryCategory.WISHLIST,
                         user.getUserId(), currentSelectedBook.getBookID());
+                view.refreshScreen();
                 break;
             case "Add to Cart":
                 currentSelectedCategory.performTransaction(LibraryCategory.CART,
                         user.getUserId(), currentSelectedBook.getBookID());
+                view.refreshScreen();
                 break;
             case "Move to Backlog":
                 currentSelectedCategory.performTransaction(LibraryCategory.BACKLOG,
                         user.getUserId(), currentSelectedBook.getBookID());
+                view.refreshScreen();
                 break;
             case "Move to Currently Reading":
                 currentSelectedCategory.performTransaction(LibraryCategory.CURRENTLY_READING,
                         user.getUserId(), currentSelectedBook.getBookID());
+                view.refreshScreen();
                 break;
             case "Move to Read":
                 currentSelectedCategory.performTransaction(LibraryCategory.READ,
                         user.getUserId(), currentSelectedBook.getBookID());
+                view.refreshScreen();
                 break;
         }
     }

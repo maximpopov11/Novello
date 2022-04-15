@@ -114,6 +114,11 @@ public interface LibraryContract {
          * @param book
          */
         void reviewBook(Book book);
+
+        /**
+         * Refreshes the screen.
+         */
+        void refreshScreen();
     }
 
     /**
