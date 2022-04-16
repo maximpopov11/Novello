@@ -3,7 +3,8 @@ package com.yn_1.novello_app.reading;
 import com.yn_1.novello_app.account.User;
 
 /**
- * {@inheritDoc}
+ * Reading Presenter <br>
+ * For handling UI logic.
  *
  * @author Roba Abbajabal
  */

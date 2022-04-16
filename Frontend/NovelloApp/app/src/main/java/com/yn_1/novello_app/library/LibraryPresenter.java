@@ -16,7 +16,8 @@ import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
 
 /**
- * {@inheritDoc}
+ * Library Presenter <br>
+ * For handling UI logic.
  *
  * @author Roba Abbajabal
  */

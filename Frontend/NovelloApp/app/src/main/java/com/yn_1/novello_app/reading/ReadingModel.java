@@ -16,7 +16,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
- * {@inheritDoc}
+ * Reading Model <br>
+ * For storing data and communicating with database.
  *
  * @author Roba Abbajabal
  */

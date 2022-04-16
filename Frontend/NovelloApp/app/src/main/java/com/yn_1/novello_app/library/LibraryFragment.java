@@ -16,14 +16,15 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.book.Book;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@inheritDoc}
+ * Library View <br>
+ * For displaying data via the UI. Is the fragment of the screen.
  *
  * @author Roba Abbajabal
  */

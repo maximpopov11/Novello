@@ -16,14 +16,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 
 import java.util.Map;
 
 /**
- * {@inheritDoc}
+ * Book View <br>
+ * For displaying data via the UI. Is the fragment of the screen.
  *
- * @author Roba Abbajabal
+ * @author Roba_Abbajabal
  */
 public class BookFragment extends Fragment implements BookContract.View {
 

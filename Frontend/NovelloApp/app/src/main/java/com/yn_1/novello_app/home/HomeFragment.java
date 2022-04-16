@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 
 /**
  * Class representing the Home screen.

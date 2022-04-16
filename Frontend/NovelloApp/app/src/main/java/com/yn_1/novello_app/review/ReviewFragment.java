@@ -13,10 +13,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 
 /**
- * {@inheritDoc}
+ * (Posting) Review View <br>
+ * For displaying data via the UI. Is the fragment of the screen.
  *
  * @author Roba Abbajabal
  */

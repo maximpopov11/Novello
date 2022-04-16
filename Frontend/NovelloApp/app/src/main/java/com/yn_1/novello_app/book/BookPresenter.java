@@ -5,7 +5,8 @@ import android.widget.ImageView;
 import com.yn_1.novello_app.Const;
 
 /**
- * {@inheritDoc}
+ * Book Presenter <br>
+ * For handling UI logic.
  *
  * @author Roba Abbajabal
  */

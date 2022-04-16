@@ -11,7 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * {@inheritDoc}
+ * (Posting) Review Model <br>
+ * For storing data and communicating with database.
  *
  * @author Roba Abbajabal
  */

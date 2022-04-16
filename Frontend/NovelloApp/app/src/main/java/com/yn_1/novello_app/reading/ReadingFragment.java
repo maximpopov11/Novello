@@ -11,10 +11,11 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 
 /**
- * {@inheritDoc}
+ * Reading View <br>
+ * For displaying data via the UI. Is the fragment of the screen.
  *
  * @author Roba Abbajabal
  */

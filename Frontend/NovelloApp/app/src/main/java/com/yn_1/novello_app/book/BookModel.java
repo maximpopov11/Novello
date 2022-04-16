@@ -18,7 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * {@inheritDoc}
+ * Book Model <br>
+ * For storing data and communicating with database.
  *
  * @author Roba Abbajabal
  */

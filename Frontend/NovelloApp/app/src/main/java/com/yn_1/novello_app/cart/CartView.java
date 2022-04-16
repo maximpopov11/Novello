@@ -20,11 +20,9 @@ import androidx.fragment.app.Fragment;
 
 import com.yn_1.novello_app.Const;
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
-import com.yn_1.novello_app.library.LibraryFragment;
-import com.yn_1.novello_app.library.LibraryFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
