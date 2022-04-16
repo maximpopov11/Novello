@@ -1,11 +1,13 @@
 package com.yn_1.novello_app.book;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.widget.ImageButton;
 
-import java.io.Serializable;
-
+/**
+ * Class representation of a book.
+ *
+ * @author Roba Abbajabal
+ * @author Maxim Popov
+ */
 public class Book {
 
     //book fields
@@ -29,12 +31,18 @@ public class Book {
 
 
     /**
-     * Constructor
-     * @param title book title
-     * @param author book author
-     * @param publicationYear book publication year
-     * @param isbn book isbn
-     * @param rating book rating
+     * Constructor for creating a book instance.
+     * @param bookID Integer representing the book id.
+     * @param title String representing the book title.
+     * @param author String representing the book author.
+     * @param genre String representing the book genre.
+     * @param publicationYear Integer representing the book's publication year.
+     * @param isbn String representing the book's isbn.
+     * @param rating Double representing the book's average isbn.
+     * @param price Double representing the book's price.
+     * @param description String representing the book's description.
+     * @param readingURL String representing the book's reading URL.
+     * @param imageURL String representing the book's image URL.
      */
     public Book(int bookID, String title, String author, String genre, int publicationYear,
                 String isbn, double rating, double price, String description, String readingURL, String imageURL) {
@@ -53,25 +61,23 @@ public class Book {
 
     /**
      * Constructor for instantiating a copy of the book for the user library
-     * @param book The book to be copied
-     * @param userCategoryID Categories book should be in for user library
+     * @param otherBook The book to be copied
+     * @param userCategoryID The new category of the book should be in.
      */
-    public Book(Book book, String userCategoryID) {
-        bookID = book.bookID;
-        title = book.title;
-        author = book.author;
-        publicationYear = book.publicationYear;
-        isbn = book.isbn;
-        rating = book.rating;
-        imageURL = book.imageURL;
+    public Book(Book otherBook, String userCategoryID) {
+        this(otherBook.bookID, otherBook.title, otherBook.author, otherBook.genre,
+                otherBook.publicationYear, otherBook.isbn, otherBook.rating, otherBook.price,
+                otherBook.description, otherBook.readingURL, otherBook.imageURL);
 
         this.userCategoryID = userCategoryID;
     }
 
     /**
-     * Constructor
-     * @param title book title
+     * Old constructor for creating a book instance.
+     * @deprecated Not to be used for new classes, replaced by {@link #Book(int, String, String, String, int, String, double, double, String, String, String)}}
+     * @param title String representing the title of the book
      */
+    @Deprecated
     public Book(String title) {
         this.title = title;
         this.author = "unknown author";
@@ -81,110 +87,123 @@ public class Book {
     }
 
     /**
-     * @return book title
+     * Gets the book's title.
+     * @return String representing the book's title.
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * @return book author
+     * Gets the book's author.
+     * @return String representing the book's author.
      */
     public String getAuthor() {
         return author;
     }
 
     /**
-     * @return book genre
+     * Gets the book's genre.
+     * @return String representing the book's genre.
      */
     public String getGenre() {return genre;}
 
     /**
-     * @return book rating
+     * Gets the book's average rating.
+     * @return Double representing the book's average rating.
      */
     public double getRating() {
         return rating;
     }
 
     /**
-     * @return book isbn
+     * Gets the book's isbn.
+     * @return String representing the book's isbn.
      */
     public String getISBN() {
         return isbn;
     }
 
     /**
-     * @return string representation of book
+     * Gets the textual representation of a book.
+     * @return String representation of the book.
      */
+    @Override
     public String toString() {
         return title + " by " + author;
     }
 
     /**
-     * @return book id
+     * Gets the book's ID.
+     * @return Integer representation of the book ID.
      */
     public int getBookID() {
         return bookID;
     }
 
     /**
-     *
-     * @return
+     * Gets a link to the book's reading page.
+     * @return String representing the book's reading URL.
      */
     public String getReadingURL() {
         return readingURL;
     }
 
     /**
-     *
-     * @return
+     * Gets the book's publication year.
+     * @return Integer representing the book's publication year.
      */   
     public int getPublicationYear() {
         return publicationYear;
     }
 
     /**
-     *
-     * @return
+     * Gets the book's price
+     * @return Double representing the book's price.
      */
     public double getPrice() {
         return price;
     }
 
     /**
-     *
+     * Gets the book's description.
+     * @return String representing the book's description.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     *
-     * @return
+     * Gets a link to the book's cover image.
+     * @return String representing the book's cover image URL.
      */
     public String getImageURL() { return imageURL; }
 
     /**
-     *
-     * @return
+     * Gets the book's image button.
+     * @deprecated To be removed in future, because it is bad code design to hold
+     *  any type of XML component in a book instance.
+     * @return ImageButton representing a button of the book.
      */
     public ImageButton getImageButton() { return linkedImageButton; }
 
     /**
-     *
-     * @param button
+     * Sets the book's image button.
+     * @deprecated To be removed in future, because it is bad code design to hold
+     *  any type of XML component in a book instance.
+     * @param button ImageButton to represent a button of the book.
      */
     public void setImageButton(ImageButton button) { linkedImageButton = button; }
 
     /**
-     *
-     * @return
+     * Gets the book's user category ID.
+     * @return A String representing the book's user category ID.
      */
     public String getUserCategoryId() { return userCategoryID; }
 
     /**
-     *
-     * @param categoryName
+     * Sets the book's user category ID.
+     * @param categoryName An integer representing the book's user category ID.
      */
     public void setUserCategoryID(String categoryName) { userCategoryID = categoryName; }
 

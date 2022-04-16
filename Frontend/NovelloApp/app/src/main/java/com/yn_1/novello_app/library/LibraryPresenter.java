@@ -15,6 +15,11 @@ import androidx.fragment.app.Fragment;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
 
+/**
+ * {@inheritDoc}
+ *
+ * @author Roba Abbajabal
+ */
 public class LibraryPresenter implements LibraryContract.Presenter {
 
     // Model and View accessible from Presenter
@@ -24,31 +29,44 @@ public class LibraryPresenter implements LibraryContract.Presenter {
     private Book currentSelectedBook;
     private LibraryCategory currentSelectedCategory;
 
+    /**
+     * Constructor that creates a new instance of the library presenter.
+     * @param model The library model.
+     * @param view The library view.
+     */
     public LibraryPresenter(LibraryContract.Model model, LibraryContract.View view) {
         this.model = model;
         this.view = view;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void beforeViewCreated(User user) {
         Log.d("Presenter", "beforeViewCreated() called");
         model.fetchAllBooks(user, view, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onViewCreated(User user, Context context) {
         view.displayAllBooks(model.getUserBookCollection());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onBookTapped(Book book) {
         view.displayBook(book);
     }
 
-    // TODO: On book held, allow user to remove book or rate book in user collection
-    @Override
-    public void onBookHeld(Book book) { }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void createBookButtons(Context context) {
         Log.d("Library", "Book collection size " + model.getUserBookCollection().size());
@@ -76,6 +94,9 @@ public class LibraryPresenter implements LibraryContract.Presenter {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void createBookMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         currentSelectedBook = model.getBookButton((ImageButton)v);
@@ -112,6 +133,9 @@ public class LibraryPresenter implements LibraryContract.Presenter {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onBookMenuItemSelected(User user, MenuItem item) {
         switch (item.getTitle().toString())

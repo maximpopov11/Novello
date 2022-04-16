@@ -10,14 +10,26 @@ import com.yn_1.novello_app.volley_requests.VolleyCommand;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * {@inheritDoc}
+ *
+ * @author Roba Abbajabal
+ */
 public class ReviewModel implements ReviewContract.Model {
 
     private int bookID;
 
+    /**
+     * Constructor that creates a new instance of the review model.
+     * @param bookID Integer representation of book ID
+     */
     public ReviewModel(int bookID) {
         this.bookID = bookID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void postReview(ReviewContract.VolleyListener volleyListener, User user, double rating, String review) {
         JSONObject put = new JSONObject();
@@ -45,6 +57,9 @@ public class ReviewModel implements ReviewContract.Model {
         }, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getBookID() {
         return bookID;

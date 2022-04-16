@@ -16,9 +16,9 @@ import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link ReviewFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * {@inheritDoc}
+ *
+ * @author Roba Abbajabal
  */
 public class ReviewFragment extends Fragment implements ReviewContract.View {
 
@@ -30,8 +30,7 @@ public class ReviewFragment extends Fragment implements ReviewContract.View {
     Button postReviewButton;
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Creates a new fragment instance, using specific arguments to be added to the bundle.
      *
      * @return A new instance of fragment ReviewFragment.
      */
@@ -41,11 +40,17 @@ public class ReviewFragment extends Fragment implements ReviewContract.View {
         return fragment;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +64,9 @@ public class ReviewFragment extends Fragment implements ReviewContract.View {
         return inflater.inflate(R.layout.fragment_review, container, false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -75,6 +83,9 @@ public class ReviewFragment extends Fragment implements ReviewContract.View {
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void navigateToBookScreen(int bookID) {
         ReviewFragmentDirections.ActionReviewFragmentToBookFragment action =

@@ -15,16 +15,29 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+/**
+ * {@inheritDoc}
+ *
+ * @author Roba Abbajabal
+ */
 public class ReadingModel implements ReadingContract.Model {
 
     private int bookID;
     private String pageURL;
 
+    /**
+     * Constructor that creates a new instance of the reading model.
+     * @param bookID Integer representation of the book ID.
+     * @param pageURL String representation of the reading page URL.
+     */
     public ReadingModel(int bookID, String pageURL) {
         this.bookID = bookID;
         this.pageURL = pageURL;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void fetchProgress(User user, int bookID, ReadingContract.View view) {
         JsonArrayRequester req = new JsonArrayRequester();
@@ -61,6 +74,9 @@ public class ReadingModel implements ReadingContract.Model {
             }, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveProgress(User user, int bookID, int progress) {
         JsonObjectRequester req = new JsonObjectRequester();
@@ -88,11 +104,17 @@ public class ReadingModel implements ReadingContract.Model {
                 }, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getBookId() {
         return bookID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getUrl() {
         return pageURL;

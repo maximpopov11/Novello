@@ -17,6 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * {@inheritDoc}
+ *
+ * @author Roba Abbajabal
+ */
 public class BookModel implements BookContract.Model {
 
     private int bookID;
@@ -24,10 +29,17 @@ public class BookModel implements BookContract.Model {
     private Bitmap currentCover;
     private Map<Integer, String[]> reviews;
 
+    /**
+     * Creates a new instance of the book model
+     * @param bookID The id of the book to be processed.
+     */
     public BookModel(int bookID) {
         this.bookID = bookID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void fetchBook(BookContract.View view) {
         JsonObjectRequester req = new JsonObjectRequester();
@@ -61,6 +73,9 @@ public class BookModel implements BookContract.Model {
         }, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void fetchImage(String imageURL, BookContract.View view) {
         ImageRequester req = new ImageRequester();
@@ -78,16 +93,25 @@ public class BookModel implements BookContract.Model {
         }, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Book getBook() {
         return currentBook;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Bitmap getBookCover() {
         return currentCover;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void fetchReviews(BookContract.View view) {
         JsonArrayRequester req = new JsonArrayRequester();
@@ -116,6 +140,9 @@ public class BookModel implements BookContract.Model {
         }, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Integer, String[]> getReviews() {
         return reviews;
