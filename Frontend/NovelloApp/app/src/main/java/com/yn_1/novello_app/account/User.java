@@ -30,6 +30,18 @@ public interface User {
     void setUserType(UserType type);
 
     /**
+     *
+     * @param url Url to the user profile image
+     */
+    void setProfileImageUrl(String url);
+
+    /**
+     *
+     * @param name The name of the user
+     */
+    void setName(String name);
+
+    /**
      * @return the user ID
      */
     int getUserId();
@@ -63,6 +75,18 @@ public interface User {
      * @return the user URL path
      */
     String getUserUrlPath();
+
+    /**
+     *
+     * @return The name of the user
+     */
+    String getName();
+
+    /**
+     *
+     * @return the user profile image
+     */
+    String getProfileImageUrl();
 
     /**
      * Adds the given user to the friends list

@@ -14,6 +14,8 @@ public class AdultUser implements User, Serializable {
     String password;
     UserType userType = UserType.ADULT;
     int id;
+    String name;
+    String userProfileImageUrl;
 
     /**
      * Constructor
@@ -26,7 +28,16 @@ public class AdultUser implements User, Serializable {
         this.username = username;
         this.password = password;
         this.id = id;
+    }
 
+    /**
+     * Constructor for getting another user
+     * @param id
+     */
+    public AdultUser(int id, String name, String userProfileImageUrl) {
+        this.id = id;
+        this.name = name;
+        this.userProfileImageUrl = userProfileImageUrl;
     }
 
     @Override
@@ -48,6 +59,16 @@ public class AdultUser implements User, Serializable {
 
         this.userType = type;
 
+    }
+
+    @Override
+    public void setProfileImageUrl(String url) {
+        userProfileImageUrl = url;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -99,6 +120,16 @@ public class AdultUser implements User, Serializable {
 
         return null;
 
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public String getProfileImageUrl() {
+        return userProfileImageUrl;
     }
 
     @Override

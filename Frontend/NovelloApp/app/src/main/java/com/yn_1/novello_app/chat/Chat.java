@@ -10,6 +10,10 @@ public class Chat {
     private List<User> users;
     private List<Message> messages;
 
+    public Chat(int chatId, List<User> users) {
+        new Chat(chatId, users, null);
+    }
+
     public Chat(int chatId, List<User> users, List<Message> messages) {
         this.chatId = chatId;
         this.users = users;
