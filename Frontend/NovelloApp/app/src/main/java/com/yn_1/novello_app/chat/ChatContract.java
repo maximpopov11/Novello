@@ -2,6 +2,10 @@ package com.yn_1.novello_app.chat;
 
 import android.graphics.Bitmap;
 
+import com.yn_1.novello_app.account.User;
+
+import java.util.List;
+
 public interface ChatContract {
     interface Model {
         enum ChatType {
@@ -22,15 +26,31 @@ public interface ChatContract {
         };
 
         void fetchChats(ChatType type);
-        void fetchProfileImagesOfChat(Chat[] chats, int[] profileImageSize,
+
+        void fetchProfileImagesOfChat(Chat[] chats, ChatType chatType, int[] profileImageSize,
                                       ChatContract.VolleyListener listener);
+
+        User getUser();
+
+        List<Chat> getPrivateChats();
+
+        List<Chat> getPublicChats();
+
+        int getPrivateChatCount();
+
+        int getPublicChatCount();
+
+        int getTotalChatCount();
     }
+
     interface View {
-
+        void populateChatListView();
     }
+
     interface Presenter {
-
+        List<Chat>[] transferChatsToView();
     }
+
     interface VolleyListener {
         void onImageRecieved(Bitmap image);
     }

@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.chat.privateChat.PrivateChatFragment;
 
 /**
@@ -21,12 +23,15 @@ import com.yn_1.novello_app.chat.privateChat.PrivateChatFragment;
  * Use the {@link ChatFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements ChatContract.View {
+
 
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
 
     private FragmentStateAdapter pagerAdapter;
+
+    ChatContract.Presenter presenter;
 
     /**
      * Use this factory method to create a new instance of
@@ -49,6 +54,11 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        User user = ((NavBarActivity) getActivity()).getUser();
+
+        presenter = new ChatPresenter(new ChatModel(user), this);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
@@ -65,6 +75,11 @@ public class ChatFragment extends Fragment {
 
         TabLayout.OnTabSelectedListener listener = new TabListener();
         tabLayout.addOnTabSelectedListener(listener);
+    }
+
+    @Override
+    public void populateChatListView() {
+
     }
 
     private class TabListener implements TabLayout.OnTabSelectedListener {
@@ -102,9 +117,11 @@ public class ChatFragment extends Fragment {
             switch (position)
             {
                 case 0:
-                    return PrivateChatFragment.newInstance(10);
+                    return PrivateChatFragment.newInstance(presenter.transferChatsToView()[0]);
+
                 case 1:
-                    return PrivateChatFragment.newInstance(10);
+                    return PrivateChatFragment.newInstance(presenter.transferChatsToView()[1]);
+
                 default:
                     throw new IllegalArgumentException();
             }

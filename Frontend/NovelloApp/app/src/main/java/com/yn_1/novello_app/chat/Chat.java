@@ -1,11 +1,14 @@
 package com.yn_1.novello_app.chat;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.message.Message;
 
 import java.util.List;
 
-public class Chat {
+public class Chat implements Parcelable {
     private int chatId;
     private List<User> users;
     private List<Message> messages;
@@ -20,6 +23,24 @@ public class Chat {
         this.messages = messages;
     }
 
+    public Chat (Parcel in) {
+        this.chatId = in.readInt();
+        in.readList(users, User.class.getClassLoader());
+        in.readList(messages, Message.class.getClassLoader());
+    }
+
+    public static final Creator<Chat> CREATOR = new Creator<Chat>() {
+        @Override
+        public Chat createFromParcel(Parcel in) {
+            return new Chat(in);
+        }
+
+        @Override
+        public Chat[] newArray(int size) {
+            return new Chat[size];
+        }
+    };
+
     public int getChatId() {
         return chatId;
     }
@@ -30,5 +51,17 @@ public class Chat {
 
     public List<Message> getMessages() {
         return messages;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(chatId);
+        dest.writeList(users);
+        dest.writeList(messages);
     }
 }

@@ -19,12 +19,17 @@ import java.util.List;
 
 public class ChatModel implements ChatContract.Model {
 
-    private ChatType chatType;
     private User currentUser;
-    private Chat[] chats;
+
+    private List<Chat> privateChats;
+    private List<Chat> publicChats;
+
+    public ChatModel(User user) {
+        currentUser = user;
+    }
 
     @Override
-    public void fetchChats(ChatType type) {
+    public void fetchChats(ChatType chatType) {
         JsonArrayRequester req = new JsonArrayRequester();
         String urlPath = "chat/" + currentUser.getUserId() + "/" + chatType.toString();
         req.getRequest(urlPath, null, new VolleyCommand<JSONArray>() {
@@ -48,7 +53,7 @@ public class ChatModel implements ChatContract.Model {
                         Chat chat = new Chat(chatId, users);
 
                     } catch (JSONException e) {
-                        Log.d("Chat", "Unable to parse JSON of " + type.toString() + " chat.");
+                        Log.d("Chat", "Unable to parse JSON of " + chatType.toString() + " chat.");
                         e.printStackTrace();
                     }
                 }
@@ -56,13 +61,13 @@ public class ChatModel implements ChatContract.Model {
 
             @Override
             public void onError(VolleyError error) {
-                Log.d("Chat", "Unable to fetch " + type.toString() + " chat.");
+                Log.d("Chat", "Unable to fetch " + chatType.toString() + " chat.");
             }
         }, null, null);
     }
 
     @Override
-    public void fetchProfileImagesOfChat(Chat[] chats, int[] profileImageSize, ChatContract.VolleyListener listener) {
+    public void fetchProfileImagesOfChat(Chat[] chats, ChatType chatType, int[] profileImageSize, ChatContract.VolleyListener listener) {
         for (Chat chat : chats) {
             int chatId = chat.getChatId();
 
@@ -86,5 +91,35 @@ public class ChatModel implements ChatContract.Model {
                 }, null, null);
             }
         }
+    }
+
+    @Override
+    public User getUser() {
+        return currentUser;
+    }
+
+    @Override
+    public List<Chat> getPrivateChats() {
+        return privateChats;
+    }
+
+    @Override
+    public List<Chat> getPublicChats() {
+        return publicChats;
+    }
+
+    @Override
+    public int getPrivateChatCount() {
+        return privateChats.size();
+    }
+
+    @Override
+    public int getPublicChatCount() {
+        return  publicChats.size();
+    }
+
+    @Override
+    public int getTotalChatCount() {
+        return privateChats.size() + publicChats.size();
     }
 }

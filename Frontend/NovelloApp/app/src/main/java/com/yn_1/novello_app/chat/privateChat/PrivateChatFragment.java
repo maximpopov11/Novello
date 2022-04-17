@@ -8,21 +8,24 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.chat.Chat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
  */
 public class PrivateChatFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private static final String ARG_PRIVATE_CHATS = "private-chats";
+    private ArrayList<Parcelable> mColumnCount;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -31,11 +34,10 @@ public class PrivateChatFragment extends Fragment {
     public PrivateChatFragment() {
     }
 
-    @SuppressWarnings("unused")
-    public static PrivateChatFragment newInstance(int columnCount) {
+    public static PrivateChatFragment newInstance(List<Chat> privateChats) {
         PrivateChatFragment fragment = new PrivateChatFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putParcelableArrayList(ARG_PRIVATE_CHATS, (ArrayList<? extends Parcelable>) privateChats);
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,7 +47,7 @@ public class PrivateChatFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            mColumnCount = getArguments().getParcelableArrayList(ARG_PRIVATE_CHATS);
         }
     }
 
@@ -58,11 +60,7 @@ public class PrivateChatFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new PrivateChatRecyclerViewAdapter(PrivateChatContent.ITEMS));
         }
         return view;
