@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 
+import java.util.ArrayList;
+
 /**
  * Profile screen view
  */
@@ -44,6 +46,16 @@ public class ProfileView extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    /**
+     * Shows the user's friend list
+     * @param friendsList
+     */
+    public void showFriends(ArrayList<User> friendsList) {
+        //todo: button to show friends list (scrollable view in the middle of profile)
+        //todo: show friends (username)
+        //todo: x button to exit friends list
     }
 
 }

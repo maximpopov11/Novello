@@ -3,6 +3,8 @@ package com.yn_1.novello_app.account;
 import com.yn_1.novello_app.cart.CartModel;
 import com.yn_1.novello_app.cart.CartView;
 
+import java.util.ArrayList;
+
 /**
  * Profile screen presenter
  */
@@ -12,6 +14,8 @@ public class ProfilePresenter {
     ProfileModel model;
 
     User user;
+
+    ArrayList<User> friendsList;
 
     /**
      * Constructor
@@ -29,6 +33,22 @@ public class ProfilePresenter {
     public void setUser(User user) {
         this.user = user;
         model.setUser(user);
+    }
+
+    /**
+     * Sends database request to obtain the friend's lit
+     */
+    public void showFriendsList() {
+        model.getFriendsList();
+    }
+
+    /**
+     * Sets the friends list
+     * @param friendsList
+     */
+    public void setFriendsList(ArrayList<User> friendsList) {
+        this.friendsList = friendsList;
+        view.showFriends(friendsList);
     }
 
 }
