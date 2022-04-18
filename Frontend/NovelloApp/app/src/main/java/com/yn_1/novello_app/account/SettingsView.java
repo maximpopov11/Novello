@@ -1,5 +1,6 @@
 package com.yn_1.novello_app.account;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,7 +10,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.book.BookContract;
 
@@ -19,6 +22,8 @@ import com.yn_1.novello_app.book.BookContract;
 public class SettingsView extends Fragment {
 
     SettingsPresenter presenter;
+
+    Button logout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,13 @@ public class SettingsView extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        logout = view.findViewById(R.id.logout);
+        logout.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        });
+
     }
 
 }

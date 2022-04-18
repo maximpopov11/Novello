@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.cart.CartViewDirections;
+import com.yn_1.novello_app.cart.PurchaseFragmentDirections;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -41,6 +41,10 @@ public class NavBarActivity extends AppCompatActivity {
                             controller.navigate(R.id.homeFragment);
                             return true;
 
+                        case R.id.settingsView:
+                            controller.navigate(R.id.settingsView);
+                            return true;
+
                         case R.id.libraryFragment:
                             controller.navigate(R.id.libraryFragment);
                             return true;
