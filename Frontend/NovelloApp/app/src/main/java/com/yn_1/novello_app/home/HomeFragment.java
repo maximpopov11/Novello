@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.cart.CartViewDirections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,11 +80,11 @@ public class HomeFragment extends Fragment {
         profile = view.findViewById(R.id.profile);
 
         settings.setOnClickListener(v -> {
-            //todo: create drop down
+            ((NavBarActivity)getActivity()).getController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsView());
         });
 
         profile.setOnClickListener(v -> {
-            //todo: create drop down
+            //todo: go to profile
         });
 
     }
