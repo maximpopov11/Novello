@@ -1,7 +1,10 @@
 package com.yn_1.novello_app.account;
 
+import android.os.Parcelable;
+
 import com.yn_1.novello_app.book.Book;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +12,7 @@ import java.util.List;
  * The creation of a user account should be done in user implementation constructor.
  * @author Roba Abbajabal
  */
-public interface User {
+public interface User extends Parcelable, Serializable {
 
     /**
      * Sets the username

@@ -1,7 +1,5 @@
 package com.yn_1.novello_app.chat;
 
-import android.graphics.Bitmap;
-
 import com.yn_1.novello_app.account.User;
 
 import java.util.List;

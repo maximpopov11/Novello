@@ -1,6 +1,9 @@
 package com.yn_1.novello_app.message;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +30,7 @@ public class MessageContent {
     static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
-            addItem(createMessageItem(i, -1, "Test"));
+            addItem(createMessageItem(i, null, null, null, "Test"));
         }
     }
 
@@ -36,7 +39,7 @@ public class MessageContent {
         ITEMS_MAP.put(item.getMessageId(), item);
     }
 
-    private static Message createMessageItem(int messageId, int userId, String message) {
-        return new Message(messageId, userId, message);
+    private static Message createMessageItem(int messageId, Bitmap image, String userName, Date date, String message) {
+        return new Message(messageId, image, userName, date, message);
     }
 }

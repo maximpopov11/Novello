@@ -1,6 +1,9 @@
 package com.yn_1.novello_app.account;
 
+import android.os.Parcel;
+
 import com.yn_1.novello_app.book.Book;
+import com.yn_1.novello_app.message.Message;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.List;
 /**
  * Adult user account.
  */
-public class AdultUser implements User, Serializable {
+public class AdultUser implements User {
 
     String username;
     String password;
@@ -18,7 +21,7 @@ public class AdultUser implements User, Serializable {
     String userProfileImageUrl;
 
     /**
-     * Constructor
+     * Constructor for creating a user
      * @param username username
      * @param password password
      * @param id user id
@@ -38,6 +41,16 @@ public class AdultUser implements User, Serializable {
         this.id = id;
         this.name = name;
         this.userProfileImageUrl = userProfileImageUrl;
+    }
+
+    /**
+     * Constructor for writing AdultUser to a Parcel
+     * @param in
+     */
+    public AdultUser(Parcel in) {
+        in.writeInt(id);
+        in.writeString(name);
+        in.writeString(userProfileImageUrl);
     }
 
     @Override
@@ -139,4 +152,27 @@ public class AdultUser implements User, Serializable {
 
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(userProfileImageUrl);
+    }
+
+    public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
 }
