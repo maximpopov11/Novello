@@ -13,13 +13,12 @@ import android.widget.ImageButton;
 
 import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.account.User;
+import com.yn_1.novello_app.cart.CartViewDirections;
 
 /**
  * Class representing the Home screen.
  */
 public class HomeFragment extends Fragment {
-
-    private User user;
 
     private ImageButton settings;
     private ImageButton profile;
@@ -39,9 +38,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        user = ((NavBarActivity)getActivity()).getUser();
-
     }
 
     @Override
@@ -63,7 +59,10 @@ public class HomeFragment extends Fragment {
         });
 
         profile.setOnClickListener(v -> {
-            //todo: create drop down
+            HomeFragmentDirections.ActionHomeFragmentToProfileView action =
+                    HomeFragmentDirections.actionHomeFragmentToProfileView();
+            action.setUserID(((NavBarActivity)getActivity()).getUser().getUserId());
+            ((NavBarActivity)getActivity()).getController().navigate(action);
         });
 
     }
