@@ -105,7 +105,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @PostMapping("/user")
-	User createPerson(@ApiParam (value = "jsonObject with all of the info of a user")@RequestBody JSONObject jsonObject) {
+	User createPerson(@ApiParam (value = "jsonObject with all of the info of a user", example = "{foo: whatever, bar: whatever2}") @RequestBody JSONObject jsonObject) {
         User u = new User();
         u.setAccountType((Integer) jsonObject.getAsNumber("accountType"));
         u.setUsername(jsonObject.getAsString("username"));
@@ -156,6 +156,7 @@ public class UserController {
         userInfoInterfaceDB.save((old_ui));
         return old_u;
     }
+
     @ApiOperation(value = "Deletes a user from a userID", response = Iterable.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
