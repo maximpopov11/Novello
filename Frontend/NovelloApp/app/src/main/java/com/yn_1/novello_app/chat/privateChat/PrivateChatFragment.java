@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.chat.Chat;
+import com.yn_1.novello_app.message.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,10 @@ import java.util.List;
 /**
  * A fragment representing a list of Items.
  */
-public class PrivateChatFragment extends Fragment {
+public class PrivateChatFragment extends Fragment implements PrivateChatContract.View {
 
     private static final String ARG_PRIVATE_CHATS = "private-chats";
-    private ArrayList<Parcelable> mColumnCount;
+    private List<Chat> privateChats;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -47,7 +48,9 @@ public class PrivateChatFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getParcelableArrayList(ARG_PRIVATE_CHATS);
+            privateChats = getArguments().getParcelableArrayList(ARG_PRIVATE_CHATS);
+            PrivateChatContract.Presenter presenter = new PrivateChatPresenter(
+                    new PrivateChatModel(privateChats), this);
         }
     }
 

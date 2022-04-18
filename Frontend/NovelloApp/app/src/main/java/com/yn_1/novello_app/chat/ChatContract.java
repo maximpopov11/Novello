@@ -25,10 +25,7 @@ public interface ChatContract {
             }
         };
 
-        void fetchChats(ChatType type);
-
-        void fetchProfileImagesOfChat(Chat[] chats, ChatType chatType, int[] profileImageSize,
-                                      ChatContract.VolleyListener listener);
+        void fetchChats(ChatType type, VolleyListener listener);
 
         User getUser();
 
@@ -44,14 +41,15 @@ public interface ChatContract {
     }
 
     interface View {
-        void populateChatListView();
+        void initializeTabListener();
     }
 
     interface Presenter {
+        void onFragmentCreated();
         List<Chat>[] transferChatsToView();
     }
 
     interface VolleyListener {
-        void onImageRecieved(Bitmap image);
+        void onChatsReceived();
     }
 }

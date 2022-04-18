@@ -1,7 +1,5 @@
 package com.yn_1.novello_app.chat;
 
-import android.graphics.Bitmap;
-
 import java.util.List;
 
 public class ChatPresenter implements ChatContract.Presenter, ChatContract.VolleyListener {
@@ -15,12 +13,18 @@ public class ChatPresenter implements ChatContract.Presenter, ChatContract.Volle
     }
 
     @Override
-    public void onImageRecieved(Bitmap image) {
-
+    public void onFragmentCreated() {
+        model.fetchChats(ChatContract.Model.ChatType.PRIVATE, this);
+        model.fetchChats(ChatContract.Model.ChatType.PUBLIC, this);
     }
 
     @Override
     public List<Chat>[] transferChatsToView() {
         return new List[]{model.getPrivateChats(), model.getPublicChats()};
+    }
+
+    @Override
+    public void onChatsReceived() {
+        view.initializeTabListener();
     }
 }

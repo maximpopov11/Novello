@@ -49,16 +49,15 @@ public class ChatFragment extends Fragment implements ChatContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        User user = ((NavBarActivity) getActivity()).getUser();
+
+        presenter = new ChatPresenter(new ChatModel(user), this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        User user = ((NavBarActivity) getActivity()).getUser();
-
-        presenter = new ChatPresenter(new ChatModel(user), this);
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
@@ -73,13 +72,13 @@ public class ChatFragment extends Fragment implements ChatContract.View {
         pagerAdapter = new ScreenSlidePagerAdapter(this);
         viewPager2.setAdapter(pagerAdapter);
 
-        TabLayout.OnTabSelectedListener listener = new TabListener();
-        tabLayout.addOnTabSelectedListener(listener);
+        presenter.onFragmentCreated();
     }
 
     @Override
-    public void populateChatListView() {
-
+    public void initializeTabListener() {
+        TabLayout.OnTabSelectedListener listener = new TabListener();
+        tabLayout.addOnTabSelectedListener(listener);
     }
 
     private class TabListener implements TabLayout.OnTabSelectedListener {
