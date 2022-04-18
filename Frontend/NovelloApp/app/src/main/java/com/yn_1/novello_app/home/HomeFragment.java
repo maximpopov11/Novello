@@ -12,11 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.yn_1.novello_app.*;
+import com.yn_1.novello_app.account.User;
 
 /**
  * Class representing the Home screen.
  */
 public class HomeFragment extends Fragment {
+
+    private User user;
 
     private ImageButton settings;
     private ImageButton profile;
@@ -36,6 +39,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        user = ((NavBarActivity)getActivity()).getUser();
+
     }
 
     @Override

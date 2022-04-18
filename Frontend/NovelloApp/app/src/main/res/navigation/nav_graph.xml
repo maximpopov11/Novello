@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.yn_1.novello_app.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_profileView"
+            app:destination="@id/profileView" />
+    </fragment>
     <fragment
         android:id="@+id/libraryFragment"
         android:name="com.yn_1.novello_app.library.LibraryFragment"
@@ -123,4 +127,14 @@
         android:name="com.yn_1.novello_app.chat.Chat"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/profileView"
+        android:name="com.yn_1.novello_app.account.ProfileView"
+        android:label="fragment_profile_view"
+        tools:layout="@layout/fragment_profile_view" >
+        <argument
+            android:name="userID"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
