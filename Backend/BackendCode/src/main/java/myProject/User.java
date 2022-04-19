@@ -54,6 +54,11 @@ class User {
     private UserInfo userInfo;
 
     @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "UserInfo_id")
+    private Friends friends;
+
+    @JsonIgnore
     public Set<BookData> getBookData() {
         return BookData;
     }
