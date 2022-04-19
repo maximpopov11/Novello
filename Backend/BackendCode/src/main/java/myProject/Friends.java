@@ -4,17 +4,27 @@ import io.swagger.annotations.ApiModelProperty;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Friends {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(allowableValues = "100030499")
-    int id;
+    @EmbeddedId
+    FriendsKey id;
 
-    @ApiModelProperty(allowableValues = "Sam")
-    @Column
-    String username;
+    @ManyToOne
+    @MapsId("senderId")
+    @JoinColumn(name = "Senderid")
+    User sender;
+
+    @ManyToOne
+    @MapsId("receiverId")
+    @JoinColumn(name = "Receiverid")
+    User reciver;
+
+
+//    @ApiModelProperty(allowableValues = "Sam")
+//    @Column
+//    String username;
 
     //1 = mutral 2 = pending
     @ApiModelProperty(allowableValues = "1-2")
@@ -25,11 +35,13 @@ public class Friends {
     @Column
     int friendId;
 
-    public int getId(){return id;}
-    public void setId(int id){this.id = id; }
 
-    public String getUsername(){return username; }
-    public void setUsername(String username){this.username = username; }
+
+    public FriendsKey getId(){return id;}
+    public void setId(FriendsKey id){this.id = id; }
+
+//    public String getUsername(){return username; }
+//    public void setUsername(String username){this.username = username; }
 
     public int getFriendshipStatus(){return friendshipStatus;}
     public void setFriendshipStatus(int friendshipStatus){this.friendshipStatus = friendshipStatus; }
@@ -39,12 +51,34 @@ public class Friends {
         this.friendId = friendId;
     }
 
-    @OneToOne
-    @JsonIgnore
-    private User user;
+//    @OneToOne
+//    @JsonIgnore
+//    private User user;
+//
+//
+//    public Friends()
+//    {
+//    }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
 
-    public Friends()
-    {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Friends other = (Friends) obj;
+        if (id == null) {
+            return other.id == null;
+        } else return id.equals(other.id);
     }
 }

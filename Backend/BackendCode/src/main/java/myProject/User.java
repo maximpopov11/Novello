@@ -54,9 +54,8 @@ class User {
     private UserInfo userInfo;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "UserInfo_id")
-    private Friends friends;
+    @OneToMany(mappedBy = "sender")
+    Set<Friends> Friends;
 
     @JsonIgnore
     public Set<BookData> getBookData() {
@@ -65,6 +64,15 @@ class User {
 
     public void setBookData(Set<BookData> bookData) {
         BookData = bookData;
+    }
+
+    @JsonIgnore
+    public Set<Friends> getFriends() {
+        return Friends;
+    }
+
+    public void setFriends(Set<Friends> friends) {
+        Friends = friends;
     }
 
     public Integer getId() {
