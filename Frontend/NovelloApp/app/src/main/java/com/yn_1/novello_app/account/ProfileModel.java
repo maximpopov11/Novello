@@ -55,9 +55,9 @@ public class ProfileModel {
 
     /**
      * Sends friends list to presenter
-     * @param friendsList is the user's friend list
+     * @param friendsList is the user's friend list (usernames only)
      */
-    private void setFriendsList(ArrayList<User> friendsList) {
+    private void setFriendsList(ArrayList<String> friendsList) {
         presenter.setFriendsList(friendsList);
     }
 
@@ -68,7 +68,16 @@ public class ProfileModel {
 
         @Override
         public void execute(JSONArray data) {
-            //todo: parse data into ArrayList and call setFriendsList with that as a param
+            try {
+                ArrayList<String> friendsList = new ArrayList<>();
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject friendJson = data.getJSONObject(i);
+                    friendsList.add(friendJson.getString("username"));
+                }
+                setFriendsList(friendsList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

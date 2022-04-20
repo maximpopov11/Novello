@@ -50,9 +50,9 @@ public class ProfileView extends Fragment {
 
     /**
      * Shows the user's friend list
-     * @param friendsList
+     * @param friendsList is the user's friend list (usernames only)
      */
-    public void showFriends(ArrayList<User> friendsList) {
+    public void showFriends(ArrayList<String> friendsList) {
         //todo: button to show friends list (scrollable view in the middle of profile)
         //todo: show friends (username)
         //todo: x button to exit friends list

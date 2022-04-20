@@ -15,7 +15,7 @@ public class ProfilePresenter {
 
     User user;
 
-    ArrayList<User> friendsList;
+    ArrayList<String> friendsList;
 
     /**
      * Constructor
@@ -44,9 +44,9 @@ public class ProfilePresenter {
 
     /**
      * Sets the friends list
-     * @param friendsList
+     * @param friendsList is the user's friend list (username only)
      */
-    public void setFriendsList(ArrayList<User> friendsList) {
+    public void setFriendsList(ArrayList<String> friendsList) {
         this.friendsList = friendsList;
         view.showFriends(friendsList);
     }
