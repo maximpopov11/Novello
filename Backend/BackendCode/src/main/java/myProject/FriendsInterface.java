@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface FriendsInterface extends JpaRepository<Friends, FriendsKey> {
-
+    //Friends findById(int id);
 }
