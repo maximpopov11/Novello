@@ -5,7 +5,6 @@ import myProject.User;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "messages")
@@ -15,12 +14,13 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private int chatRoom;
-
     @ManyToOne
     @JoinColumn(name = "message_Id")
     User user;
+
+    @ManyToOne
+    @JoinColumn(name = "chatRoom_Id")
+    ChatRoom chatRoom;
 
     @Lob
     private String content;
@@ -37,13 +37,14 @@ public class Message {
 		this.content = content;
 	}
 
-
-    public int getChatRoom() {
+    public ChatRoom getChatRoom() {
         return chatRoom;
     }
-    public void setChatRoom(int chatRoom) {
+
+    public void setChatRoom(ChatRoom chatRoom) {
         this.chatRoom = chatRoom;
     }
+
     public Long getId() {
         return id;
     }

@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -13,9 +14,10 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller      // this is needed for this to be an endpoint to springboot
-@ServerEndpoint(value = "/chat/{username}")  // this is Websocket url
+@ServerEndpoint(value = "/chat/{username}/{GroupID}")  // this is Websocket url
 public class ChatSocket {
 
   // cannot autowire static directly (instead we do it by the below
@@ -35,15 +37,14 @@ public class ChatSocket {
 	}
 
 	// Store all socket session and their corresponding username.
-	private static Map<Session, User> sessionUserMap = new Hashtable<>();
-	private static Map<User, Session> userSessionMap = new Hashtable<>();
-
-
+	private static Map<String, Map<Session, User>> sessionUserMap = new Hashtable<>();
+						//string is book ID
+	private static Map<String, Map<User, Session>> userSessionMap = new Hashtable<>();
 
 	private final Logger logger = LoggerFactory.getLogger(ChatSocket.class);
 
 	@OnOpen
-	public void onOpen(Session session, @PathParam("username") User user)
+	public void onOpen(Session session, @PathParam("username") User user, @PathParam("groupID") int groupId)
       throws IOException {
 
 		logger.info("Entered into Open");
@@ -152,7 +153,7 @@ public class ChatSocket {
 		StringBuilder sb = new StringBuilder();
 		if(messages != null && messages.size() != 0) {
 			for (Message message : messages) {
-				sb.append(message.getUserName() + ": " + message.getContent() + "\n");
+				sb.append(message.getUser() + ": " + message.getContent() + "\n");
 			}
 		}
 		return sb.toString();
