@@ -15,8 +15,10 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private int chatRoom;
+
     @ManyToOne
-//    @MapsId("userId")
     @JoinColumn(name = "message_Id")
     User user;
 
@@ -35,10 +37,16 @@ public class Message {
 		this.content = content;
 	}
 
+
+    public int getChatRoom() {
+        return chatRoom;
+    }
+    public void setChatRoom(int chatRoom) {
+        this.chatRoom = chatRoom;
+    }
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
