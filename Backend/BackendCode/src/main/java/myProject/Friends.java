@@ -19,7 +19,7 @@ public class Friends {
     @ManyToOne
     @MapsId("receiverId")
     @JoinColumn(name = "Receiverid")
-    User reciver;
+    User receiver;
 
 
 //    @ApiModelProperty(allowableValues = "Sam")
@@ -31,9 +31,12 @@ public class Friends {
     @Column
     int friendshipStatus;
 
-    @ApiModelProperty(allowableValues = "idnum")
-    @Column
-    int friendId;
+//    @ApiModelProperty(allowableValues = "idnum")
+//    @Column
+//    int sender_Id;
+//
+//    @Column
+//    int receiver_Id;
 
 
 
@@ -46,10 +49,25 @@ public class Friends {
     public int getFriendshipStatus(){return friendshipStatus;}
     public void setFriendshipStatus(int friendshipStatus){this.friendshipStatus = friendshipStatus; }
 
-    public int getFriendID(){return friendId; }
-    public void setFriendId(int friendId) {
-        this.friendId = friendId;
-    }
+//    public int getReceiver_Id() {
+//        return receiver_Id;
+//    }
+//
+//    public void setReceiver_Id(int receiver_Id) {
+//        this.receiver_Id = receiver_Id;
+//    }
+//
+//    public int getSender_Id() {
+//        return sender_Id;
+//    }
+//
+//    public void setSender_Id(int sender_Id) {
+//        this.sender_Id = sender_Id;
+//    }
+    //    public int getFriendID(){return friendId; }
+//    public void setFriendId(int friendId) {
+//        this.friendId = friendId;
+//    }
 
 //    @OneToOne
 //    @JsonIgnore
