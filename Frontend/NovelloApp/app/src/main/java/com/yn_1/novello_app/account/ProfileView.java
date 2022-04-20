@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 public class ProfileView extends Fragment {
 
     ProfilePresenter presenter;
+
+    Button friendsList;
 
     User user;
 
@@ -46,6 +49,12 @@ public class ProfileView extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        friendsList = view.findViewById(R.id.friendsList);
+        friendsList.setOnClickListener(v -> {
+            presenter.showFriendsList();
+        });
+
     }
 
     /**
