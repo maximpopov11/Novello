@@ -1,20 +1,11 @@
 package myProject.chat;
 
 import lombok.Data;
+import myProject.User;
 
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-//import lombok.Data;
+import java.util.Set;
 
 @Entity
 @Table(name = "messages")
@@ -24,8 +15,10 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String userName;
+    @ManyToOne
+//    @MapsId("userId")
+    @JoinColumn(name = "message_Id")
+    User user;
 
     @Lob
     private String content;
@@ -37,8 +30,8 @@ public class Message {
 	
 	public Message() {};
 	
-	public Message(String userName, String content) {
-		this.userName = userName;
+	public Message(User user, String content) {
+		this.user = user;
 		this.content = content;
 	}
 
@@ -49,13 +42,12 @@ public class Message {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getUserName() {
-        return userName;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getContent() {

@@ -4,12 +4,14 @@ package myProject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import myProject.chat.Message;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Api(value = "UserClass")
+public
 class User {
 
     @Id
@@ -52,6 +54,11 @@ class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "UserInfo_id")
     private UserInfo userInfo;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    @JoinColumn(name = "message_id")
+    Set<Message> messages;
 
     @JsonIgnore
     public Set<BookData> getBookData() {
