@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
         profile = view.findViewById(R.id.profile);
 
         settings.setOnClickListener(v -> {
-            ((NavBarActivity)getActivity()).getController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsView());
+            goToSettings();
         });
 
         profile.setOnClickListener(v -> {
@@ -89,4 +89,9 @@ public class HomeFragment extends Fragment {
         });
 
     }
+
+    private void goToSettings() {
+        ((NavBarActivity)getActivity()).getController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsView());
+    }
+
 }

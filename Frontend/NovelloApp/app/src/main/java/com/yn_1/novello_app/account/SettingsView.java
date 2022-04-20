@@ -45,10 +45,14 @@ public class SettingsView extends Fragment {
 
         logout = view.findViewById(R.id.logout);
         logout.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
+            goToLogin();
         });
 
+    }
+
+    private void goToLogin() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
     }
 
 }
