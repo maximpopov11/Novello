@@ -40,29 +40,23 @@ public class FriendsController {
     }
 
     @GetMapping("/friends")
-    Friends returnAllFriends(@RequestBody JSONObject jsonObject)
+    Set<Friends> returnAllFriends(@RequestBody JSONObject jsonObject)
     {
-        Friends f = new Friends();
-        //f = FIDB.get((Integer) jsonObject.getAsNumber("userId"));
-         //f = FIDB.findById((Integer) jsonObject.getAsNumber("userId")).orElseThrow(NoSuchElementException::new);
-//        Set<Friends> friends = f.friendshipStatus();
-//
-//        Set<Friends> friendsSet = new HashSet<>();
-//
-//        Iterator<Friends> friendsIterator = friendsSet.iterator();
-//
-//        Friends friends1;
-//
-//        int c;
-//        while (friendsIterator.hasNext()) {
-//            friends1 = friendsIterator.next();
-//            c = friends1.getFriendshipStatus();
-//            if (c == FriendshipStatus) {
-//                librarySet.add(friends1);
-//            }
-//        }
-//        return librarySet;
-
-        return f;
+       User u = UIDB.findById((int)jsonObject.getAsNumber("id")).orElseThrow(NoSuchElementException::new);
+        //Friends f = new Friends();
+        Set<Friends> friendsSet = new HashSet<>();
+        Set<Friends> allMutralFriends = new HashSet<>();
+        friendsSet = u.getFriends();
+        Iterator<Friends> friendsIterator = friendsSet.iterator();
+        Friends f;
+        while(friendsIterator.hasNext())
+        {
+            f = friendsIterator.next();
+           if((u.getId() == f.getSender().id) && f.getFriendshipStatus() == 2)
+           {
+               allMutralFriends.add(f);
+           }
+        }
+        return allMutralFriends;
     }
 }
