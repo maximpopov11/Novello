@@ -27,7 +27,7 @@ public class FriendsView extends Fragment {
 
         super.onCreate(savedInstanceState);
 
-        //todo: get friends list sent in fragment creation
+        friendsArray = FriendsViewArgs.fromBundle(getArguments()).getFriendsArray();
 
     }
 
@@ -43,7 +43,13 @@ public class FriendsView extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //todo: show friends (usernames) in list view in new method
+        showFriends();
+
+    }
+
+    private void showFriends() {
+
+        //todo: show friends (usernames) in list view
 
     }
 
