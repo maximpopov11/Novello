@@ -49,6 +49,7 @@ public class FriendsView extends Fragment {
 
     private void showFriends() {
 
+        //todo: friends view not entered via profile friends view button which is executing in full: need to add navigation in nav bar activity
         //todo: show friends (usernames) in list view
 
     }
