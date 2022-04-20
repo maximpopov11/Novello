@@ -49,6 +49,19 @@ public class Friends {
     public int getFriendshipStatus(){return friendshipStatus;}
     public void setFriendshipStatus(int friendshipStatus){this.friendshipStatus = friendshipStatus; }
 
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;}
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;}
 //    public int getReceiver_Id() {
 //        return receiver_Id;
 //    }

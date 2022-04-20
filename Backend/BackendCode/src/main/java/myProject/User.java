@@ -81,6 +81,7 @@ class User {
         Friends = friends;
     }
 
+    @JsonIgnore
     public Set<Friends> getFriends_receiver() {
         return Friends_receiver;
     }
