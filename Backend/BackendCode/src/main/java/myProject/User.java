@@ -2,11 +2,14 @@ package myProject;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Api(value = "UserClass")
 class User {
 
     @Id
@@ -15,19 +18,23 @@ class User {
 
 //    @Column
 //    String name;
-
+    @ApiModelProperty(allowableValues = "1")
     @Column
     Integer accountType;
 
+    @ApiModelProperty(allowableValues = "Kevin")
     @Column
     String username;
 
+    @ApiModelProperty(allowableValues = "letMeIn")
     @Column
     String password;
 
+    @ApiModelProperty(allowableValues = "Where was my mother born?")
     @Column
     String securityQuestion;
 
+    @ApiModelProperty(allowableValues = "Alaska")
     @Column
     String securityAnswer;
 

@@ -16,12 +16,18 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.book.Book;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Library View <br>
+ * For displaying data via the UI. Is the fragment of the screen.
+ *
+ * @author Roba Abbajabal
+ */
 public class LibraryFragment extends Fragment implements LibraryContract.View {
 
     // Presenter accessible from View
@@ -35,17 +41,20 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
     HorizontalScrollView backlog;
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Creates a new fragment instance, using specific arguments to be added to the bundle.
      *
      * @return A new instance of fragment LibraryFragment.
      */
     public static LibraryFragment newInstance() {
         LibraryFragment fragment = new LibraryFragment();
         Bundle args = new Bundle();
+        fragment.setArguments(args);
         return fragment;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +63,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,6 +79,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         return inflater.inflate(R.layout.fragment_library, container, false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -84,6 +99,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         categories.add(backlog);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startPresenter() {
         // Start the presenter
@@ -91,6 +109,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void displayAllBooks(List<Book> books) {
         Log.d("Library", "displayAllBooks() reached");
@@ -106,6 +127,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void displayBook(Book book) {
         LibraryFragmentDirections.ActionLibraryFragmentToBookFragment action =
@@ -114,6 +138,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         ((NavBarActivity)getActivity()).getController().navigate(action);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void readBook(Book book) {
         LibraryFragmentDirections.ActionLibraryFragmentToReadingFragment action =
@@ -123,6 +150,9 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         ((NavBarActivity)getActivity()).getController().navigate(action);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reviewBook(Book book) {
         LibraryFragmentDirections.ActionLibraryFragmentToReviewFragment action =
@@ -131,24 +161,36 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         ((NavBarActivity)getActivity()).getController().navigate(action);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Nullable
     @Override
     public Context getContext() {
         return super.getContext();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Nullable
     @Override
     public View getView() {
         return super.getView();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         presenter.createBookMenu(menu, v, menuInfo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         presenter.onBookMenuItemSelected(((NavBarActivity)getActivity()).getUser(), item);

@@ -16,14 +16,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 
 import java.util.Map;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link BookFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Book View <br>
+ * For displaying data via the UI. Is the fragment of the screen.
+ *
+ * @author Roba_Abbajabal
  */
 public class BookFragment extends Fragment implements BookContract.View {
 
@@ -41,12 +42,10 @@ public class BookFragment extends Fragment implements BookContract.View {
     private TableLayout reviewsTable;
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Creates a new fragment instance, using specific arguments to be added to the bundle.
      *
      * @return A new instance of fragment BookFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static BookFragment newInstance() {
         BookFragment fragment = new BookFragment();
         Bundle args = new Bundle();
@@ -54,11 +53,17 @@ public class BookFragment extends Fragment implements BookContract.View {
         return fragment;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,6 +79,9 @@ public class BookFragment extends Fragment implements BookContract.View {
         return inflater.inflate(R.layout.fragment_book, container, false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -90,11 +98,17 @@ public class BookFragment extends Fragment implements BookContract.View {
         reviewsTable = view.findViewById(R.id.reviewsTable);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startView() {
         presenter.onViewCreated();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void displayComponents(Book book) {
         titleText.setText(book.getTitle());
@@ -115,6 +129,9 @@ public class BookFragment extends Fragment implements BookContract.View {
         Log.d("Book", "Book displayed");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void populateReviewsTable(Map<Integer, String[]> reviews) {
         for (int i = 0; i < reviews.size(); i++) {

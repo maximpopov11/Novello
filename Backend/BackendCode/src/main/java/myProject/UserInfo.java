@@ -1,16 +1,27 @@
 package myProject;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
+@Api(value = "UserInfoClass")
 public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @ApiModelProperty(allowableValues = "100030499")
     int id;
+
+    @ApiModelProperty(allowableValues = "77")
     int age;
+
+    @ApiModelProperty(allowableValues = "Sam")
     String name;
+
+    @ApiModelProperty(allowableValues = "Nate")
     String email;
 
     public int getId(){return id;}
