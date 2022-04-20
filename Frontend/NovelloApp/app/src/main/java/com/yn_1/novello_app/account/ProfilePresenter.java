@@ -48,7 +48,7 @@ public class ProfilePresenter {
      */
     public void setFriendsList(ArrayList<String> friendsList) {
         this.friendsList = friendsList;
-        view.showFriends(friendsList);
+        view.showFriends((String[])friendsList.toArray());
     }
 
 }

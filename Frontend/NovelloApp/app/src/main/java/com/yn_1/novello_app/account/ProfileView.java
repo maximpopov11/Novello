@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.home.HomeFragmentDirections;
 
 import java.util.ArrayList;
 
@@ -53,18 +54,21 @@ public class ProfileView extends Fragment {
         friendsList = view.findViewById(R.id.friendsList);
         friendsList.setOnClickListener(v -> {
             presenter.showFriendsList();
+            //todo: remove hardcoded show friends once backend connection completed.
+            showFriends(new String[]{"name1", "name 2"});
         });
 
     }
 
     /**
      * Shows the user's friend list
-     * @param friendsList is the user's friend list (usernames only)
+     * @param friendsArray is the user's friend array (usernames only)
      */
-    public void showFriends(ArrayList<String> friendsList) {
-        //todo: button to show friends list (scrollable view in the middle of profile)
-        //todo: show friends (username)
-        //todo: x button to exit friends list
+    public void showFriends(String[] friendsArray) {
+        ProfileViewDirections.ActionProfileViewToFriendsView action =
+                ProfileViewDirections.actionProfileViewToFriendsView(null);
+        action.setFriendsArray(friendsArray);
+        ((NavBarActivity)getActivity()).getController().navigate(action);
     }
 
 }

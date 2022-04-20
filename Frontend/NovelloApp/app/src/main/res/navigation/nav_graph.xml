@@ -136,5 +136,18 @@
             android:name="userID"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_profileView_to_friendsView"
+            app:destination="@id/friendsView" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsView"
+        android:name="com.yn_1.novello_app.account.FriendsView"
+        android:label="fragment_friends_view"
+        tools:layout="@layout/fragment_friends_view" >
+        <argument
+            android:name="friendsArray"
+            app:argType="string[]"
+            app:nullable="true" />
     </fragment>
 </navigation>
