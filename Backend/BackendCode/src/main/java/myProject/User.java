@@ -57,7 +57,7 @@ class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    @JoinColumn(name = "message_id")
+//    @JoinColumn(name = "message_id")
     Set<Message> messages;
 
     @JsonIgnore

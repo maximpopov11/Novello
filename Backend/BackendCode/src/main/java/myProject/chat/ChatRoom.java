@@ -19,7 +19,7 @@ public class ChatRoom {
 
     @JsonIgnore
     @OneToMany(mappedBy = "chatRoom")
-    @JoinColumn(name = "message_id")
+//    @JoinColumn(name = "message_id")
     Set<Message> messages;
 
     public int getId() {
