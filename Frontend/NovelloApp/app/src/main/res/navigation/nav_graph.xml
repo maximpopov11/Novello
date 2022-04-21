@@ -122,5 +122,21 @@
         android:id="@+id/chatFragment"
         android:name="com.yn_1.novello_app.chat.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_messageFragment"
+            app:destination="@id/messageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.yn_1.novello_app.message.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" >
+        <argument
+            android:name="currentUser"
+            app:argType="com.yn_1.novello_app.account.User" />
+        <argument
+            android:name="currentChat"
+            app:argType="com.yn_1.novello_app.chat.Chat" />
+    </fragment>
 </navigation>

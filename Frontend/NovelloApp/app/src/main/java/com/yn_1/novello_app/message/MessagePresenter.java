@@ -1,5 +1,8 @@
 package com.yn_1.novello_app.message;
 
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import org.java_websocket.handshake.ServerHandshake;
 
 public class MessagePresenter implements MessageContract.Presenter, MessageContract.WebSocketListener {
@@ -10,6 +13,11 @@ public class MessagePresenter implements MessageContract.Presenter, MessageContr
     public MessagePresenter(MessageContract.Model model, MessageContract.View view) {
         this.model = model;
         this.view = view;
+    }
+
+    @Override
+    public void onFragmentCreated() {
+        model.beginWebSocket();
     }
 
 

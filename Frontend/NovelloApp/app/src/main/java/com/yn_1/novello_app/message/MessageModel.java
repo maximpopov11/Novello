@@ -26,12 +26,14 @@ public class MessageModel implements MessageContract.Model {
     private WebSocketClient cc;
 
 
-    public MessageModel(MessageContract.WebSocketListener websocketListener,
-                        Chat chat, User currentUser, List<Message> messageList) {
-        this.websocketListener = websocketListener;
+    public MessageModel(Chat chat, User currentUser) {
         this.chat = chat;
         this.currentUser = currentUser;
-        this.messageList = messageList;
+    }
+
+    @Override
+    public void setListener(MessageContract.WebSocketListener listener) {
+        this.websocketListener = websocketListener;
     }
 
     @Override
