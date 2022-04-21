@@ -12,7 +12,7 @@ import java.util.Date;
 public class Message {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "message_Id")
@@ -32,9 +32,10 @@ public class Message {
 	
 	public Message() {};
 	
-	public Message(User user, String content) {
+	public Message(User user, String content, ChatRoom chatRoom) {
 		this.user = user;
 		this.content = content;
+        this.chatRoom = chatRoom;
 	}
 
     public ChatRoom getChatRoom() {
@@ -45,10 +46,10 @@ public class Message {
         this.chatRoom = chatRoom;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public User getUser() {
