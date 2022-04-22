@@ -66,7 +66,7 @@ public class ProfileView extends Fragment {
      */
     public void showFriends(String[] friendsArray) {
         ProfileViewDirections.ActionProfileViewToFriendsView action =
-                ProfileViewDirections.actionProfileViewToFriendsView(null);
+                ProfileViewDirections.actionProfileViewToFriendsView(friendsArray);
         action.setFriendsArray(friendsArray);
         ((NavBarActivity)getActivity()).getController().navigate(action);
     }
