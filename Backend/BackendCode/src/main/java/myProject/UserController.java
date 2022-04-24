@@ -1,18 +1,25 @@
 package myProject;
 
 import io.swagger.annotations.*;
+import myProject.chat.ChatRoom;
+import myProject.chat.ChatRoomRepository;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
 @Api(value = "UserController")
 @RestController
 public class UserController {
 
     @Autowired
 	UserInterface db;
+    @Autowired
+    ChatRoomRepository crdb;
 
     @Autowired
     UserInfoInterface userInfoInterfaceDB;
@@ -168,6 +175,23 @@ public class UserController {
     String deletePerson(@ApiParam (value = "The ID of the user you want to delete")@PathVariable Integer id) {
         db.deleteById(id);
         return "deleted " + id;
+    }
+
+    @PostMapping("/room")
+    void addRoom(@RequestBody JSONObject json){
+        int userId = (int) json.getAsNumber("userId");
+        int roomId = (int) json.getAsNumber("roomId");
+        User user = db.findById(userId).orElseThrow(NoSuchElementException::new);
+        Set<ChatRoom> chatRoomSet = user.getChatRooms();
+        chatRoomSet.add(crdb.findById(roomId).orElseThrow(NoSuchElementException::new));
+        user.setChatRooms(chatRoomSet);
+    }
+
+    @GetMapping("/room")
+    Set<ChatRoom> getRoom(@RequestBody JSONObject json){
+        int userId = (int) json.getAsNumber("userId");
+        User user = db.findById(userId).orElseThrow(NoSuchElementException::new);
+        return user.getChatRooms();
     }
 
 

@@ -29,14 +29,15 @@ public class Message {
     @Column(name = "sent")
     private Date sent = new Date();
 	
-	
-	public Message() {};
-	
 	public Message(User user, String content, ChatRoom chatRoom) {
 		this.user = user;
 		this.content = content;
         this.chatRoom = chatRoom;
 	}
+
+    public Message() {
+
+    }
 
     public ChatRoom getChatRoom() {
         return chatRoom;

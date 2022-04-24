@@ -4,6 +4,7 @@ package myProject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import myProject.chat.ChatRoom;
 import myProject.chat.Message;
 
 import javax.persistence.*;
@@ -61,8 +62,32 @@ class User {
     Set<Message> messages;
 
     @JsonIgnore
+    @ManyToMany()
+    @JoinTable(
+            name = "chatRooms",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "chatRoom_id"))
+    Set<ChatRoom> chatRooms;
+
+    @JsonIgnore
     public Set<BookData> getBookData() {
         return BookData;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public void setChatRooms(Set<ChatRoom> chatRooms) {
+        this.chatRooms = chatRooms;
+    }
+
+    public Set<ChatRoom> getChatRooms() {
+        return chatRooms;
     }
 
     public void setBookData(Set<BookData> bookData) {

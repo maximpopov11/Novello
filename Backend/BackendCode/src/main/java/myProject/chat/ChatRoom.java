@@ -1,6 +1,7 @@
 package myProject.chat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import myProject.User;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -8,8 +9,8 @@ import java.util.Set;
 @Entity
 public class ChatRoom {
     @Id
-    @Column
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
 
     @Column
     String name;
@@ -21,6 +22,18 @@ public class ChatRoom {
     @OneToMany(mappedBy = "chatRoom")
 //    @JoinColumn(name = "message_id")
     Set<Message> messages;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "chatRooms")
+    Set<User> users;
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
     public int getId() {
         return id;

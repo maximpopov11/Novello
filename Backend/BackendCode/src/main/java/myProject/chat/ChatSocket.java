@@ -60,8 +60,7 @@ public class ChatSocket {
 
 
 	@OnClose
-	public void onClose(Session session, @PathParam("roomId") int roomId) throws IOException {
-		User user = messageMap.get(roomId).get(session);
+	public void onClose(Session session, @PathParam("roomId") int roomId) {
 		messageMap.get(roomId).remove(session);
 	}
 
