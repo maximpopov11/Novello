@@ -30,10 +30,30 @@ public class FriendsController {
         User sender = UIDB.findById(friendsKey.senderId).orElseThrow(NoSuchElementException::new);
         User receiver = UIDB.findById(friendsKey.receiverId).orElseThrow(NoSuchElementException::new);
 
+
         f.setSender(sender);
         f.setReceiver(receiver);
 
-        f.setFriendshipStatus((Integer) jsonObject.getAsNumber("friendshipStatus"));
+        FriendsKey oldFriend = new FriendsKey();
+        oldFriend.setSenderId((Integer) jsonObject.getAsNumber("receiverId"));
+        oldFriend.setReceiverId((Integer) jsonObject.getAsNumber("senderId"));
+        Friends old = new Friends();
+        int status = 1;
+        try {
+            old = FIDB.findById(oldFriend).orElseThrow(NoSuchElementException::new);
+
+
+       if (old.getFriendshipStatus() == 1);
+       {
+           old.setFriendshipStatus(2);
+           status = 2;
+       }
+        }catch(Exception e){}
+
+
+
+
+        f.setFriendshipStatus(status);
         FIDB.save(f);
         return f;
       //  User kevin = UIDB.findById(jsonObject.getAsNumber("uid"));
