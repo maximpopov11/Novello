@@ -68,7 +68,7 @@ public class MessageModel implements MessageContract.Model {
 
                 @Override
                 public void onError(Exception e) {
-                    Log.d("Exception:", e.toString());
+                    Log.d("Exception:", e.getMessage().toString());
                 }
             };
         } catch (URISyntaxException e) {
@@ -76,5 +76,10 @@ public class MessageModel implements MessageContract.Model {
             e.printStackTrace();
         }
         cc.connect();
+    }
+
+    @Override
+    public void sendClientMessage(String message) {
+        cc.send(message);
     }
 }

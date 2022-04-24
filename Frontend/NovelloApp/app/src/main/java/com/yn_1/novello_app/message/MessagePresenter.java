@@ -20,6 +20,11 @@ public class MessagePresenter implements MessageContract.Presenter, MessageContr
         model.beginWebSocket();
     }
 
+    @Override
+    public void onSendButtonClicked(String message) {
+        model.sendClientMessage(message);
+    }
+
 
     @Override
     public void onOpen(ServerHandshake handshake) {

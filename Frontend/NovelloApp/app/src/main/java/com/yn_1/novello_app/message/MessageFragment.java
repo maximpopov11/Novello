@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.chat.Chat;
@@ -26,13 +29,15 @@ import com.yn_1.novello_app.chat.Chat;
 public class MessageFragment extends Fragment implements MessageContract.View {
 
     private MessageContract.Presenter presenter;
-    private MessageContract.WebSocketListener presenterListener;
 
+
+    private RecyclerView recyclerView;
     private ImageView chatImage;
     private TextView chatTitle;
     private EditText inputMessageField;
     private Button messageSendButton;
 
+    private MessageRecyclerViewAdapter recyclerAdapter;
 
     /**
      * Use this factory method to create a new instance of
@@ -57,7 +62,6 @@ public class MessageFragment extends Fragment implements MessageContract.View {
 
         presenter = new MessagePresenter(
                 new MessageModel(currentChat, currentUser), this);
-        presenterListener = (MessageContract.WebSocketListener) presenter;
     }
 
     @Override
@@ -71,15 +75,22 @@ public class MessageFragment extends Fragment implements MessageContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        recyclerView = view.findViewById(R.id.recycler_messages);
         chatImage = view.findViewById(R.id.messageViewImage);
         chatTitle = view.findViewById(R.id.messageViewTitle);
         inputMessageField = view.findViewById(R.id.messageInputField);
         messageSendButton = view.findViewById(R.id.messageSendButton);
 
         messageSendButton.setOnClickListener(v -> {
-            presenterListener.onMessage(getInputText());
+            presenter.onSendButtonClicked(getInputText());
         });
 
+        recyclerAdapter = new MessageRecyclerViewAdapter(
+                ((NavBarActivity) getActivity()).getUser().getUserId(),
+                this,
+                messageList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(recyclerAdapter);
         presenter.onFragmentCreated();
     }
 
