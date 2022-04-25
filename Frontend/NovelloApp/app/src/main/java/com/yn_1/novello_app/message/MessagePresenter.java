@@ -5,6 +5,8 @@ import android.widget.TextView;
 
 import org.java_websocket.handshake.ServerHandshake;
 
+import java.util.Scanner;
+
 public class MessagePresenter implements MessageContract.Presenter, MessageContract.WebSocketListener {
 
     private MessageContract.Model model;
@@ -33,7 +35,17 @@ public class MessagePresenter implements MessageContract.Presenter, MessageContr
 
     @Override
     public void onMessage(String message) {
+        Scanner scan = new Scanner(message);
+        int userId = scan.nextInt();
+        scan.nextLine();
+        String username = scan.nextLine();
+        String messageBody = scan.nextLine();
 
+        // TODO: Replace placeholder arguments!
+        Message messageObject = new Message(-1, null, userId, username, null, messageBody);
+
+        model.addMessageToList(messageObject);
+        view.notifyRecyclerMessageAdded(model.getMessageList().size() - 1);
     }
 
     @Override

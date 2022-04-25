@@ -29,8 +29,15 @@ public class ChatModel implements ChatContract.Model {
     @Override
     public void fetchChats(ChatType chatType, ChatContract.VolleyListener listener) {
         JsonArrayRequester req = new JsonArrayRequester();
-        String urlPath = "chat/" + currentUser.getUserId() + "/" + chatType.toString();
-        req.getRequest(urlPath, null, new VolleyCommand<JSONArray>() {
+        String urlPath = "room";
+
+        JSONArray object = new JSONArray();
+        try {
+            object.getJSONObject(0).put("userId", currentUser.getUserId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        req.getRequest(urlPath, object, new VolleyCommand<JSONArray>() {
             @Override
             public void execute(JSONArray data) {
                 // Cycle through JSON Array List
@@ -46,7 +53,7 @@ public class ChatModel implements ChatContract.Model {
                         for (int j = 0; j < userArray.length(); j++) {
                             JSONObject userObject = userArray.getJSONObject(j);
                             int userId = userObject.getInt("id");
-                            String name = userObject.getString("name");
+                            String name = userObject.getString("username");
                             String userImageUrl = userObject.getString("image");
                             User user = new AdultUser(userId, name, userImageUrl);
                             users.add(user);

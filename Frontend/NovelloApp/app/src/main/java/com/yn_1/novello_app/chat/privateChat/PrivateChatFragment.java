@@ -21,6 +21,8 @@ import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.chat.Chat;
+import com.yn_1.novello_app.chat.ChatFragment;
+import com.yn_1.novello_app.chat.ChatFragmentDirections;
 import com.yn_1.novello_app.message.Message;
 
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ import java.util.Map;
  * A fragment representing a list of Items.
  */
 public class PrivateChatFragment extends Fragment implements PrivateChatContract.View, PrivateChatContract.ViewListener {
+
+    private PrivateChatContract.Presenter presenter;
 
     private static final String ARG_PRIVATE_CHATS = "private-chats";
     private static final String ARG_CURRENT_USER = "current-user";
@@ -57,7 +61,7 @@ public class PrivateChatFragment extends Fragment implements PrivateChatContract
         if (getArguments() != null) {
             List<Chat> privateChats = getArguments().getParcelableArrayList(ARG_PRIVATE_CHATS);
             User currentUser = getArguments().getParcelable(ARG_CURRENT_USER);
-            PrivateChatContract.Presenter presenter = new PrivateChatPresenter(
+            presenter = new PrivateChatPresenter(
                     new PrivateChatModel(currentUser, privateChats), this);
         }
     }
@@ -91,6 +95,11 @@ public class PrivateChatFragment extends Fragment implements PrivateChatContract
 
     @Override
     public void navigateToMessageView(int id) {
-        // TODO: Navigate to message view using chat id
+        ChatFragmentDirections.ActionChatFragmentToMessageFragment action =
+                ChatFragmentDirections.actionChatFragmentToMessageFragment
+                        ((getArguments().getParcelable(ARG_CURRENT_USER)),
+                                presenter.transferChatsToView().get(id));
+        ((NavBarActivity) ((ChatFragment) getHost()).getActivity()).getController()
+                .navigate(action);
     }
 }

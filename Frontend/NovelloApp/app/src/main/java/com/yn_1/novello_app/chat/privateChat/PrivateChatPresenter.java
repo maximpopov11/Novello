@@ -1,5 +1,9 @@
 package com.yn_1.novello_app.chat.privateChat;
 
+import com.yn_1.novello_app.chat.Chat;
+
+import java.util.List;
+
 public class PrivateChatPresenter implements PrivateChatContract.Presenter, PrivateChatContract.VolleyListener {
 
     PrivateChatContract.Model model;
@@ -13,6 +17,11 @@ public class PrivateChatPresenter implements PrivateChatContract.Presenter, Priv
     @Override
     public void onFragmentCreated() {
         model.fetchProfileImagesOfChat(this);
+    }
+
+    @Override
+    public List<Chat> transferChatsToView() {
+        return model.getChats();
     }
 
     @Override

@@ -26,7 +26,7 @@ public class MessageModel implements MessageContract.Model {
     private WebSocketClient cc;
 
 
-    public MessageModel(Chat chat, User currentUser) {
+    public MessageModel(Chat chat, User currentUser, List<Message> messageList) {
         this.chat = chat;
         this.currentUser = currentUser;
     }
@@ -42,7 +42,7 @@ public class MessageModel implements MessageContract.Model {
                 new Draft_6455()
         };
 
-        final String url = Const.baseUrl + "websocket/" + chat.getChatId()
+        final String url = Const.baseUrl + "chat/" + chat.getChatId()
                 + "/" + currentUser.getUserId();
 
         try {
@@ -81,5 +81,15 @@ public class MessageModel implements MessageContract.Model {
     @Override
     public void sendClientMessage(String message) {
         cc.send(message);
+    }
+
+    @Override
+    public void addMessageToList(Message message) {
+        messageList.add(message);
+    }
+
+    @Override
+    public List<Message> getMessageList() {
+        return messageList;
     }
 }

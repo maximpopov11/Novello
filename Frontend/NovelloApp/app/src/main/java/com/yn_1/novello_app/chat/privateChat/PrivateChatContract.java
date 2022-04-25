@@ -26,6 +26,7 @@ public interface PrivateChatContract {
 
     interface Presenter {
         void onFragmentCreated();
+        List<Chat> transferChatsToView();
     }
 
     interface VolleyListener {

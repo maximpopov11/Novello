@@ -1,9 +1,9 @@
 package com.yn_1.novello_app.account;
 
 import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.yn_1.novello_app.book.Book;
-import com.yn_1.novello_app.message.Message;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Adult user account.
  */
-public class AdultUser implements User {
+public class AdultUser implements User, Parcelable, Serializable {
 
     String username;
     String password;
@@ -164,15 +164,15 @@ public class AdultUser implements User {
         dest.writeString(userProfileImageUrl);
     }
 
-    public static final Creator<Message> CREATOR = new Creator<Message>() {
+    public static final Creator<AdultUser> CREATOR = new Creator<AdultUser>() {
         @Override
-        public Message createFromParcel(Parcel in) {
-            return new Message(in);
+        public AdultUser createFromParcel(Parcel in) {
+            return new AdultUser(in);
         }
 
         @Override
-        public Message[] newArray(int size) {
-            return new Message[size];
+        public AdultUser[] newArray(int size) {
+            return new AdultUser[size];
         }
     };
 }
