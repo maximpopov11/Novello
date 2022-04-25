@@ -126,6 +126,9 @@
         <action
             android:id="@+id/action_chatFragment_to_messageFragment"
             app:destination="@id/messageFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_createChatFragment"
+            app:destination="@id/createChatFragment" />
     </fragment>
     <fragment
         android:id="@+id/messageFragment"
@@ -138,5 +141,17 @@
         <argument
             android:name="currentChat"
             app:argType="com.yn_1.novello_app.chat.Chat" />
+    </fragment>
+    <fragment
+        android:id="@+id/createChatFragment"
+        android:name="com.yn_1.novello_app.create_chat.CreateChatFragment"
+        android:label="fragment_friend_list"
+        tools:layout="@layout/fragment_friend_list" >
+        <action
+            android:id="@+id/action_createChatFragment_to_messageFragment"
+            app:destination="@id/messageFragment" />
+        <argument
+            android:name="currentUser"
+            app:argType="com.yn_1.novello_app.account.AdultUser" />
     </fragment>
 </navigation>
