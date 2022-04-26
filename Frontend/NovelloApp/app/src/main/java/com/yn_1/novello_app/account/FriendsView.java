@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,7 +25,11 @@ import com.yn_1.novello_app.home.HomeFragmentDirections;
  */
 public class FriendsView extends Fragment {
 
+    FriendsPresenter presenter;
+
     ScrollView scrollView;
+    EditText addFriendSearch;
+    Button addFriendButton;
 
     final int Text_Width = 500;
     final int Text_Height = 300;
@@ -35,6 +41,7 @@ public class FriendsView extends Fragment {
 
         super.onCreate(savedInstanceState);
 
+        presenter = new FriendsPresenter(this);
         friendsArray = FriendsViewArgs.fromBundle(getArguments()).getFriendsArray();
 
     }
@@ -52,10 +59,46 @@ public class FriendsView extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         scrollView = view.findViewById(R.id.friendsScrollView);
+        addFriendSearch = view.findViewById(R.id.addFriendSearch);
+        addFriendButton = view.findViewById(R.id.addFriendButton);
+        addFriendButton.setOnClickListener(v -> {
+            addFriendRequest();
+        });
         showFriends();
 
     }
 
+    /**
+     * Adds the searched friend.
+     */
+    private void addFriendRequest() {
+
+        String friend = addFriendSearch.getText().toString();
+        presenter.addFriendRequest(friend);
+
+    }
+
+    /**
+     * Alerts the user of the result of adding the friend
+     * @param success is true if the friend was added
+     */
+    public void friendAdded(boolean success) {
+        String text;
+        if (success) {
+            text = "Friend added successfully.";
+        }
+        else {
+            text = "Friend not added successfully.";
+        }
+        AlertDialog.Builder alert = new AlertDialog.Builder(this.getContext());
+        alert.setMessage(text);
+        alert.show();
+        showFriends();
+    }
+
+    /**
+     * Shows the list of friends.
+     */
     private void showFriends() {
 
         //todo: friends view not entered via profile friends view button which is executing in full: need to add navigation in nav bar activity
