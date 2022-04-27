@@ -185,7 +185,10 @@ public class UserController {
         Set<ChatRoom> chatRoomSet = user.getChatRooms();
         chatRoomSet.add(crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new));
         user.setChatRooms(chatRoomSet);
-        crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new).getUsers().add(user);
+        ChatRoom chatroom = crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new);
+        Set<User> userSet = chatroom.getUsers();
+        userSet.add(user);
+        chatroom.setUsers(userSet);
     }
 
     @GetMapping("/room")
