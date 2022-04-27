@@ -1,6 +1,7 @@
 package com.yn_1.novello_app.account;
 
 import com.android.volley.VolleyError;
+import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.volley_requests.JsonArrayRequester;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
@@ -35,11 +36,14 @@ public class FriendsModel {
         JsonObjectCommand command = new JsonObjectCommand();
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("username", username);
+            jsonObject.put("senderId", ((NavBarActivity)presenter.view.getActivity()).getUser().getUserId());
+            //todo: obtain receiver id and put it in the next line
+            jsonObject.put("receiverId", 1);
+            jsonObject.put("friendshipStatus", 1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        jsonObjectRequester.postRequest("friends", jsonObject, command, null, null);
+        jsonObjectRequester.postRequest("friend", jsonObject, command, null, null);
     }
 
     /**
