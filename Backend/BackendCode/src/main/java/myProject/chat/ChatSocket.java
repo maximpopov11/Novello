@@ -3,7 +3,10 @@ package myProject.chat;
 import myProject.user.User;
 import myProject.user.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -15,19 +18,23 @@ import java.util.*;
 public class ChatSocket {
 
 	private static MessageRepository msgRepo;
-
 	@Autowired
 	public void setMessageRepository(MessageRepository repo) {
 		msgRepo = repo;  // we are setting the static variable
 	}
 
+	private static UserInterface udb;
 	@Autowired
-	UserInterface udb;
+	public void setUdb(UserInterface repo){udb = repo;}
+
+	private static MessageRepository mdb;
 	@Autowired
-	MessageRepository mdb;
+	public void setMdb(MessageRepository repo){mdb = repo;}
+
+	private static ChatRoomRepository rdb;
 	@Autowired
-	ChatRoomRepository rdb;
-	private static Map<Integer, Map<Session, User>> messageMap = new Hashtable<>();
+	public void setRdb(ChatRoomRepository repo){rdb = repo;}
+	public static Map<Integer, Map<Session, User>> messageMap = new Hashtable<>();
 
 	@OnOpen
 	public void onOpen(Session session, @PathParam("userId") Integer userId, @PathParam("roomId") int roomId) throws IOException {
@@ -35,7 +42,7 @@ public class ChatSocket {
 		Map<Session, User> map = messageMap.getOrDefault(roomId, new HashMap<>());
 		User user = udb.findById(userId).orElseThrow(NoSuchElementException::new);
 		map.put(session,user);
-
+		messageMap.put(roomId,map);
 		sendMessageToPArticularUser(session, getChatHistory());
 }
 
