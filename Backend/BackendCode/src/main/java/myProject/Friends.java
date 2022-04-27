@@ -2,10 +2,7 @@ package myProject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Friends {

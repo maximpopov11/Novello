@@ -12,6 +12,4 @@ import java.util.Set;
 
 @Repository
 public interface UserInterface extends JpaRepository<User, Integer> {
-
-
 }

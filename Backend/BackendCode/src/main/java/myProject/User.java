@@ -4,6 +4,8 @@ package myProject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import myProject.chat.ChatRoom;
+import myProject.chat.Message;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,14 +14,13 @@ import java.util.Set;
 
 @Entity
 @Api(value = "UserClass")
+public
 class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-//    @Column
-//    String name;
     @ApiModelProperty(allowableValues = "1")
     @Column
     Integer accountType;
@@ -40,12 +41,6 @@ class User {
     @Column
     String securityAnswer;
 
-//    @Column
-//    String email;
-//
-//    @Column
-//    Integer age;
-
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     Set<BookData> BookData;
@@ -56,6 +51,18 @@ class User {
     private UserInfo userInfo;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "user")
+//    @JoinColumn(name = "message_id")
+    Set<Message> messages;
+
+    @JsonIgnore
+    @ManyToMany()
+    @JoinTable(
+            name = "chatRooms",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "chatRoom_id"))
+    Set<ChatRoom> chatRooms;
+
     @OneToMany(mappedBy = "sender")
     Set<Friends> Friends;
 
@@ -63,11 +70,25 @@ class User {
     @OneToMany(mappedBy = "receiver")
     Set<Friends> Friends_receiver;
 
-    String date;
-
     @JsonIgnore
     public Set<BookData> getBookData() {
         return BookData;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public void setChatRooms(Set<ChatRoom> chatRooms) {
+        this.chatRooms = chatRooms;
+    }
+
+    public Set<ChatRoom> getChatRooms() {
+        return chatRooms;
     }
 
     public void setBookData(Set<BookData> bookData) {
@@ -100,14 +121,6 @@ class User {
         this.id = id;
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-
     public Integer getAccountType() {
         return accountType;
     }
@@ -115,14 +128,6 @@ class User {
     public void setAccountType(Integer accountType) {
         this.accountType = accountType;
     }
-
-//    public Integer getAge() {
-//        return age;
-//    }
-//
-//    public void setAge(Integer age) {
-//        this.age = age;
-//    }
 
     public String getUsername() {
         return username;
@@ -155,42 +160,6 @@ class User {
     public void setSecurityAnswer(String securityAnswer) {
         this.securityAnswer = securityAnswer;
     }
-
-//    public  User findByUsername(String reciverUsername) {
-//        User user;
-//        int i;
-//        for(i = 1; i<=db.count(); i++){
-//            user = db.findById(i).orElseThrow(RuntimeException::new);
-//            if(user.username.equals(json.getAsString("username"))){
-//
-//                }
-//            }
-//        }
-//        return null;
-//    }
-
-//        Set<User> users = new HashSet<>();
-//
-//        Iterator<User> userIterator = users.iterator();
-//
-//        User u = new User();
-//
-//        while (userIterator.hasNext()) {
-//            u = userIterator.next();
-//            String name = u.getUsername();
-//            if (name == reciverUsername) {
-//                return u;
-//            }
-//        }
-//        return null;
-//    }
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
 
     public UserInfo getUserInfo(){return userInfo; }
     public void setUserInfo(UserInfo userInfo) {this.userInfo = userInfo; }
