@@ -1,5 +1,6 @@
 package myProject.friends;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import myProject.user.User;
 
@@ -10,6 +11,7 @@ public class Friends {
     @EmbeddedId
     FriendsKey id;
 
+    @JsonIgnore
     @ManyToOne
     @MapsId("senderId")
     @JoinColumn(name = "Senderid")
@@ -47,7 +49,7 @@ public class Friends {
 
     public int getFriendshipStatus(){return friendshipStatus;}
     public void setFriendshipStatus(int friendshipStatus){this.friendshipStatus = friendshipStatus; }
-
+    @JsonIgnore
     public User getSender() {
         return sender;
     }

@@ -10,6 +10,8 @@ import myProject.chat.Message;
 import myProject.friends.Friends;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Entity
