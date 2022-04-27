@@ -1,11 +1,13 @@
-package myProject;
+package myProject.user;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import myProject.book.BookData;
 import myProject.chat.ChatRoom;
 import myProject.chat.Message;
+import myProject.friends.Friends;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -17,7 +19,7 @@ class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    public Integer id;
 
     @ApiModelProperty(allowableValues = "1")
     @Column
@@ -41,7 +43,7 @@ class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    Set<BookData> BookData;
+    Set<myProject.book.BookData> BookData;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
@@ -62,7 +64,7 @@ class User {
     Set<ChatRoom> chatRooms;
 
     @OneToMany(mappedBy = "sender")
-    Set<Friends> Friends;
+    Set<myProject.friends.Friends> Friends;
 
     @JsonIgnore
     @OneToMany(mappedBy = "receiver")

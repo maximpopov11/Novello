@@ -1,7 +1,7 @@
 package myProject.chat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import myProject.User;
+import myProject.user.User;
 
 import javax.persistence.*;
 import java.util.Set;

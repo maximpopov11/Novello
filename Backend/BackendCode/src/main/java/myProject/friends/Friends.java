@@ -1,6 +1,8 @@
-package myProject;
+package myProject.friends;
 
 import io.swagger.annotations.ApiModelProperty;
+import myProject.user.User;
+
 import javax.persistence.*;
 
 @Entity

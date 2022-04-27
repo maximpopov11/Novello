@@ -1,10 +1,9 @@
 package myProject.chat;
 
-import myProject.User;
-import myProject.UserInterface;
+import myProject.user.User;
+import myProject.user.UserInterface;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,13 +25,16 @@ public class ChatRoomController {
         User user;
         ChatRoom chatRoom = new ChatRoom();
         chatRoom.setName(json[0].getAsString("name"));
+        chatRoom = cdb.save(chatRoom);
         Set<User> users = new HashSet<>();
 
         for(int i = 1; i<json.length; i++){
             user = udb.findById(Integer.parseInt( json[i].getAsString("userId"))).orElseThrow(NoSuchElementException::new);
             user.getChatRooms().add(chatRoom);
+            udb.save(user);
             users.add(user);
         }
+
         chatRoom.setUsers(users);
         cdb.save(chatRoom);
     }

@@ -1,4 +1,4 @@
-package myProject;
+package myProject.book;
 
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
