@@ -179,21 +179,18 @@ public class UserController {
 
     @PostMapping("/room")
     void addRoom(@RequestBody JSONObject json){
-        int userId = (int) json.getAsNumber("userId");
-        int roomId = (int) json.getAsNumber("roomId");
-        User user = db.findById(userId).orElseThrow(NoSuchElementException::new);
+//        int userId = (int) json.getAsNumber("userId");
+//        int roomId = (int) json.getAsNumber("roomId");
+        User user = db.findById(Integer.parseInt( json.getAsString("userId"))).orElseThrow(NoSuchElementException::new);
         Set<ChatRoom> chatRoomSet = user.getChatRooms();
-        chatRoomSet.add(crdb.findById(roomId).orElseThrow(NoSuchElementException::new));
+        chatRoomSet.add(crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new));
         user.setChatRooms(chatRoomSet);
+        crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new).getUsers().add(user);
     }
 
     @GetMapping("/room")
-    Set<ChatRoom> getRoom(@RequestBody JSONObject json){
-        int userId = (int) json.getAsNumber("userId");
-        User user = db.findById(userId).orElseThrow(NoSuchElementException::new);
+    Set<ChatRoom> getRoom(@RequestBody JSONObject json[]){
+        User user = db.findById(Integer.parseInt( json[0].getAsString("userId"))).orElseThrow(NoSuchElementException::new);
         return user.getChatRooms();
     }
-
-
-
 }

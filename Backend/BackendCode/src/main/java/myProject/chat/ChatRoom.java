@@ -10,7 +10,7 @@ import java.util.Set;
 public class ChatRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    int id;
 
     @Column
     String name;

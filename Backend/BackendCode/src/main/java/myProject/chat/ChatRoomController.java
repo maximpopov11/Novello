@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -19,21 +20,20 @@ public class ChatRoomController {
     @Autowired
     UserInterface udb;
 
-//    @PostMapping("/chatRoom")
-//    void createRoom(@RequestBody JSONObject[] json){
-//        User user;
-//
-//        for(int i = 0; i<json.length; i++){
-//            user = udb.findById((int) json[i].getAsNumber("userId")).orElseThrow(NoSuchElementException::new);
-//        }
-////        cdb.save(chatRoom);
-//    }
+    @PostMapping("/chatRoom")
+    void createRoom(@RequestBody JSONObject[] json){
 
+        User user;
+        ChatRoom chatRoom = new ChatRoom();
+        chatRoom.setName(json[0].getAsString("name"));
+        Set<User> users = new HashSet<>();
 
-//    @GetMapping("/chatRoom")
-//    void getRooms(@RequestBody JSONObject json[]){
-//        int user = (int) json[0].getAsNumber("userId");
-//
-//    }
-
+        for(int i = 1; i<json.length; i++){
+            user = udb.findById(Integer.parseInt( json[i].getAsString("userId"))).orElseThrow(NoSuchElementException::new);
+            user.getChatRooms().add(chatRoom);
+            users.add(user);
+        }
+        chatRoom.setUsers(users);
+        cdb.save(chatRoom);
+    }
 }
