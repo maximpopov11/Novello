@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.cart.CartViewDirections;
+import com.yn_1.novello_app.NavBarActivity;
+import com.yn_1.novello_app.R;
 
 /**
  * Class representing the Home screen.
@@ -55,7 +57,7 @@ public class HomeFragment extends Fragment {
         profile = view.findViewById(R.id.profile);
 
         settings.setOnClickListener(v -> {
-            //todo: create drop down
+            goToSettings();
         });
 
         profile.setOnClickListener(v -> {
@@ -66,4 +68,9 @@ public class HomeFragment extends Fragment {
         });
 
     }
+
+    private void goToSettings() {
+        ((NavBarActivity)getActivity()).getController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsView());
+    }
+
 }

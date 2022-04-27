@@ -46,6 +46,7 @@ public class NavBarActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navBar, controller);
 
         navBar.setOnItemSelectedListener (listener);
+        
     }
 
     /**
@@ -57,6 +58,10 @@ public class NavBarActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.homeFragment:
                     controller.navigate(R.id.homeFragment);
+                    return true;
+
+                case R.id.settingsView:
+                    controller.navigate(R.id.settingsView);
                     return true;
 
                 case R.id.libraryFragment:

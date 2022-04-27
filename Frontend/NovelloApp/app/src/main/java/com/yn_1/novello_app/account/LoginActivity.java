@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //todo: remove hard coded login and fix login bug
+            //todo: remove hard coded login and fix login bug: problem because is get request?
             loginResult(1);
             //userRequester.getRequest("login", accountCredentialsJson, command, null, null);
         });
