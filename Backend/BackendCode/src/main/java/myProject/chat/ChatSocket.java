@@ -1,7 +1,7 @@
 package myProject.chat;
 
-import myProject.User;
-import myProject.UserInterface;
+import myProject.user.User;
+import myProject.user.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import javax.websocket.*;

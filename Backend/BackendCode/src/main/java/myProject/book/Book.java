@@ -1,4 +1,4 @@
-package myProject;
+package myProject.book;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

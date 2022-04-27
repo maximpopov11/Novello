@@ -1,6 +1,8 @@
-package myProject;
+package myProject.book;
 
 import io.swagger.annotations.ApiModelProperty;
+import myProject.user.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +15,7 @@ public class BookData {
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "User_id")
-    User user;
+User user;
 
 //    @JsonIgnore
     @ManyToOne

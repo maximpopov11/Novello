@@ -1,4 +1,4 @@
-package myProject;
+package myProject.book;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

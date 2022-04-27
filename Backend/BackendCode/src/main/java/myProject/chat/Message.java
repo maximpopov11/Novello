@@ -1,7 +1,7 @@
 package myProject.chat;
 
 import lombok.Data;
-import myProject.User;
+import myProject.user.User;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package myProject;
+package myProject.user;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;

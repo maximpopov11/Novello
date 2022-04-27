@@ -1,6 +1,8 @@
-package myProject;
+package myProject.friends;
 
 
+import myProject.user.User;
+import myProject.user.UserInterface;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

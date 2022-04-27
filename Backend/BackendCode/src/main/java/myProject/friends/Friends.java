@@ -1,7 +1,9 @@
-package myProject;
+package myProject.friends;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
+import myProject.user.User;
+
 import javax.persistence.*;
 
 @Entity

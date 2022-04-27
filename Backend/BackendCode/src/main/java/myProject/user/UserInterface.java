@@ -1,4 +1,4 @@
-package myProject;
+package myProject.user;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
