@@ -38,7 +38,7 @@ public class FriendsModel {
         try {
             jsonObject.put("senderId", ((NavBarActivity)presenter.view.getActivity()).getUser().getUserId());
             //todo: obtain receiver id and put it in the next line
-            jsonObject.put("receiverId", 1);
+            jsonObject.put("receiverusrname", username);
             jsonObject.put("friendshipStatus", 1);
         } catch (JSONException e) {
             e.printStackTrace();

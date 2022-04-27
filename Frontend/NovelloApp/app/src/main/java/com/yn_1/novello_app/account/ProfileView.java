@@ -54,8 +54,6 @@ public class ProfileView extends Fragment {
         friendsList = view.findViewById(R.id.friendsList);
         friendsList.setOnClickListener(v -> {
             presenter.showFriendsList();
-            //todo: remove hardcoded show friends once backend connection completed.
-            showFriends(new String[]{"name1", "name 2"});
         });
 
     }

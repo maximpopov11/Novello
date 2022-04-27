@@ -50,7 +50,7 @@ public class FriendsView extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_profile_view, container, false);
+        return inflater.inflate(R.layout.fragment_friends_view, container, false);
 
     }
 
@@ -73,6 +73,7 @@ public class FriendsView extends Fragment {
      */
     private void addFriendRequest() {
 
+        //todo: get friends on friend fragment rather than profile (no need to send, can refresh easily upon adding friend)
         String friend = addFriendSearch.getText().toString();
         presenter.addFriendRequest(friend);
 
