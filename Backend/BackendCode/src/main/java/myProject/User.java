@@ -69,6 +69,16 @@ class User {
             inverseJoinColumns = @JoinColumn(name = "chatRoom_id"))
     Set<ChatRoom> chatRooms;
 
+    @OneToMany(mappedBy = "sender")
+    Set<Friends> Friends;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "receiver")
+    Set<Friends> Friends_receiver;
+
+    String date;
+
+
     @JsonIgnore
     public Set<BookData> getBookData() {
         return BookData;
@@ -92,6 +102,24 @@ class User {
 
     public void setBookData(Set<BookData> bookData) {
         BookData = bookData;
+    }
+
+    @JsonIgnore
+    public Set<Friends> getFriends() {
+        return Friends;
+    }
+
+    public void setFriends(Set<Friends> friends) {
+        Friends = friends;
+    }
+
+    @JsonIgnore
+    public Set<Friends> getFriends_receiver() {
+        return Friends_receiver;
+    }
+
+    public void setFriends_receiver(Set<Friends> friends) {
+        Friends = friends;
     }
 
     public Integer getId() {
