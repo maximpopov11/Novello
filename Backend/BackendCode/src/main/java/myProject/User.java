@@ -6,6 +6,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Entity
@@ -154,6 +156,34 @@ class User {
         this.securityAnswer = securityAnswer;
     }
 
+//    public  User findByUsername(String reciverUsername) {
+//        User user;
+//        int i;
+//        for(i = 1; i<=db.count(); i++){
+//            user = db.findById(i).orElseThrow(RuntimeException::new);
+//            if(user.username.equals(json.getAsString("username"))){
+//
+//                }
+//            }
+//        }
+//        return null;
+//    }
+
+//        Set<User> users = new HashSet<>();
+//
+//        Iterator<User> userIterator = users.iterator();
+//
+//        User u = new User();
+//
+//        while (userIterator.hasNext()) {
+//            u = userIterator.next();
+//            String name = u.getUsername();
+//            if (name == reciverUsername) {
+//                return u;
+//            }
+//        }
+//        return null;
+//    }
 //    public String getEmail() {
 //        return email;
 //    }
