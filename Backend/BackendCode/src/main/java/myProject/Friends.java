@@ -1,10 +1,7 @@
 package myProject;
 
 import io.swagger.annotations.ApiModelProperty;
-import net.minidev.json.annotate.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Friends {

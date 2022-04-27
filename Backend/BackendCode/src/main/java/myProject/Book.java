@@ -6,7 +6,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity

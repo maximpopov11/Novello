@@ -1,9 +1,7 @@
 package myProject;
 
 import io.swagger.annotations.*;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;

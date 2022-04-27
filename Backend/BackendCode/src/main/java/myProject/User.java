@@ -19,8 +19,6 @@ class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-//    @Column
-//    String name;
     @ApiModelProperty(allowableValues = "1")
     @Column
     Integer accountType;
@@ -40,12 +38,6 @@ class User {
     @ApiModelProperty(allowableValues = "Alaska")
     @Column
     String securityAnswer;
-
-//    @Column
-//    String email;
-//
-//    @Column
-//    Integer age;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -75,9 +67,6 @@ class User {
     @JsonIgnore
     @OneToMany(mappedBy = "receiver")
     Set<Friends> Friends_receiver;
-
-    String date;
-
 
     @JsonIgnore
     public Set<BookData> getBookData() {
@@ -130,14 +119,6 @@ class User {
         this.id = id;
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-
     public Integer getAccountType() {
         return accountType;
     }
@@ -145,14 +126,6 @@ class User {
     public void setAccountType(Integer accountType) {
         this.accountType = accountType;
     }
-
-//    public Integer getAge() {
-//        return age;
-//    }
-//
-//    public void setAge(Integer age) {
-//        this.age = age;
-//    }
 
     public String getUsername() {
         return username;
@@ -185,14 +158,6 @@ class User {
     public void setSecurityAnswer(String securityAnswer) {
         this.securityAnswer = securityAnswer;
     }
-
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
 
     public UserInfo getUserInfo(){return userInfo; }
     public void setUserInfo(UserInfo userInfo) {this.userInfo = userInfo; }
