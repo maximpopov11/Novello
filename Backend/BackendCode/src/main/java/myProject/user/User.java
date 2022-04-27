@@ -29,7 +29,7 @@ class User {
 
     @ApiModelProperty(allowableValues = "Kevin")
     @Column
-    String username;
+    public String username;
 
     @ApiModelProperty(allowableValues = "letMeIn")
     @Column
