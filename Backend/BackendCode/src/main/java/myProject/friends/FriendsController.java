@@ -77,7 +77,6 @@ public class FriendsController {
     Set<Friends> returnAllFriends(@RequestBody JSONObject jsonObject)
     {
        User u = UIDB.findById((int)jsonObject.getAsNumber("id")).orElseThrow(NoSuchElementException::new);
-        //Friends f = new Friends();
         Set<Friends> friendsSet = new HashSet<>();
         Set<Friends> allMutralFriends = new HashSet<>();
         friendsSet = u.getFriends();

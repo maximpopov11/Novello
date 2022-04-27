@@ -63,34 +63,7 @@ public class Friends {
 
     public void setReceiver(User receiver) {
         this.receiver = receiver;}
-//    public int getReceiver_Id() {
-//        return receiver_Id;
-//    }
-//
-//    public void setReceiver_Id(int receiver_Id) {
-//        this.receiver_Id = receiver_Id;
-//    }
-//
-//    public int getSender_Id() {
-//        return sender_Id;
-//    }
-//
-//    public void setSender_Id(int sender_Id) {
-//        this.sender_Id = sender_Id;
-//    }
-    //    public int getFriendID(){return friendId; }
-//    public void setFriendId(int friendId) {
-//        this.friendId = friendId;
-//    }
 
-//    @OneToOne
-//    @JsonIgnore
-//    private User user;
-//
-//
-//    public Friends()
-//    {
-//    }
 
     @Override
     public int hashCode() {
