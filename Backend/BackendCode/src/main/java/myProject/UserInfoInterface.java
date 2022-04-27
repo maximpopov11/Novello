@@ -8,5 +8,4 @@ public interface UserInfoInterface extends JpaRepository<UserInfo, Integer> {
 
     @Transactional
     void deleteById(int id);
-
 }

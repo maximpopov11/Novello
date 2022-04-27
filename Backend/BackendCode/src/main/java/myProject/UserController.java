@@ -1,18 +1,23 @@
 package myProject;
 
 import io.swagger.annotations.*;
+import myProject.chat.ChatRoom;
+import myProject.chat.ChatRoomRepository;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
 @Api(value = "UserController")
 @RestController
 public class UserController {
 
     @Autowired
 	UserInterface db;
+    @Autowired
+    ChatRoomRepository crdb;
 
     @Autowired
     UserInfoInterface userInfoInterfaceDB;
@@ -38,7 +43,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @GetMapping("/login")
-    JSONObject login(@ApiParam (value = "json opject that has the username and password entered by user to check if they can log in")@RequestBody JSONObject json){
+    JSONObject login(@ApiParam (value = "json object that has the username and password entered by user to check if they can log in")@RequestBody JSONObject json){
 
         User user;
         JSONObject jsonReturn = new JSONObject();
@@ -64,20 +69,19 @@ public class UserController {
     })
     @PostMapping("/addAllUsers")
     void createAllPersons(@ApiParam (value = "All of the users jsonObjects")@RequestBody JSONObject[] jsonObject) {
-        for(int i = 0; i < jsonObject.length; i++)
-        {
+        for (JSONObject object : jsonObject) {
             User u = new User();
-            u.setAccountType((Integer) jsonObject[i].getAsNumber("accountType"));
-            u.setUsername(jsonObject[i].getAsString("username"));
-            u.setPassword(jsonObject[i].getAsString("password"));
-            u.setSecurityQuestion(jsonObject[i].getAsString("securityQuestion"));
-            u.setSecurityAnswer(jsonObject[i].getAsString("securityAnswer"));
+            u.setAccountType((Integer) object.getAsNumber("accountType"));
+            u.setUsername(object.getAsString("username"));
+            u.setPassword(object.getAsString("password"));
+            u.setSecurityQuestion(object.getAsString("securityQuestion"));
+            u.setSecurityAnswer(object.getAsString("securityAnswer"));
 
             UserInfo ui = new UserInfo();
             ui.setUser(u);
-            ui.setAge((Integer) jsonObject[i].getAsNumber("age"));
-            ui.setEmail(jsonObject[i].getAsString("email"));
-            ui.setName(jsonObject[i].getAsString("name"));
+            ui.setAge((Integer) object.getAsNumber("age"));
+            ui.setEmail(object.getAsString("email"));
+            ui.setName(object.getAsString("name"));
 
             u.setUserInfo(ui);
 
@@ -138,7 +142,7 @@ public class UserController {
         UserInfo old_ui = old_u.getUserInfo();
         if (jsonObject.getAsString("name") != null)
             old_ui.setName(jsonObject.getAsString("name"));
-        if ((Integer) jsonObject.getAsNumber("accountType") != null)
+        if (jsonObject.getAsNumber("accountType") != null)
             old_u.setAccountType((Integer) jsonObject.getAsNumber("accountType"));
         if (jsonObject.getAsString("username") != null)
             old_u.setUsername(jsonObject.getAsString("username"));
@@ -150,7 +154,7 @@ public class UserController {
             old_u.setSecurityQuestion(jsonObject.getAsString("securityQuestion"));
         if (jsonObject.getAsString("email") != null)
             old_ui.setEmail(jsonObject.getAsString("email"));
-        if ((Integer) jsonObject.getAsNumber("age") != null)
+        if (jsonObject.getAsNumber("age") != null)
             old_ui.setAge((Integer) jsonObject.getAsNumber("age"));
         db.save(old_u);
         userInfoInterfaceDB.save((old_ui));
@@ -170,6 +174,21 @@ public class UserController {
         return "deleted " + id;
     }
 
+    @PostMapping("/room")
+    void addRoom(@RequestBody JSONObject json){
+        User user = db.findById(Integer.parseInt( json.getAsString("userId"))).orElseThrow(NoSuchElementException::new);
+        Set<ChatRoom> chatRoomSet = user.getChatRooms();
+        chatRoomSet.add(crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new));
+        user.setChatRooms(chatRoomSet);
+        ChatRoom chatroom = crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new);
+        Set<User> userSet = chatroom.getUsers();
+        userSet.add(user);
+        chatroom.setUsers(userSet);
+    }
 
-
+    @GetMapping("/room")
+    Set<ChatRoom> getRoom(@RequestBody JSONObject[] json){
+        User user = db.findById(Integer.parseInt( json[0].getAsString("userId"))).orElseThrow(NoSuchElementException::new);
+        return user.getChatRooms();
+    }
 }
