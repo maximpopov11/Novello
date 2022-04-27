@@ -3,9 +3,7 @@ package myProject.chat;
 import myProject.user.User;
 import myProject.user.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
