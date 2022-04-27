@@ -23,7 +23,7 @@ public class ChatRoom {
 //    @JoinColumn(name = "message_id")
     Set<Message> messages;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToMany(mappedBy = "chatRooms")
     Set<User> users;
 
