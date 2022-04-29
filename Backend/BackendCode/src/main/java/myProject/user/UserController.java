@@ -188,9 +188,9 @@ public class UserController {
         crdb.save(chatroom);
     }
 
-    @GetMapping("/room")
-    Set<ChatRoom> getRoom(@RequestBody JSONObject[] json){
-        User user = db.findById(Integer.parseInt( json[0].getAsString("userId"))).orElseThrow(NoSuchElementException::new);
+    @GetMapping("/room/{id}")
+    Set<ChatRoom> getRoom(@PathVariable Integer id/*@RequestBody JSONObject json[]*/){
+        User user = db.findById(id).orElseThrow(NoSuchElementException::new);
         return user.getChatRooms();
     }
 }
