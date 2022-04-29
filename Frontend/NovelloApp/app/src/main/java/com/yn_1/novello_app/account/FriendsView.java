@@ -27,7 +27,7 @@ public class FriendsView extends Fragment {
 
     FriendsPresenter presenter;
 
-    ScrollView scrollView;
+    LinearLayout linearLayout;
     EditText addFriendSearch;
     Button addFriendButton;
 
@@ -58,7 +58,7 @@ public class FriendsView extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        scrollView = view.findViewById(R.id.friendsScrollView);
+        linearLayout = view.findViewById(R.id.friendsLinearLayout);
         addFriendSearch = view.findViewById(R.id.addFriendSearch);
         addFriendButton = view.findViewById(R.id.addFriendButton);
         addFriendButton.setOnClickListener(v -> {
@@ -111,7 +111,7 @@ public class FriendsView extends Fragment {
             textParams.setMargins(5, 5, 5, 5);
             textView.setLayoutParams(textParams);
             textView.setText(friendsArray[i]);
-            scrollView.addView(textView);
+            linearLayout.addView(textView);
         }
 
     }
