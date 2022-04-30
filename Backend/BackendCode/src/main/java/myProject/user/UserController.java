@@ -42,7 +42,7 @@ public class UserController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping("/login")
+    @PostMapping("/login")
     JSONObject login(@ApiParam (value = "json object that has the username and password entered by user to check if they can log in")@RequestBody JSONObject json){
 
         User user;
