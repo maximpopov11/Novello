@@ -14,6 +14,11 @@ public class BookController {
 
     @Autowired
     BookInterface db;
+    @GetMapping("/")
+    public String welcome() {
+        return "HELLO";
+    }
+
 
     @ApiOperation(value = "Add a book to the system", response = Iterable.class)
     @PostMapping("/book")
