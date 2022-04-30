@@ -64,7 +64,7 @@ class User {
     Set<ChatRoom> chatRooms;
 
     @OneToMany(mappedBy = "sender")
-    Set<myProject.friends.Friends> Friends;
+    Set<Friends> Friends;
 
     @JsonIgnore
     @OneToMany(mappedBy = "receiver")
