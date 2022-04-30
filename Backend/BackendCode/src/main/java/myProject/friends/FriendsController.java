@@ -1,14 +1,13 @@
 package myProject.friends;
 
 
+import io.swagger.annotations.ApiParam;
 import myProject.user.User;
 import myProject.user.UserInterface;
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -74,9 +73,9 @@ public class FriendsController {
     }
 
     @GetMapping("/friends")
-    Set<Friends> returnAllFriends(@RequestBody JSONObject jsonObject)
+    Set<Friends> returnAllFriends(@RequestBody JSONObject[] json)
     {
-       User u = UIDB.findById((int)jsonObject.getAsNumber("id")).orElseThrow(NoSuchElementException::new);
+        User u = UIDB.findById((int)json[0].getAsNumber("id")).orElseThrow(NoSuchElementException:: new);
         Set<Friends> friendsSet = new HashSet<>();
         Set<Friends> allMutralFriends = new HashSet<>();
         friendsSet = u.getFriends();
@@ -92,4 +91,25 @@ public class FriendsController {
         }
         return allMutralFriends;
     }
+
+//    @DeleteMapping("/friends/{id}")
+//    String deletePerson(@ApiParam(value = "The ID of the user you want to delete")@PathVariable Integer id) {
+//        JSONObject jsonObject;
+//        User u = UIDB.findById((int)jsonObject.getAsNumber("id")).orElseThrow(NoSuchElementException::new);
+//        Set<Friends> friendsSet = new HashSet<>();
+//        Set<Friends> allMutralFriends = new HashSet<>();
+//        friendsSet = u.getFriends();
+//        Iterator<Friends> friendsIterator = friendsSet.iterator();
+//        Friends f;
+//        while(friendsIterator.hasNext())
+//        {
+//            f = friendsIterator.next();
+//            if((u.getId() == f.getSender().id) && f.getFriendshipStatus() == 2)
+//            {
+//                allMutralFriends.add(f);
+//            }
+//        }
+//        UIDB.deleteById(id);
+//        return "deleted " + id;
+//    }
 }

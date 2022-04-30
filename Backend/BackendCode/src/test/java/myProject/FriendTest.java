@@ -2,7 +2,9 @@ package myProject;
 
 
 import io.restassured.RestAssured;
+import io.restassured.mapper.ObjectMapper;
 import io.restassured.response.Response;
+import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -18,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(SpringRunner.class)
 
 public class FriendTest {
+
     @LocalServerPort
     int port;
 
@@ -26,15 +30,18 @@ public class FriendTest {
         RestAssured.port = port;
         RestAssured.baseURI = "http://localhost";
     }
+
     @Test
     public void reverseTest() {
         // Send request and receive response
+        JSONObject test = new JSONObject();
+        JSONObject requestParams = new JSONObject();
+        requestParams.put("id", 1);
+
         Response response = RestAssured.given().
-                header("Content-Type", "text/plain").
-                header("charset","utf-8").
-                body("hello").
+                body(requestParams.toJSONString()).
                 when().
-                get("/");
+                get("/friends");
 
 
         // Check status code
@@ -45,7 +52,7 @@ public class FriendTest {
         String returnString = response.getBody().asString();
         //            JSONArray returnArr = new JSONArray(returnString);
 //            JSONObject returnObj = returnArr.getJSONObject(returnArr.length()-1);
-        assertEquals("HELLO", returnString);
+        assertEquals("[]", returnString);
     }
 
 //    @Test
