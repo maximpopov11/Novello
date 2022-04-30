@@ -1,26 +1,20 @@
 package com.yn_1.novello_app.cart;
 
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
-import com.yn_1.novello_app.Const;
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.*;
+import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
 
