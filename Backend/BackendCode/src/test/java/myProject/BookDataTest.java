@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 //import myapp.Service.ReverseStringService;
 
 @RunWith(SpringRunner.class)
-public class OtherTest {
+public class BookDataTest {
 
 	@Test
 	public void testReverse()  {
