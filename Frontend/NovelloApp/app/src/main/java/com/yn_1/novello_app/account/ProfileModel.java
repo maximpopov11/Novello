@@ -42,15 +42,7 @@ public class ProfileModel {
     public void getFriendsList() {
         JsonArrayRequester jsonArrayRequester = new JsonArrayRequester();
         JsonArrayCommand command = new JsonArrayCommand();
-        JSONArray userJson = new JSONArray();
-        try {
-            JSONObject jsonElement = new JSONObject();
-            jsonElement.put("id", user.getUserId());
-            userJson.put(jsonElement);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        jsonArrayRequester.getRequest("friends", userJson, command, null, null);
+        jsonArrayRequester.getRequest("friends/" + user.getUserId(), null, command, null, null);
     }
 
     /**

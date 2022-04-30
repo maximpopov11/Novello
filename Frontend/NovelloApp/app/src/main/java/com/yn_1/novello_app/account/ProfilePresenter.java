@@ -48,7 +48,11 @@ public class ProfilePresenter {
      */
     public void setFriendsList(ArrayList<String> friendsList) {
         this.friendsList = friendsList;
-        view.showFriends((String[])friendsList.toArray());
+        String[] friendsArray = new String[friendsList.size()];
+        for (int i = 0; i < friendsList.size(); i++) {
+            friendsArray[i] = friendsList.get(i);
+        }
+        view.showFriends(friendsArray);
     }
 
 }
