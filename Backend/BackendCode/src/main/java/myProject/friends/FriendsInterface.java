@@ -5,5 +5,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FriendsInterface extends JpaRepository<Friends, FriendsKey> {
-    //Friends findById(FriendsKey friend);
 }
