@@ -85,7 +85,7 @@ public class FriendsController {
         while(friendsIterator.hasNext())
         {
             f = friendsIterator.next();
-           if((u.getId() == f.getSender().id) && f.getFriendshipStatus() == 1)
+           if((u.getId() == f.getSender().id) && f.getFriendshipStatus() == 2)
            {
                allMutralFriends.add(f);
            }
