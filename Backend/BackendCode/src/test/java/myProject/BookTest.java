@@ -33,8 +33,6 @@ public class BookTest {
     public void reverseTest() {
         // Send request and receive response
         Response response = RestAssured.given().
-                header("Content-Type", "text/plain").
-                header("charset","utf-8").
                 body("hello").
                 when().
                 get("/");
