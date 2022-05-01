@@ -42,17 +42,17 @@ public class FriendsController {
         Friends f = new Friends();
         f.setId(friendsKey);
         User sender = UIDB.findById(friendsKey.senderId).orElseThrow(NoSuchElementException::new);
-        User receiver = UIDB.findById(friendsKey.receiverId).orElseThrow(NoSuchElementException::new);
+        User receiver = UIDB.findById(uid).orElseThrow(NoSuchElementException::new);
 
 
         f.setSender(sender);
         f.setReceiver(receiver);
 
         FriendsKey oldFriend = new FriendsKey();
-        oldFriend.setSenderId((Integer) jsonObject.getAsNumber("receiverId"));
+        oldFriend.setSenderId((Integer) jsonObject.getAsNumber("uid"));
         oldFriend.setReceiverId((Integer) jsonObject.getAsNumber("senderId"));
         Friends old = new Friends();
-        int status = 1;
+        int status = 2;
         try {
             old = FIDB.findById(oldFriend).orElseThrow(NoSuchElementException::new);
 
