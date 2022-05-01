@@ -3,6 +3,7 @@ package myProject;
 
 import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 import net.minidev.json.JSONObject;
@@ -73,5 +74,16 @@ public class BookTest {
 
         String returnString = response.getBody().asString();
         assertEquals(json,returnString);
+
+        Response response2 = RestAssured.given().
+                when().
+                get("/book");
+
+        assertNotEquals("",response2.getBody().asString());
+    }
+
+    @Test
+    public void testother(){
+
     }
 }
