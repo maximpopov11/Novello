@@ -60,10 +60,11 @@ public class ProfileModel {
 
         @Override
         public void execute(JSONArray data) {
+            //todo: I am given lots of objects and I only need some of them
             try {
                 ArrayList<String> friendsList = new ArrayList<>();
                 for (int i = 0; i < data.length(); i++) {
-                    JSONObject friendJson = data.getJSONObject(i);
+                    JSONObject friendJson = data.getJSONObject(2 * i + 1);
                     friendsList.add(friendJson.getString("username"));
                 }
                 setFriendsList(friendsList);
