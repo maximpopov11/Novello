@@ -42,15 +42,7 @@ public class ProfileModel {
     public void getFriendsList() {
         JsonArrayRequester jsonArrayRequester = new JsonArrayRequester();
         JsonArrayCommand command = new JsonArrayCommand();
-        JSONArray userJson = new JSONArray();
-        try {
-            JSONObject jsonElement = new JSONObject();
-            jsonElement.put("id", user.getUserId());
-            userJson.put(jsonElement);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        jsonArrayRequester.getRequest("friends", userJson, command, null, null);
+        jsonArrayRequester.getRequest("friends/" + user.getUserId(), null, command, null, null);
     }
 
     /**
@@ -68,10 +60,11 @@ public class ProfileModel {
 
         @Override
         public void execute(JSONArray data) {
+            //todo: I am given lots of objects and I only need some of them
             try {
                 ArrayList<String> friendsList = new ArrayList<>();
                 for (int i = 0; i < data.length(); i++) {
-                    JSONObject friendJson = data.getJSONObject(i);
+                    JSONObject friendJson = data.getJSONObject(2 * i + 1);
                     friendsList.add(friendJson.getString("username"));
                 }
                 setFriendsList(friendsList);
