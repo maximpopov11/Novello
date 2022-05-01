@@ -4,6 +4,7 @@ import androidx.test.filters.LargeTest;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 
+import com.yn_1.novello_app.account.CreateAccountActivity;
 import com.yn_1.novello_app.account.LoginActivity;
 
 import org.junit.Rule;
@@ -28,38 +29,28 @@ import android.os.Looper;
 //Mock the RequestServerForService class
 @RunWith(AndroidJUnit4ClassRunner.class)
 @LargeTest  //large execution time
-public class LoginActivityTest {
+public class CreateAccountTest {
 
     private static final int SIMULATED_DELAY_MS = 500;
 
     @Rule   //needed to launch the activity
-    public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<CreateAccountActivity> activityRule = new ActivityTestRule<>(CreateAccountActivity.class);
 
     /**
-     * Tests input
+     * Tests account creation
      */
     @Test
-    public void input() {
+    public void accountCreation() {
+
+        //account creation failed
         Looper.prepare();
-        onView(withId(R.id.inputUsername)).perform(typeText("username"), closeSoftKeyboard());
-        onView(withId(R.id.inputPassword)).perform(typeText("password"), closeSoftKeyboard());
-        onView(withId(R.id.login)).perform(click());
-    }
+        ((CreateAccountActivity)activityRule.getActivity()).accountCreationResult(false);
+        onView(withText("Account not created for an unknown reason!")).check(matches(isDisplayed()));
 
-    /**
-     * Tests loginResult
-     */
-    @Test
-    public void login() {
+        //account creation succeeded
+        ((CreateAccountActivity)activityRule.getActivity()).accountCreationResult(true);
+        intended(hasComponent(LoginActivity.class.getName()));
 
-        //login failed
-        Looper.prepare();
-        ((LoginActivity)activityRule.getActivity()).loginResult(0);
-        onView(withText("Login failed. Try again!")).check(matches(isDisplayed()));
-
-        //login succeeded
-        ((LoginActivity)activityRule.getActivity()).loginResult(1);
-        intended(hasComponent(NavBarActivity.class.getName()));
 
     }
 

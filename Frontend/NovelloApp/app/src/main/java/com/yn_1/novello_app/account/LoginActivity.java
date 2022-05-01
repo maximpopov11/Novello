@@ -55,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             //todo: remove hard coded login and fix login bug: problem because is get request?
-            userRequester.postRequest("login", accountCredentialsJson, command, null, null);
+            loginResult(3);
+            //userRequester.postRequest("login", accountCredentialsJson, command, null, null);
         });
 
         createAccount.setOnClickListener(v -> {
