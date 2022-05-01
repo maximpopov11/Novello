@@ -19,6 +19,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.StringEndsWith.endsWith;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 
 import android.os.Looper;
 
@@ -43,6 +45,10 @@ public class LoginActivityTest {
         Looper.prepare();
         ((LoginActivity)activityRule.getActivity()).loginResult(0);
         onView(withText("Login failed. Try again!")).check(matches(isDisplayed()));
+
+        //login succeeded
+        ((LoginActivity)activityRule.getActivity()).loginResult(1);
+        intended(hasComponent(NavBarActivity.class.getName()));
 
     }
 
