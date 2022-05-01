@@ -42,8 +42,9 @@ public class BookController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @PostMapping("/addAllBooks")
-    void addAllBooks(@ApiParam (value = "Json array of Books to add to the global library") @RequestBody Book[] b) {
+    Book[] addAllBooks(@ApiParam (value = "Json array of Books to add to the global library") @RequestBody Book[] b) {
         db.saveAll(Arrays.asList(b));
+        return b;
     }
 
     @ApiOperation(value = "Get a book by id from the system", response = Iterable.class)
