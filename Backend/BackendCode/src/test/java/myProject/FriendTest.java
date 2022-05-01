@@ -12,6 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,18 +33,60 @@ public class FriendTest {
         RestAssured.port = port;
         RestAssured.baseURI = "http://localhost";
     }
+    @Test
+    public void makeAFriend(){
+        String json = "{\n" +
+                "    \"senderId\":3,\n" +
+                "    \"receiverusrname\":\"Scottie\",\n" +
+                "    \"friendshipStatus\":1\n" +
+                "}";
+        Response response = RestAssured.given().header("Content-Type", "application/json").
+                body(json).
+                when().
+                post("/friend");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("{\"id\":{\"senderId\":3,\"receiverId\":2},\"receiver\":{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},\"friendshipStatus\":2}",returnString);
+
+
+    }
+    @Test
+    public void makeACloseFriend(){
+        String json = "{\n" +
+                "    \"senderId\":3,\n" +
+                "    \"receiverusrname\":\"Scottie\",\n" +
+                "    \"friendshipStatus\":1\n" +
+                "}";
+        Response response = RestAssured.given().header("Content-Type", "application/json").
+                body(json).
+                when().
+                post("/friend");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("{\"id\":{\"senderId\":3,\"receiverId\":2},\"receiver\":{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},\"friendshipStatus\":2}",returnString);
+
+
+    }
+
 
     @Test
-    public void reverseTest() {
-        // Send request and receive response
-        JSONObject test = new JSONObject();
-        JSONObject requestParams = new JSONObject();
-        requestParams.put("id", 1);
+    public void findAllFriends() {
 
-        Response response = RestAssured.given().
-                body(requestParams.toJSONString()).
-                when().
-                get("/friends");
+        Response response = RestAssured
+                .given()
+                .log()
+                .headers()
+                .get("http://coms-309-013.class.las.iastate.edu:8080/friends/3");
 
 
         // Check status code
@@ -52,7 +97,7 @@ public class FriendTest {
         String returnString = response.getBody().asString();
         //            JSONArray returnArr = new JSONArray(returnString);
 //            JSONObject returnObj = returnArr.getJSONObject(returnArr.length()-1);
-        assertEquals("[]", returnString);
+        assertEquals("[{\"id\":{\"senderId\":3,\"receiverId\":2},\"receiver\":{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},\"friendshipStatus\":2}]", returnString);
     }
 
 //    @Test
