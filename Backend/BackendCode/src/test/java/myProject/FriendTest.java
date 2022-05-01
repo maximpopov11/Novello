@@ -33,19 +33,57 @@ public class FriendTest {
         RestAssured.port = port;
         RestAssured.baseURI = "http://localhost";
     }
+    @Test
+    public void makeAFriend(){
+        String json = "{\n" +
+                "    \"senderId\":3,\n" +
+                "    \"receiverusrname\":\"Scottie\",\n" +
+                "    \"friendshipStatus\":1\n" +
+                "}";
+        Response response = RestAssured.given().header("Content-Type", "application/json").
+                body(json).
+                when().
+                post("/friend");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("{\"id\":{\"senderId\":3,\"receiverId\":2},\"receiver\":{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},\"friendshipStatus\":2}",returnString);
+
+
+    }
+    @Test
+    public void makeACloseFriend(){
+        String json = "{\n" +
+                "    \"senderId\":3,\n" +
+                "    \"receiverusrname\":\"Scottie\",\n" +
+                "    \"friendshipStatus\":1\n" +
+                "}";
+        Response response = RestAssured.given().header("Content-Type", "application/json").
+                body(json).
+                when().
+                post("/friend");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("{\"id\":{\"senderId\":3,\"receiverId\":2},\"receiver\":{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},\"friendshipStatus\":2}",returnString);
+
+
+    }
+
 
     @Test
-    public void reverseTest() {
-        // Send request and receive response
-//        JSONObject test = new JSONObject();
-//        JSONObject requestParams = new JSONObject();
-//        requestParams.put("id", 1);
-//        Map<String,String> requestHeaders = new HashMap<>();
-//        requestHeaders.put("id", "1");
-//        RestAssured.given().headers(requestHeaders);
+    public void findAllFriends() {
 
         Response response = RestAssured
-        .given()
+                .given()
                 .log()
                 .headers()
                 .get("http://coms-309-013.class.las.iastate.edu:8080/friends/3");

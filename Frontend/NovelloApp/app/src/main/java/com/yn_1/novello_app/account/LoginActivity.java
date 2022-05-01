@@ -55,8 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             //todo: remove hard coded login and fix login bug: problem because is get request?
-            loginResult(1);
-            //userRequester.getRequest("login", accountCredentialsJson, command, null, null);
+            userRequester.postRequest("login", accountCredentialsJson, command, null, null);
         });
 
         createAccount.setOnClickListener(v -> {
@@ -70,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
      * Moves to home screen after login if successful and sends an alert otherwise
      * @param userID is the user's ID. It is 0 if the login failed.
      */
-    private void loginResult(int userID) {
+    public void loginResult(int userID) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         if (userID != 0) {
