@@ -48,10 +48,9 @@ public class BookTest {
 
     @Test
     public void addBook(){
-        JSONObject json = new JSONObject();
-        json.put("title","coolBook");
-        Response response = RestAssured.given().
-                body(json.toString()).
+String json = "{\"isbn\":\"0000000000001\",\"title\":\"Pride and Prejudice\",\"author\":\"Jane Austen\",\"publicationYear\":1813,\"overallRating\":5.0,\"msrp\":9.99,\"genre\":\"Literature\",\"description\":\"Pride and Prejudice is an 1813 novel of manners written by Jane Austen. The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book who learns about the repercussions of hasty judgments and comes to appreciate the difference between superficial goodness and actual goodness.\",\"readingUrl\":\"https://www.gutenberg.org/files/1342/1342-h/1342-h.htm\",\"imageUrl\":\"https://www.gutenberg.org/cache/epub/1342/pg1342.cover.medium.jpg\"}";
+        Response response = RestAssured.given().header("Content-Type", "application/json").
+                body(json).
                 when().
                 post("/book");
 
@@ -61,7 +60,7 @@ public class BookTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals(json.toString(),returnString);
+        assertEquals(json,returnString);
 
 
     }
