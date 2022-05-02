@@ -103,9 +103,9 @@ public class PrivateChatFragment extends Fragment implements PrivateChatContract
     public void navigateToMessageView(int id) {
         ChatFragmentDirections.ActionChatFragmentToMessageFragment action =
                 ChatFragmentDirections.actionChatFragmentToMessageFragment
-                        ((getArguments().getParcelable(ARG_CURRENT_USER)),
+                        (((NavBarActivity) getActivity()).getUser(),
                                 presenter.transferChatsToView().get(id));
-        ((NavBarActivity) ((ChatFragment) getHost()).getActivity()).getController()
+        ((NavBarActivity) getActivity()).getController()
                 .navigate(action);
     }
 }

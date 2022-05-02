@@ -61,8 +61,8 @@ public class MessageFragment extends Fragment implements MessageContract.View {
         Chat currentChat = MessageFragmentArgs.fromBundle(getArguments()).getCurrentChat();
 
         presenter = new MessagePresenter(
-                new MessageModel(currentChat, currentUser, MessageFragmentArgs.
-                        fromBundle(savedInstanceState).getCurrentChat().getMessages()), this);
+                new MessageModel(currentChat, currentUser, null), this);
+                        // MessageFragmentArgs.fromBundle(savedInstanceState).getCurrentChat().getMessages()),
     }
 
     @Override
@@ -87,9 +87,8 @@ public class MessageFragment extends Fragment implements MessageContract.View {
         });
 
         recyclerAdapter = new MessageRecyclerViewAdapter(
-                ((NavBarActivity) getActivity()).getUser().getUserId(),
-                getContext(),
-                MessageFragmentArgs.fromBundle(savedInstanceState).getCurrentChat().getMessages());
+                ((NavBarActivity) getActivity()).getUser().getUserId(), getContext(), null);
+                // MessageFragmentArgs.fromBundle(savedInstanceState).getCurrentChat().getMessages());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
         presenter.onFragmentCreated();

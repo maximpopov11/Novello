@@ -47,7 +47,8 @@ public class PrivateChatModel implements PrivateChatContract.Model {
     @Override
     public void fetchProfileImagesOfChat(PrivateChatContract.VolleyListener listener) {
         imagesIndex = 0;
-        for (Chat chat : chats) {
+        listener.onAllProfileImagesFetched();
+        /*for (Chat chat : chats) {
              for (User user : chat.getUsers()) {
                  String userProfileImageUrl = user.getProfileImageUrl();
                  ImageRequester req = new ImageRequester();
@@ -70,6 +71,6 @@ public class PrivateChatModel implements PrivateChatContract.Model {
                      }
                  }, null, null);
              }
-        }
+        }*/
      }
 }

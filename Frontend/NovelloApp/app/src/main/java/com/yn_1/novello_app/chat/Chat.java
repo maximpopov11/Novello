@@ -15,13 +15,21 @@ public class Chat implements Parcelable {
     private List<Message> messages;
 
     public Chat(int chatId, String chatName, List<User> users) {
-        new Chat(chatId, chatName, users, null);
+        this(chatId, chatName, users, null);
     }
 
     public Chat(int chatId, String chatName, List<User> users, List<Message> messages) {
         this.chatId = chatId;
+        this.chatName = chatName;
         this.users = users;
         this.messages = messages;
+    }
+
+    public Chat(Chat other) {
+        this.chatId = other.chatId;
+        this.chatName = other.chatName;
+        this.users = other.users;
+        this.messages = other.messages;
     }
 
     public Chat (Parcel in) {

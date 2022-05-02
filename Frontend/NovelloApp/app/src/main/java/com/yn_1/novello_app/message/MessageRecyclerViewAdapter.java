@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yn_1.novello_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageRecyclerViewAdapter extends RecyclerView.Adapter {
@@ -26,6 +27,10 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter {
         this.currentUserId = currentUserId;
         this.context = context;
         this.messageList = messageList;
+
+        if (messageList == null) {
+            messageList = new ArrayList<>();
+        }
     }
 
     @NonNull
@@ -63,7 +68,8 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return messageList.size();
+        // return messageList.size();
+        return 0;
     }
 
     @Override

@@ -43,7 +43,7 @@ public class PrivateChatRecyclerViewAdapter extends RecyclerView.Adapter<Private
         holder.mItem = mValues1.get(position);
 
         holder.chatName.setText(mValues1.get(position).getChatName());
-        holder.chatImage.setImageBitmap(mValues2.get(position));
+        // holder.chatImage.setImageBitmap(mValues2.get(position));
 
         holder.itemView.setOnClickListener(v -> {
             listener.navigateToMessageView(position);

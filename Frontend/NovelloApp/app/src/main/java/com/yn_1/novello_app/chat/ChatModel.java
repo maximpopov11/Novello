@@ -63,9 +63,11 @@ public class ChatModel implements ChatContract.Model {
                             case NULL:
                                 throw new IllegalArgumentException();
                             case PRIVATE:
-                                privateChats.add(chat);
+                                privateChats.add(new Chat(chat));
+                                break;
                             case PUBLIC:
-                                publicChats.add(chat);
+                                publicChats.add(new Chat(chat));
+                                break;
                         }
 
                         // If final element is finished, receive chats
