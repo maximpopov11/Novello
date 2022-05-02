@@ -31,13 +31,13 @@
             android:id="@+id/privateChatTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Public" />
+            android:text="Private" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/publicChatTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Private" />
+            android:text="Public" />
 
     </com.google.android.material.tabs.TabLayout>
 

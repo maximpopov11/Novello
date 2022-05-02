@@ -5,17 +5,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.databinding.FragmentFriendBinding;
 
 import java.util.List;
 
 public class MyCreateChatRecyclerViewAdapter extends RecyclerView.Adapter<MyCreateChatRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<User> mValues;
 
-    public MyCreateChatRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MyCreateChatRecyclerViewAdapter(List<User> items) {
         mValues = items;
     }
 
@@ -29,8 +32,9 @@ public class MyCreateChatRecyclerViewAdapter extends RecyclerView.Adapter<MyCrea
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.username.setText(mValues.get(position).getUsername());
+        // TODO: Add user profile image
+        holder.profileImage.setImageBitmap(null);
     }
 
     @Override
@@ -39,19 +43,21 @@ public class MyCreateChatRecyclerViewAdapter extends RecyclerView.Adapter<MyCrea
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public final CheckBox selectableCheckBox;
+        public final ImageView profileImage;
+        public final TextView username;
+        public User mItem;
 
         public ViewHolder(FragmentFriendBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            selectableCheckBox = binding.friendCheckButton;
+            profileImage = binding.friendImage;
+            username = binding.friendName;
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + username.getText() + "'";
         }
     }
 }

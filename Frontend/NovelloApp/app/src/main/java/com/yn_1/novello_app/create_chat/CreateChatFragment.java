@@ -45,7 +45,7 @@ public class CreateChatFragment extends Fragment implements CreateChatContract.V
         // Set the adapter
         recyclerView = view.findViewById(R.id.friendRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new MyCreateChatRecyclerViewAdapter(PlaceholderContent.ITEMS));
+        recyclerView.setAdapter(new MyCreateChatRecyclerViewAdapter(null));
 
         return view;
     }

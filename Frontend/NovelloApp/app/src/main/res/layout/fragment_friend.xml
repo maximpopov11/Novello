@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <RadioButton
-        android:id="@+id/friendRadioButton"
+    <CheckBox
+        android:id="@+id/friendCheckButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1" />

@@ -74,6 +74,12 @@ public class PrivateChatFragment extends Fragment implements PrivateChatContract
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.onFragmentCreated();
+    }
+
+    @Override
     public void displayChatList(List<Chat> items1, Map<Integer, Bitmap> items2) {
         View view = getView();
 

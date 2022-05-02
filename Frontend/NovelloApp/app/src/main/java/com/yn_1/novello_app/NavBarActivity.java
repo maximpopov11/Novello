@@ -23,7 +23,7 @@ public class NavBarActivity extends AppCompatActivity {
 
         // Server: Gets user from LoginActivity
         // user = (AdultUser) getIntent().getSerializableExtra("USER");
-        user = (AdultUser) getIntent().getParcelableExtra("USER");
+        user = getIntent().getParcelableExtra("USER");
 
         // Postman: Used for individual testing
         // user = new AdultUser("testUser", null, -1);

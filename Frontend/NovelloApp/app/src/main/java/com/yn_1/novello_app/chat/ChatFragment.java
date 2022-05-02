@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.yn_1.novello_app.NavBarActivity;
@@ -75,6 +77,8 @@ public class ChatFragment extends Fragment implements ChatContract.View {
         presenter.onFragmentCreated();
     }
 
+
+
     @Override
     public void initializeTabListener() {
         TabLayout.OnTabSelectedListener listener = new TabListener();
@@ -85,15 +89,18 @@ public class ChatFragment extends Fragment implements ChatContract.View {
 
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
-            if (tab.getId() == R.id.publicChatTab) {
+            /*if (tab.getId() == R.id.privateChatTab) {
                 viewPager2.setCurrentItem(0);
             }
-            else if (tab.getId() == R.id.privateChatTab) {
+            else if (tab.getId() == R.id.publicChatTab) {
                 viewPager2.setCurrentItem(1);
             }
             else {
                 throw new IllegalArgumentException();
-            }
+            }*/
+            Toast.makeText(getContext(), "Tab Selected: " + tab.getPosition(), Toast.LENGTH_SHORT);
+            Log.d("Tab Selected", String.valueOf(tab.getPosition()));
+            viewPager2.setCurrentItem(tab.getPosition());
         }
 
         @Override

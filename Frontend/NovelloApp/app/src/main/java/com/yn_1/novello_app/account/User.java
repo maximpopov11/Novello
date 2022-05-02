@@ -12,7 +12,7 @@ import java.util.List;
  * The creation of a user account should be done in user implementation constructor.
  * @author Roba Abbajabal
  */
-public interface User {
+public interface User extends Parcelable {
 
     /**
      * Sets the username

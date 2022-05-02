@@ -37,9 +37,9 @@ public class AdultUser implements User, Parcelable, Serializable {
      * Constructor for getting another user
      * @param id
      */
-    public AdultUser(int id, String name, String userProfileImageUrl) {
+    public AdultUser(int id, String username, String userProfileImageUrl) {
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.userProfileImageUrl = userProfileImageUrl;
     }
 
@@ -48,9 +48,9 @@ public class AdultUser implements User, Parcelable, Serializable {
      * @param in
      */
     public AdultUser(Parcel in) {
-        in.writeInt(id);
-        in.writeString(name);
-        in.writeString(userProfileImageUrl);
+        id = in.readInt();
+        name = in.readString();
+        userProfileImageUrl = in.readString();
     }
 
     @Override

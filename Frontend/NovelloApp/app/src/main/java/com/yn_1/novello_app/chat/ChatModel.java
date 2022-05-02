@@ -28,16 +28,13 @@ public class ChatModel implements ChatContract.Model {
 
     @Override
     public void fetchChats(ChatType chatType, ChatContract.VolleyListener listener) {
-        JsonArrayRequester req = new JsonArrayRequester();
-        String urlPath = "room";
+        privateChats = new ArrayList<Chat>();
+        publicChats = new ArrayList<Chat>();
 
-        JSONArray object = new JSONArray();
-        try {
-            object.getJSONObject(0).put("userId", currentUser.getUserId());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        req.getRequest(urlPath, object, new VolleyCommand<JSONArray>() {
+        JsonArrayRequester req = new JsonArrayRequester();
+        String urlPath = "room/"+currentUser.getUserId();
+
+        req.getRequest(urlPath, null, new VolleyCommand<JSONArray>() {
             @Override
             public void execute(JSONArray data) {
                 // Cycle through JSON Array List
@@ -48,17 +45,18 @@ public class ChatModel implements ChatContract.Model {
 
                         // Create a chat from the chat index and users involved.
                         int chatId = chatObject.getInt("id");
+                        String chatName = chatObject.getString("name");
                         JSONArray userArray = chatObject.getJSONArray("users");
                         List<User> users = new ArrayList();
                         for (int j = 0; j < userArray.length(); j++) {
                             JSONObject userObject = userArray.getJSONObject(j);
                             int userId = userObject.getInt("id");
                             String name = userObject.getString("username");
-                            String userImageUrl = userObject.getString("image");
-                            User user = new AdultUser(userId, name, userImageUrl);
+                            // String userImageUrl = userObject.getString("image");
+                            User user = new AdultUser(userId, name, null);
                             users.add(user);
                         }
-                        Chat chat = new Chat(chatId, users);
+                        Chat chat = new Chat(chatId, chatName, users);
 
                         // Add new chat element to list
                         switch (chatType) {

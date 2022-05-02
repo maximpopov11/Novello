@@ -41,10 +41,9 @@ public class PrivateChatRecyclerViewAdapter extends RecyclerView.Adapter<Private
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues1.get(position);
-        holder.chatImage.setImageBitmap(mValues2.get(position));
 
-        String title = getTitle(mValues1.get(position).getUsers());
-        holder.chatName.setText(title);
+        holder.chatName.setText(mValues1.get(position).getChatName());
+        holder.chatImage.setImageBitmap(mValues2.get(position));
 
         holder.itemView.setOnClickListener(v -> {
             listener.navigateToMessageView(position);
@@ -71,22 +70,5 @@ public class PrivateChatRecyclerViewAdapter extends RecyclerView.Adapter<Private
         public String toString() {
             return super.toString() + " '" + chatName + "'";
         }
-    }
-
-    /**
-     * Gets all users in a chat and return the title (excluding the current user)
-     * @param users
-     * @return
-     */
-     private String getTitle(List<User> users) {
-        StringBuilder title = new StringBuilder();
-        for (int i = 0; i < users.size(); i++)
-        {
-            if (!users.equals(currentUser.getUsername()))
-            {
-                title.append(users.get(i).getUsername()).append(", ");
-            }
-        }
-        return title.toString();
     }
 }
