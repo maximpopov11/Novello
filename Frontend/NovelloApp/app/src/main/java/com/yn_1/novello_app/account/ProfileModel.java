@@ -64,7 +64,7 @@ public class ProfileModel {
             try {
                 ArrayList<String> friendsList = new ArrayList<>();
                 for (int i = 0; i < data.length(); i++) {
-                    JSONObject friendJson = data.getJSONObject(2 * i + 1);
+                    JSONObject friendJson = data.getJSONObject(i).getJSONObject("receiver");
                     friendsList.add(friendJson.getString("username"));
                 }
                 setFriendsList(friendsList);
