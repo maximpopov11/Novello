@@ -37,36 +37,25 @@ public class LoginActivityTest {
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
     /**
-     * Tests input
+     * Tests successful login
      */
     @Test
-    public void input() {
-        Looper.prepare();
+    public void loginSuccess() {
         onView(withId(R.id.inputUsername)).perform(typeText("Scottie"), closeSoftKeyboard());
         onView(withId(R.id.inputPassword)).perform(typeText("6969"), closeSoftKeyboard());
         onView(withId(R.id.login)).perform(click());
         onView(withId(R.id.textView2)).check(matches(withText("Home")));
-        //Intents.init();
-        //intended(hasComponent(NavBarActivity.class.getName()));
-
-
     }
 
     /**
-     * Tests loginResult
+     * Tests failed login
      */
-//    @Test
-//    public void login() {
-//
-//        //login failed
-//     //  Looper.prepare();
-//        ((LoginActivity)activityRule.getActivity()).loginResult(0);
-//        onView(withText("Login failed. Try again!")).check(matches(isDisplayed()));
-//
-//        //login succeeded
-//        ((LoginActivity)activityRule.getActivity()).loginResult(1);
-//        intended(hasComponent(NavBarActivity.class.getName()));
-//
-//    }
+    @Test
+    public void loginFailure() {
+        onView(withId(R.id.inputUsername)).perform(typeText("IncorrectUsername"), closeSoftKeyboard());
+        onView(withId(R.id.inputPassword)).perform(typeText("IncorrectPassword"), closeSoftKeyboard());
+        onView(withId(R.id.login)).perform(click());
+        onView(withId(R.id.login)).check(matches(withText("Login")));
+    }
 
 }
