@@ -111,6 +111,17 @@ public class UserController {
     @PostMapping("/user")
 	User createPerson(@ApiParam (value = "jsonObject with all of the info of a user", example = "{foo: whatever, bar: whatever2}") @RequestBody JSONObject jsonObject) {
         User u = new User();
+        if( jsonObject.getAsNumber("accountType") == null)
+        {
+            u.setUsername(jsonObject.getAsString("username"));
+            u.setPassword(jsonObject.getAsString("password"));
+            UserInfo ui = new UserInfo();
+            ui.setUser(u);
+            db.save(u);
+            userInfoInterfaceDB.save(ui);
+            return u;
+
+        }
         u.setAccountType((Integer) jsonObject.getAsNumber("accountType"));
         u.setUsername(jsonObject.getAsString("username"));
         u.setPassword(jsonObject.getAsString("password"));
