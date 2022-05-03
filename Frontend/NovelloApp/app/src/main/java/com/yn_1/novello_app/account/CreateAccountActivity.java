@@ -71,7 +71,7 @@ public class CreateAccountActivity extends AppCompatActivity {
      * Navigates to the login screen upon successful login or prints an error alert upon failure.
      * @param success true if account created succesfully
      */
-    void accountCreationResult(boolean success) {
+    public void accountCreationResult(boolean success) {
 
         if (success) {
             Intent intent = new Intent(this, LoginActivity.class);

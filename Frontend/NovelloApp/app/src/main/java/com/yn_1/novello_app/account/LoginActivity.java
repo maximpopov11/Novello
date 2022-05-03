@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //todo: remove hard coded login and fix login bug: problem because is get request?
             userRequester.postRequest("login", accountCredentialsJson, command, null, null);
         });
 
@@ -95,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 int userID;
                 if (data != null) {
-                    userID = data.getInt("userID");
+                    userID = data.getInt("userId");
                 }
                 else {
                     userID = 0;

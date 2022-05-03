@@ -5,7 +5,7 @@ import androidx.test.filters.LargeTest;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 
-import com.yn_1.novello_app.account.LoginActivity;
+import com.yn_1.novello_app.account.CreateAccountActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,33 +29,35 @@ import android.os.Looper;
 //Mock the RequestServerForService class
 @RunWith(AndroidJUnit4ClassRunner.class)
 @LargeTest  //large execution time
-public class LoginActivityTest {
+public class CreateAccountActivityTest {
 
     private static final int SIMULATED_DELAY_MS = 500;
 
     @Rule   //needed to launch the activity
-    public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<CreateAccountActivity> activityRule = new ActivityTestRule<>(CreateAccountActivity.class);
 
     /**
-     * Tests failed login
+     * Tests failed create account
      */
     @Test
-    public void loginFailure() {
-        onView(withId(R.id.inputUsername)).perform(typeText("IncorrectUsername"), closeSoftKeyboard());
-        onView(withId(R.id.inputPassword)).perform(typeText("IncorrectPassword"), closeSoftKeyboard());
-        onView(withId(R.id.login)).perform(click());
-        onView(withId(R.id.login)).check(matches(withText("Login")));
+    public void createAccountFailure() {
+        onView(withId(R.id.username)).perform(typeText("NewUsername"), closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("NewPassword"), closeSoftKeyboard());
+        onView(withId(R.id.confirmPassword)).perform(typeText("NotNewPassword"), closeSoftKeyboard());
+        onView(withId(R.id.createAccount)).perform(click());
+        onView(withId(R.id.createAccount)).check(matches(withText("Create Account")));
     }
 
     /**
-     * Tests successful login
+     * Tests successful create account
      */
     @Test
-    public void loginSuccess() {
-        onView(withId(R.id.inputUsername)).perform(typeText("Scottie"), closeSoftKeyboard());
-        onView(withId(R.id.inputPassword)).perform(typeText("6969"), closeSoftKeyboard());
-        onView(withId(R.id.login)).perform(click());
-        onView(withId(R.id.textView2)).check(matches(withText("Home")));
+    public void createAccountSuccess() {
+        onView(withId(R.id.username)).perform(typeText("NewUsername"), closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("NewPassword"), closeSoftKeyboard());
+        onView(withId(R.id.confirmPassword)).perform(typeText("NewPassword"), closeSoftKeyboard());
+        onView(withId(R.id.createAccount)).perform(click());
+        onView(withId(R.id.login)).check(matches(withText("Login")));
     }
 
 }
