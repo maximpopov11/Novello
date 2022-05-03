@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 //Mock the RequestServerForService class
 @RunWith(AndroidJUnit4ClassRunner.class)
 @LargeTest  //large execution time
-public class FriendsTest {
+public class CartTest {
 
     private static final int SIMULATED_DELAY_MS = 500;
 
@@ -36,10 +36,11 @@ public class FriendsTest {
         onView(withId(R.id.inputUsername)).perform(typeText("Scottie"), closeSoftKeyboard());
         onView(withId(R.id.inputPassword)).perform(typeText("6969"), closeSoftKeyboard());
         onView(withId(R.id.login)).perform(click());
-        onView(withId(R.id.profile)).perform(click());
-        onView(withId(R.id.friendsList)).perform(click());
-        onView(withId(R.id.addFriendSearch)).perform(typeText("Scottie"), closeSoftKeyboard());
-        onView(withId(R.id.addFriendButton)).check(matches(withText("Add Friend")));
+        onView(withId(R.id.cartView)).perform(click());
+        onView(withId(R.id.purchase)).perform(click());
+        onView(withId(R.id.creditCardInput)).perform(typeText("123456789"), closeSoftKeyboard());
+        onView(withId(R.id.finishPurchase)).check(matches(withText("Finish")));
+        onView(withId(R.id.textView2)).check(matches(withText("Home")));
     }
 
 }
