@@ -26,6 +26,11 @@ public class ChatRoomTest {
         RestAssured.port = port;
         RestAssured.baseURI = "http://localhost";
     }
+
+    @Test
+    public void test1(){
+        assertEquals("","");
+    }
 //    @Test
 //    public void makeAllUsers(){
 //        String json = "[\n" +

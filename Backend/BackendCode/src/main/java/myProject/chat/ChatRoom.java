@@ -18,6 +18,9 @@ public class ChatRoom {
     @Column
     String description;
 
+    @Column
+    Integer type;
+
     @JsonIgnore
     @OneToMany(mappedBy = "chatRoom")
 //    @JoinColumn(name = "message_id")
@@ -26,6 +29,14 @@ public class ChatRoom {
 //    @JsonIgnore
     @ManyToMany(mappedBy = "chatRooms")
     Set<User> users;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public Set<User> getUsers() {
         return users;

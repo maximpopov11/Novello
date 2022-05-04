@@ -1,24 +1,42 @@
 package myProject;
 
+
+import static io.restassured.RestAssured.post;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+
+import net.minidev.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.junit.Assert.assertEquals;
 
-// Import Local classes
-//import myapp.Service.ReverseStringService;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+
+import javax.swing.text.html.parser.Parser;
+
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 @RunWith(SpringRunner.class)
+
 public class BookDataTest {
+	@LocalServerPort
+	int port;
 
-	@Test
-	public void testReverse()  {
-		// create an instance of SUT
-//		ReverseStringService rss = new ReverseStringService();
-
-		//check if it works by calling its methods
-		assertEquals("olleh", "olleh");
-
+	@Before
+	public void setUp() {
+		RestAssured.port = port;
+		RestAssured.baseURI = "http://localhost";
 	}
 
+	@Test
+	public void createBookData(){
+		assertEquals("","");
+	}
 }

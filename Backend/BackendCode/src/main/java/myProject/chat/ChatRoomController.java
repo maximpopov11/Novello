@@ -25,6 +25,7 @@ public class ChatRoomController {
         User user;
         ChatRoom chatRoom = new ChatRoom();
         chatRoom.setName(json[0].getAsString("name"));
+        chatRoom.setType((int) json[0].getAsNumber("type"));
         chatRoom = cdb.save(chatRoom);
         Set<User> users = new HashSet<>();
 
