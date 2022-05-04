@@ -64,7 +64,7 @@ public class PublicChatFragment extends Fragment implements PublicChatContract.V
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_private_chat_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
         return view;
     }
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.chat.Chat;
-import com.yn_1.novello_app.databinding.FragmentPrivateChatBinding;
+import com.yn_1.novello_app.databinding.FragmentChatItemBinding;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class PublicChatRecyclerViewAdapter extends RecyclerView.Adapter<PublicCh
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(FragmentPrivateChatBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(FragmentChatItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class PublicChatRecyclerViewAdapter extends RecyclerView.Adapter<PublicCh
         public final TextView chatName;
         public Chat mItem;
 
-        public ViewHolder(FragmentPrivateChatBinding binding) {
+        public ViewHolder(FragmentChatItemBinding binding) {
             super(binding.getRoot());
             chatImage = binding.chatImage;
             chatName = binding.chatTitle;

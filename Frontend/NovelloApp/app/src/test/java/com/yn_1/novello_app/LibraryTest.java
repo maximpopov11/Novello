@@ -17,7 +17,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
-public class LibrarySystemTest {
+public class LibraryTest {
 
     private static final int SIMULATED_DELAY_MS = 500;
 
@@ -39,6 +39,4 @@ public class LibrarySystemTest {
     public void addBookToCart() {
 
     }
-
-    public static Matcher<View> has
 }

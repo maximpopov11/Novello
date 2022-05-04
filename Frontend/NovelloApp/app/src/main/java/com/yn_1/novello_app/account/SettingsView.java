@@ -52,6 +52,7 @@ public class SettingsView extends Fragment {
 
     private void goToLogin() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
+        getActivity().finishAffinity();
         startActivity(intent);
     }
 
