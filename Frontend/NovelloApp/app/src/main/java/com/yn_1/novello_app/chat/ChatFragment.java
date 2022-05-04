@@ -12,11 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.account.AdultUser;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.chat.privateChat.PrivateChatFragment;
 
@@ -32,6 +34,7 @@ public class ChatFragment extends Fragment implements ChatContract.View {
     private TabLayout tabLayout;
 
     private FragmentStateAdapter pagerAdapter;
+    private Button createChatButton;
 
     ChatContract.Presenter presenter;
 
@@ -70,6 +73,8 @@ public class ChatFragment extends Fragment implements ChatContract.View {
 
         tabLayout = view.findViewById(R.id.chatTabLayout);
         viewPager2 = view.findViewById(R.id.chatViewPager);
+        createChatButton = view.findViewById(R.id.navigateCreateChat);
+        createChatButton.setOnClickListener(v -> navigateToCreateChatScreen());
 
         presenter.onFragmentCreated();
     }
@@ -83,6 +88,13 @@ public class ChatFragment extends Fragment implements ChatContract.View {
 
         TabLayout.OnTabSelectedListener listener = new TabListener();
         tabLayout.addOnTabSelectedListener(listener);
+    }
+
+    @Override
+    public void navigateToCreateChatScreen() {
+        ((NavBarActivity) getActivity()).getController().navigate(ChatFragmentDirections.
+                actionChatFragmentToCreateChatFragment(
+                        (AdultUser) ((NavBarActivity) getActivity()).getUser()));
     }
 
     private class TabListener implements TabLayout.OnTabSelectedListener {

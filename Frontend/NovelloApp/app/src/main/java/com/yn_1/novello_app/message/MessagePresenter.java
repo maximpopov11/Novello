@@ -61,7 +61,7 @@ public class MessagePresenter implements MessageContract.Presenter, MessageContr
             Message messageObject = new Message(-1, null, userId, username, date, messageBody);
 
             model.addMessageToList(messageObject);
-            view.notifyRecyclerMessageAdded(model.getMessageList().size() - 1, messageObject);
+            view.notifyRecyclerMessageAdded(model.getMessageList().size(), messageObject);
         }
         scan.close();
     }

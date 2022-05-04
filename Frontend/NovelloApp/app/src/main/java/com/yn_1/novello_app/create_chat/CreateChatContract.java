@@ -1,27 +1,31 @@
 package com.yn_1.novello_app.create_chat;
 
-import com.yn_1.novello_app.account.User;
-import com.yn_1.novello_app.chat.Chat;
+import org.json.JSONArray;
 
 import java.util.List;
 
 public interface CreateChatContract {
     interface Model {
+        void setListener(VolleyListener listener);
         void fetchFriends();
-        void sendChat();
-        List<User> getFriends();
+        void sendChat(JSONArray send);
+        List<Integer> getIds();
     }
 
     interface View {
-        void navigateToMessageScreen(User user, Chat chat);
+        void createFriendsList(List<Integer> friendIds, List<String> friendUsernames);
+        void navigateToMessageScreen();
+        String getInputtedTitle();
+
     }
 
     interface Presenter {
         void onFragmentCreated();
-        void onCreateChatButtonPressed();
+        void onCreateChatButtonPressed(boolean[] friendsSelected);
     }
 
     interface VolleyListener {
-        void onFriendFetched(List<User> friends);
+        void onFriendFetched(List<Integer> friendIds, List<String> friendUsernames);
+        void onFriendsCreated();
     }
 }
