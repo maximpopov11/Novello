@@ -82,8 +82,13 @@ public class MessageFragment extends Fragment implements MessageContract.View {
         inputMessageField = view.findViewById(R.id.messageInputField);
         messageSendButton = view.findViewById(R.id.messageSendButton);
 
+        chatTitle.setText(MessageFragmentArgs.fromBundle(getArguments()).getCurrentChat().getChatName());
+
         messageSendButton.setOnClickListener(v -> {
-            presenter.onSendButtonClicked(getInputText());
+            if (!inputMessageField.getText().toString().equals("")) {
+                presenter.onSendButtonClicked(getInputText());
+                inputMessageField.setText("");
+            }
         });
 
         recyclerAdapter = new MessageRecyclerViewAdapter(
@@ -100,7 +105,15 @@ public class MessageFragment extends Fragment implements MessageContract.View {
     }
 
     @Override
-    public void notifyRecyclerMessageAdded(int finalElementIndex) {
+    public void notifyRecyclerMessageAdded(int finalElementIndex, Message message) {
+        recyclerAdapter.addMessage(message);
         recyclerAdapter.notifyItemInserted(finalElementIndex);
+        //recyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.onExit();
     }
 }

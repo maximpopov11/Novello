@@ -13,6 +13,7 @@ import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageModel implements MessageContract.Model {
@@ -21,7 +22,7 @@ public class MessageModel implements MessageContract.Model {
 
     Chat chat;
     User currentUser;
-    List<Message> messageList;
+    ArrayList<Message> messageList = new ArrayList<>();
 
     private WebSocketClient cc;
 
@@ -33,7 +34,7 @@ public class MessageModel implements MessageContract.Model {
 
     @Override
     public void setListener(MessageContract.WebSocketListener listener) {
-        this.websocketListener = websocketListener;
+        websocketListener = listener;
     }
 
     @Override
@@ -46,36 +47,36 @@ public class MessageModel implements MessageContract.Model {
                 + "/" + currentUser.getUserId();
 
         try {
-            Log.d("Socket:", "Attempting connection");
+            Log.d("Socket", "Attempting connection");
             cc = new WebSocketClient(new URI(url), (Draft) drafts[0]) {
                 @Override
                 public void onMessage(String message) {
-                    Log.d("", "run() returned: " + message);
+                    Log.d("Socket MESSAGE", "onMessage() returned: \n" + message);
                     websocketListener.onMessage(message);
                 }
 
                 @Override
                 public void onOpen(ServerHandshake handshake) {
-                    Log.d("OPEN", "run() returned: " + "is connecting");
+                    Log.d("Socket OPEN", "onOpen() returned: " + "is connecting");
                     websocketListener.onOpen(handshake);
                 }
 
                 @Override
                 public void onClose(int code, String reason, boolean remote) {
-                    Log.d("CLOSE", "onClose() returned: " + reason);
+                    Log.d("Socket CLOSE", "onClose() returned: " + reason);
                     websocketListener.onClose(code, reason, remote);
                 }
 
                 @Override
                 public void onError(Exception e) {
-                    Log.d("Exception:", e.getMessage().toString());
+                    Log.d("Socket ERROR", "onError() returned: " + e.getMessage().toString());
                 }
             };
+            cc.connect();
         } catch (URISyntaxException e) {
-            Log.d("Exception:", e.getMessage().toString());
+            Log.d("URI Exception", e.getMessage().toString());
             e.printStackTrace();
         }
-        cc.connect();
     }
 
     @Override
@@ -91,5 +92,11 @@ public class MessageModel implements MessageContract.Model {
     @Override
     public List<Message> getMessageList() {
         return messageList;
+    }
+
+    @Override
+    public void closeSocket() {
+        cc.close();
+        Log.d("Socket", "Socket closed.");
     }
 }

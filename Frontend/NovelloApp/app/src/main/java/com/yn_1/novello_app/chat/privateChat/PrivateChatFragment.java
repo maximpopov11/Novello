@@ -87,7 +87,7 @@ public class PrivateChatFragment extends Fragment implements PrivateChatContract
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setLayoutManager(new LinearLayoutManager(context, 0, false));
             recyclerView.setAdapter(new PrivateChatRecyclerViewAdapter(items1, items2,
                     ((NavBarActivity)getActivity()).getUser(), this));
         }

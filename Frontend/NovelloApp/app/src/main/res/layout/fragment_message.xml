@@ -69,9 +69,19 @@
         android:id="@+id/layout_gchat_chatbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
+        <Button
+            android:id="@+id/messageSendButton"
+            android:layout_width="80dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackground"
+            android:text="Send"
+            android:textColor="@color/design_default_color_primary" />
 
         <EditText
             android:id="@+id/messageInputField"
@@ -85,15 +95,6 @@
             android:inputType="text"
             android:maxLines="6"
             tools:ignore="Autofill" />
-
-        <Button
-            android:id="@+id/messageSendButton"
-            android:layout_width="80dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:background="?attr/selectableItemBackground"
-            android:text="Send"
-            android:textColor="@color/design_default_color_primary" />
 
     </RelativeLayout>
 
