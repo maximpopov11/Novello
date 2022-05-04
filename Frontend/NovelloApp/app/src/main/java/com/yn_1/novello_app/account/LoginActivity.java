@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 
@@ -54,9 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //todo: remove hard coded login and fix login bug
-            loginResult(1);
-            //userRequester.getRequest("login", accountCredentialsJson, command, null, null);
+            userRequester.postRequest("login", accountCredentialsJson, command, null, null);
         });
 
         createAccount.setOnClickListener(v -> {
@@ -70,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
      * Moves to home screen after login if successful and sends an alert otherwise
      * @param userID is the user's ID. It is 0 if the login failed.
      */
-    private void loginResult(int userID) {
+    public void loginResult(int userID) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         if (userID != 0) {
@@ -96,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 int userID;
                 if (data != null) {
-                    userID = data.getInt("userID");
+                    userID = data.getInt("userId");
                 }
                 else {
                     userID = 0;

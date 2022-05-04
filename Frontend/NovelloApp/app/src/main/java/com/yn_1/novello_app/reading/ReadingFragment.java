@@ -11,8 +11,14 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 
+/**
+ * Reading View <br>
+ * For displaying data via the UI. Is the fragment of the screen.
+ *
+ * @author Roba Abbajabal
+ */
 public class ReadingFragment extends Fragment implements ReadingContract.View {
 
     private WebView webView;
@@ -20,6 +26,11 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
     // Presenter accessible from View
     private ReadingContract.Presenter presenter;
 
+    /**
+     * Creates a new fragment instance, using specific arguments to be added to the bundle.
+     *
+     * @return A new instance of fragment ReadingFragment.
+     */
     public static ReadingFragment newInstance() {
         ReadingFragment fragment = new ReadingFragment();
         Bundle args = new Bundle();
@@ -27,11 +38,17 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
         return fragment;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,6 +64,9 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
         return inflater.inflate(R.layout.fragment_reading, container, false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -57,28 +77,43 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
         presenter.onPageLoad(((NavBarActivity)getActivity()).getUser());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onStop() {
         super.onStop();
         presenter.onPageLoad(((NavBarActivity)getActivity()).getUser());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Nullable
     @Override
     public View getView() {
         return super.getView();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getProgress() {
         return webView.getScrollY() - webView.getTop();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getProgressPercentage() {
         return (double) getProgress() / webView.getContentHeight();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void jumpToProgress(int progress) {
         webView.setScrollY(progress + webView.getTop());

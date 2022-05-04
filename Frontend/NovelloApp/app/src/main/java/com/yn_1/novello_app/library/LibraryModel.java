@@ -22,6 +22,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Library Model <br>
+ * For storing data and communicating with database.
+ *
+ * @author  Roba Abbajabal
+ */
 public class LibraryModel implements LibraryContract.Model {
     private List<Book> bookCollection;
     private int bookCount;
@@ -30,6 +36,9 @@ public class LibraryModel implements LibraryContract.Model {
     private Map<ImageButton, Book> bookButtons;
 
     private int finishedCollectionCounter;
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void fetchAllBooks(User user, LibraryContract.View view, LibraryContract.Presenter presenter) {
         bookButtons = null;
@@ -90,6 +99,9 @@ public class LibraryModel implements LibraryContract.Model {
     }
 
     private int finishedImagesCounter;
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void assignImageToBook(Book book, String imageURL, ImageButton button, LibraryContract.View view) {
         ImageRequester req = new ImageRequester();
@@ -112,28 +124,17 @@ public class LibraryModel implements LibraryContract.Model {
         }, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Book> getUserBookCollection() {
         return bookCollection;
     }
 
-    // TODO: Press add button to add book to collection
-    @Override
-    public List<Book> addBookToCollection(Book book) {
-        return null;
-    }
-
-    // TODO: Hold book to remove book from collection
-    @Override
-    public List<Book> removeBookFromCollection(Book book) {
-        return null;
-    }
-
-    @Override
-    public Map<ImageButton, Book> getBookButtons() {
-        return bookButtons;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addBookButton(Book book, ImageButton button) {
         if (bookButtons == null) {
@@ -142,6 +143,9 @@ public class LibraryModel implements LibraryContract.Model {
         bookButtons.put(button, book);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Book getBookButton(ImageButton button) {
         return bookButtons.get(button);

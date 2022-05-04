@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.VolleyError;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.volley_requests.VolleyCommand;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
 
@@ -71,7 +71,7 @@ public class CreateAccountActivity extends AppCompatActivity {
      * Navigates to the login screen upon successful login or prints an error alert upon failure.
      * @param success true if account created succesfully
      */
-    void accountCreationResult(boolean success) {
+    public void accountCreationResult(boolean success) {
 
         if (success) {
             Intent intent = new Intent(this, LoginActivity.class);

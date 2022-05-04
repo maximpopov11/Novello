@@ -9,6 +9,23 @@ import com.yn_1.novello_app.volley_requests.VolleyCommand;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Enumerated type representation of the five types of library categories. <br> <br>
+ *
+ * Five Library Categories for Books: <br>
+ * 0. None: Existing book that is not in a user category. <br>
+ * 1. Wishlist: The category that contains books that the user wishes to purchase. <br>
+ * 2. Cart: The category that contains the books the user is about to purchase. <br>
+ * 3. Backlog: The category that contains books the user hasn't read, or will read again. <br>
+ * 4. Currently Reading: The category that contains books that the user is currently reading. <br>
+ * 5. Read The category containing books that the user has finished,
+ *  and do not intend to read again in near time. <br>
+ *
+ * This class is also holds information on which categories books in libraries can be moved,
+ *  as well as operations for moving books between categories in the server.
+ *
+ * @author Roba Abbajabal
+ */
 public enum LibraryCategory {
     NONE (0, null, new boolean[]{false, true, true, false, false, false}),
     WISHLIST (1, "wishlist", new boolean[]{true, false, true, false, false, false}),
@@ -21,6 +38,13 @@ public enum LibraryCategory {
     private final String stringFormat;
     private final boolean[] possibleTransactions;
 
+    /**
+     * Constructor of a library category
+     * @param categoryIndex Integer representing the category index.
+     * @param stringFormat String representation of the category.
+     * @param possibleTransactions Boolean array representation of which categories the book in
+     *                             the current category can be moved to.
+     */
     LibraryCategory(int categoryIndex, String stringFormat, boolean[] possibleTransactions) {
         this.categoryIndex = categoryIndex;
         this.stringFormat = stringFormat;
@@ -28,34 +52,35 @@ public enum LibraryCategory {
     }
 
     /**
-     *
-     * @return
+     * Gets the category index.
+     * @return Integer representing the category index.
      */
     public int getCategoryIndex() {
         return categoryIndex;
     }
 
     /**
-     *
-     * @return
+     * Gets the string format of the category.
+     * @return String representation of the category.
      */
     public String getStringFormat() {
         return stringFormat;
     }
 
     /**
-     *
-     * @return
+     * Gets the possible category transactions.
+     * @return Boolean array representation of which categories the book in
+     * the current category can be moved to.
      */
     public boolean[] getPossibleTransactions() {
         return possibleTransactions;
     }
 
     /**
-     * Method for moving book between user categories.
-     * @param newCategory
-     * @param userID
-     * @param bookID
+     * Moves book between user categories. Gets the book and calls the helper method.
+     * @param newCategory The new category to be moved to.
+     * @param userID Integer representing the user that holds the library.
+     * @param bookID Integer representing the book to be moved.
      */
     public void performTransaction(LibraryCategory newCategory, int userID, int bookID) {
 
@@ -83,18 +108,19 @@ public enum LibraryCategory {
     }
 
     /**
-     * Helper method for putting book in a new category
-     * @param newCategory
-     * @param userID
-     * @param bookID
+     * Helper method for putting book in a new category (or removing books from the library.
+     * @param newCategory The new category to be moved to.
+     *      * @param userID Integer representing the user that holds the library.
+     *      * @param bookID Integer representing the book to be moved.
      */
     private void putInCategory(LibraryCategory newCategory, int userID, int bookID) {
         JsonObjectRequester categoryReq = new JsonObjectRequester();
+        String pathUrl = "bookData";
+        JSONObject object = new JSONObject();
+
         // If NONE: DELETE book
         if (newCategory == NONE)
         {
-            String pathUrl = "bookData";
-            JSONObject object = new JSONObject();
             try {
                 object.put("bookId", bookID);
                 object.put("userId", userID);
@@ -115,9 +141,7 @@ public enum LibraryCategory {
         }
         // Else: PUT book in new category
         else {
-            String pathUrl = "bookData";
-                    // userID + "/library/" + newCategory.getCategoryIndex();
-            JSONObject object = new JSONObject();
+            // userID + "/library/" + newCategory.getCategoryIndex();
             try {
                 object.put("bookId", bookID);
                 object.put("userId", userID);

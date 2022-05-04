@@ -9,7 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.yn_1.novello_app.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_profileView"
+            app:destination="@id/profileView" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsView"
+            app:destination="@id/settingsView" />
+    </fragment>
     <fragment
         android:id="@+id/libraryFragment"
         android:name="com.yn_1.novello_app.library.LibraryFragment"
@@ -123,4 +130,33 @@
         android:name="com.yn_1.novello_app.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/profileView"
+        android:name="com.yn_1.novello_app.account.ProfileView"
+        android:label="fragment_profile_view"
+        tools:layout="@layout/fragment_profile_view" >
+        <argument
+            android:name="userID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_profileView_to_friendsView"
+            app:destination="@id/friendsView" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsView"
+        android:name="com.yn_1.novello_app.account.FriendsView"
+        android:label="FriendsView"
+        tools:layout="@layout/fragment_friends_view">
+        <argument
+            android:name="friendsArray"
+            android:defaultValue="@null"
+            app:argType="string[]"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsView"
+        android:name="com.yn_1.novello_app.account.SettingsView"
+        android:label="fragment_settings_view"
+        tools:layout="@layout/fragment_settings_view" />
 </navigation>
