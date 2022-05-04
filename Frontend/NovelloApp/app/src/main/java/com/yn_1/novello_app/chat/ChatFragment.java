@@ -21,6 +21,7 @@ import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.account.AdultUser;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.chat.privateChat.PrivateChatFragment;
+import com.yn_1.novello_app.chat.publicChat.PublicChatFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -137,7 +138,7 @@ public class ChatFragment extends Fragment implements ChatContract.View {
                     return PrivateChatFragment.newInstance(presenter.transferChatsToView()[0]);
 
                 case 1:
-                    return PrivateChatFragment.newInstance(presenter.transferChatsToView()[1]);
+                    return PublicChatFragment.newInstance(presenter.transferChatsToView()[1]);
 
                 default:
                     throw new IllegalArgumentException();

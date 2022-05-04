@@ -27,35 +27,37 @@ public class CreateChatPresenter implements CreateChatContract.Presenter, Create
     @Override
     public void onCreateChatButtonPressed(boolean[] friendsSelected) {
         JSONArray body = new JSONArray();
+        if (!view.getInputtedTitle().equals("") && view.getInputtedAccess() != -1)
+        {
+            try {
+                JSONObject chatTitle = new JSONObject();
+                chatTitle.put("name", view.getInputtedTitle());;
+                chatTitle.put("type", view.getInputtedAccess());
+                body.put(chatTitle);
 
-        try {
-            JSONObject chatTitle = new JSONObject();
-            chatTitle.put("name", view.getInputtedTitle());;
-            chatTitle.put("type", 1);
-            body.put(chatTitle);
+                JSONObject currentUser = new JSONObject();
+                currentUser.put("userId", ((NavBarActivity) ((CreateChatFragment)view).
+                        getActivity()).getUser().getUserId());
+                body.put(currentUser);
 
-            JSONObject currentUser = new JSONObject();
-            currentUser.put("userId", ((NavBarActivity) ((CreateChatFragment)view).
-                    getActivity()).getUser().getUserId());
-            body.put(currentUser);
+                for (int i = 0; i < friendsSelected.length; i++) {
+                    if (friendsSelected[i]) {
+                        // selectedFriendIds.add(model.getIds().get(i));
+                        JSONObject userInChat = new JSONObject();
+                        userInChat.put("userId", model.getIds().get(i));
+                        body.put(userInChat);
+                    }
+                }
 
-            for (int i = 0; i < friendsSelected.length; i++) {
-                if (friendsSelected[i]) {
-                    // selectedFriendIds.add(model.getIds().get(i));
-                    JSONObject userInChat = new JSONObject();
-                    userInChat.put("userId", model.getIds().get(i));
-                    body.put(userInChat);
+                if (body.length() > 2) {
+                    // model.sendChat(selectedFriendIds);
+                    model.sendChat(body);
+                    onFriendsCreated();
                 }
             }
-
-            if (body.length() > 2) {
-                // model.sendChat(selectedFriendIds);
-                model.sendChat(body);
-                onFriendsCreated();
+            catch (JSONException e) {
+                e.printStackTrace();
             }
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 

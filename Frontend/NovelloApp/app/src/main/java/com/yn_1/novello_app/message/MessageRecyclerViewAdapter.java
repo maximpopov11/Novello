@@ -30,7 +30,9 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter {
         if (messageList != null) {
             this.messageList = messageList;
         }
-        this.messageList.add(new Message(-1, null,-1, "Hard coded", new Date(0), "Initial Message Test"));
+
+        // Hard-coded message test
+        // this.messageList.add(new Message(-1, null,-1, "Hard coded", new Date(0), "Initial Message Test"));
     }
 
     @NonNull

@@ -1,5 +1,7 @@
 package com.yn_1.novello_app.create_chat;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
@@ -31,6 +35,7 @@ public class CreateChatFragment extends Fragment implements CreateChatContract.V
     RecyclerView recyclerView;
     Button createChatButton;
     EditText titleInput;
+    Spinner spinner;
 
     boolean[] friendValues;
 
@@ -53,7 +58,15 @@ public class CreateChatFragment extends Fragment implements CreateChatContract.V
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        spinner = view.findViewById(R.id.access_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.access_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
         titleInput = view.findViewById(R.id.messageInputField);
+        titleInput.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+
         createChatButton = view.findViewById(R.id.createChat);
         createChatButton.setOnClickListener(v -> presenter.onCreateChatButtonPressed(friendValues));
         // Set the adapter
@@ -90,5 +103,11 @@ public class CreateChatFragment extends Fragment implements CreateChatContract.V
     @Override
     public String getInputtedTitle() {
         return titleInput.getText().toString();
+    }
+
+    @Override
+    public int getInputtedAccess() {
+        // 1 for private, 2 for public
+        return spinner.getSelectedItemPosition() + 1;
     }
 }

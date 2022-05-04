@@ -16,7 +16,7 @@ public interface CreateChatContract {
         void createFriendsList(List<Integer> friendIds, List<String> friendUsernames);
         void navigateToMessageScreen();
         String getInputtedTitle();
-
+        int getInputtedAccess();
     }
 
     interface Presenter {
