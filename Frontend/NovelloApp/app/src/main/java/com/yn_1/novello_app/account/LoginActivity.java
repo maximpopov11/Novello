@@ -84,8 +84,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             alert.setMessage("Login failed. Try again!");
+            alert.show();
         }
-        alert.show();
 
     }
 
