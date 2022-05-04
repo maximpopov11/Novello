@@ -61,15 +61,6 @@ public class ChatSocket {
         User user = messageMap.get(roomId).get(session);
         broadcast(user.getUsername() + ": " + message, roomId);
 
-        // Direct message to a user using the format "@username <message>"
-//		if (message.startsWith("@")) {
-//			User destUsername = message.split(" ")[0].substring(1);
-
-        // send the message to the sender and receiver
-//			sendMessageToPArticularUser(destUser, "[DM] " + user + ": " + message);
-//			sendMessageToPArticularUser(user, "[DM] " + user + ": " + message);
-
-//		}
         msgRepo.save(new Message(user, message, rdb.findById(roomId).orElseThrow(NoSuchElementException::new)));
     }
 
@@ -95,12 +86,9 @@ public class ChatSocket {
         });
     }
 
-
-    // Gets the Chat history from the repository
     private String getChatHistory(int roomId) {
         List<Message> messages = msgRepo.findAll();
 
-        // convert the list to a string
         StringBuilder sb = new StringBuilder();
         if (messages != null && messages.size() != 0) {
             for (Message message : messages) {
@@ -111,4 +99,4 @@ public class ChatSocket {
         return sb.toString();
     }
 
-} // end of Class
+}
