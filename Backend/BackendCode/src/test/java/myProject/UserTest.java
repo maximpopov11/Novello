@@ -80,6 +80,103 @@ public class UserTest {
 
     }
 
+    @Test
+    public void makeUser(){
+        String json = "{\n" +
+                "    \"username\":\"Phantom\",\n" +
+                "    \"password\":\"7893\"\n" +
+                "}";
+        Response response = RestAssured.given().header("Content-Type", "application/json").
+                body(json).
+                when().
+                post("/user");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("{\"id\":4,\"accountType\":null,\"username\":\"Phantom\",\"password\":\"7893\",\"securityQuestion\":null,\"securityAnswer\":null}",returnString);
+
+
+    }
+
+    @Test
+    public void getAUser(){
+        Response response = RestAssured
+                .given()
+                .log()
+                .headers()
+                .get("/user/2");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"}",returnString);
+
+    }
+
+    @Test
+    public void updateUser(){
+        String json = "{\"id\":1,\"accountType\":1,\"username\":\"IChangedMyName\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"}";
+        Response response = RestAssured.given().header("Content-Type", "application/json").
+                body(json).
+                when().
+                put("/user/1");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("{\"id\":1,\"accountType\":1,\"username\":\"IChangedMyName\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"}",returnString);
+    }
+
+    @Test
+    public void deleteUser(){
+        Response response = RestAssured
+                .given()
+                .log()
+                .headers()
+                .delete("/user/4");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("deleted 4",returnString);
+    }
+
+    @Test
+    public void login(){
+        String json = "{\n" +
+                "    \"username\":\"Scottie\",\n" +
+                "    \"password\":\"6969\"\n" +
+                "}";
+        Response response = RestAssured.given().header("Content-Type", "application/json").
+                body(json).
+                when().
+                post("/login");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("{\"userId\":2}",returnString);
+
+
+    }
+
+
 //    @Test
 //    public void capitalizeTest() {
 //        // Send request and receive response
