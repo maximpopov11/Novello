@@ -2,7 +2,9 @@ package myProject;
 
 
 import io.restassured.RestAssured;
+import io.restassured.mapper.ObjectMapper;
 import io.restassured.response.Response;
+import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -27,12 +33,11 @@ public class FriendTest {
         RestAssured.port = port;
         RestAssured.baseURI = "http://localhost";
     }
-
     @Test
-    public void makeAFriend() {
+    public void makeAFriend(){
         String json = "{\n" +
                 "    \"senderId\":3,\n" +
-                "    \"receiverusrname\":\"Idontknowpickone\",\n" +
+                "    \"receiverusrname\":\"IChangedMyName\",\n" +
                 "    \"friendshipStatus\":1\n" +
                 "}";
         Response response = RestAssured.given().header("Content-Type", "application/json").
@@ -46,13 +51,12 @@ public class FriendTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":{\"senderId\":3,\"receiverId\":1},\"receiver\":{\"id\":1,\"accountType\":1,\"username\":\"Idontknowpickone\",\"password\":\"8493\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"penguin\"},\"friendshipStatus\":2}", returnString);
+        assertEquals("{\"id\":{\"senderId\":3,\"receiverId\":1},\"receiver\":{\"id\":1,\"accountType\":1,\"username\":\"IChangedMyName\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"},\"friendshipStatus\":2}",returnString);
 
 
     }
-
     @Test
-    public void makeACloseFriend() {
+    public void makeACloseFriend(){
         String json = "{\n" +
                 "    \"senderId\":1,\n" +
                 "    \"receiverusrname\":\"Maxim\",\n" +
@@ -69,7 +73,7 @@ public class FriendTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":{\"senderId\":1,\"receiverId\":3},\"receiver\":{\"id\":3,\"accountType\":1,\"username\":\"Maxim\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"Cat\"},\"friendshipStatus\":2}", returnString);
+        assertEquals("{\"id\":{\"senderId\":1,\"receiverId\":3},\"receiver\":{\"id\":3,\"accountType\":1,\"username\":\"Maxim\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"Cat\"},\"friendshipStatus\":2}",returnString);
 
 
     }
@@ -93,7 +97,7 @@ public class FriendTest {
         String returnString = response.getBody().asString();
         //            JSONArray returnArr = new JSONArray(returnString);
 //            JSONObject returnObj = returnArr.getJSONObject(returnArr.length()-1);
-        assertEquals("[{\"id\":{\"senderId\":3,\"receiverId\":1},\"receiver\":{\"id\":1,\"accountType\":1,\"username\":\"Idontknowpickone\",\"password\":\"8493\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"penguin\"},\"friendshipStatus\":2}]", returnString);
+        assertEquals("[{\"id\":{\"senderId\":3,\"receiverId\":1},\"receiver\":{\"id\":1,\"accountType\":1,\"username\":\"IChangedMyName\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"},\"friendshipStatus\":2}]", returnString);
     }
 
 //    @Test
@@ -120,6 +124,8 @@ public class FriendTest {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
+
+
 
 
 }

@@ -3,12 +3,17 @@ package myProject;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import myProject.user.User;
+import myProject.user.UserInterface;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -172,6 +177,48 @@ public class UserTest {
 
 
         assertEquals("{\"userId\":2}", returnString);
+
+
+    }
+
+    @Test
+    public void getAllUsers(){
+        Response response = RestAssured
+                .given()
+                .log()
+                .headers()
+                .get("/users");
+
+        int statusCode = response.getStatusCode();
+        assertEquals(200, statusCode);
+
+        String returnString = response.getBody().asString();
+
+
+        assertEquals("[{\"id\":1,\"accountType\":1,\"username\":\"Idontknowpickone\",\"password\":\"8493\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"penguin\"},{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},{\"id\":3,\"accountType\":1,\"username\":\"Maxim\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"Cat\"}]",returnString);
+
+    }
+    @Autowired
+    UserInterface UIDB;
+    @Test
+    public void getAccountType(){
+        User u = new User();
+        u = UIDB.findById(3).orElseThrow(NoSuchElementException::new);
+        String username = u.getUsername();
+        int accountType = u.getAccountType();
+        String password = u.getPassword();
+        String securityQuestion = u.getSecurityQuestion();
+        String securityAnswer = u.getSecurityAnswer();
+
+
+
+
+
+        assertEquals("Maxim",username);
+        assertEquals(1,accountType);
+        assertEquals("5760",password);
+        assertEquals("Favorite animal",securityQuestion);
+        assertEquals("Cat",securityAnswer);
 
 
     }
