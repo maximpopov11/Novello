@@ -108,7 +108,7 @@ class Book {
         this.publicationYear = publicationYear;
     }
 
-    public String getISBN() {
+    public String getIsbn() {
         return isbn;
     }
 
@@ -136,16 +136,8 @@ class Book {
         this.bookID = bookID;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    public Double getMSRP() {
-        return msrp;
     }
 
     public double getOverallRating() {
@@ -156,17 +148,8 @@ class Book {
         this.overallRating = overallRating;
     }
 
-    public void setOverallRating(double rating) {
-        this.overallRating = rating;
-    }
-
     @JsonIgnore
     public Set<BookData> getBookData() {
         return bookData;
     }
-
-    public void setBookData(Set<BookData> bookData) {
-        this.bookData = bookData;
     }
-
-}

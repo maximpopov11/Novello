@@ -144,14 +144,6 @@ class User {
         this.messages = messages;
     }
 
-    public Set<myProject.friends.Friends> getFriends_receiver() {
-        return Friends_receiver;
-    }
-
-    public void setFriends_receiver(Set<myProject.friends.Friends> friends_receiver) {
-        Friends_receiver = friends_receiver;
-    }
-
     public String getSecurityAnswer() {
         return securityAnswer;
     }
