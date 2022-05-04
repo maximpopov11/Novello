@@ -33,7 +33,7 @@ public class UserTest {
     }
 
     @Test
-    public void makeAllUsers(){
+    public void makeAllUsers() {
         String json = "[\n" +
                 "    \n" +
                 "{\n" +
@@ -80,13 +80,13 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("",returnString);
+        assertEquals("", returnString);
 
 
     }
 
     @Test
-    public void makeUser(){
+    public void makeUser() {
         String json = "{\n" +
                 "    \"username\":\"Phantom\",\n" +
                 "    \"password\":\"7893\"\n" +
@@ -102,13 +102,13 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":4,\"accountType\":null,\"username\":\"Phantom\",\"password\":\"7893\",\"securityQuestion\":null,\"securityAnswer\":null}",returnString);
+        assertEquals("{\"id\":4,\"accountType\":null,\"username\":\"Phantom\",\"password\":\"7893\",\"securityQuestion\":null,\"securityAnswer\":null}", returnString);
 
 
     }
 
     @Test
-    public void getAUser(){
+    public void getAUser() {
         Response response = RestAssured
                 .given()
                 .log()
@@ -121,12 +121,12 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"}",returnString);
+        assertEquals("{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"}", returnString);
 
     }
 
     @Test
-    public void updateUser(){
+    public void updateUser() {
         String json = "{\"id\":1,\"accountType\":1,\"username\":\"IChangedMyName\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"}";
         Response response = RestAssured.given().header("Content-Type", "application/json").
                 body(json).
@@ -139,11 +139,11 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":1,\"accountType\":1,\"username\":\"IChangedMyName\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"}",returnString);
+        assertEquals("{\"id\":1,\"accountType\":1,\"username\":\"IChangedMyName\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"}", returnString);
     }
 
     @Test
-    public void deleteUser(){
+    public void deleteUser() {
         Response response = RestAssured
                 .given()
                 .log()
@@ -156,11 +156,11 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("deleted 4",returnString);
+        assertEquals("deleted 4", returnString);
     }
 
     @Test
-    public void login(){
+    public void login() {
         String json = "{\n" +
                 "    \"username\":\"Scottie\",\n" +
                 "    \"password\":\"6969\"\n" +
@@ -176,7 +176,7 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"userId\":2}",returnString);
+        assertEquals("{\"userId\":2}", returnString);
 
 
     }
@@ -248,8 +248,6 @@ public class UserTest {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-
-
 
 
 }

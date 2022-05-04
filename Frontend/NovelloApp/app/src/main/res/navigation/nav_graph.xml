@@ -127,9 +127,40 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.yn_1.novello_app.chat.Chat"
+        android:name="com.yn_1.novello_app.chat.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_messageFragment"
+            app:destination="@id/messageFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_createChatFragment"
+            app:destination="@id/createChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.yn_1.novello_app.message.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" >
+        <argument
+            android:name="currentUser"
+            app:argType="com.yn_1.novello_app.account.User" />
+        <argument
+            android:name="currentChat"
+            app:argType="com.yn_1.novello_app.chat.Chat" />
+    </fragment>
+    <fragment
+        android:id="@+id/createChatFragment"
+        android:name="com.yn_1.novello_app.create_chat.CreateChatFragment"
+        android:label="fragment_friend_list"
+        tools:layout="@layout/fragment_friend_list" >
+        <argument
+            android:name="currentUser"
+            app:argType="com.yn_1.novello_app.account.AdultUser" />
+        <action
+            android:id="@+id/action_createChatFragment_to_chatFragment2"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileView"
         android:name="com.yn_1.novello_app.account.ProfileView"

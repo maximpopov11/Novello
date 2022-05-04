@@ -1,7 +1,10 @@
 package com.yn_1.novello_app.account;
 
+import android.os.Parcelable;
+
 import com.yn_1.novello_app.book.Book;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +13,7 @@ import java.util.List;
  *
  * @author Roba Abbajabal
  */
-public interface User {
+public interface User extends Parcelable {
 
     /**
      * Sets the username
@@ -29,6 +32,18 @@ public interface User {
      * @param type account type
      */
     void setUserType(UserType type);
+
+    /**
+     *
+     * @param url Url to the user profile image
+     */
+    void setProfileImageUrl(String url);
+
+    /**
+     *
+     * @param name The name of the user
+     */
+    void setName(String name);
 
     /**
      * @return the user ID
@@ -64,6 +79,18 @@ public interface User {
      * @return the user URL path
      */
     String getUserUrlPath();
+
+    /**
+     *
+     * @return The name of the user
+     */
+    String getName();
+
+    /**
+     *
+     * @return the user profile image
+     */
+    String getProfileImageUrl();
 
     /**
      * Adds the given user to the friends list

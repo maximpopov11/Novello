@@ -92,6 +92,6 @@ public class ReviewFragment extends Fragment implements ReviewContract.View {
         ReviewFragmentDirections.ActionReviewFragmentToBookFragment action =
                 ReviewFragmentDirections.actionReviewFragmentToBookFragment();
         action.setBookID(bookID);
-        ((NavBarActivity)getActivity()).getController().navigate(bookID);
+        ((NavBarActivity)getActivity()).getController().navigate(action);
     }
 }

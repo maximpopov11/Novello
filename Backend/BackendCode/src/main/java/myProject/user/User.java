@@ -21,13 +21,13 @@ class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    @ApiModelProperty(allowableValues = "1")
-    @Column
-    Integer accountType;
-
     @ApiModelProperty(allowableValues = "Kevin")
     @Column
     public String username;
+
+    @ApiModelProperty(allowableValues = "1")
+    @Column
+    Integer accountType;
 
     @ApiModelProperty(allowableValues = "letMeIn")
     @Column
@@ -44,11 +44,6 @@ class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     Set<myProject.book.BookData> BookData;
-
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "UserInfo_id")
-    private UserInfo userInfo;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -71,28 +66,25 @@ class User {
     Set<Friends> Friends_receiver;
 
     @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "UserInfo_id")
+    private UserInfo userInfo;
+
+    @JsonIgnore
     public Set<BookData> getBookData() {
         return BookData;
     }
 
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
-    }
-
-    public void setChatRooms(Set<ChatRoom> chatRooms) {
-        this.chatRooms = chatRooms;
+    public void setBookData(Set<myProject.book.BookData> bookData) {
+        BookData = bookData;
     }
 
     public Set<ChatRoom> getChatRooms() {
         return chatRooms;
     }
 
-    public void setBookData(Set<BookData> bookData) {
-        BookData = bookData;
+    public void setChatRooms(Set<ChatRoom> chatRooms) {
+        this.chatRooms = chatRooms;
     }
 
     @JsonIgnore
@@ -100,16 +92,7 @@ class User {
         return Friends;
     }
 
-    public void setFriends(Set<Friends> friends) {
-        Friends = friends;
-    }
-
-    @JsonIgnore
-    public Set<Friends> getFriends_receiver() {
-        return Friends_receiver;
-    }
-
-    public void setFriends_receiver(Set<Friends> friends) {
+    public void setFriends(Set<myProject.friends.Friends> friends) {
         Friends = friends;
     }
 
@@ -119,14 +102,6 @@ class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(Integer accountType) {
-        this.accountType = accountType;
     }
 
     public String getUsername() {
@@ -145,12 +120,28 @@ class User {
         this.password = password;
     }
 
-    public String getSecurityQuestion() {
-        return securityQuestion;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setSecurityQuestion(String securityQuestion) {
-        this.securityQuestion = securityQuestion;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public Integer getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Integer accountType) {
+        this.accountType = accountType;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 
     public String getSecurityAnswer() {
@@ -161,7 +152,11 @@ class User {
         this.securityAnswer = securityAnswer;
     }
 
-    public UserInfo getUserInfo(){return userInfo; }
-    public void setUserInfo(UserInfo userInfo) {this.userInfo = userInfo; }
+    public String getSecurityQuestion() {
+        return securityQuestion;
+    }
 
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
+    }
 }

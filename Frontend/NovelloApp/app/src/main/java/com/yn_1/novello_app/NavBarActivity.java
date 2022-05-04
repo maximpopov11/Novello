@@ -33,7 +33,8 @@ public class NavBarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nav_bar);
 
         // Server: Gets user from LoginActivity
-        user = (AdultUser) getIntent().getSerializableExtra("USER");
+        // user = (AdultUser) getIntent().getSerializableExtra("USER");
+        user = getIntent().getParcelableExtra("USER");
 
         // Postman: Used for individual testing
         // user = new AdultUser("testUser", null, -1);
