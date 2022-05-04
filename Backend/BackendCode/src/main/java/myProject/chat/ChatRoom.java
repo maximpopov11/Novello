@@ -30,9 +30,9 @@ public class ChatRoom {
     @ManyToMany(mappedBy = "chatRooms")
     Set<User> users;
 
-    public Integer getType() {
-        return type;
-    }
+//    public Integer getType() {
+//        return type;
+//    }
 
     public void setType(Integer type) {
         this.type = type;

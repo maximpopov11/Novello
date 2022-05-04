@@ -40,9 +40,9 @@ public class Message {
         return chatRoom;
     }
 
-    public void setChatRoom(ChatRoom chatRoom) {
-        this.chatRoom = chatRoom;
-    }
+//    public void setChatRoom(ChatRoom chatRoom) {
+//        this.chatRoom = chatRoom;
+//    }
 
     public Integer getId() {
         return id;
@@ -64,17 +64,17 @@ public class Message {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Date getSent() {
-        return sent;
-    }
-
-    public void setSent(Date sent) {
-        this.sent = sent;
-    }
+//    public void setContent(String content) {
+//        this.content = content;
+//    }
+//
+//    public Date getSent() {
+//        return sent;
+//    }
+//
+//    public void setSent(Date sent) {
+//        this.sent = sent;
+//    }
 
 
 }
