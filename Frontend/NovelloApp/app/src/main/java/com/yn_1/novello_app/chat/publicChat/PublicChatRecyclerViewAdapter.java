@@ -1,12 +1,12 @@
-package com.yn_1.novello_app.chat.privateChat;
-
-import androidx.recyclerview.widget.RecyclerView;
+package com.yn_1.novello_app.chat.publicChat;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.chat.Chat;
@@ -18,15 +18,15 @@ import java.util.Map;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Chat}.
  */
-public class PrivateChatRecyclerViewAdapter extends RecyclerView.Adapter<PrivateChatRecyclerViewAdapter.ViewHolder> {
+public class PublicChatRecyclerViewAdapter extends RecyclerView.Adapter<PublicChatRecyclerViewAdapter.ViewHolder> {
 
     private final List<Chat> mValues1;
     private final Map<Integer, Bitmap> mValues2;
     private final User currentUser;
-    private final PrivateChatContract.ViewListener listener;
+    private final PublicChatContract.ViewListener listener;
 
-    public PrivateChatRecyclerViewAdapter(List<Chat> items1, Map<Integer, Bitmap> items2, User currentUser,
-                                          PrivateChatContract.ViewListener listener) {
+    public PublicChatRecyclerViewAdapter(List<Chat> items1, Map<Integer, Bitmap> items2, User currentUser,
+                                         PublicChatContract.ViewListener listener) {
         mValues1 = items1;
         mValues2 = items2;
         this.currentUser = currentUser;

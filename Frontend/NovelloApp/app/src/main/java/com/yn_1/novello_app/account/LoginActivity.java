@@ -2,6 +2,8 @@ package com.yn_1.novello_app.account;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -72,9 +74,11 @@ public class LoginActivity extends AppCompatActivity {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         if (userID != 0) {
+            Parcel parcel = Parcel.obtain();
             AdultUser user = new AdultUser(username, password, userID);
             Intent intent = new Intent(this, NavBarActivity.class);
-            intent.putExtra("USER", (Serializable) user);
+            // intent.putExtra("USER", (Serializable) user);
+            intent.putExtra("USER", (Parcelable) user);
             startActivity(intent);
         }
         else {

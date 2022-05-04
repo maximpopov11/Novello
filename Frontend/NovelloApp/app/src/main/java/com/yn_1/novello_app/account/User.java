@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Roba Abbajabal
  */
-public interface User extends Parcelable, Serializable {
+public interface User extends Parcelable {
 
     /**
      * Sets the username

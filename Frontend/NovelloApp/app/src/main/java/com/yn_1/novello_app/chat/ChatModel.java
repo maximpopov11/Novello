@@ -28,8 +28,12 @@ public class ChatModel implements ChatContract.Model {
 
     @Override
     public void fetchChats(ChatType chatType, ChatContract.VolleyListener listener) {
+        privateChats = new ArrayList<Chat>();
+        publicChats = new ArrayList<Chat>();
+
         JsonArrayRequester req = new JsonArrayRequester();
-        String urlPath = "chat/" + currentUser.getUserId() + "/" + chatType.toString();
+        String urlPath = "room/"+currentUser.getUserId();
+
         req.getRequest(urlPath, null, new VolleyCommand<JSONArray>() {
             @Override
             public void execute(JSONArray data) {
@@ -41,26 +45,28 @@ public class ChatModel implements ChatContract.Model {
 
                         // Create a chat from the chat index and users involved.
                         int chatId = chatObject.getInt("id");
+                        String chatName = chatObject.getString("name");
+                        int chatAccess = chatObject.getInt("type");
                         JSONArray userArray = chatObject.getJSONArray("users");
                         List<User> users = new ArrayList();
                         for (int j = 0; j < userArray.length(); j++) {
                             JSONObject userObject = userArray.getJSONObject(j);
                             int userId = userObject.getInt("id");
-                            String name = userObject.getString("name");
-                            String userImageUrl = userObject.getString("image");
-                            User user = new AdultUser(userId, name, userImageUrl);
+                            String name = userObject.getString("username");
+                            // String userImageUrl = userObject.getString("image");
+                            User user = new AdultUser(userId, name, null);
                             users.add(user);
                         }
-                        Chat chat = new Chat(chatId, users);
+                        Chat chat = new Chat(chatId, chatName, users);
 
                         // Add new chat element to list
-                        switch (chatType) {
-                            case NULL:
-                                throw new IllegalArgumentException();
-                            case PRIVATE:
-                                privateChats.add(chat);
-                            case PUBLIC:
-                                publicChats.add(chat);
+                        switch (chatAccess) {
+                            case 1:
+                                privateChats.add(new Chat(chat));
+                                break;
+                            case 2:
+                                publicChats.add(new Chat(chat));
+                                break;
                         }
 
                         // If final element is finished, receive chats

@@ -1,15 +1,15 @@
-package com.yn_1.novello_app.chat.privateChat;
+package com.yn_1.novello_app.chat.publicChat;
 
 import com.yn_1.novello_app.chat.Chat;
 
 import java.util.List;
 
-public class PrivateChatPresenter implements PrivateChatContract.Presenter, PrivateChatContract.VolleyListener {
+public class PublicChatPresenter implements PublicChatContract.Presenter, PublicChatContract.VolleyListener {
 
-    PrivateChatContract.Model model;
-    PrivateChatContract.View view;
+    PublicChatContract.Model model;
+    PublicChatContract.View view;
 
-    public PrivateChatPresenter(PrivateChatContract.Model model, PrivateChatContract.View view) {
+    public PublicChatPresenter(PublicChatContract.Model model, PublicChatContract.View view) {
         this.model = model;
         this.view = view;
     }

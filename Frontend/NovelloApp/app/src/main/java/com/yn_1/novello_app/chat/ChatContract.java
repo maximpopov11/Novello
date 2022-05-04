@@ -40,6 +40,7 @@ public interface ChatContract {
 
     interface View {
         void initializeTabListener();
+        void navigateToCreateChatScreen();
     }
 
     interface Presenter {

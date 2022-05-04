@@ -1,24 +1,20 @@
-package com.yn_1.novello_app.chat.privateChat;
+package com.yn_1.novello_app.chat.publicChat;
 
 import android.graphics.Bitmap;
 
-import com.android.volley.VolleyError;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.chat.Chat;
-import com.yn_1.novello_app.chat.ChatContract;
-import com.yn_1.novello_app.volley_requests.ImageRequester;
-import com.yn_1.novello_app.volley_requests.VolleyCommand;
 
 import java.util.List;
 import java.util.Map;
 
-public class PrivateChatModel implements PrivateChatContract.Model {
+public class PublicChatModel implements PublicChatContract.Model {
 
     User currentUser;
     List<Chat> chats;
     Map<Integer, Bitmap> userImages;
 
-    public PrivateChatModel(User currentUser, List<Chat> chats) {
+    public PublicChatModel(User currentUser, List<Chat> chats) {
         this.currentUser = currentUser;
         this.chats = chats;
     }
@@ -45,7 +41,7 @@ public class PrivateChatModel implements PrivateChatContract.Model {
 
     private int imagesIndex;
     @Override
-    public void fetchProfileImagesOfChat(PrivateChatContract.VolleyListener listener) {
+    public void fetchProfileImagesOfChat(PublicChatContract.VolleyListener listener) {
         imagesIndex = 0;
         listener.onAllProfileImagesFetched();
         /*for (Chat chat : chats) {

@@ -10,21 +10,31 @@ import java.util.List;
 
 public class Chat implements Parcelable {
     private int chatId;
+    private String chatName;
     private List<User> users;
     private List<Message> messages;
 
-    public Chat(int chatId, List<User> users) {
-        new Chat(chatId, users, null);
+    public Chat(int chatId, String chatName, List<User> users) {
+        this(chatId, chatName, users, null);
     }
 
-    public Chat(int chatId, List<User> users, List<Message> messages) {
+    public Chat(int chatId, String chatName, List<User> users, List<Message> messages) {
         this.chatId = chatId;
+        this.chatName = chatName;
         this.users = users;
         this.messages = messages;
     }
 
+    public Chat(Chat other) {
+        this.chatId = other.chatId;
+        this.chatName = other.chatName;
+        this.users = other.users;
+        this.messages = other.messages;
+    }
+
     public Chat (Parcel in) {
         this.chatId = in.readInt();
+        this.chatName = in.readString();
         in.readList(users, User.class.getClassLoader());
         in.readList(messages, Message.class.getClassLoader());
     }
@@ -45,6 +55,10 @@ public class Chat implements Parcelable {
         return chatId;
     }
 
+    public String getChatName() {
+        return chatName;
+    }
+
     public List<User> getUsers() {
         return users;
     }
@@ -61,6 +75,7 @@ public class Chat implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(chatId);
+        dest.writeString(chatName);
         dest.writeList(users);
         dest.writeList(messages);
     }
