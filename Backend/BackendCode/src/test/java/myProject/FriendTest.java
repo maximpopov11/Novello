@@ -37,7 +37,7 @@ public class FriendTest {
     public void makeAFriend(){
         String json = "{\n" +
                 "    \"senderId\":3,\n" +
-                "    \"receiverusrname\":\"Scottie\",\n" +
+                "    \"receiverusrname\":\"Idontknowpickone\",\n" +
                 "    \"friendshipStatus\":1\n" +
                 "}";
         Response response = RestAssured.given().header("Content-Type", "application/json").
@@ -51,7 +51,7 @@ public class FriendTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":{\"senderId\":3,\"receiverId\":2},\"receiver\":{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},\"friendshipStatus\":2}",returnString);
+        assertEquals("{\"id\":{\"senderId\":3,\"receiverId\":1},\"receiver\":{\"id\":1,\"accountType\":1,\"username\":\"Idontknowpickone\",\"password\":\"8493\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"penguin\"},\"friendshipStatus\":2}",returnString);
 
 
     }
@@ -86,7 +86,7 @@ public class FriendTest {
                 .given()
                 .log()
                 .headers()
-                .get("http://coms-309-013.class.las.iastate.edu:8080/friends/3");
+                .get("/friends/3");
 
 
         // Check status code
@@ -97,7 +97,7 @@ public class FriendTest {
         String returnString = response.getBody().asString();
         //            JSONArray returnArr = new JSONArray(returnString);
 //            JSONObject returnObj = returnArr.getJSONObject(returnArr.length()-1);
-        assertEquals("[{\"id\":{\"senderId\":3,\"receiverId\":1},\"receiver\":{\"id\":1,\"accountType\":1,\"username\":\"Idontknowpickone\",\"password\":\"8493\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"penguin\"},\"friendshipStatus\":2},{\"id\":{\"senderId\":3,\"receiverId\":2},\"receiver\":{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},\"friendshipStatus\":2}]", returnString);
+        assertEquals("[{\"id\":{\"senderId\":3,\"receiverId\":1},\"receiver\":{\"id\":1,\"accountType\":1,\"username\":\"Idontknowpickone\",\"password\":\"8493\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"penguin\"},\"friendshipStatus\":2}]", returnString);
     }
 
 //    @Test
