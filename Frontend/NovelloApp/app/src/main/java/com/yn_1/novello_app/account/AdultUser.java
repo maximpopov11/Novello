@@ -1,6 +1,9 @@
 package com.yn_1.novello_app.account;
 
+import android.os.Parcel;
+
 import com.yn_1.novello_app.book.Book;
+import com.yn_1.novello_app.message.Message;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,15 +11,17 @@ import java.util.List;
 /**
  * Adult user account.
  */
-public class AdultUser implements User, Serializable {
+public class AdultUser implements User {
 
     String username;
     String password;
     UserType userType = UserType.ADULT;
     int id;
+    String name;
+    String userProfileImageUrl;
 
     /**
-     * Constructor
+     * Constructor for creating a user
      * @param username username
      * @param password password
      * @param id user id
@@ -26,7 +31,26 @@ public class AdultUser implements User, Serializable {
         this.username = username;
         this.password = password;
         this.id = id;
+    }
 
+    /**
+     * Constructor for getting another user
+     * @param id
+     */
+    public AdultUser(int id, String name, String userProfileImageUrl) {
+        this.id = id;
+        this.name = name;
+        this.userProfileImageUrl = userProfileImageUrl;
+    }
+
+    /**
+     * Constructor for writing AdultUser to a Parcel
+     * @param in
+     */
+    public AdultUser(Parcel in) {
+        in.writeInt(id);
+        in.writeString(name);
+        in.writeString(userProfileImageUrl);
     }
 
     @Override
@@ -48,6 +72,16 @@ public class AdultUser implements User, Serializable {
 
         this.userType = type;
 
+    }
+
+    @Override
+    public void setProfileImageUrl(String url) {
+        userProfileImageUrl = url;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -102,10 +136,43 @@ public class AdultUser implements User, Serializable {
     }
 
     @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public String getProfileImageUrl() {
+        return userProfileImageUrl;
+    }
+
+    @Override
     public void addUserToFriendsList(User user) {
 
 
 
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(userProfileImageUrl);
+    }
+
+    public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
 }

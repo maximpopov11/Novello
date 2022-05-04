@@ -99,6 +99,11 @@ public interface LibraryContract {
          * @param book Representation of book to be reviewed and rated.
          */
         void reviewBook(Book book);
+
+        /**
+         * Refreshes the screen.
+         */
+        void refreshScreen();
     }
 
     /**

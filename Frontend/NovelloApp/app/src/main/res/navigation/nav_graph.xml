@@ -127,7 +127,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.yn_1.novello_app.chat.Chat"
+        android:name="com.yn_1.novello_app.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment

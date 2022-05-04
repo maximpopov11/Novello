@@ -196,4 +196,10 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
         presenter.onBookMenuItemSelected(((NavBarActivity)getActivity()).getUser(), item);
         return true;
     }
+
+    @Override
+    public void refreshScreen() {
+        ((NavBarActivity)getActivity()).getController().popBackStack();
+        ((NavBarActivity)getActivity()).getController().navigate(R.id.libraryFragment);
+    }
 }

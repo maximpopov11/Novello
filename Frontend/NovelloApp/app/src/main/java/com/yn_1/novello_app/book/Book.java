@@ -1,6 +1,12 @@
 package com.yn_1.novello_app.book;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageButton;
+
+import com.yn_1.novello_app.message.Message;
+
+import java.io.Serializable;
 
 /**
  * Class representation of a book.
@@ -8,7 +14,7 @@ import android.widget.ImageButton;
  * @author Roba Abbajabal
  * @author Maxim Popov
  */
-public class Book {
+public class Book implements Serializable, Parcelable {
 
     //book fields
     int bookID;
@@ -84,6 +90,20 @@ public class Book {
         this.publicationYear = -1;
         this.isbn = "unknown isbn";
         this.rating = -1;
+    }
+
+    public Book(Parcel in) {
+        this.bookID = in.readInt();
+        this.title = in.readString();
+        this.author = in.readString();
+        this.genre = in.readString();
+        this.publicationYear = in.readInt();
+        this.isbn = in.readString();
+        this.rating = in.readDouble();
+        this.readingURL = in.readString();
+        this.price = in.readDouble();
+        this.description = in.readString();
+        this.imageURL = in.readString();
     }
 
     /**
@@ -207,4 +227,35 @@ public class Book {
      */
     public void setUserCategoryID(String categoryName) { userCategoryID = categoryName; }
 
+    public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(bookID);
+        dest.writeString(title);
+        dest.writeString(author);
+        dest.writeString(genre);
+        dest.writeInt(publicationYear);
+        dest.writeString(isbn);
+        dest.writeDouble(rating);
+        dest.writeString(readingURL);
+        dest.writeDouble(price);
+        dest.writeString(description);
+        dest.writeString(readingURL);
+    }
 }

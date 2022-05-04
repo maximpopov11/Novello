@@ -1,66 +1,67 @@
 package com.yn_1.novello_app.chat;
 
-import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import androidx.fragment.app.Fragment;
+import com.yn_1.novello_app.account.User;
+import com.yn_1.novello_app.message.Message;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import java.util.List;
 
-import com.yn_1.novello_app.R;
+public class Chat implements Parcelable {
+    private int chatId;
+    private List<User> users;
+    private List<Message> messages;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Chat#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Chat extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Chat() {
-        // Required empty public constructor
+    public Chat(int chatId, List<User> users) {
+        new Chat(chatId, users, null);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Chat.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Chat newInstance(String param1, String param2) {
-        Chat fragment = new Chat();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public Chat(int chatId, List<User> users, List<Message> messages) {
+        this.chatId = chatId;
+        this.users = users;
+        this.messages = messages;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public Chat (Parcel in) {
+        this.chatId = in.readInt();
+        in.readList(users, User.class.getClassLoader());
+        in.readList(messages, Message.class.getClassLoader());
+    }
+
+    public static final Creator<Chat> CREATOR = new Creator<Chat>() {
+        @Override
+        public Chat createFromParcel(Parcel in) {
+            return new Chat(in);
         }
+
+        @Override
+        public Chat[] newArray(int size) {
+            return new Chat[size];
+        }
+    };
+
+    public int getChatId() {
+        return chatId;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(chatId);
+        dest.writeList(users);
+        dest.writeList(messages);
     }
 }
