@@ -75,6 +75,10 @@ class User {
         return BookData;
     }
 
+    public void setBookData(Set<myProject.book.BookData> bookData) {
+        BookData = bookData;
+    }
+
     public Set<ChatRoom> getChatRooms() {
         return chatRooms;
     }
@@ -88,16 +92,16 @@ class User {
         return Friends;
     }
 
+    public void setFriends(Set<myProject.friends.Friends> friends) {
+        Friends = friends;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public void setAccountType(Integer accountType) {
-        this.accountType = accountType;
     }
 
     public String getUsername() {
@@ -116,19 +120,51 @@ class User {
         this.password = password;
     }
 
-    public void setSecurityQuestion(String securityQuestion) {
-        this.securityQuestion = securityQuestion;
-    }
-
-    public void setSecurityAnswer(String securityAnswer) {
-        this.securityAnswer = securityAnswer;
-    }
-
     public UserInfo getUserInfo() {
         return userInfo;
     }
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public Integer getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Integer accountType) {
+        this.accountType = accountType;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public Set<myProject.friends.Friends> getFriends_receiver() {
+        return Friends_receiver;
+    }
+
+    public void setFriends_receiver(Set<myProject.friends.Friends> friends_receiver) {
+        Friends_receiver = friends_receiver;
+    }
+
+    public String getSecurityAnswer() {
+        return securityAnswer;
+    }
+
+    public void setSecurityAnswer(String securityAnswer) {
+        this.securityAnswer = securityAnswer;
+    }
+
+    public String getSecurityQuestion() {
+        return securityQuestion;
+    }
+
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
     }
 }

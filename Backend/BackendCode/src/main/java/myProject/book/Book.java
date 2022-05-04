@@ -64,12 +64,24 @@ class Book {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public String getReadingUrl() {
         return readingUrl;
+    }
+
+    public void setReadingUrl(String readingUrl) {
+        this.readingUrl = readingUrl;
     }
 
     public String getTitle() {
@@ -96,10 +108,6 @@ class Book {
         this.publicationYear = publicationYear;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public String getISBN() {
         return isbn;
     }
@@ -112,8 +120,28 @@ class Book {
         this.genre = genre;
     }
 
+    public Double getMsrp() {
+        return msrp;
+    }
+
     public void setMsrp(Double msrp) {
         this.msrp = msrp;
+    }
+
+    public Integer getBookID() {
+        return bookID;
+    }
+
+    public void setBookID(Integer bookID) {
+        this.bookID = bookID;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public Double getMSRP() {
@@ -124,6 +152,10 @@ class Book {
         return overallRating;
     }
 
+    public void setOverallRating(Double overallRating) {
+        this.overallRating = overallRating;
+    }
+
     public void setOverallRating(double rating) {
         this.overallRating = rating;
     }
@@ -131,6 +163,10 @@ class Book {
     @JsonIgnore
     public Set<BookData> getBookData() {
         return bookData;
+    }
+
+    public void setBookData(Set<BookData> bookData) {
+        this.bookData = bookData;
     }
 
 }

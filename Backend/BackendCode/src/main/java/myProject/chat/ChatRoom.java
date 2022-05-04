@@ -26,11 +26,6 @@ public class ChatRoom {
     @ManyToMany(mappedBy = "chatRooms")
     Set<User> users;
 
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     public Set<User> getUsers() {
         return users;
     }
@@ -51,11 +46,23 @@ public class ChatRoom {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getType() {
         return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 }
