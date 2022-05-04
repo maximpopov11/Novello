@@ -53,6 +53,7 @@ public class MessageModel implements MessageContract.Model {
                 public void onMessage(String message) {
                     Log.d("Socket MESSAGE", "onMessage() returned: \n" + message);
                     websocketListener.onMessage(message);
+                    // cc.reconnect();
                 }
 
                 @Override

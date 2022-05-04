@@ -106,14 +106,25 @@ public class MessageFragment extends Fragment implements MessageContract.View {
 
     @Override
     public void notifyRecyclerMessageAdded(int finalElementIndex, Message message) {
-        recyclerAdapter.addMessage(message);
-        recyclerAdapter.notifyItemInserted(finalElementIndex);
+        recyclerView.post(new Runnable()
+        {
+            @Override
+            public void run() {
+                recyclerAdapter.addMessage(message);
+                recyclerAdapter.notifyItemInserted(finalElementIndex);
+            }
+        });
         //recyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onStop() {
-        super.onStop();
         presenter.onExit();
+        super.onStop();
+
+        getActivity().finish();
+        getActivity().overridePendingTransition(0, 0);
+        startActivity(getActivity().getIntent());
+        getActivity().overridePendingTransition(0, 0);
     }
 }

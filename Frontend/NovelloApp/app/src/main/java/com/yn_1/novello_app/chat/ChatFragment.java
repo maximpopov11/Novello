@@ -71,9 +71,6 @@ public class ChatFragment extends Fragment implements ChatContract.View {
         tabLayout = view.findViewById(R.id.chatTabLayout);
         viewPager2 = view.findViewById(R.id.chatViewPager);
 
-        pagerAdapter = new ScreenSlidePagerAdapter(this);
-        viewPager2.setAdapter(pagerAdapter);
-
         presenter.onFragmentCreated();
     }
 
@@ -81,6 +78,9 @@ public class ChatFragment extends Fragment implements ChatContract.View {
 
     @Override
     public void initializeTabListener() {
+        pagerAdapter = new ScreenSlidePagerAdapter(this);
+        viewPager2.setAdapter(pagerAdapter);
+
         TabLayout.OnTabSelectedListener listener = new TabListener();
         tabLayout.addOnTabSelectedListener(listener);
     }
@@ -98,7 +98,6 @@ public class ChatFragment extends Fragment implements ChatContract.View {
             else {
                 throw new IllegalArgumentException();
             }*/
-            Toast.makeText(getContext(), "Tab Selected: " + tab.getPosition(), Toast.LENGTH_SHORT);
             Log.d("Tab Selected", String.valueOf(tab.getPosition()));
             viewPager2.setCurrentItem(tab.getPosition());
         }
