@@ -15,11 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.book.Book;
-import com.yn_1.novello_app.cart.CartModel;
-import com.yn_1.novello_app.cart.CartPresenter;
-import com.yn_1.novello_app.library.LibraryFragment;
 
 import java.util.ArrayList;
 import java.util.List;

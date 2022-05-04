@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.volley.VolleyError;
 import com.yn_1.novello_app.NavBarActivity;
-import com.yn_1.novello_app.R;
+import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.book.Book;
 import com.yn_1.novello_app.library.LibraryFragment;
 import com.yn_1.novello_app.volley_requests.JsonObjectRequester;
