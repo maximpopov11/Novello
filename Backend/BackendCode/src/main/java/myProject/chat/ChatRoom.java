@@ -51,6 +51,10 @@ public class ChatRoom {
         return name;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
