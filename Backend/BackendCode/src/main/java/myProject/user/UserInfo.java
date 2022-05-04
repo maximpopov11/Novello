@@ -46,16 +46,8 @@ public class UserInfo {
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public void setEmail(String email) {
@@ -69,31 +61,4 @@ public class UserInfo {
     public void setUser(User user) {
         this.user = user;
     }
-
-    //	@OneToMany(mappedBy = "person")
-//	private Set<BookRating> ratings;
-
-
-//	@OneToMany
-//	@JoinColumn(name = "bk_book_id")
-/*
-
-	public Books getBk() {
-		return bk;
-	}
-	@ManyToOne
-	@JoinColumn(name = "friends_id")
-	Person friends;
-
-	public Person getFriends() {
-		return friends;
-	}
-	@Column
-	Books library;
-	@Column
-	CREDIT CARD INFO
-
-	@Column
-	Friends JSON
-*/
 }

@@ -14,8 +14,8 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.*;
 
-@Controller      // this is needed for this to be an endpoint to springboot
-@ServerEndpoint(value = "/chat/{roomId}/{userId}")  // this is Websocket url
+@Controller
+@ServerEndpoint(value = "/chat/{roomId}/{userId}")
 public class ChatSocket {
 
     public static Map<Integer, Map<Session, User>> messageMap = new Hashtable<>();

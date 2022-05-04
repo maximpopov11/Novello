@@ -13,12 +13,15 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "message_Id")
     User user;
+
     @ManyToOne
     @JoinColumn(name = "chatRoom_Id")
     ChatRoom chatRoom;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Lob
     private String content;
 
@@ -33,16 +36,11 @@ public class Message {
     }
 
     public Message() {
-
     }
 
     public ChatRoom getChatRoom() {
         return chatRoom;
     }
-
-//    public void setChatRoom(ChatRoom chatRoom) {
-//        this.chatRoom = chatRoom;
-//    }
 
     public Integer getId() {
         return id;
@@ -63,18 +61,4 @@ public class Message {
     public String getContent() {
         return content;
     }
-
-//    public void setContent(String content) {
-//        this.content = content;
-//    }
-//
-//    public Date getSent() {
-//        return sent;
-//    }
-//
-//    public void setSent(Date sent) {
-//        this.sent = sent;
-//    }
-
-
 }

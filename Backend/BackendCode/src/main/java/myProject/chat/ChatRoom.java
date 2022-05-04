@@ -16,23 +16,16 @@ public class ChatRoom {
     String name;
 
     @Column
-    String description;
-
-    @Column
     Integer type;
 
     @JsonIgnore
     @OneToMany(mappedBy = "chatRoom")
-//    @JoinColumn(name = "message_id")
     Set<Message> messages;
 
-    //    @JsonIgnore
+
     @ManyToMany(mappedBy = "chatRooms")
     Set<User> users;
 
-//    public Integer getType() {
-//        return type;
-//    }
 
     public void setType(Integer type) {
         this.type = type;
@@ -53,22 +46,6 @@ public class ChatRoom {
     public void setId(int id) {
         this.id = id;
     }
-
-//    public Set<Message> getMessages() {
-//        return messages;
-//    }
-//
-//    public void setMessages(Set<Message> messages) {
-//        this.messages = messages;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
 
     public String getName() {
         return name;

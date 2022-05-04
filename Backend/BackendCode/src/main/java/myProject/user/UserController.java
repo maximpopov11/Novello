@@ -203,7 +203,7 @@ public class UserController {
     }
 
     @GetMapping("/room/{id}")
-    Set<ChatRoom> getRoom(@PathVariable Integer id/*@RequestBody JSONObject json[]*/) {
+    Set<ChatRoom> getRoom(@PathVariable Integer id) {
         User user = db.findById(id).orElseThrow(NoSuchElementException::new);
         return user.getChatRooms();
     }

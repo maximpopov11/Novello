@@ -20,12 +20,15 @@ class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
+
     @ApiModelProperty(allowableValues = "Kevin")
     @Column
     public String username;
+
     @ApiModelProperty(allowableValues = "1")
     @Column
     Integer accountType;
+
     @ApiModelProperty(allowableValues = "letMeIn")
     @Column
     String password;
@@ -41,10 +44,12 @@ class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     Set<myProject.book.BookData> BookData;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user")
 //    @JoinColumn(name = "message_id")
     Set<Message> messages;
+
     @JsonIgnore
     @ManyToMany()
     @JoinTable(
@@ -52,11 +57,14 @@ class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "chatRoom_id"))
     Set<ChatRoom> chatRooms;
+
     @OneToMany(mappedBy = "sender")
     Set<Friends> Friends;
+
     @JsonIgnore
     @OneToMany(mappedBy = "receiver")
     Set<Friends> Friends_receiver;
+
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "UserInfo_id")
@@ -65,18 +73,6 @@ class User {
     @JsonIgnore
     public Set<BookData> getBookData() {
         return BookData;
-    }
-
-    public void setBookData(Set<BookData> bookData) {
-        BookData = bookData;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
     }
 
     public Set<ChatRoom> getChatRooms() {
@@ -92,29 +88,12 @@ class User {
         return Friends;
     }
 
-    public void setFriends(Set<Friends> friends) {
-        Friends = friends;
-    }
-
-    @JsonIgnore
-    public Set<Friends> getFriends_receiver() {
-        return Friends_receiver;
-    }
-
-    public void setFriends_receiver(Set<Friends> friends) {
-        Friends = friends;
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getAccountType() {
-        return accountType;
     }
 
     public void setAccountType(Integer accountType) {
@@ -137,16 +116,8 @@ class User {
         this.password = password;
     }
 
-    public String getSecurityQuestion() {
-        return securityQuestion;
-    }
-
     public void setSecurityQuestion(String securityQuestion) {
         this.securityQuestion = securityQuestion;
-    }
-
-    public String getSecurityAnswer() {
-        return securityAnswer;
     }
 
     public void setSecurityAnswer(String securityAnswer) {
@@ -160,5 +131,4 @@ class User {
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
     }
-
 }
