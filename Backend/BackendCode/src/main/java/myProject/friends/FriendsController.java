@@ -1,10 +1,8 @@
 package myProject.friends;
 
 
-import io.swagger.annotations.ApiParam;
 import myProject.user.User;
 import myProject.user.UserInterface;
-import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -73,22 +71,19 @@ public class FriendsController {
     }
 
     @GetMapping("/friends/{id}")
-    Set<Friends> returnAllFriends( @PathVariable int id)
-    {
+    Set<Friends> returnAllFriends(@PathVariable int id) {
 
-        User u  = UIDB.findById(id).orElseThrow(RuntimeException::new);
+        User u = UIDB.findById(id).orElseThrow(RuntimeException::new);
         Set<Friends> friendsSet = new HashSet<>();
         Set<Friends> allMutralFriends = new HashSet<>();
         friendsSet = u.getFriends();
         Iterator<Friends> friendsIterator = friendsSet.iterator();
         Friends f;
-        while(friendsIterator.hasNext())
-        {
+        while (friendsIterator.hasNext()) {
             f = friendsIterator.next();
-           if((id == f.getSender().id) && f.getFriendshipStatus() == 2)
-           {
-               allMutralFriends.add(f);
-           }
+            if ((id == f.getSender().id) && f.getFriendshipStatus() == 2) {
+                allMutralFriends.add(f);
+            }
         }
         return allMutralFriends;
     }

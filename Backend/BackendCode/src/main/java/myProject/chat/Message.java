@@ -10,30 +10,27 @@ import java.util.Date;
 @Table(name = "messages")
 @Data
 public class Message {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     @ManyToOne
     @JoinColumn(name = "message_Id")
     User user;
-
     @ManyToOne
     @JoinColumn(name = "chatRoom_Id")
     ChatRoom chatRoom;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Lob
     private String content;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sent")
     private Date sent = new Date();
-	
-	public Message(User user, String content, ChatRoom chatRoom) {
-		this.user = user;
-		this.content = content;
+
+    public Message(User user, String content, ChatRoom chatRoom) {
+        this.user = user;
+        this.content = content;
         this.chatRoom = chatRoom;
-	}
+    }
 
     public Message() {
 
@@ -50,9 +47,11 @@ public class Message {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public User getUser() {
         return user;
     }
@@ -77,5 +76,5 @@ public class Message {
         this.sent = sent;
     }
 
-    
+
 }

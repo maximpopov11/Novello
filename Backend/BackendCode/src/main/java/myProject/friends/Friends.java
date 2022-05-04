@@ -40,29 +40,41 @@ public class Friends {
 //    int receiver_Id;
 
 
+    public FriendsKey getId() {
+        return id;
+    }
 
-    public FriendsKey getId(){return id;}
-    public void setId(FriendsKey id){this.id = id; }
+    public void setId(FriendsKey id) {
+        this.id = id;
+    }
 
 //    public String getUsername(){return username; }
 //    public void setUsername(String username){this.username = username; }
 
-    public int getFriendshipStatus(){return friendshipStatus;}
-    public void setFriendshipStatus(int friendshipStatus){this.friendshipStatus = friendshipStatus; }
+    public int getFriendshipStatus() {
+        return friendshipStatus;
+    }
+
+    public void setFriendshipStatus(int friendshipStatus) {
+        this.friendshipStatus = friendshipStatus;
+    }
+
     @JsonIgnore
     public User getSender() {
         return sender;
     }
 
     public void setSender(User sender) {
-        this.sender = sender;}
+        this.sender = sender;
+    }
 
     public User getReceiver() {
         return receiver;
     }
 
     public void setReceiver(User receiver) {
-        this.receiver = receiver;}
+        this.receiver = receiver;
+    }
 
 
     @Override

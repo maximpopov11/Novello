@@ -28,7 +28,7 @@ public class ChatRoomTest {
     }
 
     @Test
-    public void createChatRoom(){
+    public void createChatRoom() {
         String json = "[\n" +
                 "    {\n" +
                 "        \"name\" : \"Single Private Chat\",\n" +
@@ -55,8 +55,8 @@ public class ChatRoomTest {
                 body(json2).
                 when().
                 delete("/bookData");
-        assertEquals("",response2.getBody().asString());
+        assertEquals("", response2.getBody().asString());
 
-        assertEquals(response.getBody().asString(),"");
+        assertEquals(response.getBody().asString(), "");
     }
 }

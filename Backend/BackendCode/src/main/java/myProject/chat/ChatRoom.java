@@ -26,7 +26,7 @@ public class ChatRoom {
 //    @JoinColumn(name = "message_id")
     Set<Message> messages;
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @ManyToMany(mappedBy = "chatRooms")
     Set<User> users;
 
@@ -49,24 +49,31 @@ public class ChatRoom {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public Set<Message> getMessages() {
         return messages;
     }
+
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }

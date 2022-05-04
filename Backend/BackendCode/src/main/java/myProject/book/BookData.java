@@ -11,13 +11,11 @@ public class BookData {
     @EmbeddedId
     BookDataKey id;
 
-//    @JsonIgnore
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "User_id")
-User user;
+    User user;
 
-//    @JsonIgnore
     @ManyToOne
     @MapsId("bookId")
     @JoinColumn(name = "Book_id")
@@ -68,30 +66,29 @@ User user;
         this.user = user;
     }
 
-    public void setReview(String review) {
-        this.review = review;
-    }
-
     public String getReview() {
         return review;
     }
 
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public void setCategory(int category) {
-        this.category = category;
+    public void setReview(String review) {
+        this.review = review;
     }
 
     public int getPage() {
         return page;
     }
 
+    public void setPage(int page) {
+        this.page = page;
+    }
+
     public int getCategory() {
         return category;
     }
 
+    public void setCategory(int category) {
+        this.category = category;
+    }
 
     @Override
     public int hashCode() {
@@ -103,12 +100,9 @@ User user;
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         BookData other = (BookData) obj;
         if (id == null) {
             return other.id == null;

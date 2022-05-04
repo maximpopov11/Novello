@@ -6,6 +6,7 @@ import myProject.chat.ChatRoomRepository;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -15,7 +16,7 @@ import java.util.Set;
 public class UserController {
 
     @Autowired
-	UserInterface db;
+    UserInterface db;
     @Autowired
     ChatRoomRepository crdb;
 
@@ -30,7 +31,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @GetMapping("/user/{id}")
-	User getUser(@ApiParam(value = "ID of the user you are looking for") @PathVariable Integer id) {
+    User getUser(@ApiParam(value = "ID of the user you are looking for") @PathVariable Integer id) {
         return db.findById(id).
                 orElseThrow(RuntimeException::new);
     }
@@ -43,16 +44,16 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @PostMapping("/login")
-    JSONObject login(@ApiParam (value = "json object that has the username and password entered by user to check if they can log in")@RequestBody JSONObject json){
+    JSONObject login(@ApiParam(value = "json object that has the username and password entered by user to check if they can log in") @RequestBody JSONObject json) {
 
         User user;
         JSONObject jsonReturn = new JSONObject();
         int i;
-        for(i = 1; i<=db.count(); i++){
+        for (i = 1; i <= db.count(); i++) {
             user = db.findById(i).orElseThrow(RuntimeException::new);
-            if(user.username.equals(json.getAsString("username"))){
-                if(user.password.equals(json.getAsString("password"))){
-                    jsonReturn.put("userId",i);
+            if (user.username.equals(json.getAsString("username"))) {
+                if (user.password.equals(json.getAsString("password"))) {
+                    jsonReturn.put("userId", i);
                     return jsonReturn;
                 }
             }
@@ -68,7 +69,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @PostMapping("/addAllUsers")
-    void createAllPersons(@ApiParam (value = "All of the users jsonObjects")@RequestBody JSONObject[] jsonObject) {
+    void createAllPersons(@ApiParam(value = "All of the users jsonObjects") @RequestBody JSONObject[] jsonObject) {
         for (JSONObject object : jsonObject) {
             User u = new User();
             u.setAccountType((Integer) object.getAsNumber("accountType"));
@@ -89,6 +90,7 @@ public class UserController {
             userInfoInterfaceDB.save(ui);
         }
     }
+
     @ApiOperation(value = "Gets all users", response = Iterable.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -96,7 +98,8 @@ public class UserController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @GetMapping("/users")//was request mapping
+    @GetMapping("/users")
+//was request mapping
     List<User> getPersons() {
         return db.findAll();
     }
@@ -109,10 +112,9 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @PostMapping("/user")
-	User createPerson(@ApiParam (value = "jsonObject with all of the info of a user", example = "{foo: whatever, bar: whatever2}") @RequestBody JSONObject jsonObject) {
+    User createPerson(@ApiParam(value = "jsonObject with all of the info of a user", example = "{foo: whatever, bar: whatever2}") @RequestBody JSONObject jsonObject) {
         User u = new User();
-        if( jsonObject.getAsNumber("accountType") == null)
-        {
+        if (jsonObject.getAsNumber("accountType") == null) {
             u.setUsername(jsonObject.getAsString("username"));
             u.setPassword(jsonObject.getAsString("password"));
             UserInfo ui = new UserInfo();
@@ -140,6 +142,7 @@ public class UserController {
         userInfoInterfaceDB.save(ui);
         return u;
     }
+
     @ApiOperation(value = "updating a user via a userID", response = Iterable.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -148,7 +151,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @PutMapping("/user/{id}")
-	User updatePerson(@ApiParam (value = "The Jason object of the updated person")@RequestBody JSONObject jsonObject, @ApiParam (value = "The ID of the person we are updating")@PathVariable Integer id) {
+    User updatePerson(@ApiParam(value = "The Jason object of the updated person") @RequestBody JSONObject jsonObject, @ApiParam(value = "The ID of the person we are updating") @PathVariable Integer id) {
         User old_u = db.findById(id).orElseThrow(RuntimeException::new);
         UserInfo old_ui = old_u.getUserInfo();
         if (jsonObject.getAsString("name") != null)
@@ -159,7 +162,7 @@ public class UserController {
             old_u.setUsername(jsonObject.getAsString("username"));
         if (jsonObject.getAsString("password") != null)
             old_u.setPassword(jsonObject.getAsString("password"));
-        if (jsonObject.getAsString("securityAnswer")!= null)
+        if (jsonObject.getAsString("securityAnswer") != null)
             old_u.setSecurityAnswer(jsonObject.getAsString("securityAnswer"));
         if (jsonObject.getAsString("securityQuestion") != null)
             old_u.setSecurityQuestion(jsonObject.getAsString("securityQuestion"));
@@ -180,19 +183,19 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @DeleteMapping("/user/{id}")
-    String deletePerson(@ApiParam (value = "The ID of the user you want to delete")@PathVariable Integer id) {
+    String deletePerson(@ApiParam(value = "The ID of the user you want to delete") @PathVariable Integer id) {
         db.deleteById(id);
         return "deleted " + id;
     }
 
     @PostMapping("/room")
-    void addRoom(@RequestBody JSONObject json){
-        User user = db.findById(Integer.parseInt( json.getAsString("userId"))).orElseThrow(NoSuchElementException::new);
+    void addRoom(@RequestBody JSONObject json) {
+        User user = db.findById(Integer.parseInt(json.getAsString("userId"))).orElseThrow(NoSuchElementException::new);
         Set<ChatRoom> chatRoomSet = user.getChatRooms();
-        chatRoomSet.add(crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new));
+        chatRoomSet.add(crdb.findById(Integer.parseInt(json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new));
         user.setChatRooms(chatRoomSet);
         db.save(user);
-        ChatRoom chatroom = crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new);
+        ChatRoom chatroom = crdb.findById(Integer.parseInt(json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new);
         Set<User> userSet = chatroom.getUsers();
         userSet.add(user);
         chatroom.setUsers(userSet);
@@ -200,7 +203,7 @@ public class UserController {
     }
 
     @GetMapping("/room/{id}")
-    Set<ChatRoom> getRoom(@PathVariable Integer id/*@RequestBody JSONObject json[]*/){
+    Set<ChatRoom> getRoom(@PathVariable Integer id/*@RequestBody JSONObject json[]*/) {
         User user = db.findById(id).orElseThrow(NoSuchElementException::new);
         return user.getChatRooms();
     }

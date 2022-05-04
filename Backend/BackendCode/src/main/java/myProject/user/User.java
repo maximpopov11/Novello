@@ -20,15 +20,12 @@ class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
-
-    @ApiModelProperty(allowableValues = "1")
-    @Column
-    Integer accountType;
-
     @ApiModelProperty(allowableValues = "Kevin")
     @Column
     public String username;
-
+    @ApiModelProperty(allowableValues = "1")
+    @Column
+    Integer accountType;
     @ApiModelProperty(allowableValues = "letMeIn")
     @Column
     String password;
@@ -44,17 +41,10 @@ class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     Set<myProject.book.BookData> BookData;
-
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "UserInfo_id")
-    private UserInfo userInfo;
-
     @JsonIgnore
     @OneToMany(mappedBy = "user")
 //    @JoinColumn(name = "message_id")
     Set<Message> messages;
-
     @JsonIgnore
     @ManyToMany()
     @JoinTable(
@@ -62,17 +52,23 @@ class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "chatRoom_id"))
     Set<ChatRoom> chatRooms;
-
     @OneToMany(mappedBy = "sender")
     Set<Friends> Friends;
-
     @JsonIgnore
     @OneToMany(mappedBy = "receiver")
     Set<Friends> Friends_receiver;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "UserInfo_id")
+    private UserInfo userInfo;
 
     @JsonIgnore
     public Set<BookData> getBookData() {
         return BookData;
+    }
+
+    public void setBookData(Set<BookData> bookData) {
+        BookData = bookData;
     }
 
     public Set<Message> getMessages() {
@@ -83,16 +79,12 @@ class User {
         this.messages = messages;
     }
 
-    public void setChatRooms(Set<ChatRoom> chatRooms) {
-        this.chatRooms = chatRooms;
-    }
-
     public Set<ChatRoom> getChatRooms() {
         return chatRooms;
     }
 
-    public void setBookData(Set<BookData> bookData) {
-        BookData = bookData;
+    public void setChatRooms(Set<ChatRoom> chatRooms) {
+        this.chatRooms = chatRooms;
     }
 
     @JsonIgnore
@@ -161,7 +153,12 @@ class User {
         this.securityAnswer = securityAnswer;
     }
 
-    public UserInfo getUserInfo(){return userInfo; }
-    public void setUserInfo(UserInfo userInfo) {this.userInfo = userInfo; }
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
 }
