@@ -185,23 +185,23 @@ public class UserController {
         return "deleted " + id;
     }
 
-    @PostMapping("/room")
-    void addRoom(@RequestBody JSONObject json){
-        User user = db.findById(Integer.parseInt( json.getAsString("userId"))).orElseThrow(NoSuchElementException::new);
-        Set<ChatRoom> chatRoomSet = user.getChatRooms();
-        chatRoomSet.add(crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new));
-        user.setChatRooms(chatRoomSet);
-        db.save(user);
-        ChatRoom chatroom = crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new);
-        Set<User> userSet = chatroom.getUsers();
-        userSet.add(user);
-        chatroom.setUsers(userSet);
-        crdb.save(chatroom);
-    }
-
-    @GetMapping("/room/{id}")
-    Set<ChatRoom> getRoom(@PathVariable Integer id/*@RequestBody JSONObject json[]*/){
-        User user = db.findById(id).orElseThrow(NoSuchElementException::new);
-        return user.getChatRooms();
-    }
+//    @PostMapping("/room")
+//    void addRoom(@RequestBody JSONObject json){
+//        User user = db.findById(Integer.parseInt( json.getAsString("userId"))).orElseThrow(NoSuchElementException::new);
+//        Set<ChatRoom> chatRoomSet = user.getChatRooms();
+//        chatRoomSet.add(crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new));
+//        user.setChatRooms(chatRoomSet);
+//        db.save(user);
+//        ChatRoom chatroom = crdb.findById(Integer.parseInt( json.getAsString("roomId"))).orElseThrow(NoSuchElementException::new);
+//        Set<User> userSet = chatroom.getUsers();
+//        userSet.add(user);
+//        chatroom.setUsers(userSet);
+//        crdb.save(chatroom);
+//    }
+//
+//    @GetMapping("/room/{id}")
+//    Set<ChatRoom> getRoom(@PathVariable Integer id/*@RequestBody JSONObject json[]*/){
+//        User user = db.findById(id).orElseThrow(NoSuchElementException::new);
+//        return user.getChatRooms();
+//    }
 }
