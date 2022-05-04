@@ -38,23 +38,23 @@ public class BookDataKey implements Serializable {
         return result;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        BookDataKey other = (BookDataKey) obj;
-        if (bookId == null) {
-            if (other.bookId != null)
-                return false;
-        } else if (!bookId.equals(other.bookId))
-            return false;
-        if (userId == null) {
-            return other.userId == null;
-        } else return userId.equals(other.userId);
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj)
+//            return true;
+//        if (obj == null)
+//            return false;
+//        if (getClass() != obj.getClass())
+//            return false;
+//        BookDataKey other = (BookDataKey) obj;
+//        if (bookId == null) {
+//            if (other.bookId != null)
+//                return false;
+//        } else if (!bookId.equals(other.bookId))
+//            return false;
+//        if (userId == null) {
+//            return other.userId == null;
+//        } else return userId.equals(other.userId);
+//    }
 }
 

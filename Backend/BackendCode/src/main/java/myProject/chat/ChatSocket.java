@@ -51,7 +51,7 @@ public class ChatSocket {
         User user = udb.findById(userId).orElseThrow(NoSuchElementException::new);
         map.put(session, user);
         messageMap.put(roomId, map);
-        sendMessageToPArticularUser(session, getChatHistory());
+        sendMessageToPArticularUser(session, getChatHistory(roomId));
     }
 
 
@@ -97,14 +97,15 @@ public class ChatSocket {
 
 
     // Gets the Chat history from the repository
-    private String getChatHistory() {
+    private String getChatHistory(int roomId) {
         List<Message> messages = msgRepo.findAll();
 
         // convert the list to a string
         StringBuilder sb = new StringBuilder();
         if (messages != null && messages.size() != 0) {
             for (Message message : messages) {
-                sb.append(message.getUser() + ": " + message.getContent() + "\n");
+                if (message.getChatRoom().getId() == roomId)
+                    sb.append(message.getUser() + ": " + message.getContent() + "\n");
             }
         }
         return sb.toString();
