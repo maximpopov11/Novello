@@ -112,6 +112,10 @@ class Book {
         return isbn;
     }
 
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
     public String getGenre() {
         return genre;
     }
@@ -136,10 +140,6 @@ class Book {
         this.bookID = bookID;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public double getOverallRating() {
         return overallRating;
     }
@@ -152,4 +152,4 @@ class Book {
     public Set<BookData> getBookData() {
         return bookData;
     }
-    }
+}
