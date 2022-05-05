@@ -131,13 +131,14 @@ public class LibraryTest {
         wishlistLinearLayout.check(matches(hasMinimumChildCount(1)));
 
         // Scroll to bottom
-        onView(withId(R.id.libraryScrollLinearLayout)).perform(ViewActions.swipeUp());
+        // onView(withId(R.id.libraryScrollLinearLayout)).perform(ViewActions.swipeUp());
 
         // Check if read category has elements
         ViewInteraction readLinearLayout = onView(
                 allOf(  withId(R.id.read),
                         withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
                         isDisplayed()));
+        readLinearLayout.perform(scrollTo());
         readLinearLayout.check(matches(hasMinimumChildCount(1)));
 
         // Check if backlog has elements
@@ -145,6 +146,7 @@ public class LibraryTest {
                 allOf(  withId(R.id.backlog),
                         withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
                         isDisplayed()));
+        backlogLinearLayout.perform(scrollTo());
         backlogLinearLayout.check(matches(hasMinimumChildCount(1)));
     }
 
