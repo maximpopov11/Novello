@@ -4,19 +4,12 @@ package com.yn_1.novello_app.account;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.RatingBar;
 
-import androidx.core.widget.NestedScrollView;
-import androidx.test.espresso.PerformException;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
-import androidx.test.espresso.util.HumanReadables;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -25,7 +18,6 @@ import com.yn_1.novello_app.R;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
@@ -33,27 +25,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
-import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anyOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LibraryTest {
+public class ReviewsTest {
 
     private static final int SIMULATED_DELAY_MS = 1000;
 
@@ -61,7 +49,7 @@ public class LibraryTest {
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void testCategories() {
+    public void reviewsTest() {
         // Input username
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.inputUsername),
@@ -116,36 +104,87 @@ public class LibraryTest {
         } catch (InterruptedException e) {
         }
 
-        // Check if currently reading category has elements
-        ViewInteraction currentlyReadingLinearLayout = onView(
-                allOf(  withId(R.id.currentlyReading),
-                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
-                        isDisplayed()));
-        currentlyReadingLinearLayout.check(matches(hasMinimumChildCount(1)));
+        // Open pop-up of read book
+        ViewInteraction imageButton = onView(
+                childAtPosition(
+                        childAtPosition(
+                                withId(R.id.read),
+                                0),
+                        0));
+        imageButton.perform(scrollTo(), longClick());
 
-        // Check if wishlist category has elements
-        ViewInteraction wishlistLinearLayout = onView(
-                allOf(  withId(R.id.wishlist),
-                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
+        // Open rating/review page
+        ViewInteraction materialTextView = onView(
+                allOf(withId(android.R.id.title), withText("Rate/Review"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                0),
                         isDisplayed()));
-        wishlistLinearLayout.check(matches(hasMinimumChildCount(1)));
+        materialTextView.perform(click());
 
-        // Scroll to bottom
-        onView(withId(R.id.libraryScrollLinearLayout)).perform(ViewActions.swipeUp());
+        try {
+            Thread.sleep(SIMULATED_DELAY_MS);
+        } catch (InterruptedException e) {
+        }
 
-        // Check if read category has elements
-        ViewInteraction readLinearLayout = onView(
-                allOf(  withId(R.id.read),
-                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
+        // Enter review comment
+        ViewInteraction ratingBar = onView(
+                allOf(withId(R.id.postReviewRatingBar),
                         isDisplayed()));
-        readLinearLayout.check(matches(hasMinimumChildCount(1)));
+        ratingBar.perform((ViewAction) new SetRating(), closeSoftKeyboard());
 
-        // Check if backlog has elements
-        ViewInteraction backlogLinearLayout = onView(
-                allOf(  withId(R.id.backlog),
-                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
+        // Enter review comment
+        ViewInteraction textInputEditText = onView(
+                allOf(withId(R.id.postReviewText),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.textInputLayout),
+                                        0),
+                                0),
                         isDisplayed()));
-        backlogLinearLayout.check(matches(hasMinimumChildCount(1)));
+        textInputEditText.perform(replaceText("Espresso Test Review!"), closeSoftKeyboard());
+
+        // Submit review
+        ViewInteraction materialButton2 = onView(
+                allOf(withId(R.id.postReviewButton), withText("Submit"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.nav_host_fragment),
+                                        0),
+                                5),
+                        isDisplayed()));
+        materialButton2.perform(click());
+
+        try {
+            Thread.sleep(SIMULATED_DELAY_MS);
+        } catch (InterruptedException e) {
+        }
+
+        ViewInteraction tableLayout = onView(
+                allOf(withId(R.id.reviewsTable),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        tableLayout.check(matches(isDisplayed()));
+
+        ViewInteraction textView = onView(
+                allOf(withText("IChangedMyName"),
+                        withParent(withParent(withId(R.id.reviewsTable))),
+                        isDisplayed()));
+        textView.check(matches(withText("IChangedMyName")));
+
+        ViewInteraction textView2 = onView(
+                allOf(withText("3.5"),
+                        withParent(withParent(withId(R.id.reviewsTable))),
+                        isDisplayed()));
+        textView2.check(matches(withText("3.5")));
+
+        ViewInteraction textView3 = onView(
+                allOf(withText("Espresso Test Review!"),
+                        withParent(withParent(withId(R.id.reviewsTable))),
+                        isDisplayed()));
+        textView3.check(matches(withText("Espresso Test Review!")));
     }
 
     private static Matcher<View> childAtPosition(
@@ -165,5 +204,25 @@ public class LibraryTest {
                         && view.equals(((ViewGroup) parent).getChildAt(position));
             }
         };
+    }
+
+    public final class SetRating implements ViewAction {
+
+        @Override
+        public Matcher<View> getConstraints() {
+            Matcher <View> isRatingBarConstraint = ViewMatchers.isAssignableFrom(RatingBar.class);
+            return isRatingBarConstraint;
+        }
+
+        @Override
+        public String getDescription() {
+            return "Custom view action to set rating.";
+        }
+
+        @Override
+        public void perform(UiController uiController, View view) {
+            RatingBar ratingBar = (RatingBar) view;
+            ratingBar.setRating(3.5f);
+        }
     }
 }
