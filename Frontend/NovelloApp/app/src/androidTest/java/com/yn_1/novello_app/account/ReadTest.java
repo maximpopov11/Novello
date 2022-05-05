@@ -4,19 +4,8 @@ package com.yn_1.novello_app.account;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
-import androidx.core.widget.NestedScrollView;
-import androidx.test.espresso.PerformException;
-import androidx.test.espresso.UiController;
-import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.matcher.ViewMatchers;
-import androidx.test.espresso.util.HumanReadables;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -25,43 +14,36 @@ import com.yn_1.novello_app.R;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.action.ViewActions.swipeUp;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
-import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anyOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LibraryTest {
+public class ReadTest {
 
+    private static final int SMALL_DELAY_MS = 50;
     private static final int SIMULATED_DELAY_MS = 1000;
 
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void testCategories() {
+    public void readTest() {
         // Input username
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.inputUsername),
@@ -116,36 +98,55 @@ public class LibraryTest {
         } catch (InterruptedException e) {
         }
 
-        // Check if currently reading category has elements
-        ViewInteraction currentlyReadingLinearLayout = onView(
-                allOf(  withId(R.id.currentlyReading),
-                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
-                        isDisplayed()));
-        currentlyReadingLinearLayout.check(matches(hasMinimumChildCount(1)));
+        // Open pop up menu
+        ViewInteraction imageButton = onView(
+                childAtPosition(
+                        childAtPosition(
+                                withId(R.id.currentlyReading),
+                                0),
+                        0));
+        imageButton.perform(scrollTo(), longClick());
 
-        // Check if wishlist category has elements
-        ViewInteraction wishlistLinearLayout = onView(
-                allOf(  withId(R.id.wishlist),
-                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
-                        isDisplayed()));
-        wishlistLinearLayout.check(matches(hasMinimumChildCount(1)));
+        try {
+            Thread.sleep(SMALL_DELAY_MS);
+        } catch (InterruptedException e) {
+        }
 
-        // Scroll to bottom
-        onView(withId(R.id.libraryScrollLinearLayout)).perform(ViewActions.swipeUp());
-
-        // Check if read category has elements
-        ViewInteraction readLinearLayout = onView(
-                allOf(  withId(R.id.read),
-                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
+        // Press button to read the book
+        ViewInteraction materialTextView = onView(
+                allOf(withId(android.R.id.title), withText("Read Book"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                0),
                         isDisplayed()));
-        readLinearLayout.check(matches(hasMinimumChildCount(1)));
+        materialTextView.perform(click());
 
-        // Check if backlog has elements
-        ViewInteraction backlogLinearLayout = onView(
-                allOf(  withId(R.id.backlog),
-                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
+        try {
+            Thread.sleep(SIMULATED_DELAY_MS);
+        } catch (InterruptedException e) {
+        }
+
+        // Long click the reading view once it is loaded
+        ViewInteraction webView = onView(
+                allOf(withId(R.id.readingView),
+                        childAtPosition(
+                                allOf(withId(R.id.coordinatorLayout),
+                                        childAtPosition(
+                                                withId(R.id.nav_host_fragment),
+                                                0)),
+                                1),
                         isDisplayed()));
-        backlogLinearLayout.check(matches(hasMinimumChildCount(1)));
+        webView.perform(longClick());
+
+        // Exit the screen, saves reading progress
+        pressBack();
+
+        try {
+            Thread.sleep(SIMULATED_DELAY_MS);
+        } catch (InterruptedException e) {
+        }
     }
 
     private static Matcher<View> childAtPosition(
