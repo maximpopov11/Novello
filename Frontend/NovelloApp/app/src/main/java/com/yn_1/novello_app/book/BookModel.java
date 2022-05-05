@@ -123,10 +123,10 @@ public class BookModel implements BookContract.Model {
                 for (int i = 0; i < data.length(); i++) {
                     try {
                         JSONObject object = data.getJSONObject(i);
-                        String userID = object.getJSONObject("id").getString("userId");
+                        String userName = object.getJSONObject("user").getString("username");
                         String rating = object.getString("rating");
                         String review = object.getString("review");
-                        reviews.put(i, new String[]{userID, rating, review});
+                        reviews.put(i, new String[]{userName, rating, review});
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

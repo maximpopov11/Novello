@@ -20,10 +20,10 @@
                 android:id="@+id/bookImageView"
                 android:layout_width="87dp"
                 android:layout_height="140dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:background="#000000"
                 android:src="@drawable/ic_launcher_background"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
@@ -41,79 +41,92 @@
                 app:layout_constraintTop_toTopOf="@+id/ratingTitle"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <TableLayout
-                android:id="@+id/reviewsTable"
-                android:layout_width="411dp"
-                android:layout_height="241dp"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
                 app:layout_constraintTop_toBottomOf="@+id/reviewsText">
 
-                <TableRow
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/green">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center"
-                        android:text="User"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
+                    <TableLayout
+                        android:id="@+id/reviewsTable"
+                        android:layout_width="411dp"
+                        android:layout_height="241dp"
+                        android:background="@color/white">
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center"
-                        android:text="Rating"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/green">
 
-                    <TextView
-                        android:layout_width="239dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:gravity="center"
-                        android:text="Comment"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="User"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
 
-                </TableRow>
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="Rating"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
 
-            </TableLayout>
+                            <TextView
+                                android:layout_width="230dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="Comment"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                        </TableRow>
+
+                    </TableLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
             <TextView
                 android:id="@+id/titleText"
-                android:layout_width="411dp"
-                android:layout_height="73dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
                 android:text=" [Title]"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="34sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/authorText"
-                android:layout_width="218dp"
+                android:layout_width="match_parent"
                 android:layout_height="23dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text=" Author:"
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/bookImageView"
-                app:layout_constraintTop_toTopOf="@+id/bookImageView" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookImageView" />
 
             <TextView
                 android:id="@+id/publicationYearText"
-                android:layout_width="218dp"
+                android:layout_width="match_parent"
                 android:layout_height="23dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_medium"
@@ -121,12 +134,12 @@
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/bookImageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/authorText" />
 
             <TextView
                 android:id="@+id/isbnText"
-                android:layout_width="218dp"
+                android:layout_width="match_parent"
                 android:layout_height="23dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_medium"
@@ -134,7 +147,7 @@
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/bookImageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/publicationYearText" />
 
             <TextView
@@ -147,18 +160,18 @@
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/bookImageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ratingTitle" />
 
             <TextView
                 android:id="@+id/ratingTitle"
-                android:layout_width="58dp"
+                android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text=" Rating:"
                 android:textColor="#000000"
-                app:layout_constraintStart_toEndOf="@+id/bookImageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/isbnText" />
 
             <TextView
@@ -169,19 +182,23 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="(0.0)"
                 android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.042"
                 app:layout_constraintStart_toEndOf="@+id/ratingBar"
                 app:layout_constraintTop_toTopOf="@+id/ratingBar" />
 
             <TextView
                 android:id="@+id/descriptionText"
-                android:layout_width="363dp"
-                android:layout_height="178dp"
+                android:layout_width="340dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text=" Description:"
+                android:text="Description:"
                 android:textColor="#000000"
                 android:textSize="14sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/priceText" />
 
@@ -189,6 +206,7 @@
                 android:id="@+id/reviewsText"
                 android:layout_width="409dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text=" Reviews:"
                 android:textColor="#000000"

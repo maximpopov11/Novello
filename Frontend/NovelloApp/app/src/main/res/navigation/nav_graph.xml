@@ -31,6 +31,9 @@
             <argument
                 android:name="bookID"
                 android:defaultValue="-1" />
+            <argument
+                android:name="bookTitle"
+                android:defaultValue="null" />
         </action>
         <action
             android:id="@+id/action_libraryFragment_to_bookFragment"
@@ -60,6 +63,9 @@
             app:argType="integer"
             android:id="@+id/action_libraryFragment_to_bookFragment"
             app:destination="@id/bookFragment" />
+        <argument
+            android:name="bookTitle"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/bookFragment"

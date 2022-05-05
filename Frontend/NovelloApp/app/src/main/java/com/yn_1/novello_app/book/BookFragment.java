@@ -1,6 +1,7 @@
 package com.yn_1.novello_app.book;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -141,6 +142,12 @@ public class BookFragment extends Fragment implements BookContract.View {
             TextView userID = new TextView(getContext());
             TextView userRating = new TextView(getContext());
             TextView userReview = new TextView(getContext());
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                userID.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+                userRating.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+                userReview.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+            }
 
             userID.setText(reviews.get(i)[0]);
             userRating.setText(reviews.get(i)[1]);
