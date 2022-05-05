@@ -112,6 +112,7 @@ public class MessageFragment extends Fragment implements MessageContract.View {
             public void run() {
                 recyclerAdapter.addMessage(message);
                 recyclerAdapter.notifyItemInserted(finalElementIndex);
+                recyclerView.scrollToPosition(finalElementIndex - 1);
             }
         });
         //recyclerAdapter.notifyDataSetChanged();

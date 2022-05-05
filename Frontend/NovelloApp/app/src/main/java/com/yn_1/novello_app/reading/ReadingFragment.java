@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.*;
@@ -73,8 +75,16 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
 
         webView = view.findViewById(R.id.readingView);
         webView.loadUrl(ReadingFragmentArgs.fromBundle(getArguments()).getReadingLink());
-
         presenter.onPageLoad(((NavBarActivity)getActivity()).getUser());
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                webView.evaluateJavascript("javascript:"
+                        + "document.body.style.margin = \"5px\";"
+                        + "document.body.style.padding = \"5px\";", null);
+            }
+        });
     }
 
     /**
