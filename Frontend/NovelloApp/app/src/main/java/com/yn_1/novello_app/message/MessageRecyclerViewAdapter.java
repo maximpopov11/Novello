@@ -113,7 +113,7 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter {
             nameText = (TextView) itemView.findViewById(R.id.other_name);
 
             // May be incorrect, resource points to fragment_message.xml instead of chat_other.xml
-            profileImage = (ImageView) itemView.findViewById(R.id.messageViewImage);
+            // profileImage = (ImageView) itemView.findViewById(R.id.messageViewImage);
         }
 
         void bind(Message message) {

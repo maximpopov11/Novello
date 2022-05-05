@@ -5,10 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.*;
@@ -25,6 +30,9 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
 
     // Presenter accessible from View
     private ReadingContract.Presenter presenter;
+
+    private TextView readingTitleText;
+    private TextView readingProgressText;
 
     /**
      * Creates a new fragment instance, using specific arguments to be added to the bundle.
@@ -71,10 +79,34 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        readingTitleText = view.findViewById(R.id.readingTitle);
+        readingProgressText = view.findViewById(R.id.readingProgress);
+
+        readingTitleText.setText(ReadingFragmentArgs.fromBundle(getArguments()).getBookTitle());
+
         webView = view.findViewById(R.id.readingView);
         webView.loadUrl(ReadingFragmentArgs.fromBundle(getArguments()).getReadingLink());
-
         presenter.onPageLoad(((NavBarActivity)getActivity()).getUser());
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                webView.evaluateJavascript("javascript:"
+                        + "document.body.style.margin = \"5px\";"
+                        + "document.body.style.padding = \"5px\";", null);
+
+                final Handler handler = new Handler();
+                final int delay = 2500;
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        readingProgressText.setText(String.format("%,.2f",getProgressPercentage()) + "%");
+                        handler.postDelayed(this, delay);
+                    }
+                }, delay);
+            }
+        });
     }
 
     /**
@@ -82,8 +114,8 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
      */
     @Override
     public void onStop() {
+        presenter.onEscape(((NavBarActivity)getActivity()).getUser());
         super.onStop();
-        presenter.onPageLoad(((NavBarActivity)getActivity()).getUser());
     }
 
     /**
@@ -100,7 +132,7 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
      */
     @Override
     public int getProgress() {
-        return webView.getScrollY() - webView.getTop();
+        return webView.getScrollY();
     }
 
     /**
@@ -108,7 +140,7 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
      */
     @Override
     public double getProgressPercentage() {
-        return (double) getProgress() / webView.getContentHeight();
+        return (double) getProgress() / (webView.getContentHeight()) * 33.3;
     }
 
     /**
@@ -116,6 +148,6 @@ public class ReadingFragment extends Fragment implements ReadingContract.View {
      */
     @Override
     public void jumpToProgress(int progress) {
-        webView.setScrollY(progress + webView.getTop());
+        webView.setScrollY(progress);
     }
 }

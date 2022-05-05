@@ -79,12 +79,13 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, NavBarActivity.class);
             // intent.putExtra("USER", (Serializable) user);
             intent.putExtra("USER", (Parcelable) user);
+            finishAffinity();
             startActivity(intent);
         }
         else {
             alert.setMessage("Login failed. Try again!");
+            alert.show();
         }
-        alert.show();
 
     }
 

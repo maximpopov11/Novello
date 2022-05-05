@@ -1,10 +1,12 @@
-package com.yn_1.novello_app;
+package com.yn_1.novello_app.account;
 
 import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 
+import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.account.CreateAccountActivity;
 
 import org.junit.Rule;
@@ -41,7 +43,7 @@ public class CreateAccountActivityTest {
      */
     @Test
     public void createAccountFailure() {
-        onView(withId(R.id.username)).perform(typeText("NewUsername"), closeSoftKeyboard());
+        onView(ViewMatchers.withId(R.id.username)).perform(typeText("NewUsername"), closeSoftKeyboard());
         onView(withId(R.id.password)).perform(typeText("NewPassword"), closeSoftKeyboard());
         onView(withId(R.id.confirmPassword)).perform(typeText("NotNewPassword"), closeSoftKeyboard());
         onView(withId(R.id.createAccount)).perform(click());

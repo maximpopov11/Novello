@@ -32,7 +32,6 @@ public class MessageFragment extends Fragment implements MessageContract.View {
 
 
     private RecyclerView recyclerView;
-    private ImageView chatImage;
     private TextView chatTitle;
     private EditText inputMessageField;
     private Button messageSendButton;
@@ -77,7 +76,6 @@ public class MessageFragment extends Fragment implements MessageContract.View {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.recycler_messages);
-        chatImage = view.findViewById(R.id.messageViewImage);
         chatTitle = view.findViewById(R.id.messageViewTitle);
         inputMessageField = view.findViewById(R.id.messageInputField);
         messageSendButton = view.findViewById(R.id.messageSendButton);
@@ -112,6 +110,7 @@ public class MessageFragment extends Fragment implements MessageContract.View {
             public void run() {
                 recyclerAdapter.addMessage(message);
                 recyclerAdapter.notifyItemInserted(finalElementIndex);
+                recyclerView.scrollToPosition(finalElementIndex - 1);
             }
         });
         //recyclerAdapter.notifyDataSetChanged();

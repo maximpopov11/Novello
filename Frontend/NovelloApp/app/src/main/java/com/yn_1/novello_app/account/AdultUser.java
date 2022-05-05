@@ -27,7 +27,6 @@ public class AdultUser implements User, Parcelable, Serializable {
      * @param id user id
      */
     public AdultUser(String username, String password, int id) {
-
         this.username = username;
         this.password = password;
         this.id = id;
@@ -50,6 +49,8 @@ public class AdultUser implements User, Parcelable, Serializable {
     public AdultUser(Parcel in) {
         id = in.readInt();
         name = in.readString();
+        username = in.readString();
+        password = in.readString();
         userProfileImageUrl = in.readString();
     }
 
@@ -161,6 +162,8 @@ public class AdultUser implements User, Parcelable, Serializable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
+        dest.writeString(username);
+        dest.writeString(password);
         dest.writeString(userProfileImageUrl);
     }
 
