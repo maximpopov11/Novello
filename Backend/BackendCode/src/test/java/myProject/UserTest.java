@@ -102,7 +102,7 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":4,\"accountType\":null,\"username\":\"Phantom\",\"password\":\"7893\",\"securityQuestion\":null,\"securityAnswer\":null}", returnString);
+        assertEquals("{\"id\":4,\"username\":\"Phantom\",\"accountType\":null,\"password\":\"7893\",\"securityQuestion\":null,\"securityAnswer\":null}", returnString);
 
 
     }
@@ -121,7 +121,7 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"}", returnString);
+        assertEquals("{\"id\":2,\"username\":\"Scottie\",\"accountType\":1,\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"}", returnString);
 
     }
 
@@ -139,7 +139,7 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("{\"id\":1,\"accountType\":1,\"username\":\"IChangedMyName\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"}", returnString);
+        assertEquals("{\"id\":1,\"username\":\"IChangedMyName\",\"accountType\":1,\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"panda\"}", returnString);
     }
 
     @Test
@@ -195,7 +195,7 @@ public class UserTest {
         String returnString = response.getBody().asString();
 
 
-        assertEquals("[{\"id\":1,\"accountType\":1,\"username\":\"Idontknowpickone\",\"password\":\"8493\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"penguin\"},{\"id\":2,\"accountType\":1,\"username\":\"Scottie\",\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},{\"id\":3,\"accountType\":1,\"username\":\"Maxim\",\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"Cat\"}]",returnString);
+        assertEquals("[{\"id\":1,\"username\":\"Idontknowpickone\",\"accountType\":1,\"password\":\"8493\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"penguin\"},{\"id\":2,\"username\":\"Scottie\",\"accountType\":1,\"password\":\"6969\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"dog\"},{\"id\":3,\"username\":\"Maxim\",\"accountType\":1,\"password\":\"5760\",\"securityQuestion\":\"Favorite animal\",\"securityAnswer\":\"Cat\"}]",returnString);
 
     }
     @Autowired
