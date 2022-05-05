@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -66,6 +67,14 @@ public class BookTest {
         Response response2 = RestAssured.given().when().get("/book");
 
         assertNotEquals("", response2.getBody().asString());
+
+        String json5 = "{\"isbn\":\"0000000000001\",\"title\":\"Pride and Prejudice\",\"author\":\"stee\",\"publicationYear\":1813,\"overallRating\":5.0,\"msrp\":9.99,\"genre\":\"Literature\",\"description\":\"Pride and Prejudice is an 1813 novel of manners written by Jane Austen. The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book who learns about the repercussions of hasty judgments and comes to appreciate the difference between superficial goodness and actual goodness.\",\"readingUrl\":\"https://www.gutenberg.org/files/1342/1342-h/1342-h.htm\",\"imageUrl\":\"https://www.gutenberg.org/cache/epub/1342/pg1342.cover.medium.jpg\"}";
+        Response response5 = RestAssured.given().header("Content-Type", "application/json").body(json).when().put("/book/2");
+
+        int statusCode5 = response5.getStatusCode();
+        assertEquals(200, statusCode);
+
+        assertEquals(response5.getBody().asString(), response5.getBody().asString());
     }
 
     @Test
@@ -90,16 +99,10 @@ public class BookTest {
         assertNotEquals("", response.getBody().asString());
     }
 
-    @Test
-    public void updateBook() {
-        String json = "{\"isbn\":\"0000000000001\",\"title\":\"Pride and Prejudice\",\"author\":\"stee\",\"publicationYear\":1813,\"overallRating\":5.0,\"msrp\":9.99,\"genre\":\"Literature\",\"description\":\"Pride and Prejudice is an 1813 novel of manners written by Jane Austen. The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book who learns about the repercussions of hasty judgments and comes to appreciate the difference between superficial goodness and actual goodness.\",\"readingUrl\":\"https://www.gutenberg.org/files/1342/1342-h/1342-h.htm\",\"imageUrl\":\"https://www.gutenberg.org/cache/epub/1342/pg1342.cover.medium.jpg\"}";
-        Response response = RestAssured.given().header("Content-Type", "application/json").body(json).when().put("/book/2");
-
-        int statusCode = response.getStatusCode();
-        assertEquals(200, statusCode);
-
-        assertEquals(response.getBody().asString(), response.getBody().asString());
-    }
+//    @Test
+//    public void z() {
+//
+//    }
 
     @Test
     public void deleteBook() {
