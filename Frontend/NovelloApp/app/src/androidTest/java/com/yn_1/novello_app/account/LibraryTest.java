@@ -4,8 +4,19 @@ package com.yn_1.novello_app.account;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
+import androidx.core.widget.NestedScrollView;
+import androidx.test.espresso.PerformException;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.espresso.util.HumanReadables;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -14,6 +25,7 @@ import com.yn_1.novello_app.R;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
@@ -24,14 +36,20 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anyOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -43,7 +61,7 @@ public class LibraryTest {
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void recordedTest() {
+    public void testCategories() {
         // Input username
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.inputUsername),
@@ -77,6 +95,11 @@ public class LibraryTest {
                         isDisplayed()));
         materialButton.perform(click());
 
+        try {
+            Thread.sleep(SIMULATED_DELAY_MS);
+        } catch (InterruptedException e) {
+        }
+
         // Go to Library
         ViewInteraction bottomNavigationItemView = onView(
                 allOf(withId(R.id.libraryFragment), withContentDescription("Library"),
@@ -95,26 +118,29 @@ public class LibraryTest {
 
 
         ViewInteraction currentlyReadingLinearLayout = onView(
-                allOf(withParent(allOf(withId(R.id.currentlyReading),
-                        withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+                allOf(  withId(R.id.currentlyReading),
+                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
                         isDisplayed()));
         currentlyReadingLinearLayout.check(matches(hasMinimumChildCount(1)));
 
         ViewInteraction wishlistLinearLayout = onView(
-                allOf(withParent(allOf(withId(R.id.wishlist),
-                        withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+                allOf(  withId(R.id.wishlist),
+                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
                         isDisplayed()));
         wishlistLinearLayout.check(matches(hasMinimumChildCount(1)));
 
+        onView(withId(R.id.libraryScroll))
+                .perform(swipeUp());
+
         ViewInteraction readLinearLayout = onView(
-                allOf(withParent(allOf(withId(R.id.read),
-                        withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+                allOf(  withId(R.id.read),
+                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
                         isDisplayed()));
         readLinearLayout.check(matches(hasMinimumChildCount(1)));
 
         ViewInteraction backlogLinearLayout = onView(
-                allOf(withParent(allOf(withId(R.id.backlog),
-                        withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+                allOf(  withId(R.id.backlog),
+                        withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)),
                         isDisplayed()));
         backlogLinearLayout.check(matches(hasMinimumChildCount(1)));
     }
