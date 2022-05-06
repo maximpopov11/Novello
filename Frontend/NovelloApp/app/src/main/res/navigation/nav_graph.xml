@@ -114,7 +114,11 @@
         android:id="@+id/discoverView"
         android:name="com.yn_1.novello_app.discovery.DiscoveryView"
         android:label="fragment_discovery_view"
-        tools:layout="@layout/fragment_discovery_view" />
+        tools:layout="@layout/fragment_discovery_view" >
+        <action
+            android:id="@+id/action_discoverView_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.yn_1.novello_app.review.ReviewFragment"

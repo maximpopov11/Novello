@@ -80,6 +80,7 @@ public class DiscoveryModel {
         for (int i = 0; i < data.length(); i++) {
             try {
                 JSONObject book = data.getJSONObject(i);
+                int id = book.getInt("bookID");
                 String title = book.getString("title");
                 String author = book.getString("author");
                 String genre = book.getString("genre");
@@ -89,7 +90,7 @@ public class DiscoveryModel {
                 int price = book.getInt("msrp");
                 String readingUrl = book.getString("readingUrl");
                 String imageUrl = book.getString("imageUrl");
-                Book newBook = new Book(-1, title, author, genre, publicationYear, isbn, rating,
+                Book newBook = new Book(id, title, author, genre, publicationYear, isbn, rating,
                         -1, null, readingUrl, imageUrl);
                 userBooks.add(newBook);
             } catch (JSONException e) {
@@ -111,6 +112,7 @@ public class DiscoveryModel {
         for (int i = 0; i < data.length(); i++) {
             try {
                 JSONObject book = data.getJSONObject(i).getJSONObject("book");
+                int id = book.getInt("bookID");
                 String title = book.getString("title");
                 String author = book.getString("author");
                 String genre = book.getString("genre");
@@ -120,7 +122,7 @@ public class DiscoveryModel {
                 int price = book.getInt("msrp");
                 String readingUrl = book.getString("readingUrl");
                 String imageUrl = book.getString("imageUrl");
-                Book newBook = new Book(-1, title, author, genre, publicationYear, isbn, rating,
+                Book newBook = new Book(id, title, author, genre, publicationYear, isbn, rating,
                         -1, null, readingUrl, imageUrl);
                 userBooks.add(newBook);
             } catch (JSONException e) {

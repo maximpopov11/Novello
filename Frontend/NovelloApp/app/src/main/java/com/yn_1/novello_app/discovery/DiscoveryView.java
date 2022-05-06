@@ -13,10 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.*;
 import com.yn_1.novello_app.book.Book;
+import com.yn_1.novello_app.library.LibraryCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,8 @@ public class DiscoveryView extends Fragment {
 
     DiscoveryPresenter presenter;
 
-    TableLayout tableLayout;
+    // TableLayout tableLayout;
+    RecyclerView recyclerView;
 
     ArrayList<Pair<Book, Double>> sortedRecommendations = null;
 
@@ -38,15 +42,14 @@ public class DiscoveryView extends Fragment {
         //todo: get to cart from nav bar
         //todo: leave cart through nav bar
         super.onCreate(savedInstanceState);
-
-        int userID = ((NavBarActivity)getActivity()).getUser().getUserId();
-        presenter = new DiscoveryPresenter(this, userID);
-
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        int userID = ((NavBarActivity)getActivity()).getUser().getUserId();
+        presenter = new DiscoveryPresenter(this, userID);
 
         return inflater.inflate(R.layout.fragment_discovery_view, container, false);
 
@@ -56,8 +59,9 @@ public class DiscoveryView extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tableLayout = view.findViewById(R.id.discoveryTableLayout);
-
+        // tableLayout = view.findViewById(R.id.discoveryTableLayout);
+        recyclerView = view.findViewById(R.id.discoveryRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     /**
@@ -65,12 +69,12 @@ public class DiscoveryView extends Fragment {
      * @param sortedRecommendations is a sorted ArrayList of books by recommendation rating
      */
     public void showRecommendedBooks(ArrayList<Pair<Book, Double>> sortedRecommendations) {
-
-        //todo: add book image button
-        //todo: does text view need layout params?
         int count = 1;
+
+        ArrayList<Book> books = new ArrayList<>();
         for (Pair<Book, Double> pair : sortedRecommendations) {
-            TableRow tableRow = new TableRow(getContext());
+            // Maxim's old code, before Roba's design improvements
+            /*TableRow tableRow = new TableRow(getContext());
             TextView textView = new TextView(getContext());
             Book book = pair.first;
             String text = count + ".\n" + book.getTitle() + " by " + book.getAuthor()
@@ -80,10 +84,25 @@ public class DiscoveryView extends Fragment {
             TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams();
             tableRowParams.setMargins(5, 5, 5, 5);
             tableRow.setLayoutParams(tableRowParams);
-            tableLayout.addView(tableRow);
+            tableLayout.addView(tableRow);*/
+            books.add(pair.first);
             count++;
         }
 
+        recyclerView.setAdapter(new DiscoveryRecyclerViewAdapter(books,
+            // Code for viewing the book's screen
+            bookId -> {
+                ((NavBarActivity) getActivity()).
+                        getController().navigate
+                        (DiscoveryViewDirections.actionDiscoverViewToBookFragment(bookId));
+            },
+            // Code for moving to wishlist
+            bookId -> {
+                LibraryCategory currentCategory = LibraryCategory.NONE;
+                currentCategory.performTransaction(LibraryCategory.WISHLIST,
+                        ((NavBarActivity)getActivity()).getUser().getUserId(),
+                        bookId);
+            }));
     }
 
 }

@@ -1,6 +1,5 @@
 package com.yn_1.novello_app.create_chat;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.databinding.FragmentFriendBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyCreateChatRecyclerViewAdapter extends RecyclerView.Adapter<MyCreateChatRecyclerViewAdapter.ViewHolder> {
