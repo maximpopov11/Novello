@@ -2,7 +2,7 @@
 
 
 ## Description
-A library hub app for book recommendations, reviews, shopping, and communication, and collections.
+A library hub app for book recommendations, reviews, shopping, collections, and communication.
 
 
 ## Dependencies
