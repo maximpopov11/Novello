@@ -1,6 +1,7 @@
 package com.yn_1.novello_app.discovery;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,7 +103,18 @@ public class DiscoveryView extends Fragment {
                 currentCategory.performTransaction(LibraryCategory.WISHLIST,
                         ((NavBarActivity)getActivity()).getUser().getUserId(),
                         bookId);
+                refreshScreen();
             }));
     }
 
+    private void refreshScreen() {
+        Handler t = new Handler();
+        t.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((NavBarActivity)getActivity()).getController().popBackStack();
+                ((NavBarActivity)getActivity()).getController().navigate(R.id.discoverView);
+            }
+        }, 500);
+    }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -200,7 +201,14 @@ public class LibraryFragment extends Fragment implements LibraryContract.View {
 
     @Override
     public void refreshScreen() {
-        ((NavBarActivity)getActivity()).getController().popBackStack();
-        ((NavBarActivity)getActivity()).getController().navigate(R.id.libraryFragment);
+        Handler t = new Handler();
+
+        t.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((NavBarActivity)getActivity()).getController().popBackStack();
+                ((NavBarActivity)getActivity()).getController().navigate(R.id.libraryFragment);
+            }
+        }, 500);
     }
 }

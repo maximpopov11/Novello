@@ -1,6 +1,7 @@
 package com.yn_1.novello_app.cart;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.yn_1.novello_app.NavBarActivity;
 import com.yn_1.novello_app.R;
 import com.yn_1.novello_app.account.User;
 import com.yn_1.novello_app.book.Book;
+import com.yn_1.novello_app.discovery.DiscoveryRecyclerViewAdapter;
+import com.yn_1.novello_app.discovery.DiscoveryViewDirections;
+import com.yn_1.novello_app.library.LibraryCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +38,7 @@ public class CartView extends Fragment {
     ArrayList<Book> cart = new ArrayList<>();
 
     Button purchase;
-    LinearLayout innerLayout;
+    RecyclerView recyclerView;
 
     final int Text_Width = 500;
     final int Text_Height = 300;
@@ -44,13 +50,6 @@ public class CartView extends Fragment {
 
         super.onCreate(savedInstanceState);
 
-        presenter = new CartPresenter(this);
-
-        user = ((NavBarActivity)getActivity()).getUser();
-        presenter.setUser(user);
-
-        presenter.getCartBooks();
-
     }
 
     @Nullable
@@ -58,6 +57,13 @@ public class CartView extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         Log.d("Cart", "CartView entered on create view.");
+
+        presenter = new CartPresenter(this);
+
+        user = ((NavBarActivity)getActivity()).getUser();
+        presenter.setUser(user);
+
+        presenter.getCartBooks();
 
         return inflater.inflate(R.layout.fragment_cart, container, false);
 
@@ -69,8 +75,9 @@ public class CartView extends Fragment {
 
         Log.d("Cart", "CartView entered on view created.");
 
+        recyclerView = view.findViewById(R.id.cartRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         purchase = view.findViewById(R.id.purchase);
-        innerLayout = view.findViewById(R.id.cartLinearLayoutInner);
 
         purchase.setOnClickListener(v -> {
 
@@ -106,7 +113,7 @@ public class CartView extends Fragment {
      * @param cartBooks are the books to add
      */
     private void addBooksToLayout(List<Book> cartBooks) {
-        for (Book book : cartBooks) {
+        /*for (Book book : cartBooks) {
             //todo: create sample ui and insert book info for each book, creating a new version with each book
 
             //todo: remove from cart button
@@ -120,9 +127,34 @@ public class CartView extends Fragment {
             textParams.setMargins(5, 5, 5, 5);
             textView.setLayoutParams(textParams);
             textView.setText("Title: " + book.getTitle() + "\nAuthor: " + book.getAuthor() + "\n" + "Price: $" + book.getPrice());
-            innerLayout.addView(textView);
 
-        }
+        }*/
+
+        recyclerView.setAdapter(new CartRecyclerViewAdapter(cartBooks,
+                // Code for viewing the book's screen
+                bookId -> {
+                    ((NavBarActivity) getActivity()).
+                            getController().navigate
+                            (CartViewDirections.actionCartViewToBookFragment(bookId));
+                },
+                // Code for moving to wishlist
+                bookId -> {
+                    LibraryCategory currentCategory = LibraryCategory.CART;
+                    currentCategory.performTransaction(LibraryCategory.WISHLIST,
+                            ((NavBarActivity)getActivity()).getUser().getUserId(),
+                            bookId);
+                    refreshScreen();
+                }));
     }
 
+    private void refreshScreen() {
+        Handler t = new Handler();
+        t.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((NavBarActivity)getActivity()).getController().popBackStack();
+                ((NavBarActivity)getActivity()).getController().navigate(R.id.cartView);
+            }
+        }, 500);
+    }
 }

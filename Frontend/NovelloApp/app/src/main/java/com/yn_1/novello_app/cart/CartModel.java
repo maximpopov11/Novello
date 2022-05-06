@@ -65,6 +65,7 @@ public class CartModel {
         for (int i = 0; i < data.length(); i++) {
             try {
                 JSONObject book = data.getJSONObject(i).getJSONObject("book");
+                int id = book.getInt("bookID");
                 String title = book.getString("title");
                 String author = book.getString("author");
                 String genre = book.getString("genre");
@@ -75,7 +76,7 @@ public class CartModel {
                 String description = book.getString("description");
                 String imageUrl = book.getString("imageUrl");
                 String readingUrl = book.getString("readingUrl");
-                Book newBook = new Book(-1, title, author, genre, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
+                Book newBook = new Book(id, title, author, genre, publicationYear, isbn, rating, price, description, readingUrl, imageUrl);
                 newBook.setUserCategoryID("cart");
                 cart.add(newBook);
             } catch (JSONException e) {
@@ -83,26 +84,6 @@ public class CartModel {
             }
         }
         presenter.sendCart(cart);
-    }
-
-    /**
-     * Assigns image to book
-     * @param book book to get image button
-     * @param imageButton image button to connect to book
-     */
-    public void assignImageToBook(Book book, ImageButton imageButton) {
-        ImageRequester req = new ImageRequester();
-        req.getRequest(book.getImageURL(), null, new VolleyCommand<Bitmap>() {
-            @Override
-            public void execute(Bitmap image) {
-                Bitmap newImage = Bitmap.createScaledBitmap(image, presenter.view.Image_Width, presenter.view.Image_Height,
-                        true);
-                imageButton.setImageBitmap(newImage);
-            }
-
-            @Override
-            public void onError(VolleyError error) { }
-        }, null, null);
     }
 
     /**
