@@ -123,8 +123,8 @@ public class PurchaseFragment extends Fragment {
      */
     private void purchaseResult(boolean succeeded) {
         if (chargeCard(creditCardNumber)) {
-            ((NavBarActivity)getActivity()).getController().navigate(PurchaseFragmentDirections.
-                    actionPurchaseFragmentToHomeFragment());
+
+            ((NavBarActivity)getActivity()).getController().navigate(R.id.homeFragment);
         }
         else {
             //todo: card could not be charged, do something about it
