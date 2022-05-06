@@ -4,6 +4,8 @@
 ## Description
 A library hub app for book recommendations, reviews, shopping, collections, and communication.
 
+## Video Demo
+* https://www.youtube.com/watch?v=LpAmz0KqOaE&t=424s
 
 ## Dependencies
 
