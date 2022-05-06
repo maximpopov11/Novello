@@ -19,7 +19,7 @@ A library hub app for book recommendations, reviews, shopping, collections, and 
 * Kyle Goben        (kgoben@iastate.edu)
 * Maxim Popov       (mpopov@iastate.edu)
 
-## Contributor: Maxim Popov
+## Contributor: Maxim Popov (Frontend)
 * Login
 * Create Account
 * Settings
